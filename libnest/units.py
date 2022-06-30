@@ -17,6 +17,10 @@ HBARC=197.         # \hbar c [MeV fm]
 VUNIT=197./940*100 # alpha constant over the neutron mass (100 to have percentage)
 M0   =20.72        # neutron bare mass
 
+def printM0():
+    """Prints M0 constant"""
+    print(M0)
+
 def KtoMev(temp):
     """Function converts temperature units from Kelvins to MeVs"""
     return temp/11604525006.1598
