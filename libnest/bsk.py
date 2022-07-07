@@ -46,11 +46,25 @@ def F_x(x, eta):
 def assymetry_eta(rho, rho_n, rho_p):
     """Returns asymmetry between neutrons and protons eta for matter of
     density rho"""
+    # TODO rho is not needad as an argument: rho = rho_n + rho_p
+    # TODO when there is division by rho, it's nice to add in denominanor
+    #      DENSEPSILON
     return (rho_n-rho_p)/rho
+
+def kF(rho):
+    """Returns Fermi momentum kF for a given density rho."""
+    return (3.*np.pi*np.pi*rho)**(1./3.);
 
 def energy_per_nucleon(kF, rho, F_x, eta):
     """Returns the energy per nucleon on infinite nuclear matter of density rho
     and asymmetry eta, in MeV."""
+    # TODO: kF and rho are connected see kF(rho)
+    # TODO: F_x not needed as an argument
+    # TODO: rho_n and rho_p as an argument, instead of rho and eta
+    # NOTE: removed '/T2' since it's division by 0
+    # NOTE: 2/3 in many programming languages gives 0 (operation on integeres)
+    #       therefore I prefer to write explicitely 2./3 that would work in
+    #       C or FORTRAN - just in case
     return (3*units.HBARC**2/20*kF**2*((np.power(1+eta,5/3)/units.MN
                                                 +np.power(1-eta,5/3)
                                                           /units.MP))
@@ -64,6 +78,12 @@ def energy_per_nucleon(kF, rho, F_x, eta):
                 *((2+X4)*F_x(5./3,eta)-(1/2+X4)*F_x(8./3,eta))
             + 3*T5/40*kF*np.power(rho,GAMMA+1)
                 *((2+X5)*F_x(5./3,eta)-(1/2+X5)*F_x(8./3,eta)))
+
+# TODO (5.13) from NeST.pdf
+
+# TODO (5.11) from NeST.pdf
+# TODO (5.12) from NeST.pdf
+# TODO (5.10) from NeST.pdf
 
 # TODO list:
 # https://journals.aps.org/prc/pdf/10.1103/PhysRevC.82.035804
