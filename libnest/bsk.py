@@ -38,29 +38,14 @@ GAMMA =(1./4.)     # [1]
 # Code formulas: A13, and dependent (A14, A15)
 #
 
-def F_x(x, eta):
-    """Returns the function Fx(eta) later used in the calculation of energy per
-    nucleon of infinite nuclear matter of density rho and asymmetry eta"""
-    return 0.5*((1+eta)**x+(1-eta)**x)
 
-def assymetry_eta(rho, rho_n, rho_p):
-    """Returns asymmetry between neutrons and protons eta for matter of
-    density rho"""
-    # TODO rho is not needad as an argument: rho = rho_n + rho_p
-    # TODO when there is division by rho, it's nice to add in denominanor
-    #      DENSEPSILON
-    return (rho_n-rho_p)/rho
-
-def kF(rho):
-    """Returns Fermi momentum kF for a given density rho."""
-    return (3.*np.pi*np.pi*rho)**(1./3.);
-
-def energy_per_nucleon(kF, rho, F_x, eta):
+x
+def energy_per_nucleon(kF, rh, eta):
     """Returns the energy per nucleon on infinite nuclear matter of density rho
     and asymmetry eta, in MeV."""
-    # TODO: kF and rho are connected see kF(rho)
-    # TODO: F_x not needed as an argument
-    # TODO: rho_n and rho_p as an argument, instead of rho and eta
+    # TODO: kF and rho are connected see kF(rho) 
+    # TODO: F_x not needed as an argument 
+    # TODO: rho_n and rho_p as an argument, instead of rho and eta 
     # NOTE: removed '/T2' since it's division by 0
     # NOTE: 2/3 in many programming languages gives 0 (operation on integeres)
     #       therefore I prefer to write explicitely 2./3 that would work in

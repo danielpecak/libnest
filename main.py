@@ -11,6 +11,22 @@
 # $ ./test_libnest.py
 
 import libnest
+import libnest.plots
+import libnest.real_data_plots
+import numpy as np
+import matplotlib.pyplot as plt
+
 print(libnest.fm3togcm3(1.0))
 
 print("Siema")
+
+#print(dir(libnest))
+
+
+libnest.plots.plot_effective_mass_symmetric_Mn() #symmetric
+
+libnest.plots.plot_effective_mass_symmetric_Mp() #symmetric
+
+libnest.plots.plot_effective_mass_neutron_Mn() #neutron matter
+
+#libnest.real_data_plots.density("N2600i_density.txt")
