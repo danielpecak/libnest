@@ -95,6 +95,46 @@ def q_effective_mass(M_q, rho, rho_q):
     return (1./2*libnest.units.HBARC**2)/(((libnest.units.HBARC**2)/(2*M_q))
                                            +C_rho)
 
+def symmetric_pairing_field(rho_n, rho_p):
+    """Returns the pairing field for symmetric nuclear matter, for kF lower 
+    than 1.38 fm^-1"""
+    kF = (3.**np.pi*(rho_n+rho_p))**(1./3.)
+    return 3.37968*(kF**2)*(kF-1.38236)**2/(kF**2+0.556092**2)/((kF-1.38236)**2
+                                                                + 0.327517**2)
+
+def neutron_pairing_field(rho_n):
+    """Returns the pairing field for pure neutron matter, with kF lower than 
+    1.31 fm^-1"""
+    kF = kF = (3.**np.pi*(rho_n))**(1./3.)
+    return 11.5586*(kF**2)*(kF-1.3142)**2/(kF**2+0.489932**2)/((kF-1.3142)**2
+                                                                + 0.906146**2)
+
+def neutron_ref_pairing_field(rho_n, rho_p):
+    """Returns the reference pairing field for neutrons in uniform matter"""
+    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
+                                                        (rho_n+rho_p)))
+            +neutron_pairing_field(rho_n)*rho_n/(rho_n+rho_p)*
+            (rho_n-rho_p)/(rho_n+rho_p))
+
+def proton_ref_pairing_field(rho_n, rho_p):
+    """Returns the reference pairing field for protons in uniform matter"""
+    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
+                                                        (rho_n+rho_p)))
+            -neutron_pairing_field(rho_n)*rho_n/(rho_n+rho_p)*
+            (rho_n-rho_p)/(rho_n+rho_p))
+
+def mean_field_potential(Mq, rho_n, rho_p, rho_q):
+    """Returns the mean field potential
+    rho_q is either rho_n or rho_p"""
+    return libnest.units.HBARC**2/(2*Mq)+libnest.units.T1/4*(
+        (1+libnest.units.X1/2)*(rho_n+rho_p)-(1./2+libnest.units.X1)*rho_q)
+    +libnest.units.T4/4 * (rho_n+rho_p)**libnest.units.BETA*((
+        1+libnest.units.X4/2)*(rho_n+rho_p)-(1./2*libnest.units.X4)*rho_q)
+    +1./4*((libnest.units.T2+libnest.units.T2X2 /2)*(rho_n+rho_p) 
+          +(1./2*libnest.units.T2+libnest.units.T2X2)*rho_q)
+    +((1+libnest.units.X5/2)*(rho_n+rho_p)+(1./2+libnest.units.X5)*rho_q)
+    *(rho_n+rho_p)**libnest.units.GAMMA*libnest.units.T5/4
+
 
 #def isovector_effective_mass(M_q, rho, rho_q):
 #    return
