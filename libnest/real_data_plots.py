@@ -25,6 +25,7 @@ import libnest.plots
 #N15000i_current.txt
 #N15000i_density.txt
 
+
 #OPENING FILES
 def file_check(filename):
     """
@@ -39,6 +40,18 @@ def file_check(filename):
         print(f"{filename}" + " not found. Check the directory and the file.")
         return False
 
+def cross_section_distance(x, y):
+    """Returns the distance to the centre of the 90x90 fm box as cross-section,
+    changing it from a coordinate system with origin at one end of the box"""
+    r = np.sqrt((x-45)**2 + (y-45)**2)
+    i = np.where(x<45)
+    r[i] = -r[i]
+    return r
+
+def phi(x,y): #just in case
+    """Returns phi for the polar coordinates"""
+    return np.arctan(y-45,x-45)
+
 def density(filename):
     if file_check(filename):
         DATA = np.genfromtxt(filename, delimiter=' ', comments='#')
@@ -47,17 +60,18 @@ def density(filename):
         #DATA[:,0] - x
         #DATA[:,1] - y
         #DATA[:,2] - rho_q
-
-        #r equation!
+        #print(DATA[:,0]-45)
+        
+        r = cross_section_distance(DATA[:,0], DATA[:,1])
     
         RHO = plt.figure()
         RHO.add_subplot(111)
         plt.title("Density vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+        plt.ylabel(r"$\rho \: {[fm}^{-3}]$", fontsize=10)
         plt.xticks(fontsize=10)
-        plt.plot(r, DATA[:,2], linewidth=2.0, label='Fit')
-        plt.legend()
+        plt.scatter(r, DATA[:,2], 0.5)
+        #plt.legend()
 
         plt.show()
         

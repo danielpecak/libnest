@@ -132,8 +132,8 @@ def mean_field_potential(Mq, rho_n, rho_p, rho_q):
         1+libnest.units.X4/2)*(rho_n+rho_p)-(1./2*libnest.units.X4)*rho_q)
     +1./4*((libnest.units.T2+libnest.units.T2X2 /2)*(rho_n+rho_p) 
           +(1./2*libnest.units.T2+libnest.units.T2X2)*rho_q)
-    +((1+libnest.units.X5/2)*(rho_n+rho_p)+(1./2+libnest.units.X5)*rho_q)
-    *(rho_n+rho_p)**libnest.units.GAMMA*libnest.units.T5/4
+    +(((1+libnest.units.X5/2)*(rho_n+rho_p)+(1./2+libnest.units.X5)*rho_q)*
+    (rho_n+rho_p)**libnest.units.GAMMA*libnest.units.T5/4)
 
 
 #def isovector_effective_mass(M_q, rho, rho_q):
