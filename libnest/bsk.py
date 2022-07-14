@@ -125,6 +125,7 @@ def effective_mass(rho, Ms, Mv):
     Mv/M, accordingly. ???
     For neutron matter, rho = rho_n
     For symmetric matter, rho = 2*rho_n"""
+    # NOTE: I think this probably would not be needed anymore
     return 1/(2*rho/Ms + (1-2*rho)/Mv)
 
 
@@ -180,6 +181,8 @@ def energy_per_nucleon(rho_n, rho_p):
     density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
     Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
     """
+    # TODO: testing: making plots for total density [0, 0.2] and [0, 1.0]
+    #               for pure neutron and symmetric nuclear matter
     rho = rho_n+rho_p+DENSEPSILON
     kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
     eta = (rho_n-rho_p)/rho
