@@ -25,6 +25,8 @@ VUNIT=197./940*100 # alpha constant over the neutron mass (100 to have percentag
 hbar22M0   =20.72  # neutron bare mass
 MN   =939.56542052 # neutron mass [MeV]
 MP   =938.27208816 # proton  mass [MeV]
+HBAR2M_n = 20.721248369006936 # [MeV*fm<sup>2</sup>] 0.5*hbar^2/neutron mass
+HBAR2M_p = 20.749810921501915 # [MeV*fm<sup>2</sup>] 0.5*hbar^2/proton mass
 
 def printhbar22M0():
     """Prints hbar22M0 constant"""

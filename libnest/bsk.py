@@ -7,16 +7,18 @@
 # forBSk31
 # According to Goriely, Chamel, Pearson PRC 93 034337 (2016)
 #================================
+import sys
 import numpy as np
 from libnest import units
-from libnest.units import HBARC, MN, MP, DENSEPSILON, NUMZERO
+from libnest.units import HBARC, DENSEPSILON, NUMZERO
+from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
 
 T0   =-2302.01     # skyrme parameter t0 [MeV*fm^3]
 T1   =762.99       # skyrme parameter t1 [MeV*fm<sup>5</sup>]
 T2   =0.0          # skyrme parameter t2 [MeV*fm<sup>5</sup>]
 T3   =13797.83     # skyrme parameter t3 [MeV*fm^(3+3*ALPHA)]
-T4   =-500         # skyrme parameter t4 [MeV*fm^(5+3*BETA)]
-T5   =-40          # skyrme parameter t5 [MeV*fm^(5+3*GAMMA)]
+T4   =-500.         # skyrme parameter t4 [MeV*fm^(5+3*BETA)]
+T5   =-40.          # skyrme parameter t5 [MeV*fm^(5+3*GAMMA)]
 X0   =0.676655     # skyrme parameter x0 [1]
 X1   =2.658109     # skyrme parameter x1 [1]
 T2X2 =-422.29      # skyrme parameter x2t2 [1][MeV*fm<sup>5</sup>]
@@ -24,7 +26,7 @@ X3   =0.83982      # skyrme parameter x3 [1]
 X4   =5.           # skyrme parameter x4 [1]
 X5   =-12.         # skyrme parameter x5 [1]
 ALPHA =(1./5.)     # [1]
-BETA =(1./12.)     # [1]
+BETA  =(1./12.)     # [1]
 GAMMA =(1./4.)     # [1]
 # NOTE: these are not important at the moment
 YW   =2.           # [1]
@@ -51,15 +53,12 @@ def rhoEta(rho_n, rho_p):
 # ================================
 #       Pairing fields
 # ================================
-# TODO (5.13) from NeST.pdf
-
-# TODO (5.12) from NeST.pdf
-# TODO (5.10) from NeST.pdf
 def symmetric_pairing_field(rho_n, rho_p):
     """Returns the pairing field for symmetric nuclear matter, for kF lower
     than 1.38 fm^-1.
     Formula (5.12) from NeST.pdf"""
     kF = rho2kf(rho_n+rho_p)
+    # TODO
     # if(kF > 1.38):
     #     return NUMZERO
     return 3.37968*(kF**2)*(kF-1.38236)**2/(kF**2+0.556092**2)/((kF-1.38236)**2
@@ -69,7 +68,9 @@ def neutron_pairing_field(rho_n):
     """Returns the pairing field for pure neutron matter, with kF lower than
     1.31 fm^-1.
     Formula (5.11) from NeST.pdf"""
+    # TODO use rho2kf
     kF = (3.**np.pi*(rho_n))**(1./3.)
+    # TODO
     # if(kF > 1.31):
     #     return NUMZERO
     return 11.5586*(kF**2)*(kF-1.3142)**2/(kF**2+0.489932**2)/((kF-1.3142)**2
@@ -87,6 +88,9 @@ def neutron_ref_pairing_field(rho_n, rho_p):
 def proton_ref_pairing_field(rho_n, rho_p):
     """Returns the reference pairing field for protons in uniform matter.
     Formula (5.10) from NeST.pdf"""
+    # TODO: use these definitions
+    rho, eta = rhoEta(rho_n, rho_p)
+    rho = rho + DENSEPSILON
     return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
                                                         (rho_n+rho_p)))
             -neutron_pairing_field(rho_n)*rho_n/(rho_n+rho_p)*
@@ -95,6 +99,14 @@ def proton_ref_pairing_field(rho_n, rho_p):
 # ================================
 #       Effective masses
 # ================================
+# TODO list:
+# https://journals.aps.org/prc/pdf/10.1103/PhysRevC.82.035804
+# Code function: Eq. 10 and plot it as a function of rho (I suppose this is what is done in
+# Fig 5 in the inset). q=n or p (neutron or proton counterpart)
+# rho = rho_n + rho+p
+# Make plots for neutron matter (NeuM) where rho = rho_n [rho_p =0 ]
+# Make plots for symmetric matter (SM) where rho = 2*rho_n [rho_p =rho_n ]
+#
 def effective_mass(rho, Ms, Mv):
     """Returns the effective mass of a nucleon of charge q given rho is the
     ratio of the density of matter of the specified type to total density.
@@ -114,17 +126,26 @@ def q_effective_mass(M_q, rho, rho_q):
 
     return (1./2*HBARC**2)/((HBARC**2/2*M_q)+C_rho)
 
-def mean_field_potential(Mq, rho_n, rho_p, rho_q):
-    """Returns the mean field potential
-    rho_q is either rho_n or rho_p"""
-    return HBARC**2/(2*Mq)+T1/4*(
-        (1+X1/2)*(rho_n+rho_p)-(1./2+X1)*rho_q)
-    +T4/4 * (rho_n+rho_p)**BETA*((
-        1+X4/2)*(rho_n+rho_p)-(1./2*X4)*rho_q)
-    +1./4*((T2+T2X2 /2)*(rho_n+rho_p)
-          +(1./2*T2+T2X2)*rho_q)
-    +(((1+X5/2)*(rho_n+rho_p)+(1./2+X5)*rho_q)*
-    (rho_n+rho_p)**GAMMA*T5/4)
+def B_q(rho_n, rho_p,q):
+    """Returns the mean field potential U_q
+    rho_q is either rho_n or rho_p.
+    Formula (5.13) from NeST.pdf
+    """
+    if(q=='n'):
+        rho_q = rho_n
+        HBAR2M_q = HBAR2M_n
+    elif(q=='p'):
+        rho_q = rho_p
+        HBAR2M_q = HBAR2M_p
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    rho = rho_n + rho_p
+    return HBAR2M_q/(HBAR2M_q
+                     + T1/4.*((1.+X1/2.)*rho - (1./2.+X1)*rho_q)
+                     + T4/4.*((1.+X4/2.)*rho - (1./2.+X4)*rho_q)*np.power(rho,BETA)
+                     + 1./4.*((T2+T2X2/2.)*rho+(1./2.*T2+T2X2)*rho_q)
+                     + T5/4.*((1.+X5/2.)*rho + (1./2.+X5)*rho_q)*np.power(rho,GAMMA)
+                     )
 
 # TODO list:
 # Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:
@@ -154,14 +175,7 @@ def energy_per_nucleon(rho_n, rho_p):
             + 3*T5/40*kF*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
 
 
-# TODO list:
-# https://journals.aps.org/prc/pdf/10.1103/PhysRevC.82.035804
-# Code function: Eq. 10 and plot it as a function of rho (I suppose this is what is done in
-# Fig 5 in the inset). q=n or p (neutron or proton counterpart)
-# rho = rho_n + rho+p
-# Make plots for neutron matter (NeuM) where rho = rho_n [rho_p =0 ]
-# Make plots for symmetric matter (SM) where rho = 2*rho_n [rho_p =rho_n ]
-#
+
 # TODO list:
 # PHYSICAL REVIEW C 104, 055801 (2021)
 # NOTE: densities such as TAU, MU, J will be given in the future from the data
