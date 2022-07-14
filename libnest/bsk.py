@@ -9,7 +9,7 @@
 #================================
 import numpy as np
 from libnest import units
-from libnest.units import HBARC, MN, MP, DENSEPSILON
+from libnest.units import HBARC, MN, MP, DENSEPSILON, NUMZERO
 
 T0   =-2302.01     # skyrme parameter t0 [MeV*fm^3]
 T1   =762.99       # skyrme parameter t1 [MeV*fm<sup>5</sup>]
@@ -43,32 +43,50 @@ def rho2kf(rho):
     """Returns wavevector kF based on density rho."""
     return (3.**np.pi*rho)**(1./3.)
 
+def rhoEta(rho_n, rho_p):
+    """Returns total density and difference of densities from neutron and
+    proton densities."""
+    return rho_n+rho_p, rho_n-rho_p
+
 # ================================
 #       Pairing fields
 # ================================
+# TODO (5.13) from NeST.pdf
+
+# TODO (5.12) from NeST.pdf
+# TODO (5.10) from NeST.pdf
 def symmetric_pairing_field(rho_n, rho_p):
     """Returns the pairing field for symmetric nuclear matter, for kF lower
-    than 1.38 fm^-1"""
-    kF = (3.**np.pi*(rho_n+rho_p))**(1./3.)
+    than 1.38 fm^-1.
+    Formula (5.12) from NeST.pdf"""
+    kF = rho2kf(rho_n+rho_p)
+    # if(kF > 1.38):
+    #     return NUMZERO
     return 3.37968*(kF**2)*(kF-1.38236)**2/(kF**2+0.556092**2)/((kF-1.38236)**2
                                                                 + 0.327517**2)
 
 def neutron_pairing_field(rho_n):
     """Returns the pairing field for pure neutron matter, with kF lower than
-    1.31 fm^-1"""
-    kF = kF = (3.**np.pi*(rho_n))**(1./3.)
+    1.31 fm^-1.
+    Formula (5.11) from NeST.pdf"""
+    kF = (3.**np.pi*(rho_n))**(1./3.)
+    # if(kF > 1.31):
+    #     return NUMZERO
     return 11.5586*(kF**2)*(kF-1.3142)**2/(kF**2+0.489932**2)/((kF-1.3142)**2
                                                                 + 0.906146**2)
 
 def neutron_ref_pairing_field(rho_n, rho_p):
-    """Returns the reference pairing field for neutrons in uniform matter"""
-    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
-                                                        (rho_n+rho_p)))
-            +neutron_pairing_field(rho_n)*rho_n/(rho_n+rho_p)*
-            (rho_n-rho_p)/(rho_n+rho_p))
+    """Returns the reference pairing field for neutrons in uniform matter.
+    Formula (5.10) from NeST.pdf"""
+    # TODO: use these definitions
+    rho, eta = rhoEta(rho_n, rho_p)
+    rho = rho + DENSEPSILON
+    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs(eta/rho))
+            +neutron_pairing_field(rho_n)*rho_n/rho*eta/rho)
 
 def proton_ref_pairing_field(rho_n, rho_p):
-    """Returns the reference pairing field for protons in uniform matter"""
+    """Returns the reference pairing field for protons in uniform matter.
+    Formula (5.10) from NeST.pdf"""
     return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
                                                         (rho_n+rho_p)))
             -neutron_pairing_field(rho_n)*rho_n/(rho_n+rho_p)*
@@ -89,17 +107,12 @@ def effective_mass(rho, Ms, Mv):
 
 def q_effective_mass(M_q, rho, rho_q):
     """Returns effective mass Mq*/M of neutron or proton"""
-    C_rho = etaT1/4*((1+X1/2)*rho-
-                                (1./2+X1)*rho_q)
-    +T4/4 * rho**BETA*((
-        1+X4/2)*rho-(1./2*X4)*rho_q)
-    +1./4*((T2+T2X2 /2)*rho
-          +(1./2*T2+T2X2)*rho_q)
-    +T5/4*((1+X5/2)*rho+
-                         (1./2+X5)*rho_q)*rho**GAMMA
+    C_rho = etaT1/4*((1+X1/2)*rho-(1./2+X1)*rho_q)
+    +T4/4*rho**BETA*((1+X4/2)*rho-(1./2*X4)*rho_q)
+    +1./4*((T2+T2X2 /2)*rho+(1./2*T2+T2X2)*rho_q)
+    +T5/4*((1+X5/2)*rho+(1./2+X5)*rho_q)*rho**GAMMA
 
-    return (1./2*HBARC**2)/(((HBARC**2)/(2*M_q))
-                                           +C_rho)
+    return (1./2*HBARC**2)/((HBARC**2/2*M_q)+C_rho)
 
 def mean_field_potential(Mq, rho_n, rho_p, rho_q):
     """Returns the mean field potential
@@ -122,23 +135,17 @@ def mean_field_potential(Mq, rho_n, rho_p, rho_q):
 
 def energy_per_nucleon(rho_n, rho_p):
     """Returns the energy per nucleon on infinite nuclear matter of given
-    density of protons and neutrons, rho_p and rho_n, respectively, in MeV"""
-    # TODO: kF and rho are connected see kF(rho)
-    # TODO: F_x not needed as an argument
-    # TODO: rho_n and rho_p as an argument, instead of rho and eta
-    # NOTE: removed '/T2' since it's division by 0
-    # NOTE: 2/3 in many programming languages gives 0 (operation on integeres)
-    #       therefore I prefer to write explicitely 2./3 that would work in
-    #       C or FORTRAN - just in case
+    density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
+    Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
+    """
     rho = rho_n+rho_p+DENSEPSILON
-    kF = (3.*np.pi**2*rho/2.)**(1./3.)
+    kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
     eta = (rho_n-rho_p)/rho
-    F_x_5 = 0.5*((1+eta)**(5./3.)+(1-eta)**(5./3.))
-    F_x_8 = 0.5*((1+eta)**(8./3.)+(1-eta)**(8./3.))
+    F_x_5 = 0.5*((1+eta)**(5./3.)+(1-eta)**(5./3.)) # Formula (A15)
+    F_x_8 = 0.5*((1+eta)**(8./3.)+(1-eta)**(8./3.)) # Formula (A15)
 
     return (3*HBARC**2/20*kF**2*((np.power(1+eta,5/3)/MN
-                                                +np.power(1-eta,5/3)
-                                                          /MP))
+                                                +np.power(1-eta,5/3)/MP))
             + T0/8.*rho*(3-(2*X0 + 1)*eta**2)
             + 3.*T1/40*rho*kF**2*((2+X1)*F_x_5 -(1/2+X1)*F_x_8)
             + 3./40*((2*T2+T2X2)*F_x_5 +(1./2*T2+T2X2)*F_x_8)*rho*kF**2
@@ -146,11 +153,6 @@ def energy_per_nucleon(rho_n, rho_p):
             + 3*T4/40*kF**2*np.power(rho, BETA+1)*((2+X4)*F_x_5-(1/2+X4)*F_x_8)
             + 3*T5/40*kF*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
 
-# TODO (5.13) from NeST.pdf
-
-# TODO (5.11) from NeST.pdf
-# TODO (5.12) from NeST.pdf
-# TODO (5.10) from NeST.pdf
 
 # TODO list:
 # https://journals.aps.org/prc/pdf/10.1103/PhysRevC.82.035804

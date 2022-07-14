@@ -13,6 +13,8 @@
 import numpy as np
 
 DENSEPSILON = 1e-12
+NUMZERO = 1e-12
+NUMINF  = 1e30
 
 # NOTE: physical constants are from NIST website:
 # https://physics.nist.gov/cgi-bin/cuu/Value?hbcmevf
