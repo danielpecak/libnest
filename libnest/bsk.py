@@ -128,6 +128,27 @@ def effective_mass(rho, Ms, Mv):
     # NOTE: I think this probably would not be needed anymore
     return 1/(2*rho/Ms + (1-2*rho)/Mv)
 
+def isoscalarM(rho_n, rho_p):
+    """Calculated effective isoscalar mass M_s for a given uniform system
+    with neutron and proton densities rho_n, rho_p respectively.  """
+    # TODO FILL IN using effMn and effMp
+    pass
+
+def isovectorM(rho_n, rho_p):
+    """Calculated effective isovector mass M_s for a given uniform system
+    with neutron and proton densities rho_n, rho_p respectively.  """
+    # TODO FILL IN using effMn and effMp
+    pass
+
+def effMn(rho_n, rho_p):
+    """Effective mass of a neutron in nuclear medium."""
+    # TODO please test it: make plots as a function of density
+    return HBAR2M_n/B_q(rho_n, rho_p,'n')
+
+def effMp(rho_n, rho_p):
+    """Effective mass of a proton in nuclear medium."""
+    # TODO please test it: make plots as a function of density
+    return HBAR2M_p/B_q(rho_n, rho_p,'p')
 
 def U_q(rho_n, rho_p,q): # TODO
     """Returns the mean field potential B_q
@@ -166,8 +187,8 @@ def B_q(rho_n, rho_p,q):
              + T1/4.*((1.+X1/2.)*rho - (1./2.+X1)*rho_q)
              + T4/4.*((1.+X4/2.)*rho - (1./2.+X4)*rho_q)*np.power(rho,BETA)
              + 1./4.*((T2+T2X2/2.)*rho+(1./2.*T2+T2X2)*rho_q)
-                     + T5/4.*((1.+X5/2.)*rho + (1./2.+X5)*rho_q)*np.power(rho,GAMMA)
-                     )
+             + T5/4.*((1.+X5/2.)*rho + (1./2.+X5)*rho_q)*np.power(rho,GAMMA)
+             )
 
 # TODO list:
 # Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:
