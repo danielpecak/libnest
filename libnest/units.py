@@ -14,11 +14,15 @@ import numpy as np
 
 DENSEPSILON = 1e-12
 
-HBARC=197.         # \hbar c [MeV fm]
+# NOTE: physical constants are from NIST website:
+# https://physics.nist.gov/cgi-bin/cuu/Value?hbcmevf
+# https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev
+# https://physics.nist.gov/cgi-bin/cuu/Value?mpc2mev
+HBARC=197.3269804  # \hbar c [MeV fm]
 VUNIT=197./940*100 # alpha constant over the neutron mass (100 to have percentage)
 hbar22M0   =20.72  # neutron bare mass
-MN   =939.56542052 # neutron mass [MeV/c]
-MP   =938.27208816 # proton mass [MeV/c]
+MN   =939.56542052 # neutron mass [MeV]
+MP   =938.27208816 # proton  mass [MeV]
 
 def printhbar22M0():
     """Prints hbar22M0 constant"""
