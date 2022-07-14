@@ -43,7 +43,11 @@ KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 # ================================
 def rho2kf(rho):
     """Returns wavevector kF based on density rho."""
-    return (3.**np.pi*rho)**(1./3.)
+    return (3.*np.pi*np.pi*rho)**(1./3.)
+
+def rho2tau(rho):
+    """Returns kinetic density tau for uniform Fermi system of density rho."""
+    return 0.6*(3.*np.pi)**(2./3.)*rho**(5./3.)
 
 def rhoEta(rho_n, rho_p):
     """Returns total density and difference of densities from neutron and
