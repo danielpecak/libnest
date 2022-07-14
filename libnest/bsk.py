@@ -57,10 +57,14 @@ def symmetric_pairing_field(rho_n, rho_p):
     """Returns the pairing field for symmetric nuclear matter, for kF lower
     than 1.38 fm^-1.
     Formula (5.12) from NeST.pdf"""
+    # NOTE: because of the IF statement to use this function for plotting eg.
+    #   r = np.arange(0,0.2,0.0001)
+    #   f = symmetric_pairing_field
+    #   f=np.vectorize(f) # ADD THIS LINE TO MAKE IT WORK WITH NUMPY
+    #   ax.plot(r,f(r),label='NeuM')
     kF = rho2kf(rho_n+rho_p)
-    # TODO
-    # if(kF > 1.38):
-    #     return NUMZERO
+    if(kF > 1.38):
+        return NUMZERO
     return 3.37968*(kF**2)*(kF-1.38236)**2/(kF**2+0.556092**2)/((kF-1.38236)**2
                                                                 + 0.327517**2)
 
@@ -68,11 +72,14 @@ def neutron_pairing_field(rho_n):
     """Returns the pairing field for pure neutron matter, with kF lower than
     1.31 fm^-1.
     Formula (5.11) from NeST.pdf"""
-    # TODO use rho2kf
-    kF = (3.**np.pi*(rho_n))**(1./3.)
-    # TODO
-    # if(kF > 1.31):
-    #     return NUMZERO
+    # NOTE: because of the IF statement to use this function for plotting eg.
+    #   r = np.arange(0,0.2,0.0001)
+    #   f = symmetric_pairing_field
+    #   f=np.vectorize(f) # ADD THIS LINE TO MAKE IT WORK WITH NUMPY
+    #   ax.plot(r,f(r),label='NeuM')
+    kF = rho2kf(rho_n)
+    if(kF > 1.31):
+        return NUMZERO
     return 11.5586*(kF**2)*(kF-1.3142)**2/(kF**2+0.489932**2)/((kF-1.3142)**2
                                                                 + 0.906146**2)
 
@@ -92,9 +99,9 @@ def proton_ref_pairing_field(rho_n, rho_p):
     rho, eta = rhoEta(rho_n, rho_p)
     rho = rho + DENSEPSILON
     return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
-                                                        (rho_n+rho_p)))
-            -neutron_pairing_field(rho_n)*rho_n/(rho_n+rho_p)*
-            (rho_n-rho_p)/(rho_n+rho_p))
+                                                        (rho)))
+            -neutron_pairing_field(rho_n)*rho_n/(rho)*
+            (rho_n-rho_p)/(rho))
 
 # ================================
 #       Effective masses
