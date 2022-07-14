@@ -7,8 +7,9 @@
 # forBSk31
 # According to Goriely, Chamel, Pearson PRC 93 034337 (2016)
 #================================
-from libnest import units
 import numpy as np
+from libnest import units
+from libnest.units import HBARC, MN, MP, DENSEPSILON
 
 T0   =-2302.01     # skyrme parameter t0 [MeV*fm^3]
 T1   =762.99       # skyrme parameter t1 [MeV*fm<sup>5</sup>]
@@ -25,13 +26,15 @@ X5   =-12.         # skyrme parameter x5 [1]
 ALPHA =(1./5.)     # [1]
 BETA =(1./12.)     # [1]
 GAMMA =(1./4.)     # [1]
-#define YW  2.       // [1]
-#define FNP 1.00     // [1]
-#define FNM 1.06     // [1]
-#define FPP 1.00     // [1]
-#define FPM 1.04     // [1]
-#define KAPPAN -36630.4 // [MeV*fm<sup>8</sup>]
-#define KAPPAP -45207.2 // [MeV*fm<sup>8</sup>]
+# NOTE: these are not important at the moment
+YW   =2.           # [1]
+FNP  =1.00         # [1]
+FNM  =1.06         # [1]
+FPP  =1.00         # [1]
+FPM  =1.04         # [1]
+KAPPAN =-36630.4   # [MeV*fm<sup>8</sup>]
+KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
+
 
 # ================================
 #       Auxiliary
@@ -86,29 +89,29 @@ def effective_mass(rho, Ms, Mv):
 
 def q_effective_mass(M_q, rho, rho_q):
     """Returns effective mass Mq*/M of neutron or proton"""
-    C_rho = units.T1/4*((1+units.X1/2)*rho-
-                                (1./2+units.X1)*rho_q)
-    +units.T4/4 * rho**units.BETA*((
-        1+units.X4/2)*rho-(1./2*units.X4)*rho_q)
-    +1./4*((units.T2+units.T2X2 /2)*rho
-          +(1./2*units.T2+units.T2X2)*rho_q)
-    +units.T5/4*((1+units.X5/2)*rho+
-                         (1./2+units.X5)*rho_q)*rho**units.GAMMA
+    C_rho = etaT1/4*((1+X1/2)*rho-
+                                (1./2+X1)*rho_q)
+    +T4/4 * rho**BETA*((
+        1+X4/2)*rho-(1./2*X4)*rho_q)
+    +1./4*((T2+T2X2 /2)*rho
+          +(1./2*T2+T2X2)*rho_q)
+    +T5/4*((1+X5/2)*rho+
+                         (1./2+X5)*rho_q)*rho**GAMMA
 
-    return (1./2*units.HBARC**2)/(((units.HBARC**2)/(2*M_q))
+    return (1./2*HBARC**2)/(((HBARC**2)/(2*M_q))
                                            +C_rho)
 
 def mean_field_potential(Mq, rho_n, rho_p, rho_q):
     """Returns the mean field potential
     rho_q is either rho_n or rho_p"""
-    return units.HBARC**2/(2*Mq)+units.T1/4*(
-        (1+units.X1/2)*(rho_n+rho_p)-(1./2+units.X1)*rho_q)
-    +units.T4/4 * (rho_n+rho_p)**units.BETA*((
-        1+units.X4/2)*(rho_n+rho_p)-(1./2*units.X4)*rho_q)
-    +1./4*((units.T2+units.T2X2 /2)*(rho_n+rho_p)
-          +(1./2*units.T2+units.T2X2)*rho_q)
-    +(((1+units.X5/2)*(rho_n+rho_p)+(1./2+units.X5)*rho_q)*
-    (rho_n+rho_p)**units.GAMMA*units.T5/4)
+    return HBARC**2/(2*Mq)+T1/4*(
+        (1+X1/2)*(rho_n+rho_p)-(1./2+X1)*rho_q)
+    +T4/4 * (rho_n+rho_p)**BETA*((
+        1+X4/2)*(rho_n+rho_p)-(1./2*X4)*rho_q)
+    +1./4*((T2+T2X2 /2)*(rho_n+rho_p)
+          +(1./2*T2+T2X2)*rho_q)
+    +(((1+X5/2)*(rho_n+rho_p)+(1./2+X5)*rho_q)*
+    (rho_n+rho_p)**GAMMA*T5/4)
 
 # TODO list:
 # Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:
@@ -127,15 +130,15 @@ def energy_per_nucleon(rho_n, rho_p):
     # NOTE: 2/3 in many programming languages gives 0 (operation on integeres)
     #       therefore I prefer to write explicitely 2./3 that would work in
     #       C or FORTRAN - just in case
-    rho = rho_n+rho_p+units.DENSEPSILON
+    rho = rho_n+rho_p+DENSEPSILON
     kF = (3.*np.pi**2*rho/2.)**(1./3.)
     eta = (rho_n-rho_p)/rho
     F_x_5 = 0.5*((1+eta)**(5./3.)+(1-eta)**(5./3.))
     F_x_8 = 0.5*((1+eta)**(8./3.)+(1-eta)**(8./3.))
 
-    return (3*units.HBARC**2/20*kF**2*((np.power(1+eta,5/3)/units.MN
+    return (3*HBARC**2/20*kF**2*((np.power(1+eta,5/3)/MN
                                                 +np.power(1-eta,5/3)
-                                                          /units.MP))
+                                                          /MP))
             + T0/8.*rho*(3-(2*X0 + 1)*eta**2)
             + 3.*T1/40*rho*kF**2*((2+X1)*F_x_5 -(1/2+X1)*F_x_8)
             + 3./40*((2*T2+T2X2)*F_x_5 +(1./2*T2+T2X2)*F_x_8)*rho*kF**2

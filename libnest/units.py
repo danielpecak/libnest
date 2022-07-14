@@ -19,28 +19,6 @@ VUNIT=197./940*100 # alpha constant over the neutron mass (100 to have percentag
 hbar22M0   =20.72  # neutron bare mass
 MN   =939.56542052 # neutron mass [MeV/c]
 MP   =938.27208816 # proton mass [MeV/c]
-T0   =-2302.01     # skyrme parameter t0 [MeV*fm^3]
-T1   =762.99       # skyrme parameter t1 [MeV*fm<sup>5</sup>]
-T2   =0.0          # skyrme parameter t2 [MeV*fm<sup>5</sup>]
-T3   =13797.83     # skyrme parameter t3 [MeV*fm^(3+3*ALPHA)]
-T4   =-500         # skyrme parameter t4 [MeV*fm^(5+3*BETA)]
-T5   =-40          # skyrme parameter t5 [MeV*fm^(5+3*GAMMA)]
-X0   =0.676655     # skyrme parameter x0 [1]
-X1   =2.658109     # skyrme parameter x1 [1]
-T2X2 =-422.29      # skyrme parameter x2t2 [1][MeV*fm<sup>5</sup>]
-X3   =0.83982      # skyrme parameter x3 [1]
-X4   =5.           # skyrme parameter x4 [1]
-X5   =-12.         # skyrme parameter x5 [1]
-ALPHA =(1./5.)     # [1]
-BETA =(1./12.)     # [1]
-GAMMA =(1./4.)     # [1]
-YW   =2.           # [1]
-FNP  =1.00         # [1]
-FNM  =1.06         # [1]
-FPP  =1.00         # [1]
-FPM  =1.04         # [1]
-KAPPAN =-36630.4   # [MeV*fm<sup>8</sup>]
-KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 
 def printhbar22M0():
     """Prints hbar22M0 constant"""
