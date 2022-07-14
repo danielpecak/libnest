@@ -90,7 +90,6 @@ def neutron_pairing_field(rho_n):
 def neutron_ref_pairing_field(rho_n, rho_p):
     """Returns the reference pairing field for neutrons in uniform matter.
     Formula (5.10) from NeST.pdf"""
-    # TODO: use these definitions
     rho, eta = rhoEta(rho_n, rho_p)
     rho = rho + DENSEPSILON
     return (symmetric_pairing_field(rho_n, rho_p)*(1-abs(eta/rho))
@@ -131,14 +130,33 @@ def effective_mass(rho, Ms, Mv):
 def q_effective_mass(M_q, rho, rho_q):
     """Returns effective mass Mq*/M of neutron or proton"""
     C_rho = etaT1/4*((1+X1/2)*rho-(1./2+X1)*rho_q)
-    +T4/4*rho**BETA*((1+X4/2)*rho-(1./2*X4)*rho_q)
+    +T4/4*rho**BETA*((1+X4/2)*rho-(1./2*X4)*rho_q) 
     +1./4*((T2+T2X2 /2)*rho+(1./2*T2+T2X2)*rho_q)
     +T5/4*((1+X5/2)*rho+(1./2+X5)*rho_q)*rho**GAMMA
 
     return (1./2*HBARC**2)/((HBARC**2/2*M_q)+C_rho)
 
+def U_q(rho_n, rho_p,q): # TODO
+    """Returns the mean field potential B_q
+    rho_q is either rho_n or rho_p.
+    Formula (5.14) from NeST.pdf
+    """
+    # TODO: modify IF statement if needed
+    if(q=='n'):
+        rho_q = rho_n
+        HBAR2M_q = HBAR2M_n
+    elif(q=='p'):
+        rho_q = rho_p
+        HBAR2M_q = HBAR2M_p
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    rho = rho_n + rho_p
+    # TODO fill in what is returned
+    return 0.0
+
+
 def B_q(rho_n, rho_p,q):
-    """Returns the mean field potential U_q
+    """Returns the mean field potential B_q
     rho_q is either rho_n or rho_p.
     Formula (5.13) from NeST.pdf
     """
