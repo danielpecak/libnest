@@ -66,11 +66,14 @@ def symmetric_pairing_field(rho_n, rho_p):
     #   f = symmetric_pairing_field
     #   f=np.vectorize(f) # ADD THIS LINE TO MAKE IT WORK WITH NUMPY
     #   ax.plot(r,f(r),label='NeuM')
-    kF = rho2kf(rho_n+rho_p)
-    if(kF > 1.38):
-        return NUMZERO
-    return 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
+    kF = rho2kf((rho_n+rho_p)/2)
+    delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
                                               ((kF-1.38236)**2+(0.327517**2)))
+    i = np.where(kF>1.38)
+    delta[i] = NUMZERO
+    # if(kF > 1.38):
+    #     return NUMZERO
+    return delta
 
 def neutron_pairing_field(rho_n):
     """Returns the pairing field for pure neutron matter, with kF lower than
@@ -82,10 +85,13 @@ def neutron_pairing_field(rho_n):
     #   f=np.vectorize(f) # ADD THIS LINE TO MAKE IT WORK WITH NUMPY
     #   ax.plot(r,f(r),label='NeuM')
     kF = rho2kf(rho_n)
-    if(kF > 1.31):
-        return NUMZERO
-    return 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
+    delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
+    i = np.where(kF>1.31)
+    delta[i] = NUMZERO
+    # if(kF > 1.31):
+    #     return NUMZERO
+    return delta
 
 def neutron_ref_pairing_field(rho_n, rho_p):
     """Returns the reference pairing field for neutrons in uniform matter.
@@ -99,12 +105,12 @@ def proton_ref_pairing_field(rho_n, rho_p):
     """Returns the reference pairing field for protons in uniform matter.
     Formula (5.10) from NeST.pdf"""
     # TODO: use these definitions
-    rho, eta = rhoEta(rho_n, rho_p)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = rho + DENSEPSILON
-    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs((rho_n-rho_p)/
-                                                        (rho)))
-            -neutron_pairing_field(rho_n)*rho_n/(rho)*
-            (rho_n-rho_p)/(rho))
+    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs(eta/rho))
+            -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)
+
+
 
 # ================================
 #       Effective masses
@@ -203,7 +209,7 @@ def energy_per_nucleon(rho_n, rho_p):
     Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
     """
     # TODO: testing: making plots for total density [0, 0.2] and [0, 1.0]
-    #               for pure neutron and symmetric nuclear matter
+    #               for pure neutron and symmetric nuclear matter X
     rho = rho_n+rho_p+DENSEPSILON
     kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
     eta = (rho_n-rho_p)/rho

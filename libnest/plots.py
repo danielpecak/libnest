@@ -8,6 +8,11 @@ import matplotlib.pyplot as plt
 import libnest.bsk
 import libnest.units
 
+
+# ================================
+#         Energy/nucleon
+# ================================
+
 def plot_energy_per_nucleon(rho_n, rho_p):
     rho = np.linspace(0., 1., 100)
     rho_n = rho * rho_n
@@ -44,7 +49,41 @@ def plot_energy_per_nucleon_both():
     plt.show()  
 
 
-#plotting effective masses
+
+# ================================
+#         Pairing fields
+# ================================
+def plot_pairing_field_n(rho_n, rho_p):
+    rho = np.linspace(0., 0.09, 100)
+    rho_n = rho * rho_n
+    rho_p = rho * rho_p
+    delta = libnest.bsk.neutron_ref_pairing_field(rho_n, rho_p)
+    pairing_field = plt.figure()
+    pairing_field.add_subplot(111)
+    plt.title("Pairing Field - neutrons", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel("pairing field $\Delta \: [MeV]$", fontsize=10)
+    plt.plot(rho, delta, linewidth=2.0, label='Fit')
+
+    plt.show()
+    
+def plot_pairing_field_p(rho_n, rho_p):
+    rho = np.linspace(0., 0.2, 100)
+    rho_n = rho * rho_n
+    rho_p = rho * rho_p
+    delta = libnest.bsk.proton_ref_pairing_field(rho_n, rho_p)
+    pairing_field = plt.figure()
+    pairing_field.add_subplot(111)
+    plt.title("Pairing Field - protons", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel("pairing field $\Delta \: [MeV]$", fontsize=10)
+    plt.plot(rho, delta, linewidth=2.0, label='Fit')
+
+    plt.show()
+
+# ================================
+#        Effective masses
+# ================================
 def plot_effective_mass_symmetric_Mn():
     RHO = np.linspace(0., 2., 100)
     Mq = (libnest.bsk.q_effective_mass(libnest.units.MN, RHO, RHO/2)
