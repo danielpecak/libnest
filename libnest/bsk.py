@@ -69,8 +69,8 @@ def symmetric_pairing_field(rho_n, rho_p):
     kF = rho2kf(rho_n+rho_p)
     if(kF > 1.38):
         return NUMZERO
-    return 3.37968*(kF**2)*(kF-1.38236)**2/(kF**2+0.556092**2)/((kF-1.38236)**2
-                                                                + 0.327517**2)
+    return 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
+                                              ((kF-1.38236)**2+(0.327517**2)))
 
 def neutron_pairing_field(rho_n):
     """Returns the pairing field for pure neutron matter, with kF lower than
@@ -84,8 +84,8 @@ def neutron_pairing_field(rho_n):
     kF = rho2kf(rho_n)
     if(kF > 1.31):
         return NUMZERO
-    return 11.5586*(kF**2)*(kF-1.3142)**2/(kF**2+0.489932**2)/((kF-1.3142)**2
-                                                                + 0.906146**2)
+    return 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
+                                             (((kF-1.3142)**2)+(0.906146**2)))
 
 def neutron_ref_pairing_field(rho_n, rho_p):
     """Returns the reference pairing field for neutrons in uniform matter.
@@ -210,14 +210,14 @@ def energy_per_nucleon(rho_n, rho_p):
     F_x_5 = 0.5*((1+eta)**(5./3.)+(1-eta)**(5./3.)) # Formula (A15)
     F_x_8 = 0.5*((1+eta)**(8./3.)+(1-eta)**(8./3.)) # Formula (A15)
 
-    return (3*HBARC**2/20*kF**2*((np.power(1+eta,5/3)/MN
-                                                +np.power(1-eta,5/3)/MP))
+    return (3*(HBARC**2)/20*(kF**2)*((np.power((1+eta),5/3)/MN
+                                                +np.power((1-eta),5/3)/MP))
             + T0/8.*rho*(3-(2*X0 + 1)*eta**2)
-            + 3.*T1/40*rho*kF**2*((2+X1)*F_x_5 -(1/2+X1)*F_x_8)
-            + 3./40*((2*T2+T2X2)*F_x_5 +(1./2*T2+T2X2)*F_x_8)*rho*kF**2
-            + T3/48*np.power(rho,ALPHA+1)*(3-(1+2*X3)*eta**2)
-            + 3*T4/40*kF**2*np.power(rho, BETA+1)*((2+X4)*F_x_5-(1/2+X4)*F_x_8)
-            + 3*T5/40*kF*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
+            + 3.*T1/40*rho*(kF**2)*((2+X1)*F_x_5 -(0.5+X1)*F_x_8)
+            + 3./40*((2*T2+T2X2)*F_x_5 +(1./2*T2+T2X2)*F_x_8)*rho*(kF**2)
+            + T3/48*np.power(rho,(ALPHA+1))*(3-(1+2*X3)*(eta**2))
+            + 3*T4/40*(kF**2)*np.power(rho,BETA+1)*((2+X4)*F_x_5-(1/2+X4)*F_x_8)
+            + 3*T5/40*(kF**2)*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
 
 
 
