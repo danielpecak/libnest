@@ -26,9 +26,11 @@ print("Siema")
 
 #libnest.plots.plot_energy_per_nucleon()
 
-libnest.plots.plot_pairing_field_n(1., 0)
+#libnest.plots.plot_pairing_field_n(1., 0)
 
 #libnest.plots.plot_pairing_field_p(1., 0)
+
+libnest.plots.plot_effective_mass_n(0.5, 0.5)
 
 #libnest.plots.plot_effective_mass_symmetric_Mn() #symmetric
 

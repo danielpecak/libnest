@@ -148,12 +148,12 @@ def isovectorM(rho_n, rho_p):
 
 def effMn(rho_n, rho_p):
     """Effective mass of a neutron in nuclear medium."""
-    # TODO please test it: make plots as a function of density
+    # TODO please test it: make plots as a function of density x
     return HBAR2M_n/B_q(rho_n, rho_p,'n')
 
 def effMp(rho_n, rho_p):
     """Effective mass of a proton in nuclear medium."""
-    # TODO please test it: make plots as a function of density
+    # TODO please test it: make plots as a function of density x
     return HBAR2M_p/B_q(rho_n, rho_p,'p')
 
 def U_q(rho_n, rho_p,q): # TODO
@@ -164,18 +164,22 @@ def U_q(rho_n, rho_p,q): # TODO
     # TODO: modify IF statement if needed
     if(q=='n'):
         rho_q = rho_n
+        rho_q_prime = rho_p
         HBAR2M_q = HBAR2M_n
     elif(q=='p'):
         rho_q = rho_p
+        rho_q_prime = rho_n
         HBAR2M_q = HBAR2M_p
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
     rho = rho_n + rho_p
     # TODO fill in what is returned
-    return 0.0
+    return T0*((1+0.5*X0)*rho-(0.5+X0)*rho_q)+T3/12.*np.power(rho,(ALPHA-1))*(
+        ((0.5+0.5*X3)*rho**2*(ALPHA+2))-(0.5+X3)*(2*rho*rho_q*ALPHA*
+                                                  (rho_q_prime)**2))
 
 
-def B_q(rho_n, rho_p,q):
+def B_q(rho_n, rho_p, q):
     """Returns the mean field potential B_q
     rho_q is either rho_n or rho_p.
     Formula (5.13) from NeST.pdf
