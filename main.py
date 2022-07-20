@@ -30,7 +30,13 @@ print("Siema")
 
 #libnest.plots.plot_pairing_field_p(1., 0)
 
-libnest.plots.plot_effective_mass_n(0.5, 0.5)
+# libnest.plots.plot_effective_mass_n(0.5, 0.5)
+
+# libnest.plots.plot_effective_mass_p(0.5, 0.5)
+
+libnest.plots.plot_B_q(0.5, 0.5, 'p')
+
+libnest.plots.plot_U_q(0.5, 0.5, 'n')
 
 #libnest.plots.plot_effective_mass_symmetric_Mn() #symmetric
 

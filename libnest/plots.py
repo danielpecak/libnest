@@ -115,19 +115,35 @@ def plot_effective_mass_p(rho_n, rho_p):
     #plt.legend()
     plt.show()
     
-def plot_effective_mass_n_radius(rho_n, rho_p):
+    
+def plot_B_q(rho_n, rho_p, q):
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
-    Mn = libnest.bsk.effMn(rho_n, rho_p)
+    Mn = libnest.bsk.B_q(rho_n, rho_p, q)
     
-    plt.title("Neutron efective mass", fontsize=15)
+    plt.title(r"Mean potential field B$_q$", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"M$^{*}_{n}$/M", fontsize=10)
+    plt.ylabel(r"B$_{q}$/M", fontsize=10)
     plt.xticks(fontsize=10)
     plt.plot(rho, Mn, linewidth=2.0, label='Fit')
     #plt.legend()
     plt.show()
+    
+def plot_U_q(rho_n, rho_p, q):
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    Mn = libnest.bsk.U_q(rho_n, rho_p, q)
+    
+    plt.title(r"Mean potential field $U_q$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"U$_{q}$/M", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
     
 # def plot_effective_mass_symmetric_Mn():
 #     RHO = np.linspace(0., 2., 100)
