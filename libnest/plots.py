@@ -140,6 +140,32 @@ def plot_U_q(rho_n, rho_p, q):
     #plt.legend()
     plt.show()
     
+def plot_isoscalarM(rho_n, rho_p):
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    Mn = libnest.bsk.isoscalarM(rho_n, rho_p)
+    plt.title(r"Effective isoscalar mass $M^*_s$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"M$^*_{s}/M$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
+def plot_isovectorM(rho_n, rho_p):
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    Mn = libnest.bsk.isovectorM(rho_n, rho_p)
+    plt.title(r"Effective isovector mass $M^*_v$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"M$^*_{v}/M$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
     
 # def plot_effective_mass_symmetric_Mn():
 #     RHO = np.linspace(0., 2., 100)
