@@ -91,7 +91,6 @@ def plot_effective_mass_n(rho_n, rho_p):
     rho_n = rho_n * rho
     rho_p = rho_p * rho
     Mn = libnest.bsk.effMn(rho_n, rho_p)
-    
     plt.title("Neutron efective mass", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
     plt.ylabel(r"M$^{*}_{n}$/M", fontsize=10)
@@ -106,7 +105,6 @@ def plot_effective_mass_p(rho_n, rho_p):
     rho_n = rho_n * rho
     rho_p = rho_p * rho
     Mn = libnest.bsk.effMp(rho_n, rho_p)
-    
     plt.title("Proton efective mass", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
     plt.ylabel(r"M$^{*}_{p}$/M", fontsize=10)
@@ -121,10 +119,9 @@ def plot_B_q(rho_n, rho_p, q):
     rho_n = rho_n * rho
     rho_p = rho_p * rho
     Mn = libnest.bsk.B_q(rho_n, rho_p, q)
-    
     plt.title(r"Mean potential field B$_q$", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"B$_{q}$/M", fontsize=10)
+    plt.ylabel(r"B$_{q}$", fontsize=10)
     plt.xticks(fontsize=10)
     plt.plot(rho, Mn, linewidth=2.0, label='Fit')
     #plt.legend()
@@ -135,10 +132,9 @@ def plot_U_q(rho_n, rho_p, q):
     rho_n = rho_n * rho
     rho_p = rho_p * rho
     Mn = libnest.bsk.U_q(rho_n, rho_p, q)
-    
     plt.title(r"Mean potential field $U_q$", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"U$_{q}$/M", fontsize=10)
+    plt.ylabel(r"U$_{q}$", fontsize=10)
     plt.xticks(fontsize=10)
     plt.plot(rho, Mn, linewidth=2.0, label='Fit')
     #plt.legend()
