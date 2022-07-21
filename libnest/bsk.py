@@ -7,14 +7,119 @@
 # forBSk31
 # According to Goriely, Chamel, Pearson PRC 93 034337 (2016)
 #================================
+"""
+BSk.py
+====================================
+The module that contains Brussels-Montreal parametrization with formulas
+for energy density, effective masses, etc.
+Both for uniform system and general expressions.
+
+
+The constants for BSk31:
+
+.. data:: T0   =-2302.01
+
+    Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
+
+.. data:: T1   =762.99
+
+    Skyrme parameter :math:`t_1` [MeV fm :sup:`5`]
+
+.. data:: T2   =0.0
+
+    Skyrme parameter :math:`t_2` [MeV fm :sup:`5`]
+
+.. data:: T3   =13797.83
+
+    Skyrme parameter :math:`t_3` [MeV fm :sup:`(3+3*ALPHA)`]
+
+.. data:: T4   =-500.
+
+    Skyrme parameter :math:`t_4` [MeV fm :sup:`(5+3*BETA)`]
+
+.. data:: T5   =-40.
+
+    Skyrme parameter :math:`t_5` [MeV fm :sup:`(5+3*GAMMA)`]
+
+.. data:: X0   =0.676655
+
+    Skyrme parameter :math:`x_0` [1]
+
+.. data:: X1   =2.658109
+
+    Skyrme parameter :math:`x_1` [1]
+
+.. data:: T2X2 =-422.29
+
+    Skyrme parameter :math:`x_2t_2` [1][MeV fm :sup:`5`]
+
+.. data:: X3   =0.83982
+
+    Skyrme parameter :math:`x_3` [1]
+
+.. data:: X4   =5.
+
+    Skyrme parameter :math:`x_4` [1]
+
+.. data:: X5   =-12.
+
+    Skyrme parameter :math:`x_5` [1]
+
+.. data:: ALPHA =(1./5.)
+
+    [1]
+
+.. data:: BETA  =(1./12.)
+
+    [1]
+
+.. data:: GAMMA =(1./4.)
+
+    [1]
+
+Note:
+    these are not important at the moment
+
+.. data:: YW   =2.
+
+    [1]
+
+.. data:: FNP  =1.00
+
+    [1]
+
+.. data:: FNM  =1.06
+
+    [1]
+
+.. data:: FPP  =1.00
+
+    [1]
+
+.. data:: FPM  =1.04
+
+    [1]
+
+.. data:: KAPPAN =-36630.4
+
+    [MeV fm :sup:`8`]
+
+.. data:: KAPPAP =-45207.2
+
+    [MeV fm :sup:`8`]
+
+
+==========
+
+"""
 import sys
 import numpy as np
 from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
 
-T0   =-2302.01     # skyrme parameter t0 [MeV*fm^3]
-T1   =762.99       # skyrme parameter t1 [MeV*fm<sup>5</sup>]
+T0   =-2302.01 # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
+T1   =762.99  # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]
 T2   =0.0          # skyrme parameter t2 [MeV*fm<sup>5</sup>]
 T3   =13797.83     # skyrme parameter t3 [MeV*fm^(3+3*ALPHA)]
 T4   =-500.        # skyrme parameter t4 [MeV*fm^(5+3*BETA)]
@@ -42,8 +147,52 @@ KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 #       Auxiliary
 # ================================
 def rho2kf(rho):
-    """Returns wavevector kF based on density rho."""
+    """Returns wavevector kF based on density rho.
+
+    It uses the relation for a uniform Fermi system and yields:
+
+    .. math::
+
+        k_F = (3 \\pi^2 \\rho )^{1/3}.
+
+    If we have a two-component mixture of protons and neutrons, both
+    having two spin components (up and down), then :math:`\\rho` states
+    for the density of one isospin, and one spin component only.
+
+    Args:
+        rho (float):  density :math:`\\rho` for a single component
+
+    Returns:
+        float: wavevector :math:`k_F` [fm :sup:`-1`]
+
+    See also:
+        :func:`kf2rho`
+    """
     return (3.*np.pi*np.pi*rho)**(1./3.)
+
+def kf2rho(kF):
+    """Returns rho based on wavevector kF.
+
+    It uses the relation for a uniform Fermi system and yields:
+
+    .. math::
+
+        \\rho = \\frac{k_F^3}{3 \\pi^2}.
+
+    If we have a two-component mixture of protons and neutrons, both
+    having two spin components (up and down), then :math:`\\rho` states
+    for the density of one isospin, and one spin component only.
+
+    Args:
+        kF (float):  density :math:`\\rho` for a single component
+
+    Returns:
+        float: wavevector :math:`k_F` [fm :sup:`-1`]
+
+    See also:
+        :func:`rho2kf`
+    """
+    return kF**3/(3.*np.pi*np.pi)
 
 def rho2tau(rho):
     """Returns kinetic density tau for uniform Fermi system of density rho."""
@@ -148,7 +297,7 @@ def isovectorM(rho_n, rho_p):
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = rho + DENSEPSILON
     return 2.*eta/rho / (1./effMn(rho_n, rho_p)-1./effMp(rho_n, rho_p)-2*eta/rho/(2/((1./effMn(rho_n, rho_p))+(1./effMp(rho_n, rho_p)))))
-    #return (1.-2.*rho_n/rho-rho_p/rho_n*(1.-2.*rho_p/rho))/(1./effMp(rho_n, rho_p)-rho_p/rho_n/effMn(rho_n, rho_p)) 
+    #return (1.-2.*rho_n/rho-rho_p/rho_n*(1.-2.*rho_p/rho))/(1./effMp(rho_n, rho_p)-rho_p/rho_n/effMn(rho_n, rho_p))
 
 def effMn(rho_n, rho_p):
     """Effective mass of a neutron in nuclear medium."""
@@ -207,10 +356,6 @@ def B_q(rho_n, rho_p, q):
 # TODO list:
 # Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:
 # Code formulas: A13, and dependent (A14, A15)
-#
-
-
-
 def energy_per_nucleon(rho_n, rho_p):
     """Returns the energy per nucleon on infinite nuclear matter of given
     density of protons and neutrons, rho_p and rho_n, respectively, in MeV.

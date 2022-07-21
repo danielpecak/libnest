@@ -47,7 +47,9 @@ def readDimTxt(PATH, PREFIX):
     return([NX,NY,NZ])
 
 def txt2df(file,sufix,cols):
-    """Reads *.txt files to pandas dataframe"""
+    """
+    Reads \*.txt files to pandas dataframe
+    """
     file=file+'_'+sufix+'.txt'
     print("# Reading {}".format(file))
     df = pd.read_csv(file, comment='#', sep='\s+', header=None)
