@@ -34,14 +34,25 @@ print("Siema")
 
 # libnest.plots.plot_effective_mass_p(0.5, 0.5)
 
-libnest.plots.plot_B_q(0.5, 0.5, 'p')
+# libnest.plots.plot_B_q(0.5, 0.5, 'p')
 
-libnest.plots.plot_U_q(0.5, 0.5, 'n')
+# libnest.plots.plot_U_q(0.5, 0.5, 'n')
 
-#libnest.plots.plot_effective_mass_symmetric_Mn() #symmetric
+# libnest.plots.plot_isoscalarM(1., 0.)
 
-#libnest.plots.plot_effective_mass_symmetric_Mp() #symmetric
+# libnest.plots.plot_isovectorM(1., 0.)
 
-#libnest.plots.plot_effective_mass_neutron_Mn() #neutron matter
+# libnest.plots.plot_effective_mass_symmetric_Mn() #symmetric
 
-#libnest.real_data_plots.density("N2600i_density.txt")
+# libnest.plots.plot_effective_mass_symmetric_Mp() #symmetric
+
+# libnest.plots.plot_effective_mass_neutron_Mn() #neutron matter
+
+libnest.real_data_plots.density("N2600i_density.txt")
+
+# libnest.real_data_plots.density_contour("N2600i_density.txt")
+
+libnest.real_data_plots.pairing_field("N2600i_delta.txt")
+
+libnest.real_data_plots.current("N2600i_current.txt")
+
