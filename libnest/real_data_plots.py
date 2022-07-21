@@ -64,7 +64,7 @@ def phi(x,y): #just in case
 # ================================
 #      Real data definitions
 # ================================
-def delta(rel, im):
+def pairing_field(rel, im):
     """Returns the absolute value/modulus and the argument of the field 
     potential from its imaginary and real parts"""
     return np.sqrt(im**2+rel**2), np.arctan(im,rel)
@@ -77,7 +77,7 @@ def current(i, j, k):
 # ================================
 #       Plotting functions
 # ================================
-def density(filename):
+def plot_density(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -103,7 +103,7 @@ def density(filename):
     else:
         sys.exit('# ERROR: Cannot access file')
         
-def density_contour(filename):
+def plot_density_contour(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -122,7 +122,7 @@ def density_contour(filename):
         
         
         #interpolation by triangulation
-        zi = scipy.interpolate.griddata((x, y), rho_ratio, (xx, yy), method='cubic')
+        zi = scipy.interpolate.griddata((x, y), rho_ratio, (xx, yy), method='nearest')
         plt.imshow(zi, vmin=rho_ratio.min(), vmax=rho_ratio.max(), origin='lower',
             extent=[x.min(), x.max(), y.min(), y.max()])
         plt.colorbar()
@@ -155,7 +155,7 @@ def density_contour(filename):
     
 
 
-def pairing_field(filename):
+def plot_pairing_field(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -166,7 +166,7 @@ def pairing_field(filename):
         #data[:,3] - delta_im
         
         r = cross_section_distance(data[:,0], data[:,1])
-        delta, arg = libnest.bsk.delta(data[:,2], data[:,3])
+        delta, arg = pairing_field(data[:,2], data[:,3])
         delta_bulk = 1.33394659
         delta_ratio = delta/delta_bulk
 
@@ -183,7 +183,7 @@ def pairing_field(filename):
         sys.exit('# ERROR: Cannot access file')
         
 
-def current(filename):
+def plot_current(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -197,8 +197,8 @@ def current(filename):
         
         r = cross_section_distance(data[:,0], data[:,1])
         print(r)
-        current = libnest.bsk.current(data[:,2], data[:,3], data[:,4])
-        print(current)
+        j = current(data[:,2], data[:,3], data[:,4])
+        print(j)
 
         #NOTE: treats some files as empty? to double check
 
@@ -208,7 +208,7 @@ def current(filename):
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
         plt.ylabel("j(r)", fontsize=10)
         plt.xticks(fontsize=10)
-        plt.scatter(r, current, 0.5)
+        plt.scatter(r, j, 0.5)
         #plt.legend()
         plt.show()
     else:
