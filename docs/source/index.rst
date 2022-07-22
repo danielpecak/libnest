@@ -1,16 +1,40 @@
-.. libNeST documentation master file, created by
-   sphinx-quickstart on Wed Jul 20 15:14:13 2022.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to libNeST's documentation!
+libNeST Documentation
 ===================================
+libNeST stands for library for Neutron Star Toolkit. It contains a variety
+of tools that help handling in the complicated physics of neutrons stars.
+The aim is to use and learn about physics of nuclear matter inside a neutron 
+star without thinking about complexity of Skyrme functionals or data format.
 
-Title
-=====
+.. todo::
+    Links to wdata (+ MForbes version), wslda, wbsk, etc.
 
-Section
+Instalation
+-----------
+.. todo::
+   Add more info
+   
+Dependencies
+~~~~~~~~~~~~
+.. todo::
+   Add more info
+   
+git
+~~~
+.. todo::
+   Add more info
+
+.. code:: console
+
+    $ git clone...
+
+
+
+
+Content
 -------
+
+Citations
+---------
 
 Subsection
 ~~~~~~~~~~
@@ -31,9 +55,29 @@ Subsection
 
 
 .. toctree::
-   :maxdepth: 2
+   :caption: libNeST Documentation
+   :maxdepth: 1
+   :hidden:
+   
+   instalation
+   configuration
+   development
+   contributing
+   
+.. toctree::   
+   :maxdepth: 1
    :caption: Contents:
    
+   bsk
+   physics
+   io
+   plotting
+   
+.. toctree::
+   :maxdepth: 1
+   :caption: Tutorial
+   
+ 
 
 
 
