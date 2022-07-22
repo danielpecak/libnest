@@ -9,7 +9,7 @@
 #================================
 """
 BSk.py
-====================================
+======
 The module that contains Brussels-Montreal parametrization with formulas
 for energy density, effective masses, etc.
 Both for uniform system and general expressions.

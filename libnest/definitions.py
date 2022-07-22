@@ -5,11 +5,11 @@
 # Warsaw Technical University, Université Libre de Bruxelles
 # On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
 # March 2022, Brussels
-# =========== Description
-# Script for converting the density units for nuclear matter
-# in the ranges typical for neutron stars.
-# =========== Usage example
-# $ ./units.py
+"""
+definitions.py
+========
+"""
+
 import numpy as np
 import math
 import libnest.units as units
@@ -19,8 +19,14 @@ def kf(rho):
     return np.power(3.*math.pi*math.pi*rho,1./3.)
 
 def vsf(r):
-    """Returns the velocity based on gradient of the pairing field gradient.
-In units of percentage of speed of light [c]."""
+    """Calculates the velocity based on gradient of the pairing field gradient.
+
+    Args:
+        r (float): distance from the center of a vortex in femtometers [fm]
+
+    Returns:
+        float: velocity in units of percentage of speed of light [c]
+    """
     return units.VUNIT*0.5/abs(r)
 
 def vLandau(delta,kF):
