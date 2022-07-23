@@ -117,6 +117,7 @@ import numpy as np
 from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
+from libnest.definitions import rho2kf
 
 T0   =-2302.01 # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
 T1   =762.99  # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]
@@ -143,65 +144,6 @@ KAPPAN =-36630.4   # [MeV*fm<sup>8</sup>]
 KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 
 
-# ================================
-#       Auxiliary
-# ================================
-def rho2kf(rho):
-    """Returns wavevector kF based on density rho.
-
-    It uses the relation for a uniform Fermi system and yields:
-
-    .. math::
-
-        k_F = (3 \\pi^2 \\rho )^{1/3}.
-
-    If we have a two-component mixture of protons and neutrons, both
-    having two spin components (up and down), then :math:`\\rho` states
-    for the density of one isospin, and one spin component only.
-
-    Args:
-        rho (float):  density :math:`\\rho` for a single component
-
-    Returns:
-        float: wavevector :math:`k_F` [fm :sup:`-1`]
-
-    See also:
-        :func:`kf2rho`
-    """
-    return (3.*np.pi*np.pi*rho)**(1./3.)
-
-def kf2rho(kF):
-    """Returns rho based on wavevector kF.
-
-    It uses the relation for a uniform Fermi system and yields:
-
-    .. math::
-
-        \\rho = \\frac{k_F^3}{3 \\pi^2}.
-
-    If we have a two-component mixture of protons and neutrons, both
-    having two spin components (up and down), then :math:`\\rho` states
-    for the density of one isospin, and one spin component only.
-
-    Args:
-        kF (float):  density :math:`\\rho` for a single component
-
-    Returns:
-        float: wavevector :math:`k_F` [fm :sup:`-1`]
-
-    See also:
-        :func:`rho2kf`
-    """
-    return kF**3/(3.*np.pi*np.pi)
-
-def rho2tau(rho):
-    """Returns kinetic density tau for uniform Fermi system of density rho."""
-    return 0.6*(3.*np.pi)**(2./3.)*rho**(5./3.)
-
-def rhoEta(rho_n, rho_p):
-    """Returns total density and difference of densities from neutron and
-    proton densities."""
-    return rho_n+rho_p, rho_n-rho_p
 
 # ================================
 #       Pairing fields
