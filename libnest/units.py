@@ -41,6 +41,9 @@ HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] 0.5*hbar^2/MN
 HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] 0.5*hbar^2/MP
 ========  =========== =================== ===========
 
+.. todo::
+    Redefine ``VUNIT`` with removing 100
+
 """
 import numpy as np
 

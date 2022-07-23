@@ -65,12 +65,40 @@ def kf2rho(kF):
     return kF**3/(3.*np.pi*np.pi)
 
 def rho2tau(rho):
-    """Returns kinetic density tau for uniform Fermi system of density rho."""
+    """Returns kinetic density :math:`\\tau` for uniform Fermi system of density
+    :math:`\\rho`.
+
+    .. todo::
+        formula
+
+    .. math::
+        \\tau = \\frac{3}{5} \\left(3 \\pi\\right)^{2/3} \\rho^{5/3}
+
+    Args:
+        rho (float):  density :math:`\\rho` [fm :sup:`-3`] for a single component
+
+    Returns:
+        float: kinetic density :math:`\\tau` [fm :sup:`-3`]
+    """
     return 0.6*(3.*np.pi)**(2./3.)*rho**(5./3.)
 
 def rhoEta(rho_n, rho_p):
-    """Returns total density and difference of densities from neutron and
-    proton densities."""
+    """Returns total density :math:`\\rho` and difference :math:`\\eta` of
+    densities from neutron and proton densities.
+
+    .. todo::
+        Check if I should return rho_n-rho_p OR rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Args:
+        rho_p (float): proton density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: pair of total density :math:`\\rho` [fm :sup:`-3`], and density difference
+        :math:`\\eta` [fm :sup:`-3`]
+    """
     return rho_n+rho_p, rho_n-rho_p
 
 
@@ -86,26 +114,81 @@ def vsf(r):
     return units.VUNIT*0.5/abs(r)
 
 def vLandau(delta,kF):
-    """Returns Landau velocity."""
+    """Returns Landau velocity.
+
+    Landau velocity shows at which velocity the superfluid medium starts to be
+    excited.
+
+    .. math::
+        v_L = \\frac{\\Delta}{\\hbar k_F} c
+
+    Args:
+        delta (float): :math:`\\Delta` [MeV]
+
+    Args:
+        kF (float):  :math:`k_F` [MeV]
+
+    Returns:
+        float: Landay velocity :math:`v_L` in units of speed of light [c]
+    """
     return delta/kF
 
 def vcritical(delta,kF):
-    """Returns critical velocity for superfluid."""
+    """Returns critical velocity for superfluid.
+
+    At this velocity the system is no longer superfluid.
+
+    .. math::
+        v_L = e \\frac{\\Delta}{\\hbar k_F} c
+
+    Args:
+        delta (float): :math:`\\Delta` [MeV]
+
+    Args:
+        kF (float):  :math:`k_F` [MeV]
+
+    Returns:
+        float: Landau velocity :math:`v_c` in units of speed of light [c]
+    """
     return delta/kF*math.e/2.
 
 def superfluidFraction(j,rho,vsf):
-    """Returns superfluid fraction: how much of the matter is superfluid."""
+    """Returns superfluid fraction: how much of the matter is superfluid.
+
+
+    Args:
+        rho (float): density :math:`\\rho` [fm :sup:`-3`]
+
+    Args:
+        j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]
+
+    Args:
+        vsf (float):  :math:`v_{\\mathrm{sf}}` [c]
+
+    Returns:
+        float: superfluid fraction: a number between 0 and 1 [1]
+    """
     return units.VUNIT*j/(rho*vsf)
 
 def vsf_NV(B,vsf,A):
     """Returns the velocity based on the gradient of the pairing field phase.
 However it is adjusted to the entrainment effects (definition by Nicolas Chamel
-Valentin Allard)."""
+Valentin Allard).
+
+.. todo::
+    Add more information.
+
+"""
     return units.hbar22M0/B*vsf + units.VUNIT*A/units.HBARC
 
 def v_NV(B,j,rho,A):
     """Returns the velocity (mass velocity). It is adjusted to the entrainment
-effects (definition by Nicolas Chamel Valentin Allard)."""
+effects (definition by Nicolas Chamel Valentin Allard).
+
+
+.. todo::
+    Add more information.
+"""
     return units.VUNIT*(units.hbar22M0/B*j/rho + A/units.HBARC)
 
 
