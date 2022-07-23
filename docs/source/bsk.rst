@@ -84,4 +84,7 @@ Effective mass
 .. automodule:: libnest.bsk
     :members:    
 
+References
+----------
+.. bibliography::
 

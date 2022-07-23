@@ -360,6 +360,7 @@ def energy_per_nucleon(rho_n, rho_p):
     """Returns the energy per nucleon on infinite nuclear matter of given
     density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
     Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
+    :cite:p:`chamel2009further`
     """
     # TODO: testing: making plots for total density [0, 0.2] and [0, 1.0]
     #               for pure neutron and symmetric nuclear matter X
