@@ -10,13 +10,30 @@
 # in the ranges typical for neutron stars.
 # =========== Usage example
 # $ ./units.py
+"""
+io.py
+=====
+This module is handling input and output.
 
+
+.. todo::
+    Handling WDATA format with Forbes' python library.
+
+=====
+"""
 import pandas as pd
 
 def dimension(nx,ny,nz):
     """
-    Returns the dimensionality of the problem.
-    nx,ny,nz: number of points in the grid in x,y,z directions.
+    Calculates the dimensionality of the problem.
+
+    Args:
+        nx (int): number of grid points along x-axis
+        ny (int): number of grid points along y-axis
+        nz (int): number of grid points along z-axis
+
+    Returns:
+        int: dimensionality of the problem
     """
     flats=0
     if nx==1: flats+=1
@@ -25,9 +42,18 @@ def dimension(nx,ny,nz):
     return 3-flats
 
 def readDimTxt(PATH, PREFIX):
-    """
-    Reads data from location PATH, according to the file PREFIX. Returns
-    a list of points in each direction [NX, NY, NZ].
+    """Reads data from the file ``PREFIX_info.txt`` in location ``PATH``.
+    It gets information about the grid size and returns them in a list.
+
+    .. note::
+        This works only for 2D!
+
+    Args:
+        PATH (string): location path
+        PREFIX (string): prefix of the file
+
+    Returns:
+        list of ints: a list of points in each direction [NX, NY, NZ].
     """
     print("# Directory:\t{} \n# Prefix:\t{}\n".format(PATH, PREFIX))
     file=PATH+PREFIX+'_info.txt'
@@ -47,8 +73,16 @@ def readDimTxt(PATH, PREFIX):
     return([NX,NY,NZ])
 
 def txt2df(file,sufix,cols):
-    """
-    Reads \*.txt files to pandas dataframe
+    """Reads \*.txt files to pandas dataframe.
+
+    Args:
+        file (string): path and prefix to the data
+        sufix (string): sufix pointing to the type of data e. g. 'density', 'delta' etc.
+        cols (list of strings): names of columns in the file
+
+    Returns:
+        pandas.DataFrame: data about spatial extend of observables
+
     """
     file=file+'_'+sufix+'.txt'
     print("# Reading {}".format(file))

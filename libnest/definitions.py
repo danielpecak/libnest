@@ -91,8 +91,6 @@ def rhoEta(rho_n, rho_p):
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-
-    Args:
         rho_p (float): proton density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
@@ -124,8 +122,6 @@ def vLandau(delta,kF):
 
     Args:
         delta (float): :math:`\\Delta` [MeV]
-
-    Args:
         kF (float):  :math:`k_F` [MeV]
 
     Returns:
@@ -143,8 +139,6 @@ def vcritical(delta,kF):
 
     Args:
         delta (float): :math:`\\Delta` [MeV]
-
-    Args:
         kF (float):  :math:`k_F` [MeV]
 
     Returns:
@@ -158,11 +152,7 @@ def superfluidFraction(j,rho,vsf):
 
     Args:
         rho (float): density :math:`\\rho` [fm :sup:`-3`]
-
-    Args:
         j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]
-
-    Args:
         vsf (float):  :math:`v_{\\mathrm{sf}}` [c]
 
     Returns:
