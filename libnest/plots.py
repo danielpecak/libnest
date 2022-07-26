@@ -14,6 +14,22 @@ import libnest.units
 # ================================
 
 def plot_energy_per_nucleon(rho_n, rho_p):
+    """    
+    Plots the energy per nucleon for uniform matter of density :math:`\\rho`,
+    the sum of proton and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`
+    respectively.
+    
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`energy_per_nucleon`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho * rho_n
     rho_p = rho * rho_p
@@ -29,6 +45,20 @@ def plot_energy_per_nucleon(rho_n, rho_p):
     plt.show()
     
 def plot_energy_per_nucleon_both():
+    """    
+    Plots the energy per nucleon for symmetric uniform matter and neutron
+    uniform matter of density :math:`\\rho`, which is the sum of proton and
+    neutron densities, :math:`\\rho_p` and :math:`\\rho_n` respectively.
+    
+    Args:
+        None
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`energy_per_nucleon`
+    """
     rho = np.linspace(0, 0.2, 100)
     rho_neum = rho #NeuM
     rho_n = 0.5 * rho
@@ -54,6 +84,21 @@ def plot_energy_per_nucleon_both():
 #         Pairing fields
 # ================================
 def plot_pairing_field_n(rho_n, rho_p):
+    """    
+    Plots the pairing field :math:`\\Delta` [MeV] for neutrons in matter of
+    density :math:`\\rho`, the sum of proton and neutron densities,
+    :math:`\\rho_p` and :math:`\\rho_n` respectively.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`neutron_ref_pairing_field`
+    """
     rho = np.linspace(0., 0.09, 100)
     rho_n = rho * rho_n
     rho_p = rho * rho_p
@@ -68,6 +113,21 @@ def plot_pairing_field_n(rho_n, rho_p):
     plt.show()
     
 def plot_pairing_field_p(rho_n, rho_p):
+    """    
+    Plots the pairing field :math:`\\Delta` [MeV] for protons in matter of
+    density :math:`\\rho`, the sum of proton and neutron densities,
+    :math:`\\rho_p` and :math:`\\rho_n` respectively.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`proton_ref_pairing_field`
+    """
     rho = np.linspace(0., 0.2, 100)
     rho_n = rho * rho_n
     rho_p = rho * rho_p
@@ -87,6 +147,22 @@ def plot_pairing_field_p(rho_n, rho_p):
 
 
 def plot_effective_mass_n(rho_n, rho_p):
+    """    
+    Plots the effective mass of neutron, :math:`M_{n}^{*} / M` [MeV] in matter of
+    density :math:`\\rho`. :math:`\\rho` is the sum of proton and neutron densities,
+    :math:`\\rho_p` and :math:`\\rho_n` respectively, and :math:`M` is the sum
+    of neutron and proton masses.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`effMn`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
@@ -101,6 +177,22 @@ def plot_effective_mass_n(rho_n, rho_p):
     
     
 def plot_effective_mass_p(rho_n, rho_p):
+    """    
+    Plots the effective mass of proton, :math:`M_{p}^{*}/ M` [MeV] in matter of
+    density :math:`\\rho`. :math:`\\rho` is the sum of proton and neutron densities,
+    :math:`\\rho_p` and :math:`\\rho_n` respectively, and :math:`M` is the sum
+    of neutron and proton masses.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`effMp`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
@@ -115,6 +207,23 @@ def plot_effective_mass_p(rho_n, rho_p):
     
     
 def plot_B_q(rho_n, rho_p, q):
+    """    
+    Plots the mean field potential (from variation over kinetic density,
+    or effective mass), :math:`B_{q}` [MeV fm:sup:`2`], in matter of
+    density :math:`\\rho`, where :math:`\\rho` is the sum of proton and neutron
+    densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        q (string): nucleon type choice (neutron 'n' or proton 'p')
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`B_q`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
@@ -128,6 +237,22 @@ def plot_B_q(rho_n, rho_p, q):
     plt.show()
     
 def plot_U_q(rho_n, rho_p, q):
+    """    
+    Plots the mean field potential (from variation over density :math:`\\rho`),
+    :math:`U_{q}` [MeV] in matter of density :math:`\\rho`, where :math:`\\rho`
+    is the sum of proton and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        q (string): nucleon type choice (neutron 'n' or proton 'p')
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`U_q`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
@@ -141,6 +266,21 @@ def plot_U_q(rho_n, rho_p, q):
     plt.show()
     
 def plot_isoscalarM(rho_n, rho_p):
+    """    
+    Plots the isoscalar effective mass, :math:`M :sub:`s`:sup:`*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`isoscalarM`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
@@ -154,6 +294,21 @@ def plot_isoscalarM(rho_n, rho_p):
     plt.show()
     
 def plot_isovectorM(rho_n, rho_p):
+    """    
+    Plots the isovector effective mass, :math:`M :sub:`s`:sup:`*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`isovectorM`
+    """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
