@@ -13,6 +13,7 @@ definitions.py
 import numpy as np
 import math
 import libnest.units as units
+from libnest.units import DENSEPSILON
 
 
 def rho2kf(rho):
@@ -88,16 +89,17 @@ def rhoEta(rho_n, rho_p):
 
     .. todo::
         Check if I should return rho_n-rho_p OR rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
+        > na razie oba chyba działają tak samo
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
         float: pair of total density :math:`\\rho` [fm :sup:`-3`], and density difference
         :math:`\\eta` [fm :sup:`-3`]
     """
-    return rho_n+rho_p, rho_n-rho_p
+    return rho_n+rho_p, rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
 
 
 def vsf(r):
@@ -149,7 +151,6 @@ def vcritical(delta,kF):
 def superfluidFraction(j,rho,vsf):
     """Returns superfluid fraction: how much of the matter is superfluid.
 
-
     Args:
         rho (float): density :math:`\\rho` [fm :sup:`-3`]
         j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]
@@ -162,30 +163,33 @@ def superfluidFraction(j,rho,vsf):
 
 def vsf_NV(B,vsf,A):
     """Returns the velocity based on the gradient of the pairing field phase.
-However it is adjusted to the entrainment effects (definition by Nicolas Chamel
-Valentin Allard).
+    However it is adjusted to the entrainment effects (definition by Nicolas Chamel
+    Valentin Allard).
 
-.. todo::
-    Add more information.
+    Args:
+        B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]
+        vsf (float):  :math:`v_{\\mathrm{sf}}` [c]
+        A (float): mean field potential coming from current variation A [MeV fm]
 
-"""
+    Returns:
+        float: velocity :math:`v_{\\mathrm{SF NV}}` in units of percentage of speed of light [c]
+    """
     return units.hbar22M0/B*vsf + units.VUNIT*A/units.HBARC
 
 def v_NV(B,j,rho,A):
     """Returns the velocity (mass velocity). It is adjusted to the entrainment
 effects (definition by Nicolas Chamel Valentin Allard).
 
+    Args:
+        B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]
+        j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]
+        rho (float): density :math:`\\rho` [fm :sup:`-3`]
+        A (float): mean field potential coming from current variation A [MeV fm]
 
-.. todo::
-    Add more information.
-"""
+    Returns:
+        float: mass velocity :math:`v_{\\mathrm{NV}}` in units of percentage of speed of light [c]     
+    """
     return units.VUNIT*(units.hbar22M0/B*j/rho + A/units.HBARC)
-
-
-
-
-#def isovector_effective_mass(M_q, rho, rho_q):
-#    return
 
 
 if __name__ == '__main__':
