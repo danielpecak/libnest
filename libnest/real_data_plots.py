@@ -34,7 +34,14 @@ import scipy.interpolate
 def file_check(filename):
     """
     Checks if all files are present in the directory.
-    Raises: FileNotFoundError
+    Args:
+        filename (string): name of the data set file
+        
+    Raises:
+        FileNotFoundError
+    
+    Returns:
+        bool
     """
     try:
         file = open(filename, 'r')
@@ -50,14 +57,34 @@ def file_check(filename):
 # ================================
 def cross_section_distance(x, y):
     """Returns the distance to the centre of the 90x90 fm box as cross-section,
-    changing it from a coordinate system with origin at one end of the box"""
+    changing it from a coordinate system with origin at one corner of the box.
+    
+     Args:
+        x (float): x-coordinate :math:`r` [fm]; 
+        y (float): y=coordinate :math:`r` [fm`];
+
+    Returns:
+        float: cross section distance :math:`r` [fm]
+    
+    """
     r = np.sqrt((x-45)**2 + (y-45)**2)
     i = np.where(x<45)
     r[i] = -r[i]
     return r
 
 def phi(x,y): #just in case
-    """Returns phi for the polar coordinates"""
+    """Returns the angle of the line connecting the coordinates to the centre
+    of the 90x90 "box", for a coordinate system with origin at a corner of the
+    box.
+    
+     Args:
+        x (float): x-coordinate :math:`r` [fm]; 
+        y (float): y=coordinate :math:`r` [fm`];
+
+    Returns:
+        float: angle :math:`\\phi` [rad]
+    
+    """
     return np.arctan(y-45,x-45)
 
 
@@ -65,19 +92,55 @@ def phi(x,y): #just in case
 #      Real data definitions
 # ================================
 def pairing_field(rel, im):
-    """Returns the absolute value/modulus and the argument of the field 
-    potential from its imaginary and real parts"""
+    """Calculates the absolute value/modulus and the argument of the field 
+    potential from its imaginary and real parts.
+    
+    Args:
+        rel (float): real part of field potential :math:`\\Delta_{rel}` [MeV]; 
+        im (float): imaginary part of field potential :math:`\\Delta_{im}` [MeV];
+        
+    Returns:
+        float: pairing field :math:`\\Delta` [MeV];
+    
+    """
     return np.sqrt(im**2+rel**2), np.arctan(im,rel)
 
-def current(i, j, k):
-    """Returns the current value from its i, j, and k components"""
-    return np.sqrt(i**2+j**2+k**2)
+def current(x, y, z):
+    """Calculates the current value from its vector x, y, and z components.
+    
+    Args:
+        x (float): :math:`\\vec x` current component [fm :sup:`-4`]
+        y (float): :math:`\\vec y` current component [fm :sup:`-4`]
+        z (float): :math:`\\vec z` current component [fm :sup:`-4`]
+        
+    Returns:
+        float: current :math:`\\vec j` [fm :sup:`-4`]
+    
+    """
+    return np.sqrt(x**2+y**2+z**2)
 
 
 # ================================
 #       Plotting functions
 # ================================
 def plot_density(filename):
+    """
+    Opens the specified file, checks its validity, and creates 2D arrays from
+    its data. The first and second columns are x- and y-coordinates. The third
+    column is the density :math:`\\rho` [fm :sup:`-3`].
+    
+    Cross section distance is calculated and the density is divided by bulk
+    density. The ratio is plotted against the cross section distance.
+    
+    Args:
+        filename (string): name of the data set file
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`cross_section_distance`
+    """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -104,6 +167,22 @@ def plot_density(filename):
         sys.exit('# ERROR: Cannot access file')
         
 def plot_density_contour(filename):
+    """
+    Opens the specified file, checks its validity, and creates 2D arrays from
+    its data. The first and second columns are x- and y-coordinates. The third
+    column is the density :math:`\\rho` [fm :sup:`-3`].
+    
+    A grid is created and populated using triangulation ("scipy.interpolate.triangulate")
+    
+    Args:
+        filename (string): name of the data set file
+        
+    Returns:
+        None
+        
+    See also:
+        :func:`cross_section_distance`
+    """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -113,8 +192,8 @@ def plot_density_contour(filename):
         #data[:,2] - rho_q
         # x in one direction, y in another??
         
-        x = data[:,0] - 45
-        y = data[:,1] - 45
+        x = data[:,0]
+        y = data[:,1]
         
         xx, yy = np.meshgrid(x, y)
         rho_bulk = 0.00590448
@@ -122,7 +201,7 @@ def plot_density_contour(filename):
         
         
         #interpolation by triangulation
-        zi = scipy.interpolate.griddata((x, y), rho_ratio, (xx, yy), method='nearest')
+        zi = scipy.interpolate.griddata((x, y), rho_ratio, (xx, yy), method='linear')
         plt.imshow(zi, vmin=rho_ratio.min(), vmax=rho_ratio.max(), origin='lower',
             extent=[x.min(), x.max(), y.min(), y.max()])
         plt.colorbar()
