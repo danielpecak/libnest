@@ -403,9 +403,111 @@ def energy_per_nucleon(rho_n, rho_p):
             + 3*T5/40*(kF**2)*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
 
 
-
+# ================================
+#            Epsilon
+# ================================
 # TODO list:
 # PHYSICAL REVIEW C 104, 055801 (2021)
 # NOTE: densities such as TAU, MU, J will be given in the future from the data
 # Formulas 9-14,23, A8-A10
 
+def C_rho(rho):
+    """
+    Calculates the energy functional :math:`C^{\\rho}` cooefficient
+
+    Args:
+        rho (float): matter density :math:`\\rho` [fm :sup:`-3`]
+
+    Returns:
+        float: C coefficient :math:`C^{\\rho}`
+
+    """
+    return -1./4.*T0*(X0-1)-T3/24.*(X3-1)*rho**ALPHA
+
+def C_tau(rho):
+    """
+    Calculates the energy functional :math:`C^{\\tau}` cooefficient
+
+    Args:
+        rho (float): matter density :math:`\\rho` [fm :sup:`-3`]
+
+    Returns:
+        float: C coefficient :math:`C^{\\tau}`
+
+    """
+    return -T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho*BETA+3./8.*T5*(X5-1.)*rho**GAMMA
+
+def C_delta_rho(rho):
+    """
+    Calculates the energy functional :math:`C^{\\Delta * \\rho}` cooefficient
+
+    Args:
+        rho (float): matter density :math:`\\rho` [fm :sup:`-3`]
+
+    Returns:
+        float: C coefficient :math:`C^{\\Delta * \\rho}`
+
+    """
+    return 3./32.*T1*(X1-1.)+3./32.*T2X2+3./32.*T2+3./32.*T4*(X4-1.)*rho**BETA + 3./32.*T5*(X5-1.)*rho**GAMMA
+
+def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, eps_cutoff, mu, delta, q, kappa):
+    """
+    Calculates the total energy functional :math:`\\epsilon`.
+
+    Args:
+    rho_n (float) :
+    rho_p (float) :
+    rho_grad (float) :
+    tau (float) :
+    j (float) :
+    nu (float) :
+    eps_cutoff (float) :
+    mu (float) :
+    delta (float) :
+    q (float) :
+    kappa (float) :
+
+    Returns
+        float: 
+
+    """
+    rho = rho_n + rho_p
+    if(q=='n'):
+        M = MN
+    elif(q=='p'):
+        M = MP
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, eps_cutoff, mu, delta, q, kappa)
+
+def epsilon_rho(rho):
+    return C_rho(rho)*rho**2
+    
+def epsilon_delta_rho(rho, rho_grad):
+    return -(rho_grad)**2*C_delta_rho(rho)
+    
+def epsilon_tau(rho, tau, j):
+    return (rho*tau-j**2)*C_tau(rho)
+    
+def epsilon_pi(rho_n, rho_p, rho_grad, nu, eps_cutoff, mu, delta, q, kappa):
+    # nu - anomalous density
+    #nu^* : 1-mu ??
+    rho = rho_n + rho_p
+    return 1./4.*v_pi(rho_n, rho_p, eps_cutoff, mu, delta, q)*nu*(1-nu)*kappa*(np.abs(rho_grad))**2
+
+def v_pi(rho_n, rho_p, eps_cutoff, mu, delta, q):
+    rho = rho_n + rho_p
+    if(q=='n'):
+        M = effMn(rho_n, rho_p)
+    elif(q=='p'):
+        M = effMp(rho_n, rho_p)
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+#CHECK HBARC UNITS
+    return -8.*np.pi**2/I(eps_cutoff, mu, delta) * (HBARC**2/2./M)**(3./2.)
+
+def I(eps_cutoff, mu, delta):
+    return np.sqrt(mu)*(2*np.log(2*mu/np.abs(delta))+Lambda(eps_cutoff/mu))
+    
+def Lambda(x):
+    return np.log(16*x)+2*np.sqrt(1+x)-2*np.log(1+np.sqrt(1+x))-4.
