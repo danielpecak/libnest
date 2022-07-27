@@ -209,7 +209,7 @@ def plot_effective_mass_p(rho_n, rho_p):
 def plot_B_q(rho_n, rho_p, q):
     """    
     Plots the mean field potential (from variation over kinetic density,
-    or effective mass), :math:`B_{q}` [MeV fm:sup:`2`], in matter of
+    or effective mass), :math:`B_{q}` [MeV fm :sup:`2`], in matter of
     density :math:`\\rho`, where :math:`\\rho` is the sum of proton and neutron
     densities, :math:`\\rho_p` and :math:`\\rho_n`.
     
@@ -267,7 +267,7 @@ def plot_U_q(rho_n, rho_p, q):
     
 def plot_isoscalarM(rho_n, rho_p):
     """    
-    Plots the isoscalar effective mass, :math:`M :sub:`s`:sup:`*`` [MeV]
+    Plots the isoscalar effective mass, :math:`M_s^*` [MeV]
     in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
     and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
     
@@ -295,7 +295,7 @@ def plot_isoscalarM(rho_n, rho_p):
     
 def plot_isovectorM(rho_n, rho_p):
     """    
-    Plots the isovector effective mass, :math:`M :sub:`s`:sup:`*`` [MeV]
+    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
     in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
     and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
     

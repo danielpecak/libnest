@@ -34,6 +34,7 @@ import scipy.interpolate
 def file_check(filename):
     """
     Checks if all files are present in the directory.
+    
     Args:
         filename (string): name of the data set file
         
@@ -56,7 +57,8 @@ def file_check(filename):
 #           Coordinates
 # ================================
 def cross_section_distance(x, y):
-    """Returns the distance to the centre of the 90x90 fm box as cross-section,
+    """
+    Returns the distance to the centre of the 90x90 fm box as cross-section,
     changing it from a coordinate system with origin at one corner of the box.
     
      Args:
@@ -73,7 +75,8 @@ def cross_section_distance(x, y):
     return r
 
 def phi(x,y): #just in case
-    """Returns the angle of the line connecting the coordinates to the centre
+    """
+    Returns the angle of the line connecting the coordinates to the centre
     of the 90x90 "box", for a coordinate system with origin at a corner of the
     box.
     
@@ -92,7 +95,8 @@ def phi(x,y): #just in case
 #      Real data definitions
 # ================================
 def pairing_field(rel, im):
-    """Calculates the absolute value/modulus and the argument of the field 
+    """
+    Calculates the absolute value/modulus and the argument of the field 
     potential from its imaginary and real parts.
     
     Args:
@@ -106,7 +110,8 @@ def pairing_field(rel, im):
     return np.sqrt(im**2+rel**2), np.arctan(im,rel)
 
 def current(x, y, z):
-    """Calculates the current value from its vector x, y, and z components.
+    """
+    Calculates the current value from its vector x, y, and z components.
     
     Args:
         x (float): :math:`\\vec x` current component [fm :sup:`-4`]
@@ -125,7 +130,7 @@ def current(x, y, z):
 # ================================
 def plot_density(filename):
     """
-    Opens the specified file, checks its validity, and creates 2D arrays from
+    Opens the specified file, checks its validity, and creates a 2D array from
     its data. The first and second columns are x- and y-coordinates. The third
     column is the density :math:`\\rho` [fm :sup:`-3`].
     
@@ -168,20 +173,18 @@ def plot_density(filename):
         
 def plot_density_contour(filename):
     """
-    Opens the specified file, checks its validity, and creates 2D arrays from
+    Opens the specified file, checks its validity, and creates a 2D array from
     its data. The first and second columns are x- and y-coordinates. The third
     column is the density :math:`\\rho` [fm :sup:`-3`].
     
-    A grid is created and populated using triangulation ("scipy.interpolate.triangulate")
+    //A grid is created and populated using triangulation ("scipy.interpolate.triangulate").
+    A contour plot of density as a vertical cross section is created.
     
     Args:
         filename (string): name of the data set file
         
     Returns:
         None
-        
-    See also:
-        :func:`cross_section_distance`
     """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
@@ -235,6 +238,27 @@ def plot_density_contour(filename):
 
 
 def plot_pairing_field(filename):
+    """
+    Opens the specified file, checks its validity, and creates a 2D array from
+    its data. The first and second columns are x- and y-coordinates. The third
+    column is the real part of the pairing field :math:`\\Delta_{rel}` [MeV] and
+    the fourth is the imaginary part of the pairing field :math:`\\Delta_{im}` [MeV].
+    
+    
+    Cross section distance and the total pairing field are calculated. The total
+    pairing field is divided by the bulk pairing field, and the ratio is plotted
+    against the cross section distance.
+    
+    Args:
+        filename (string): name of the data set file
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`cross_section_distance`
+        :func:`pairing_field`
+    """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -263,6 +287,25 @@ def plot_pairing_field(filename):
         
 
 def plot_current(filename):
+    """
+    Opens the specified file, checks its validity, and creates a 2D array from
+    its data. The first and second columns are x- and y-coordinates. The third,
+    fourth, and fifth columns are :math:`\\vec x`, :math:`\\vec y`, :math:`\\vec z`
+    current components [fm :sup:`-4`]    
+    
+    Cross section distance and the total current vector :math:`\\vec j` are
+    calculated. The current is then plotted against the cross section distance.
+    
+    Args:
+        filename (string): name of the data set file
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`cross_section_distance`
+        :func:`current`
+    """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
@@ -270,9 +313,9 @@ def plot_current(filename):
         print(data)
         #data[:,0] - x
         #data[:,1] - y
-        #data[:,2] - i current component
-        #data[:,3] - j current component
-        #data[:,4] - k current component
+        #data[:,2] - x current component
+        #data[:,3] - y current component
+        #data[:,4] - z current component
         
         r = cross_section_distance(data[:,0], data[:,1])
         print(r)

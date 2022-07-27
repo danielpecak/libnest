@@ -150,7 +150,8 @@ KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 # ================================
 def symmetric_pairing_field(rho_n, rho_p):
     #    Formula (5.12) from NeST.pdf
-    """Returns the pairing field for symmetric nuclear matter for kF lower
+    """
+    Returns the pairing field for symmetric nuclear matter for kF lower
     than 1.38 fm^-1 (where the field is zero).
     
     Args:
@@ -158,7 +159,7 @@ def symmetric_pairing_field(rho_n, rho_p):
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: pairing field for symmetric matter :math:`\\Delta :sub:`sym`` [fm :sup:`-3`]
+        float: pairing field for symmetric matter :math:`\\Delta_{sym}` [fm :sup:`-3`]
     
     """
     kF = rho2kf((rho_n+rho_p)/2)
@@ -170,14 +171,15 @@ def symmetric_pairing_field(rho_n, rho_p):
 
 def neutron_pairing_field(rho_n):
     #   Formula (5.11) from NeST.pdf
-    """Returns the pairing field for pure neutron matter for kF lower than
+    """
+    Returns the pairing field for pure neutron matter for kF lower than
     1.31 fm^-1 (where the field is zero).
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: pairing field for neutron matter :math:`\\Delta :sub:`NeuM`` [fm :sup:`-3`]
+        float: pairing field for neutron matter :math:`\\Delta_{NeuM}` [fm :sup:`-3`]
     """
     kF = rho2kf(rho_n)
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
@@ -189,13 +191,15 @@ def neutron_pairing_field(rho_n):
 
 def neutron_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
-    """Returns the reference pairing field for neutrons in uniform matter.
+    """
+    Returns the reference pairing field for neutrons in uniform matter.
+    
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: pairing field for neutrons :math:`\\Delta :sub:`N`` [fm :sup:`-3`]
+        float: pairing field for neutrons :math:`\\Delta_n` [fm :sup:`-3`]
     """
     rho, eta = rhoEta(rho_n, rho_p)
     rho = rho + DENSEPSILON
@@ -204,13 +208,15 @@ def neutron_ref_pairing_field(rho_n, rho_p):
 
 def proton_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
-    """Returns the reference pairing field for protons in uniform matter.
+    """
+    Returns the reference pairing field for protons in uniform matter.
+    
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: pairing field for protons :math:`\\Delta :sub:`P`` [fm :sup:`-3`]
+        float: pairing field for protons :math:`\\Delta_p` [fm :sup:`-3`]
     """
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = rho + DENSEPSILON
@@ -230,16 +236,6 @@ def proton_ref_pairing_field(rho_n, rho_p):
 # Make plots for neutron matter (NeuM) where rho = rho_n [rho_p =0 ]
 # Make plots for symmetric matter (SM) where rho = 2*rho_n [rho_p =rho_n ]
 #
-def effective_mass(rho, Ms, Mv):
-    """Returns the effective mass of a nucleon of charge q given rho is the
-    ratio of the density of matter of the specified type to total density.
-    (rho = rho_n + rho_p)
-    Assume Ms represents Ms/M, which is a unitless fraction, and Mv represents
-    Mv/M, accordingly. ???
-    For neutron matter, rho = rho_n
-    For symmetric matter, rho = 2*rho_n"""
-    # NOTE: I think this probably would not be needed anymore
-    return 1/(2*rho/Ms + (1-2*rho)/Mv)
 
 def isoscalarM(rho_n, rho_p):
     """Calculates effective isoscalar mass M_s for a given uniform system
@@ -250,7 +246,7 @@ def isoscalarM(rho_n, rho_p):
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: effective isoscalar mass :math:`M :sub:`s`:sup:`*`` [MeV]
+        float: effective isoscalar mass :math:`M_{s}^{*}` [MeV]
         
     See also:
         :func:`effMn`
@@ -261,7 +257,7 @@ def isoscalarM(rho_n, rho_p):
 
 #to check
 def isovectorM(rho_n, rho_p):
-    """Calculated effective isovector mass M_v for a given uniform system
+    """Calculated effective isovector mass :math:`M_v` for a given uniform system
     with neutron and proton densities rho_n, rho_p respectively.
     
      Args:
@@ -269,7 +265,7 @@ def isovectorM(rho_n, rho_p):
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: effective isovector mass :math:`M :sub:`v`:sup:`*`` [MeV]
+        float: effective isovector mass :math:`M_{v}^{*}` [MeV]
     
     See also:
         :func:`effMn`
@@ -291,7 +287,7 @@ def effMn(rho_n, rho_p):
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: effective mass of a neutron :math:`M :sub:`n`:sup:`*`` [MeV]
+        float: effective mass of a neutron :math:`M_{n}^{*}` [MeV]
         
     See also:
         :func:`B_q`
@@ -300,13 +296,13 @@ def effMn(rho_n, rho_p):
 
 def effMp(rho_n, rho_p):
     """Returns the effective mass of a proton in nuclear medium.
-    
-     Args:
+     
+    Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         
     Returns:
-        float: effective mass of a proton :math:`M :sub:`p`:sup:`*`` [MeV]
+        float: effective mass of a proton :math:`M_{p}^{*}` [MeV]
     
     See also:
         :func:`B_q`
@@ -325,7 +321,7 @@ def U_q(rho_n, rho_p,q):
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
         
     Returns:
-        float: Mean field potential :math:`U :sub:`q`` [MeV]
+        float: Mean field potential :math:`U_q` [MeV]
     
     """
     if(q=='n'):
@@ -353,7 +349,7 @@ def B_q(rho_n, rho_p, q):
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
         
     Returns:
-        float: effective mass of a proton :math:`M :sub:`p`:sup:`*`` [MeV fm:sup:`2`]
+        float: effective mass of a proton :math:`M_{p}^{*}` [MeV fm :sup:`2`]
     
     """
     if(q=='n'):
@@ -376,10 +372,11 @@ def B_q(rho_n, rho_p, q):
 # Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:
 # Code formulas: A13, and dependent (A14, A15)
 def energy_per_nucleon(rho_n, rho_p):
-    """Returns the energy per nucleon on infinite nuclear matter of given
+    """
+    Returns the energy per nucleon on infinite nuclear matter of given
     density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
     Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
-    :cite:p:`chamel2009further`
+    :cite:p:`chamel2009further`.
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -387,7 +384,7 @@ def energy_per_nucleon(rho_n, rho_p):
 
         
     Returns:
-        float: energy per neutron :math:`e :sub:`n`` [MeV]
+        float: energy per neutron :math:`e_n` [MeV]
 
     """
     rho = rho_n+rho_p+DENSEPSILON
@@ -406,7 +403,9 @@ def energy_per_nucleon(rho_n, rho_p):
             + 3*T5/40*(kF**2)*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
 
 
+
 # TODO list:
 # PHYSICAL REVIEW C 104, 055801 (2021)
 # NOTE: densities such as TAU, MU, J will be given in the future from the data
 # Formulas 9-14,23, A8-A10
+
