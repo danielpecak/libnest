@@ -416,11 +416,10 @@ def C_rho(rho):
     Calculates the energy functional :math:`C^{\\rho}` cooefficient
 
     Args:
-        rho (float): matter density :math:`\\rho` [fm :sup:`-3`]
+        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
 
     Returns:
         float: C coefficient :math:`C^{\\rho}`
-
     """
     return -1./4.*T0*(X0-1)-T3/24.*(X3-1)*rho**ALPHA
 
@@ -429,7 +428,7 @@ def C_tau(rho):
     Calculates the energy functional :math:`C^{\\tau}` cooefficient
 
     Args:
-        rho (float): matter density :math:`\\rho` [fm :sup:`-3`]
+        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
 
     Returns:
         float: C coefficient :math:`C^{\\tau}`
@@ -442,7 +441,7 @@ def C_delta_rho(rho):
     Calculates the energy functional :math:`C^{\\Delta * \\rho}` cooefficient
 
     Args:
-        rho (float): matter density :math:`\\rho` [fm :sup:`-3`]
+        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
 
     Returns:
         float: C coefficient :math:`C^{\\Delta * \\rho}`
@@ -450,25 +449,24 @@ def C_delta_rho(rho):
     """
     return 3./32.*T1*(X1-1.)+3./32.*T2X2+3./32.*T2+3./32.*T4*(X4-1.)*rho**BETA + 3./32.*T5*(X5-1.)*rho**GAMMA
 
-def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, eps_cutoff, mu, delta, q, kappa):
+def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     """
-    Calculates the total energy functional :math:`\\epsilon`.
+    Calculates the total energy functional :math:`\\epsilon`, with a limit for
+    single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.
 
     Args:
-    rho_n (float) :
-    rho_p (float) :
-    rho_grad (float) :
-    tau (float) :
-    j (float) :
-    nu (float) :
-    eps_cutoff (float) :
-    mu (float) :
-    delta (float) :
-    q (float) :
-    kappa (float) :
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
+        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        kappa (float):
+            what is kappa? (no Eq.9 in Ref.41)
 
     Returns
-        float: 
+        float: nergy functional :math:`\\epsilon`
 
     """
     rho = rho_n + rho_p
@@ -478,25 +476,89 @@ def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, eps_cutoff, mu, delta, q, kappa)
         M = MP
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, eps_cutoff, mu, delta, q, kappa)
+    return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa)
 
 def epsilon_rho(rho):
+    """
+    Energy functional :math:`\\epsilon_{\\rho}` for particle matter, related to
+    the interaction of the nucleons with the background matter density.
+
+    Args:
+        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\rho}`
+    """
     return C_rho(rho)*rho**2
     
 def epsilon_delta_rho(rho, rho_grad):
+    """
+    Energy functional :math:`\\epsilon_{\\Delta \\rho}` for particle matter,
+    related to the interaction of the nucleons with the background fluctuations.
+
+    Args:
+        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
+        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\Delta \\rho}`
+    """
     return -(rho_grad)**2*C_delta_rho(rho)
     
 def epsilon_tau(rho, tau, j):
+    """
+    Energy functional :math:`\\epsilon_{\\tau}` for particle matter,
+    related to the density-dependent effective mass.It gives rise to current couplings.
+
+    Args:
+        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
+        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\tau}`
+    """
     return (rho*tau-j**2)*C_tau(rho)
     
-def epsilon_pi(rho_n, rho_p, rho_grad, nu, eps_cutoff, mu, delta, q, kappa):
-    # nu - anomalous density
-    #nu^* : 1-mu ??
-    rho = rho_n + rho_p
-    return 1./4.*v_pi(rho_n, rho_p, eps_cutoff, mu, delta, q)*nu*(1-nu)*kappa*(np.abs(rho_grad))**2
+def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
+    """
+    Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
+    related to paiirng energy density.
 
-def v_pi(rho_n, rho_p, eps_cutoff, mu, delta, q):
-    rho = rho_n + rho_p
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        kappa (float):
+           - is this tern supposed to be included? 
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\pi}`
+    """
+    #nu^* : 1-mu ??
+    #rho = rho_n + rho_p
+    return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)*kappa*(np.abs(rho_grad))**2
+
+def v_pi(rho_n, rho_p, q):
+    # Equation 14 from Phys Rev C 104
+    """
+    Calculates pairing strength :math:`\\upsilon^{pi}_q` [fm :sup:`-3`] for neutrons
+    or protons, for energies below 6.5 MeV.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+
+    Returns:
+        float: pairing strength :math:`\\upsilon^{pi}` [fm :sup:`-3`]
+
+    See also:
+        :func:`I`
+    """
+    #rho = rho_n + rho_p
     if(q=='n'):
         M = effMn(rho_n, rho_p)
     elif(q=='p'):
@@ -504,10 +566,73 @@ def v_pi(rho_n, rho_p, eps_cutoff, mu, delta, q):
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
 #CHECK HBARC UNITS
-    return -8.*np.pi**2/I(eps_cutoff, mu, delta) * (HBARC**2/2./M)**(3./2.)
+    return -8.*np.pi**2/I(rho_n, rho_p, q) * (HBARC**2/2./M)**(3./2.)
 
-def I(eps_cutoff, mu, delta):
-    return np.sqrt(mu)*(2*np.log(2*mu/np.abs(delta))+Lambda(eps_cutoff/mu))
+def I(rho_n, rho_p, q):
+    # Equation 15 from Phys Rev C 104
+    """
+    Approximates the solution to the integral present in the original
+    :math:`\\nu^{\\pi}` formula for single-particle energies below 6.5 MeV (?)
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+
+    Returns:
+        float: analytic integral solution
+        
+    See also:
+        :func:`Lambda`
+
+    """
+    if(q=='n'):
+        delta = neutron_ref_pairing_field(rho_n, rho_p)
+    elif(q=='p'):
+        delta = proton_ref_pairing_field(rho_n, rho_p)
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    return np.sqrt(mu_q(rho_n, rho_p, q))*(2*np.log(2*mu_q(rho_n, rho_p, q)/np.abs(delta))+Lambda(6.5/mu_q(rho_n, rho_p, q)))
+# Is eps_cutoff = 6.5 MeV ?
     
 def Lambda(x):
-    return np.log(16*x)+2*np.sqrt(1+x)-2*np.log(1+np.sqrt(1+x))-4.
+    # Equation 16 from Phys Rev C 104
+    """
+    Function :mah:`\\Lambda` used in :func:`I`.
+
+    Args:
+        x (float): variable
+    
+    Returns:
+        float: `\\Lambda`
+        
+    See also:
+        :func:`I`
+    """
+    return np.log(16.*x)+2.*np.sqrt(1.+x)-2.*np.log(1.+np.sqrt(1.+x))-4.
+
+def mu_q(rho_n, rho_p, q):
+# is this supposed to be a choice between protons or neutrons or should it be
+# mu = mu_p + mu_n? 
+# Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
+    """
+    Calculates the chemical potential :math:`\\mu` defined with the wavevector
+    :math:`k_F`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        
+    Returns:
+         float: chemical potential :math:`\\mu` [MeV]
+    """
+    if(q=='n'):
+        M = effMn(rho_n, rho_p)
+        rho = rho_n
+    elif(q=='p'):
+        M = effMp(rho_n, rho_p)
+        rho = rho_p
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    return HBARC**2*rho2kf(rho)**2/(2.*M)
