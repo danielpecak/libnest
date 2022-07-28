@@ -17,7 +17,8 @@ from libnest.units import DENSEPSILON
 
 
 def rho2kf(rho):
-    """Returns wavevector kF based on density rho.
+    """
+    Returns wavevector kF based on density rho.
 
     It uses the relation for a uniform Fermi system and yields:
 
@@ -42,7 +43,8 @@ def rho2kf(rho):
 
 
 def kf2rho(kF):
-    """Returns rho based on wavevector kF.
+    """
+    Returns rho based on wavevector kF.
 
     It uses the relation for a uniform Fermi system and yields:
 
@@ -66,7 +68,8 @@ def kf2rho(kF):
     return kF**3/(3.*np.pi*np.pi)
 
 def rho2tau(rho):
-    """Returns kinetic density :math:`\\tau` for uniform Fermi system of density
+    """
+    Returns kinetic density :math:`\\tau` for uniform Fermi system of density
     :math:`\\rho`.
 
     .. todo::
@@ -84,7 +87,8 @@ def rho2tau(rho):
     return 0.6*(3.*np.pi)**(2./3.)*rho**(5./3.)
 
 def rhoEta(rho_n, rho_p):
-    """Returns total density :math:`\\rho` and difference :math:`\\eta` of
+    """
+    Returns total density :math:`\\rho` and difference :math:`\\eta` of
     densities from neutron and proton densities.
 
     .. todo::
@@ -101,9 +105,9 @@ def rhoEta(rho_n, rho_p):
     """
     return rho_n+rho_p, rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
 
-
 def vsf(r):
-    """Calculates the velocity based on gradient of the pairing field gradient.
+    """
+    Calculates the velocity based on gradient of the pairing field gradient.
 
     Args:
         r (float): distance from the center of a vortex in femtometers [fm]
@@ -114,7 +118,8 @@ def vsf(r):
     return units.VUNIT*0.5/abs(r)
 
 def vLandau(delta,kF):
-    """Returns Landau velocity.
+    """
+    Returns Landau velocity.
 
     Landau velocity shows at which velocity the superfluid medium starts to be
     excited.
@@ -132,7 +137,8 @@ def vLandau(delta,kF):
     return delta/kF
 
 def vcritical(delta,kF):
-    """Returns critical velocity for superfluid.
+    """
+    Returns critical velocity for superfluid.
 
     At this velocity the system is no longer superfluid.
 
@@ -149,7 +155,8 @@ def vcritical(delta,kF):
     return delta/kF*math.e/2.
 
 def superfluidFraction(j,rho,vsf):
-    """Returns superfluid fraction: how much of the matter is superfluid.
+    """
+    Returns superfluid fraction: how much of the matter is superfluid.
 
     Args:
         rho (float): density :math:`\\rho` [fm :sup:`-3`]
@@ -162,7 +169,8 @@ def superfluidFraction(j,rho,vsf):
     return units.VUNIT*j/(rho*vsf)
 
 def vsf_NV(B,vsf,A):
-    """Returns the velocity based on the gradient of the pairing field phase.
+    """
+    Returns the velocity based on the gradient of the pairing field phase.
     However it is adjusted to the entrainment effects (definition by Nicolas Chamel
     Valentin Allard).
 
@@ -177,8 +185,9 @@ def vsf_NV(B,vsf,A):
     return units.hbar22M0/B*vsf + units.VUNIT*A/units.HBARC
 
 def v_NV(B,j,rho,A):
-    """Returns the velocity (mass velocity). It is adjusted to the entrainment
-effects (definition by Nicolas Chamel Valentin Allard).
+    """
+    Returns the velocity (mass velocity). It is adjusted to the entrainment
+    effects (definition by Nicolas Chamel Valentin Allard).
 
     Args:
         B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]
