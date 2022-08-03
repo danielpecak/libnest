@@ -20,15 +20,13 @@ import matplotlib.pyplot as plt
 
 print("Siema")
 
-#print(dir(libnest))
+# libnest.plots.plot_energy_per_nucleon_both()
 
-#libnest.plots.plot_energy_per_nucleon_both()
+# libnest.plots.plot_energy_per_nucleon(0.5, 0.5)
 
-#libnest.plots.plot_energy_per_nucleon()
+# libnest.plots.plot_pairing_field_n(1., 0)
 
-#libnest.plots.plot_pairing_field_n(1., 0)
-
-#libnest.plots.plot_pairing_field_p(1., 0)
+# libnest.plots.plot_pairing_field_p(1., 0)
 
 # libnest.plots.plot_effective_mass_n(0.5, 0.5)
 
@@ -42,17 +40,27 @@ print("Siema")
 
 # libnest.plots.plot_isovectorM(1., 0.)
 
-# libnest.plots.plot_effective_mass_symmetric_Mn() #symmetric
+libnest.plots.plot_epsilon_test(1., 0., 0.) #rho_n, tau, nu
 
-# libnest.plots.plot_effective_mass_symmetric_Mp() #symmetric
+libnest.plots.plot_epsilon(1., 0., 0., 0., 0., 0., 'n', 0.)
 
-# libnest.plots.plot_effective_mass_neutron_Mn() #neutron matter
+#epsilon_test and epsilon functions give the same plot for tau = 0 and nu = 0
+#they are different for tau = 1 and nu = 1
+#test and original start to diverge in I() and I_test() due to the first term
+#it is nullified when nu = 0 in the pairing energy density functional equation
 
-libnest.real_data_plots.density("N2600i_density.txt")
+r = np.arange(0.0001,0.2,0.0001)
+# rho_n = r
+plt.plot(r, libnest.bsk.I_test(r),label='I test')
+plt.plot(r, libnest.bsk.I(r, 0., 'n'), label='I')
+# x=np.sqrt(libnest.bsk.mu_q(rho_n, 0., 'n'))*(2*np.log(2*libnest.bsk.mu_q(rho_n, 0., 'n')/np.abs(libnest.bsk.neutron_ref_pairing_field(rho_n, 0.))))
+# plt.plot(r, x, label='first term')
+plt.legend()
 
-# libnest.real_data_plots.density_contour("N2600i_density.txt")
+# libnest.real_data_plots.plot_density("N2600i_density.txt")
 
-libnest.real_data_plots.pairing_field("N2600i_delta.txt")
+# libnest.real_data_plots.plot_density_contour("N2600i_density.txt")
 
-libnest.real_data_plots.current("N2600i_current.txt")
+# libnest.real_data_plots.plot_pairing_field("N2600i_delta.txt")
 
+# libnest.real_data_plots.plot_current("N2600i_current.txt")

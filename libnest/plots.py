@@ -321,6 +321,76 @@ def plot_isovectorM(rho_n, rho_p):
     #plt.legend()
     plt.show()
     
+def plot_epsilon_test(rho_n, tau, nu):
+    """    
+    Plots the energy density SYMBOL UNITS
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
+        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        kappa (float):
+            what is kappa? (no Eq.9 in Ref.41)
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`epsilon`
+    """
+    rho_n = np.linspace(0.0001, 1., 100)
+    eps = libnest.bsk.epsilon_test(rho_n, tau, nu)
+
+    plt.title(r"EDF test $\mathcal{E}$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho_n, eps, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
+def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
+    """    
+    Plots the energy density SYMBOL UNITS
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
+        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        kappa (float):
+            what is kappa? (no Eq.9 in Ref.41)
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`epsilon`
+    """
+    rho = np.linspace(0.0001, 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    eps = libnest.bsk.epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa)
+
+    plt.title(r"EDF $\mathcal{E}$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, eps, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
     
 # def plot_effective_mass_symmetric_Mn():
 #     RHO = np.linspace(0., 2., 100)
