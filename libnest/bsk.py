@@ -273,11 +273,15 @@ def isovectorM(rho_n, rho_p):
     """
     # TODO FILL IN using effMn and effMp
     # rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    Mn = effMn(rho_n, rho_p)
+    Mp = effMp(rho_n, rho_p)
     rho = rho_n + rho_p
     eta= rho_n - rho_p
     rho = rho + DENSEPSILON
-    return 2.*eta/rho / (1./effMn(rho_n, rho_p)-1./effMp(rho_n, rho_p)-2*eta/rho/(2/((1./effMn(rho_n, rho_p))+(1./effMp(rho_n, rho_p)))))
-    #return (1.-2.*rho_n/rho-rho_p/rho_n*(1.-2.*rho_p/rho))/(1./effMp(rho_n, rho_p)-rho_p/rho_n/effMn(rho_n, rho_p))
+    # return (2*(rho_n - rho_p)/rho)/(1/Mp - 1/Mn + (rho_n-rho_p)/rho*(1/Mp + 1/Mn))
+    # return (1-2*rho_n/rho)/(1/Mn - 2*rho_n/rho/isoscalarM(rho_n, rho_p))
+    return isoscalarM(rho_n, rho_p)*Mp*(2*rho_p-rho)/(2*Mp*rho_p-rho)
+
 
 def effMn(rho_n, rho_p):
     """Returns the effective mass of a neutron in nuclear medium.
