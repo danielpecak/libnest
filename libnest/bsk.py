@@ -238,7 +238,8 @@ def proton_ref_pairing_field(rho_n, rho_p):
 #
 
 def isoscalarM(rho_n, rho_p):
-    """Calculates effective isoscalar mass M_s for a given uniform system
+    """
+    Calculates effective isoscalar mass M_s for a given uniform system
     with neutron and proton densities rho_n and rho_p respectively. 
     
     Args:
@@ -255,9 +256,9 @@ def isoscalarM(rho_n, rho_p):
     """
     return 2/((1./effMn(rho_n, rho_p))+(1./effMp(rho_n, rho_p)))
 
-#to check
 def isovectorM(rho_n, rho_p):
-    """Calculated effective isovector mass :math:`M_v` for a given uniform system
+    """
+    Calculated effective isovector mass :math:`M_v` for a given uniform system
     with neutron and proton densities rho_n, rho_p respectively.
     
      Args:
@@ -276,15 +277,14 @@ def isovectorM(rho_n, rho_p):
     Mn = effMn(rho_n, rho_p)
     Mp = effMp(rho_n, rho_p)
     rho = rho_n + rho_p
-    eta= rho_n - rho_p
     rho = rho + DENSEPSILON
     # return (2*(rho_n - rho_p)/rho)/(1/Mp - 1/Mn + (rho_n-rho_p)/rho*(1/Mp + 1/Mn))
     # return (1-2*rho_n/rho)/(1/Mn - 2*rho_n/rho/isoscalarM(rho_n, rho_p))
     return isoscalarM(rho_n, rho_p)*Mp*(2*rho_p-rho)/(2*Mp*rho_p-rho)
 
-
 def effMn(rho_n, rho_p):
-    """Returns the effective mass of a neutron in nuclear medium.
+    """
+    Returns the effective mass of a neutron in nuclear medium.
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -299,7 +299,8 @@ def effMn(rho_n, rho_p):
     return HBAR2M_n/B_q(rho_n, rho_p,'n')
 
 def effMp(rho_n, rho_p):
-    """Returns the effective mass of a proton in nuclear medium.
+    """
+    Returns the effective mass of a proton in nuclear medium.
      
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -315,7 +316,8 @@ def effMp(rho_n, rho_p):
 
 def U_q(rho_n, rho_p,q):
     #     Formula (5.14) from NeST.pdf
-    """Returns the mean field potential from density :math:`\\rho` variation.
+    """
+    Returns the mean field potential from density :math:`\\rho` variation.
     
     rho_q is either rho_n or rho_p.
     
@@ -344,8 +346,9 @@ def U_q(rho_n, rho_p,q):
 
 def B_q(rho_n, rho_p, q):
     #    Formula (5.13) from NeST.pdf
-    """Returns the mean field potential B_q (coming from variation over kinetic density, or effective mass)
-    rho_q is either rho_n or rho_p.
+    """
+    Returns the mean field potential B_q (coming from variation over kinetic
+    density, or effective mass). rho_q is either rho_n or rho_p.
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -372,7 +375,6 @@ def B_q(rho_n, rho_p, q):
              + T5/4.*((1.+X5/2.)*rho + (1./2.+X5)*rho_q)*np.power(rho,GAMMA)
              )
 
-# TODO list:
 # Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:
 # Code formulas: A13, and dependent (A14, A15)
 def energy_per_nucleon(rho_n, rho_p):
