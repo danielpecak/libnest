@@ -16,6 +16,9 @@ import libnest.real_data_plots
 import numpy as np
 import matplotlib.pyplot as plt
 
+import sys
+TXT_PATH = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\txt\\"
+
 #print(fm3togcm3(1.0))
 
 print("Siema")
@@ -74,10 +77,19 @@ print("Siema")
 # libnest.real_data_plots.plot_current_slice("N216_T0.56.1_current.txt")
 #current too low to be visible
 
-# libnest.real_data_plots.plot_pairing_field_slice("N216_T0.18.1_delta.txt")
+libnest.real_data_plots.plot_pairing_field_slice("N216_T0.00.2_delta.txt")
+
+libnest.real_data_plots.plot_pairing_field_slice("N216_T0.02.2_delta.txt")
+
+libnest.real_data_plots.plot_pairing_field_slice("N216_T0.44.1_delta.txt")
 
 # libnest.real_data_plots.plot_B_q_slice("N216_T0.00.2_density.txt")
 
 # libnest.real_data_plots.plot_U_q_slice("N216_T0.00.2_density.txt")
 
-libnest.real_data_plots.plot_A_slice("N216_T0.32.1_A.txt")
+# libnest.real_data_plots.plot_A_slice("N216_T0.32.1_A.txt")
+
+# Temperature - delta
+libnest.real_data_plots.plot_temperature_delta('216')
+
+# libnest.real_data_plots.plot_temperature_delta('24000')

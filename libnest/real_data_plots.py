@@ -5,6 +5,7 @@ Plotting real data
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 import libnest.definitions
 import libnest.plots
 import scipy.interpolate
@@ -54,6 +55,93 @@ def file_check(filename):
         print(f"{filename}" + " not found. Check the directory and the file.")
         return False
 
+def files_set_particles(particles_nr):
+    """
+    Returns an array with files containing data sets only for a specified
+    number of particles.
+
+    Args:
+    particles_nr (string): number of particles of the data set
+
+    Returns
+        array: list of filenames
+    """
+    directory_path = TXT_PATH
+    filenames = []
+    
+    for path in os.listdir(directory_path):
+        if os.path.isfile(os.path.join(directory_path, path)):
+            filenames.append(path)
+    #print(filenames[0:])
+    p216 = []
+    p4160 = []
+    p8000 = []
+    p13600 = []
+    p16640 = []
+    p24000 = []
+    
+    p216 = [i for i in filenames if '216' in i]
+    p4160 = [i for i in filenames if '4160' in i]
+    p8000 = [i for i in filenames if '8000' in i]
+    p13600 = [i for i in filenames if '13600' in i]
+    p16640 = [i for i in filenames if '16640' in i]
+    p24000 = [i for i in filenames if '24000' in i]
+    
+    if particles_nr == '216':
+        return p216
+    elif particles_nr == '4160':
+        return p4160
+    elif particles_nr == '8000':
+        return p8000
+    elif particles_nr == '13600':
+        return p13600
+    elif particles_nr == '16640':
+        return p16640
+    elif particles_nr == '24000':
+        return p24000
+    else:
+        sys.exit('# ERROR: Incorrect value')
+        
+def files_set_type(data_type, filenames):
+    """
+    Takes an array of files and returns an array with files containing data sets of
+    a specified kind: rho (matter density), current, delta (pairing field),
+    or A (mean field potential)
+
+    Args:
+    data_type (string): choice of type of files
+    filenames (array): list of filenames to sort through
+
+    Returns
+        array: list of filenames of a specified kind
+    """
+    p_density = []
+    p_current = []
+    p_delta = []
+    p_A = []
+    
+    p_density = [i for i in filenames if 'density' in i]
+    p_current = [i for i in filenames if 'current' in i]
+    p_delta = [i for i in filenames if 'delta' in i]
+    p_A = [i for i in filenames if 'A' in i]
+    
+    # p_density_copy = p_density
+    # p_current_copy = p_current
+    # p_delta_copy = p_delta
+    # p_A_copy = p_A
+    
+    #SORT ACCORDING TO VERSION AS WELL (1 OR 2)
+    
+    if data_type == 'density':
+        return p_density
+    elif data_type == 'current':
+        return p_current
+    elif data_type == 'delta':
+        return p_delta
+    elif data_type == 'A':
+        return p_A
+    else:
+        sys.exit('# ERROR: Incorrect data type input')
 
 # ================================
 #           Coordinates
@@ -633,6 +721,188 @@ def plot_A_slice(filename):
     else:
         sys.exit('# ERROR: Cannot access file')
 
+
+# ================================
+#      Temperature variation
+# ================================
+def plot_temperature_delta(particles_nr):
+    """
+    Returns four graphs illustrating the cross section of the pairing field, 
+    :math:`\\Delta` [MeV], and temperature [MeV/kB] (where kB is the Boltzmann
+    constant). The data is taken from a folder in the directory, the path provided
+    earlier (and meant to be defined by the user). The folder contains data files
+    for varying amount of particles, so the function accepts the number of particles
+    to be plotted as an argument.
+    
+    The first graph contains :math:`\\Delta` of all temperatures, the second is
+    a closer look at the lower temperatures (first files in order), the third
+    represents higher temperatures, and the last graph provides a look at the highest
+    temperatures (for which ;math:`\\Delta` forms no obvious pattern).
+    
+    Args:
+        particles_nr (string): choice of files with a specified number of particles
+
+    Returns:
+        None
+        
+    See also:
+        :func:`cross_section_distance()`
+        :func:`pairing_field()`
+        :func:`files_set_type(data_type, filenames)`
+        :func:`files_set_particles(filenames)`
+    """
+#MAIN POINTS
+
+# 216 nr of particles:
+# - magnitude of delta drops with temperature
+# - temperatures 0 and 2 MeV/kB seem to give the exact same pattern 
+# - there is a huge gap in order of magnitude of delta between 20 and 24 MeV/kB 
+# - for larger temperatures delta drops quickly (but temperatures of 0-20 MeV/kB 
+#     were spaced by 2 MeV/kB, while 20-60 by 4 (causing a larger optical difference))
+# - delta for temperatures 24 MeV/kB  and larger forms distinct central peaks
+#     (24, 28 also form side troughs)
+# - delta for temperatures of 52 MeV/kB and above forms no clear pattern
+
+# larger nr of particles:
+# - difference between large and low temperatures visible, but not as distinct 
+#     as with 216 particles: no pairing field close to zero, all have similar shapes
+# - magnitude of delta drops with temperature
+# - up to around 20 - 30 MeV/kB delta is very similar for all temperatures
+
+    
+    filenames = files_set_type('delta', files_set_particles(particles_nr))
+    # print(filenames)
+    new_filenames = [TXT_PATH + x for x in filenames]
+    # print(new_filenames)
+    
+    #plotting all temperatures
+    plt.figure(figsize=(10,8))
+    plt.title(r"Pairing field $\Delta$ varying with temperature", fontsize=15)
+    plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+    plt.ylabel(r"$\Delta$ [MeV]", fontsize=10)
+    plt.xticks(fontsize=10)
+    
+    for file in new_filenames:
+        
+        if file_check(file):
+        
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+        
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            delta, arg = pairing_field(data[:,2], data[:,3])
+
+            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+        
+        else:
+            sys.exit('# ERROR: Cannot access file')
+    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.show()
+    
+    #plotting the top
+    plt.figure(figsize=(10,8))
+    plt.title(r"Pairing field $\Delta$ varying with temperature -low temperatures", fontsize=15)
+    plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+    plt.ylabel(r"$\Delta$ [MeV]", fontsize=10)
+    # plt.ylim([0.33, 0.35]) #useful for 216 particles
+    plt.xticks(fontsize=10)
+    
+    top_filenames = new_filenames[0:13]
+    for file in top_filenames:
+        
+        if file_check(file):
+        
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+        
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            delta, arg = pairing_field(data[:,2], data[:,3])
+
+            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+        
+        else:
+            sys.exit('# ERROR: Cannot access file')
+    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.show()
+    
+    #plotting the bottom - can use log scale for lower numbers of particles
+    fig = plt.figure(figsize=(10,8))
+    ax = fig.add_subplot(111)
+    # ax.set_yscale('log') #useful for 216 particles
+    plt.title(r"Pairing field $\Delta$ varying with temperature - high temperatures", fontsize=15)
+    plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+    plt.ylabel(r"$\Delta$ [MeV]", fontsize=10)
+    # plt.ylim([1e-15, 5e-3]) # useful for 216 particles
+    plt.xticks(fontsize=10)
+    
+    bottom_filenames = new_filenames[11:21]
+    for file in bottom_filenames:
+        
+        if file_check(file):
+        
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+        
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            delta, arg = pairing_field(data[:,2], data[:,3])
+
+            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+        
+        else:
+            sys.exit('# ERROR: Cannot access file')
+                  
+    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.show()
+    
+    #plotting the highest temperatures (see near zero delta for 216 particles)
+    plt.figure(figsize=(10,8))
+    plt.title(r"Pairing field $\Delta$ varying with temperature - highest temperatures", fontsize=15)
+    plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+    plt.ylabel(r"$\Delta$ [MeV]", fontsize=10)
+    plt.xticks(fontsize=10)
+    
+    zero_filenames = new_filenames[18:21]
+    for file in zero_filenames:
+        
+        if file_check(file):
+        
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+        
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            delta, arg = pairing_field(data[:,2], data[:,3])
+
+            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+        
+        else:
+            sys.exit('# ERROR: Cannot access file')
+    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.show()
+    
 
 if __name__ == '__main__':
     pass
