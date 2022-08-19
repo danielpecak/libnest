@@ -79,7 +79,6 @@ def plot_energy_per_nucleon_both():
     plt.show()  
 
 
-
 # ================================
 #         Pairing fields
 # ================================
@@ -344,7 +343,7 @@ def plot_epsilon_test(rho_n, tau, nu):
     See also:
         :func:`epsilon`
     """
-    rho_n = np.linspace(0.0001, 1., 100)
+    rho_n = np.linspace(0.0000, 1., 100)
     eps = libnest.bsk.epsilon_test(rho_n, tau, nu)
 
     plt.title(r"EDF test $\mathcal{E}$", fontsize=15)
@@ -378,9 +377,13 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     See also:
         :func:`epsilon`
     """
-    rho = np.linspace(0.0001, 1., 100)
+    rho = np.linspace(0.000, 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
+    
+    grad = np.linspace(0.000, 1., 100)
+    rho_grad = rho_grad * grad
+    
     eps = libnest.bsk.epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa)
 
     plt.title(r"EDF $\mathcal{E}$", fontsize=15)
@@ -391,6 +394,66 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     #plt.legend()
     plt.show()
     
+
+    
+def test_e_tau(rho_n, rho_p, tau, j):
+    """    
+    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`isovectorM`
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    Mn = libnest.bsk.epsilon_tau(rho, tau, j)
+    plt.title(r"E", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"E$^*_{v}/M$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show() 
+    
+def test_e_delta(rho_n, rho_p, rho_grad):
+    """    
+    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`isovectorM`
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    rho_grad = np.linspace(0., 1., 100)
+    Mn = libnest.bsk.epsilon_delta_rho(rho, rho_grad)
+    plt.title(r"E", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"E$^*_{v}/M$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()     
+    
+
     
 # def plot_effective_mass_symmetric_Mn():
 #     RHO = np.linspace(0., 2., 100)

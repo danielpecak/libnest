@@ -272,14 +272,9 @@ def isovectorM(rho_n, rho_p):
         :func:`effMn`
         :func:`effMp`
     """
-    # TODO FILL IN using effMn and effMp
-    # rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-    Mn = effMn(rho_n, rho_p)
     Mp = effMp(rho_n, rho_p)
-    rho = rho_n + rho_p
+    rho = rho_n + rho_p + DENSEPSILON
     rho = rho + DENSEPSILON
-    # return (2*(rho_n - rho_p)/rho)/(1/Mp - 1/Mn + (rho_n-rho_p)/rho*(1/Mp + 1/Mn))
-    # return (1-2*rho_n/rho)/(1/Mn - 2*rho_n/rho/isoscalarM(rho_n, rho_p))
     return isoscalarM(rho_n, rho_p)*Mp*(2*rho_p-rho)/(2*Mp*rho_p-rho)
 
 def effMn(rho_n, rho_p):
@@ -331,14 +326,14 @@ def U_q(rho_n, rho_p,q):
     
     """
     if(q=='n'):
-        rho_q = rho_n
-        rho_q_prime = rho_p
+        rho_q = rho_n + DENSEPSILON
+        rho_q_prime = rho_p + DENSEPSILON
     elif(q=='p'):
-        rho_q = rho_p
-        rho_q_prime = rho_n
+        rho_q = rho_p + DENSEPSILON
+        rho_q_prime = rho_n + DENSEPSILON
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    rho = rho_n + rho_p
+    rho = rho_n + rho_p + DENSEPSILON
     return T0*((1+0.5*X0)*rho-(0.5+X0)*rho_q)+T3/12.*np.power(rho,(ALPHA-1))*(
         ((0.5+0.5*X3)*rho**2*(ALPHA+2))-(0.5+X3)*(2*rho*rho_q*ALPHA*
                                                   (rho_q_prime)**2))
@@ -360,14 +355,14 @@ def B_q(rho_n, rho_p, q):
     
     """
     if(q=='n'):
-        rho_q = rho_n
+        rho_q = rho_n + DENSEPSILON
         HBAR2M_q = HBAR2M_n
     elif(q=='p'):
-        rho_q = rho_p
+        rho_q = rho_p + DENSEPSILON
         HBAR2M_q = HBAR2M_p
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    rho = rho_n + rho_p
+    rho = rho_n + rho_p + DENSEPSILON
     return (HBAR2M_q
              + T1/4.*((1.+X1/2.)*rho - (1./2.+X1)*rho_q)
              + T4/4.*((1.+X4/2.)*rho - (1./2.+X4)*rho_q)*np.power(rho,BETA)
@@ -440,7 +435,7 @@ def C_tau(rho):
         float: C coefficient :math:`C^{\\tau}`
 
     """
-    return -T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho*BETA+3./8.*T5*(X5-1.)*rho**GAMMA
+    return -T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*T5*(X5-1.)*rho**GAMMA
 
 def C_delta_rho(rho):
     """
@@ -475,7 +470,7 @@ def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
         float: nergy functional :math:`\\epsilon`
 
     """
-    rho = rho_n + rho_p
+    rho = rho_n + rho_p + DENSEPSILON
     if(q=='n'):
         M = MN
     elif(q=='p'):
@@ -504,7 +499,7 @@ def epsilon_test(rho_n, tau, nu):
         float: nergy functional :math:`\\epsilon`
 
     """
-    rho = rho_n
+    rho = rho_n + DENSEPSILON
     M = MN
     return HBARC**2/2./M*tau + epsilon_rho_test(rho)+epsilon_tau_test(rho, tau)+epsilon_pi_test(rho_n, nu)
 
@@ -621,7 +616,7 @@ def epsilon_pi_test(rho_n, nu):
     """
     #nu^* : 1-mu ??
     #rho = rho_n + rho_p
-    return 1./4.*v_pi_test(rho_n)*nu #*(1-nu)
+    return 1./4.*v_pi_test(rho_n)*nu*(1-nu)
 
 def v_pi(rho_n, rho_p, q):
     # Equation 14 from Phys Rev C 104
@@ -696,16 +691,17 @@ def I(rho_n, rho_p, q):
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
     
-    # print(delta)
-    I = Lambda(6.5/mu_q(rho_n, rho_p, q)) #value for when delta == 0 
+    mu = mu_q(rho_n, rho_p, q)
+    print(mu)
+    j = np.where(mu==0)
+    mu[j]=NUMZERO
+    print(mu)
+    I = Lambda(6.5/mu) #value for when delta == 0 
+
     x = np.where(delta==NUMZERO) # intended to catch delta values with invalid kF
-    I[x] = NUMZERO               # TO DO: does not actually work
-                                  # (print functions)
-    # print(x)
-    i = np.where(np.isnan(I)) #catches non integers
-    I[i] = NUMZERO    
+    I[x] = NUMZERO              
     y = np.where(delta!=NUMZERO)
-    I[y] = np.sqrt(mu_q(rho_n, rho_p, q))*(2*np.log(2*mu_q(rho_n, rho_p, q)/np.abs(delta))+Lambda(6.5/mu_q(rho_n, rho_p, q)))
+    I[y] = np.sqrt(mu)*(2*np.log(2*mu/np.abs(delta))+Lambda(6.5/mu))
     return I
     
 def I_test(rho_n):
@@ -727,9 +723,13 @@ def I_test(rho_n):
         :func:`Lambda`
 
     """
-    # delta = neutron_ref_pairing_field(rho_n, 0.)
-    return Lambda(6.5/mu_q_test(rho_n))*np.sqrt(mu_q_test(rho_n))
-    
+    delta = neutron_pairing_field(rho_n)
+    i=np.where(delta==0)
+    delta[i] = NUMZERO
+    mu_n = mu_q_test(rho_n)
+    j = np.where(mu_q==0)
+    mu_n[j]=NUMZERO
+    return np.sqrt(mu_n)*(2*np.log(2*mu_n/np.abs(delta))+Lambda(6.5/mu_n))
 
 def Lambda(x):
     # Equation 16 from Phys Rev C 104
@@ -745,7 +745,12 @@ def Lambda(x):
     See also:
         :func:`I`
     """
-    return np.log(16.*x)+2.*np.sqrt(1.+x)-2.*np.log(1.+np.sqrt(1.+x))-4
+    Lambda = x
+    i = np.where(x<=0 ) # intended to catch delta values with invalid kF
+    Lambda[i] = NUMZERO 
+    j = np.where(x>0)
+    Lambda[j] = np.log(16.*x)+2.*np.sqrt(1.+x)-2.*np.log(1.+np.sqrt(1.+x))-4.
+    return Lambda
 
 def mu_q(rho_n, rho_p, q):
 # is this supposed to be a choice between protons or neutrons or should it be
@@ -771,14 +776,10 @@ def mu_q(rho_n, rho_p, q):
         rho = rho_p
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    # i = np.where(rho==0)
-    # mu_q = np.linspace(0, len(rho))
-    # mu_q[i] = NUMZERO;
-    # j = np.where(rho!=0)
-    # mu_q[j] = 
-    
-    
-    return HBARC**2*rho2kf(rho)**2/(2.*M)
+    mu_q = HBARC**2*rho2kf(rho)**2/(2.*M)
+    i = np.where(mu_q==0)
+    mu_q[i] = NUMZERO
+    return mu_q
 
 def mu_q_test(rho_n):
 # Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
@@ -793,5 +794,5 @@ def mu_q_test(rho_n):
          float: chemical potential :math:`\\mu` [MeV]
     """
     M = effMn(rho_n, 0)
-   
     return HBARC**2*rho2kf(rho_n)**2/(2.*M)
+
