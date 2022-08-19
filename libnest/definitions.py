@@ -93,7 +93,7 @@ def rhoEta(rho_n, rho_p):
 
     .. todo::
         Check if I should return rho_n-rho_p OR rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
-        > na razie oba chyba działają tak samo
+        #for now rho_n-rho_p because of the  function: neutron_ref_pairing_field(rho_n, rho_p)
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -103,7 +103,8 @@ def rhoEta(rho_n, rho_p):
         float: pair of total density :math:`\\rho` [fm :sup:`-3`], and density difference
         :math:`\\eta` [fm :sup:`-3`]
     """
-    return rho_n+rho_p, rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
+    #return rho_n+rho_p, rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
+    return rho_n+rho_p, rho_n-rho_p
 
 def vsf(r):
     """
