@@ -46,28 +46,37 @@ print("Siema")
 
 
 #EPSILON
-libnest.plots.plot_epsilon_test(1., 1., 0.) #rho_n, tau, nu
+# libnest.plots.plot_epsilon_test(1., 0., 0.) #rho_n, tau, nu
 
-libnest.plots.plot_epsilon(1., 0., 0., 1., 0., 0., 'n', 0.) #rho_n, rho_p, rho_grad, tau, j, nu, q, kappa
+libnest.plots.plot_epsilon(1., 0., 1., 1., 0., 0., 'n', 0.) #rho_n, rho_p, rho_grad, tau, j, nu, q, kappa
 
-# libnest.plots.test_e_tau(1., 0., 1., 0.)
+# libnest.plots.plot_e_tau(1., 0., 1., 0.)
 
-# libnest.plots.test_e_delta(1., 0., 1.)
+# libnest.plots.plot_e_delta(1., 0., 1.)
 
-#epsilon rho graphs agree when rho_p = 0
 
-#epsilon_test and epsilon functions give the same plot for tau = 0 and nu = 0
-#they are different for tau = 1 and nu = 1
-#test and original start to diverge in I() and I_test() due to the difference in 
-#neutron _ref_pairing_field and neutron_pairing_field calculations
+#epsilon graphs agree when rho_p = 0 and rho_grad = 0
 
-# r = np.arange(0.000,0.8, 0.0001)
-# # rho_n = r
-# # plt.plot(r, libnest.bsk.epsilon_test(r, 0., 0.),label='I test')
-# plt.plot(r, libnest.bsk.epsilon_delta_rho(r, 0.), label='I')
+#there is a difference between epsilon_delta_rho and g_e_laplace (from bsk_functional_full) functions
+#(g_e_laplace uses an extra BETA T4 term as well as semms to have the T2 term incomplete (?) )
+
+#to include rho_p the code requires different equations (see NesT.pdf)
+#TO DO: mark current equations as neutron matter only and write new ones for rho_p
+#(ie epsilon_rho, epsilon_tau, epsilon_delta_rho, epsilon_pi)
+
+
+#epsilon_test and epsilon functions agree
+#although there is a slight diffference in I() and I_test() due to
+#neutron _ref_pairing_field and neutron_pairing_field calculations differences?
+
+# r = np.arange(0.000,1., 0.0001)
+# rho_n = r
+# # plt.plot(r, libnest.bsk.epsilon_test(r, 0., 0.),label='test')
+# # plt.plot(r, libnest.bsk.epsilon_pi(r, 0, 0, 0, 'n', 0), label='og')
 # # x=np.sqrt(libnest.bsk.mu_q(rho_n, 0., 'n'))*(2*np.log(2*libnest.bsk.mu_q(rho_n, 0., 'n')/np.abs(libnest.bsk.neutron_ref_pairing_field(rho_n, 0.))))
 # # plt.plot(r, x, label='first term')
 # plt.legend()
+
 
 
 #REAL PLOTS

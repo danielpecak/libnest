@@ -435,7 +435,7 @@ def C_tau(rho):
         float: C coefficient :math:`C^{\\tau}`
 
     """
-    return -T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*T5*(X5-1.)*rho**GAMMA
+    return -T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*T5*(X5+1.)*rho**GAMMA
 
 def C_delta_rho(rho):
     """
@@ -542,7 +542,7 @@ def epsilon_delta_rho(rho, rho_grad):
     Returns:
         float: energy functional :math:`\\epsilon_{\\Delta \\rho}`
     """
-    return -(rho_grad)**2*C_delta_rho(rho)
+    return (-(rho_grad)**2)*C_delta_rho(rho)
     
 def epsilon_tau(rho, tau, j):
     """
