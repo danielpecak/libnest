@@ -610,21 +610,33 @@ def epsilon_test(rho_n, tau, nu):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
-        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
-        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        kappa (float):
+        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]
+        nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]
+        kappa_n (float):
+        kappa_p (float):
             what is kappa? (no Eq.9 in Ref.41)
+            
+            TO DO: write eq for jsum2 and jdiff2
 
     Returns
         float: nergy functional :math:`\\epsilon`
 
     """
-    rho = rho_n + DENSEPSILON
-    M = MN
-    return HBARC**2/2./M*tau + epsilon_rho_test(rho)+epsilon_tau_test(rho, tau)+epsilon_pi_test(rho_n, nu)
+    rho_grad_n_square = (rho_grad_n)**2
+    rho_grad_p_square = (rho_grad_p)**2
+    rho_grad_square = rho_grad_n_square + rho_grad_p_square
+    return (HBARC**2/2./MN*tau_n + HBARC**2/2./MP*tau_p
+            + epsilon_rho_np(rho_n, rho_p)
+            + epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square)
+            + epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2)
+            + epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n, kappa_p)
+            )
 
 
 def epsilon_rho(rho):
