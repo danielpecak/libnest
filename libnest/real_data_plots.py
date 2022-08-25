@@ -32,7 +32,7 @@ TXT_PATH = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\txt\\"
 #depends on the user (path did not work in main)
 
 # ================================
-#         Opening Files
+#          Handling Files
 # ================================
 def file_check(filename):
     """
@@ -130,7 +130,7 @@ def files_set_type(data_type, filenames):
     # p_delta_copy = p_delta
     # p_A_copy = p_A
     
-    #SORT ACCORDING TO VERSION AS WELL (1 OR 2)
+    #SORT ACCORDING TO VERSION AS WELL (1 OR 2) //for now dealt with the old files manually
     
     if data_type == 'density':
         return p_density
@@ -217,6 +217,51 @@ def vector_magnitude(x, y, z):
     
     """
     return np.sqrt(x**2+y**2+z**2)
+
+def jsum2(i_x, i_y, i_z, j_x, j_y, j_z):
+    """
+    Sum of two total currents in vector form, squared.
+    
+       Args:
+    i_x (float): 
+    i_y (float):
+    i_z (float):
+    j_x (float):
+    j_y (float):
+    j_z (float):
+
+    Returns
+     float: squared sum of surrents, :math:`(\\vec i + \\vec j)^2`
+
+    """
+    x = i_x + j_x
+    y = i_y + j_y
+    z = i_z + j_z
+    
+    return (x**2 + y**2 + z**2)
+
+def jdiff2(i_x, i_y, i_z, j_x, j_y, j_z):
+    """
+    Difference of current in vector form, squared.
+
+    Args:
+    i_x (float): 
+    i_y (float):
+    i_z (float):
+    j_x (float):
+    j_y (float):
+    j_z (float):
+
+    Returns
+     float: squared difference of currents :math:`(\\vec j - \\vec j)^2`
+
+    """
+    x = i_x - j_x
+    y = i_y - j_y
+    z = i_z - j_z
+    
+    return (x**2 + y**2 + z**2)
+
 
 
 # ================================
