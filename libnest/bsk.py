@@ -414,7 +414,7 @@ def energy_per_nucleon(rho_n, rho_p):
 
 def C_rho(rho):
     """
-    Calculates the energy functional :math:`C^{\\rho}` cooefficient
+    Calculates the energy functional :math:`C^{\\rho}` cooefficient for NeuM
 
     Args:
         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
@@ -426,7 +426,7 @@ def C_rho(rho):
 
 def C_tau(rho):
     """
-    Calculates the energy functional :math:`C^{\\tau}` cooefficient
+    Calculates the energy functional :math:`C^{\\tau}` cooefficient for NeuM
 
     Args:
         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
@@ -435,11 +435,13 @@ def C_tau(rho):
         float: C coefficient :math:`C^{\\tau}`
 
     """
-    return -T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*T5*(X5+1.)*rho**GAMMA
+    return (-T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*
+            T5*(X5+1.)*rho**GAMMA)
 
 def C_delta_rho(rho):
     """
     Calculates the energy functional :math:`C^{\\Delta * \\rho}` cooefficient
+    for NeuM
 
     Args:
         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
@@ -448,7 +450,128 @@ def C_delta_rho(rho):
         float: C coefficient :math:`C^{\\Delta * \\rho}`
 
     """
-    return 3./32.*T1*(X1-1.)+3./32.*T2X2+3./32.*T2+3./32.*T4*(X4-1.)*rho**BETA + 3./32.*T5*(X5-1.)*rho**GAMMA
+    return (3./32.*T1*(X1-1.)+(3./32.*T2X2+3./32.*T2)+3./32.*T4*(X4-1.)*rho**BETA
+             +3./32.*T5*(X5+1.)*rho**GAMMA)
+
+def g_C0_rho(rho_n, rho_p):
+    """
+    Calculates the energy functional :math:`C^{\\rho}_0` cooefficient
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`C^{\\rho}_0` coefficient
+    """
+    return 3. / 8. * T0 + 3. / 48. * T3 * np.power(rho_n + rho_p, ALPHA)
+
+
+def g_C1_rho(rho_n, rho_p):
+    """
+    Calculates the energy functional :math:`C^{\\rho}_1` cooefficient
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`C^{\\rho}_1` coefficient
+    """
+    return -1. / 4. * T0 * (1. / 2. + X0) - 1. / 24. * T3 * (1. / 2. + X3) * np.power(rho_n + rho_p, ALPHA)
+
+
+def g_C0_tau(rho_n, rho_p):
+    """
+    Calculates the energy functional :math:`C^{\\tau}_0` cooefficient
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`C^{\\tau}_0` coefficient
+    """
+    rho = rho_n + rho_p
+    return (3. / 16.) * T1 + 5. / 16. * T2 + 1. / 4. * T2X2 + 3. / 16. * T4 * np.power(rho, BETA) + 1. / 4. * T5 * (1.25 + X5) * np.power(rho, GAMMA)
+
+
+def g_C1_tau(rho_n, rho_p):
+    """
+    Calculates the energy functional :math:`C^{\\tau}_1` cooefficient
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`C^{\\tau}_1` coefficient
+
+    """
+    rho = rho_n + rho_p
+    return (-1. / 8.) * T1 * (1. / 2. + X1) + 1. / 16. * T2 + 1. / 8. * T2X2 - 1. / 8. * T4 * np.power(rho, BETA) * (1. / 2. + X4) + 1. / 8. * T5 * np.power(rho, GAMMA) * (1. / 2. + X5)
+
+def epsilon_rho_np(rho_n, rho_p):
+    """
+    Energy functional :math:`\\epsilon_{\\rho}` for particle matter, related to
+    the interaction of the nucleons with the background matter density.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\rho}`
+    """
+    rho = rho_n + rho_p + DENSEPSILON
+    return g_C0_rho(rho_n, rho_p) * np.power(rho, 2) + g_C1_rho(rho_n, rho_p) * np.power(rho_n - rho_p, 2)
+
+
+def epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2):
+    """
+    Energy functional :math:`\\epsilon_{\\tau}` for particle matter,
+    related to the density-dependent effective mass. It gives rise to current couplings.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\tau}`
+    """
+    return g_C0_tau(rho_n, rho_p) * ((rho_n + rho_p) * (tau_n + tau_p) - jsum2) + g_C1_tau(rho_n, rho_p) * ((rho_n - rho_p) * (tau_n - tau_p) - jdiff2)
+
+
+def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square):
+    """
+    Energy functional :math:`\\epsilon_{\\Delta \\rho}` for particle matter,
+    related to the interaction of the nucleons with the background fluctuations.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad_n_square (float): neutron density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]
+        rho_grad_p_square (float): proton density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]
+        rho_grad_square (float): total density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]
+
+    Returns:
+        float: energy functional :math:`\\epsilon_{\\Delta \\rho}`
+    """
+    rho = rho_n+rho_p + DENSEPSILON
+    grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
+  
+    return (3./16.*T1*((1.+0.5*X1)*rho_grad_p_square-(0.5+X1)*(rho_grad_n_square+rho_grad_p_square))
+            -1./16.*T2X2*(0.5*rho_grad_p_square+rho_grad_n_square+rho_grad_p_square)
+            -1./16.*T2*(rho_grad_p_square+0.5*rho_grad_n_square+0.5*rho_grad_p_square)
+            +3./16.*T4*np.power(rho,BETA)*((1.+0.5*X4)*rho_grad_p_square-(0.5+X4)*(rho_grad_n_square+rho_grad_p_square))
+            -1./16.*T5*np.power(rho,GAMMA)*((1.+0.5*X5)*rho_grad_p_square+(0.5+X5)*(rho_grad_n_square+rho_grad_p_square))
+            +BETA/8.*T4*np.power(rho,BETA-1.)*((1.+0.5*X4)*rho*rho_grad_p_square-(0.5+X4)
+                                          *(rho_n*rho_grad_n_square+rho_p*rho_grad_p_square+rho*grad_rho_n_rho_p))
+            )
 
 def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     """
