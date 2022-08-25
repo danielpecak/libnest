@@ -148,10 +148,10 @@ KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 # ================================
 #       Pairing fields
 # ================================
-def symmetric_pairing_field(rho_n, rho_p):
+def neutron_pairing_field(rho_n):
     #    Formula (5.12) from NeST.pdf
     """
-    Returns the pairing field for symmetric nuclear matter for kF lower
+    Returns the pairing field for neutron nuclear matter for kF lower
     than 1.38 fm^-1 (where the field is zero).
     
     Args:
@@ -162,17 +162,17 @@ def symmetric_pairing_field(rho_n, rho_p):
         float: pairing field for symmetric matter :math:`\\Delta_{sym}` [fm :sup:`-3`]
     
     """
-    kF = rho2kf((rho_n+rho_p)/2)
+    kF = rho2kf((rho_n)/2)
     delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
                                               ((kF-1.38236)**2+(0.327517**2)))
     i = np.where(kF>1.38)
     delta[i] = NUMZERO
     return delta
 
-def neutron_pairing_field(rho_n):
+def symmetric_pairing_field(rho_n, rho_p):
     #   Formula (5.11) from NeST.pdf
     """
-    Returns the pairing field for pure neutron matter for kF lower than
+    Returns the pairing field for pure symmetric matter for kF lower than
     1.31 fm^-1 (where the field is zero).
     
     Args:
@@ -181,7 +181,7 @@ def neutron_pairing_field(rho_n):
     Returns:
         float: pairing field for neutron matter :math:`\\Delta_{NeuM}` [fm :sup:`-3`]
     """
-    kF = rho2kf(rho_n)
+    kF = rho2kf((rho_n+rho_p)/2)
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
     i = np.where(kF>1.31)
