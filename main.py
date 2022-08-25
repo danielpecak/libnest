@@ -46,14 +46,25 @@ print("Siema")
 
 
 #EPSILON
-# libnest.plots.plot_epsilon_test(1., 0., 0.) #rho_n, tau, nu
 
-libnest.plots.plot_epsilon(1., 0., 1., 1., 0., 0., 'n', 0.) #rho_n, rho_p, rho_grad, tau, j, nu, q, kappa
+# libnest.plots.plot_epsilon(1., 0., 1., 1., 0., 0., 'n', 0.) #rho_n, rho_p, rho_grad, tau, j, nu, q, kappa
 
 # libnest.plots.plot_e_tau(1., 0., 1., 0.)
 
 # libnest.plots.plot_e_delta(1., 0., 1.)
+#changed t5 term
 
+# libnest.plots.epsilon_rho_np(1., 0.)
+
+# libnest.plots.epsilon_tau_np(1., 0., 1., 0., 0., 0.)
+
+# libnest.plots.epsilon_delta-rho_np(1., 0., 1., 0., 1.)
+# g_e_laplace agrees with the previous delta eq without the beta term.
+
+# libnest.plots.epsilon_test(1., 0., 1., 0., 1., 0., 0., 0.) #rho_n, rho_p, grad_rho_n, grad_rho_p,  tau_n, tau_p, jsum2, jdiff2
+
+libnest.plots.epsilon_np(1., 0., 1., 0., 1., 0., 0., 0., 0.01, 0., 0., 0.) #libnest.bsk.KAPPAN, libnest.bsk.KAPPAP)
+# rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p
 
 #epsilon graphs agree when rho_p = 0 and rho_grad = 0
 
@@ -69,10 +80,16 @@ libnest.plots.plot_epsilon(1., 0., 1., 1., 0., 0., 'n', 0.) #rho_n, rho_p, rho_g
 #although there is a slight diffference in I() and I_test() due to
 #neutron _ref_pairing_field and neutron_pairing_field calculations differences?
 
-# r = np.arange(0.000,1., 0.0001)
+
+
+# r = np.arange(0.000, 1., 0.0001)
 # rho_n = r
-# # plt.plot(r, libnest.bsk.epsilon_test(r, 0., 0.),label='test')
-# # plt.plot(r, libnest.bsk.epsilon_pi(r, 0, 0, 0, 'n', 0), label='og')
+# # plt.plot(r, libnest.bsk.v_pi_test_P(r, 1),label='test')
+# # plt.plot(r, libnest.bsk.v_pi(r, 1, 'p'),label='og')
+# plt.plot(r, libnest.bsk.epsilon_pi_np(r, 0, 0, 0, 0.01, 0, libnest.bsk.KAPPAN, libnest.bsk.KAPPAP), label='og')
+# plt.plot(r, libnest.bsk.epsilon_pi_test(r, 0, 0, 0, 0, 0), label='test')
+
+
 # # x=np.sqrt(libnest.bsk.mu_q(rho_n, 0., 'n'))*(2*np.log(2*libnest.bsk.mu_q(rho_n, 0., 'n')/np.abs(libnest.bsk.neutron_ref_pairing_field(rho_n, 0.))))
 # # plt.plot(r, x, label='first term')
 # plt.legend()
@@ -109,7 +126,7 @@ libnest.plots.plot_epsilon(1., 0., 1., 1., 0., 0., 'n', 0.) #rho_n, rho_p, rho_g
 
 
 # Temperature - delta
-# libnest.real_data_plots.plot_temperature_delta('216')
+libnest.real_data_plots.plot_temperature_delta('216')
 
 # libnest.real_data_plots.plot_temperature_delta('24000')
 

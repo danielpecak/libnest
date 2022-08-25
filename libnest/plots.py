@@ -319,44 +319,11 @@ def plot_isovectorM(rho_n, rho_p):
     plt.plot(rho, Mn, linewidth=2.0, label='Fit')
     #plt.legend()
     plt.show()
-    
-def plot_epsilon_test(rho_n, tau, nu):
-    """    
-    Plots the energy density SYMBOL UNITS
-    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
-    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
-    
-    Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
-        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
-        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        kappa (float):
-            what is kappa? (no Eq.9 in Ref.41)
-        
-    Returns:
-        None
-    
-    See also:
-        :func:`epsilon`
-    """
-    rho_n = np.linspace(0.0000, 1., 100)
-    eps = libnest.bsk.epsilon_test(rho_n, tau, nu)
 
-    plt.title(r"EDF test $\mathcal{E}$", fontsize=15)
-    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"$\mathcal{E}$", fontsize=10)
-    plt.xticks(fontsize=10)
-    plt.plot(rho_n, eps, linewidth=2.0, label='Fit')
-    #plt.legend()
-    plt.show()
     
 def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     """    
-    Plots the energy density SYMBOL UNITS
+    Plots the energy density :math:`\\epsilon` [MeV fm :sup:`-3`]
     in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
     and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
     
@@ -380,6 +347,7 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     rho = np.linspace(0.000, 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
+    rho = rho_n + rho_p
     
     grad = np.linspace(0.000, 1., 100)
     rho_grad = rho_grad * grad
@@ -388,7 +356,7 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
 
     plt.title(r"EDF $\mathcal{E}$", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"$\mathcal{E}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E} \:\: [MeV fm^{-3}$", fontsize=10)
     plt.xticks(fontsize=10)
     plt.plot(rho, eps, linewidth=2.0, label='Fit')
     #plt.legend()
@@ -396,11 +364,10 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     
 
     
-def plot_e_tau(rho_n, rho_p, tau, j):
+def plot_epsilon_tau(rho_n, rho_p, tau, j):
     """    
-    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
-    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
-    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    Plots the energy density :math:`\\epsilon` [MeV fm :sup:`-3`] in neutron matter,
+    related to the density-dependent effective mass.
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
@@ -415,16 +382,18 @@ def plot_e_tau(rho_n, rho_p, tau, j):
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
+    rho = rho_n + rho_p
+    
     Mn = libnest.bsk.epsilon_tau(rho, tau, j)
-    plt.title(r"E", fontsize=15)
+    plt.title(r"E ", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"E$^*_{v}/M$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}_{\\tau} [MeV fm^{-3}$", fontsize=10)
     plt.xticks(fontsize=10)
     plt.plot(rho, Mn, linewidth=2.0, label='Fit')
     #plt.legend()
     plt.show() 
     
-def plot_e_delta(rho_n, rho_p, rho_grad):
+def plot_epsilon_delta(rho_n, rho_p, rho_grad):
     """    
     Plots the isovector effective mass, :math:`M_v^*`` [MeV]
     in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
@@ -443,17 +412,195 @@ def plot_e_delta(rho_n, rho_p, rho_grad):
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho
+    rho = rho_n + rho_p
+    
     grad = np.linspace(0., 1., 100)
-    grad = rho_grad * grad
+    rho_grad = rho_grad * grad
+    
     Mn = libnest.bsk.epsilon_delta_rho(rho, rho_grad)
     plt.title(r"E", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel(r"E$^*_{v}/M$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}_{\\Delta \\rho} [MeV fm^{-3}$", fontsize=10)
     plt.xticks(fontsize=10)
     plt.plot(rho, Mn, linewidth=2.0, label='Fit')
     #plt.legend()
     plt.show()     
     
+
+def plot_epsilon_rho_np(rho_n, rho_p):
+    """    
+    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`isovectorM`
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    rho = rho_n + rho_p
+    
+    Mn = libnest.bsk.g_e_rho_np(rho_n, rho_p)
+    plt.title(r"E", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}_{\\rho} [MeV fm^{-3}$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
+        
+def plot_epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2):
+    """    
+    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    rho = rho_n + rho_p
+    
+    Mn = libnest.bsk.g_e_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2)
+    plt.title(r"E", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}_{\\tau} [MeV fm^{-3}$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show()
+    
+def plot_epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n, rho_grad_p, rho_grad):
+    """    
+    Plots the isovector effective mass, :math:`M_v^*`` [MeV]
+    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton
+    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
+        
+    Returns:
+        None
+
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    rho = rho_p + rho_n
+    
+    #for testing the plot
+    rho_grad = rho_grad * np.linspace(0., 1., 100)
+    rho_grad_n_square = (np.linspace(0., 1., 100) * rho_grad_n)**2
+    rho_grad_p_square = (np.linspace(0., 1., 100) * rho_grad_p)**2
+    rho_grad_square = rho_grad**2
+   
+    Mn = libnest.bsk.g_e_LaplaceRho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square)
+    plt.title(r"E $\mathcal{E}$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E}_{\\Delta \\rho} [MeV fm^{-3}]$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, Mn, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show() 
+
+    #to delete later
+def epsilon_test(rho_n, rho_p, rho_grad_n, rho_grad_p,  tau_n, tau_p, jsum2, jdiff2):
+    """    
+    Plots the energy density functional from bsk_functional_full code (for testing).
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        
+    Returns:
+        None
+
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    rho = rho_n + rho_p
+    
+    rho_grad = np.linspace(0., 1., 100)
+    rho_grad_n_square = (rho_grad * rho_grad_n)**2
+    rho_grad_p_square = (rho_grad * rho_grad_p)**2
+    rho_grad_square = rho_grad_n_square + rho_grad_p_square 
+    
+    x = libnest.units.HBARC**2/2/libnest.units.MN*tau_n + libnest.bsk.g_e_LaplaceRho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square) + libnest.bsk.g_e_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2) + libnest.bsk.g_e_rho_np(rho_n, rho_p)
+    plt.title(r"EDF$\mathcal{E}$", fontsize=15)
+    plt.xlabel(r"$\rho \:\: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$$\mathcal{E} [MeV fm^{-3}]$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, x, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show() 
+
+def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
+    """    
+    Plots the energy functional :math:`\\epsilon` [MeV fm :sup:`-3`] against
+    :math`\\rho`, the sum of proton and neutron of densities, :math:`\\rho_p`
+    and :math:`\\rho_n` respectively.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
+        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]
+        nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]
+        nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]
+        kappa_n (float):
+        kappa_p (float):
+        
+    Returns:
+        None
+    
+    See also:
+        :func:`isovectorM`
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    rho_p = rho_p * rho
+    rho = rho_n + rho_p
+    
+    rho_grad = np.linspace(0., 1., 100)
+    rho_grad_n = rho_grad_n * rho_grad
+    rho_grad_p = rho_grad_p * rho_grad
+    
+    epsilon = libnest.bsk.epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p)
+    plt.title(r"EDF $\mathcal{E}$", fontsize=15)
+    plt.xlabel(r"$\rho \:\: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$\mathcal{E} \:\: [MeV fm^{-3}]$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, epsilon, linewidth=2.0, label='Fit')
+    #plt.legend()
+    plt.show() 
+
 
 
     

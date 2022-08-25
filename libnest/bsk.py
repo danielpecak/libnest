@@ -119,8 +119,8 @@ from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
 from libnest.definitions import rho2kf, rhoEta
 
-T0   =-2302.01 # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
-T1   =762.99  # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]
+T0   =-2302.01     # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
+T1   =762.99       # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]
 T2   =0.0          # skyrme parameter t2 [MeV*fm<sup>5</sup>]
 T3   =13797.83     # skyrme parameter t3 [MeV*fm^(3+3*ALPHA)]
 T4   =-500.        # skyrme parameter t4 [MeV*fm^(5+3*BETA)]
@@ -602,7 +602,8 @@ def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
         sys.exit('# ERROR: Nucleon q must be either n or p')
     return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa)
 
-def epsilon_test(rho_n, tau, nu):
+
+def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
     """
     Calculates the total energy functional :math:`\\epsilon`, with a limit for
     single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.
@@ -651,19 +652,6 @@ def epsilon_rho(rho):
         float: energy functional :math:`\\epsilon_{\\rho}`
     """
     return C_rho(rho)*rho**2
-
-def epsilon_rho_test(rho):
-    """
-    Energy functional :math:`\\epsilon_{\\rho}` for particle matter, related to
-    the interaction of the nucleons with the background matter density.
-
-    Args:
-        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
-
-    Returns:
-        float: energy functional :math:`\\epsilon_{\\rho}`
-    """
-    return C_rho(rho)*rho**2
     
 def epsilon_delta_rho(rho, rho_grad):
     """
@@ -682,7 +670,7 @@ def epsilon_delta_rho(rho, rho_grad):
 def epsilon_tau(rho, tau, j):
     """
     Energy functional :math:`\\epsilon_{\\tau}` for particle matter,
-    related to the density-dependent effective mass.It gives rise to current couplings.
+    related to the density-dependent effective mass. It gives rise to current couplings.
 
     Args:
         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
@@ -693,21 +681,6 @@ def epsilon_tau(rho, tau, j):
         float: energy functional :math:`\\epsilon_{\\tau}`
     """
     return (rho*tau-j**2)*C_tau(rho)
-
-def epsilon_tau_test(rho, tau):
-    """
-    Energy functional :math:`\\epsilon_{\\tau}` for particle matter,
-    related to the density-dependent effective mass.It gives rise to current couplings.
-
-    Args:
-        rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
-        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
-        j (float): momentum density/current :math:`j` [fm :sup:`-3`]
-
-    Returns:
-        float: energy functional :math:`\\epsilon_{\\tau}`
-    """
-    return (rho*tau)*C_tau(rho)
     
 def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
     """
@@ -732,7 +705,8 @@ def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
     #rho = rho_n + rho_p
     return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)+kappa*(np.abs(rho_grad))**2
 
-def epsilon_pi_test(rho_n, nu):
+def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n, 
+                    kappa_p):
     """
     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
     related to pairng energy density.
@@ -749,9 +723,10 @@ def epsilon_pi_test(rho_n, nu):
     Returns:
         float: energy functional :math:`\\epsilon_{\\pi}`
     """
-    #nu^* : 1-mu ??
     #rho = rho_n + rho_p
-    return 1./4.*v_pi_test(rho_n)*nu*(1-nu)
+    return (1./4.*(v_pi(rho_n, rho_p, 'n') + kappa_n*(np.abs(rho_grad_n))**2)*nu_n**2
+            +1./4.*(v_pi(rho_n, rho_p, 'p') + kappa_p*(np.abs(rho_grad_p))**2 )* nu_p**2)
+
 
 def v_pi(rho_n, rho_p, q):
     # Equation 14 from Phys Rev C 104
@@ -777,29 +752,8 @@ def v_pi(rho_n, rho_p, q):
         M = effMp(rho_n, rho_p)
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-#CHECK HBARC UNITS
     return -8.*np.pi**2/I(rho_n, rho_p, q) * (HBARC**2/2./M)**(3./2.)
-
-def v_pi_test(rho_n):
-    # Equation 14 from Phys Rev C 104
-    """
-    Calculates pairing strength :math:`\\upsilon^{pi}_q` [fm :sup:`-3`] for neutrons
-    or protons, for energies below 6.5 MeV.
-
-    Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-
-    Returns:
-        float: pairing strength :math:`\\upsilon^{pi}` [fm :sup:`-3`]
-
-    See also:
-        :func:`I`
-    """
-    #rho = rho_n + rho_p
-    M = effMn(rho_n, 0)
-    return -8.*np.pi**2/I_test(rho_n) * (HBARC**2/2./M)**(3./2.)
+    # return -8.*np.pi**2/I(rho_n, rho_p, q) * (B_q(rho_n, rho_p, q))**(3./2.)
 
 def I(rho_n, rho_p, q):
     # Equation 15 from Phys Rev C 104
@@ -831,40 +785,14 @@ def I(rho_n, rho_p, q):
     j = np.where(mu==0)
     mu[j]=NUMZERO
     print(mu)
-    I = Lambda(6.5/mu) #value for when delta == 0 
+    I = mu #value for when delta == 0 
 
     x = np.where(delta==NUMZERO) # intended to catch delta values with invalid kF
-    I[x] = NUMZERO              
+    I[x] = NUMZERO     
+    print(I)         
     y = np.where(delta!=NUMZERO)
     I[y] = np.sqrt(mu)*(2*np.log(2*mu/np.abs(delta))+Lambda(6.5/mu))
     return I
-    
-def I_test(rho_n):
-    # Equation 15 from Phys Rev C 104
-    """
-    Approximates the solution to the integral present in the original
-    :math:`\\nu^{\\pi}` formula for single-particle energies below 6.5 MeV for
-    neutron matter.
-    
-    Here the test diverges from the original equation.
-    
-    Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-
-    Returns:
-        float: analytic integral solution
-        
-    See also:
-        :func:`Lambda`
-
-    """
-    delta = neutron_pairing_field(rho_n)
-    i=np.where(delta==0)
-    delta[i] = NUMZERO
-    mu_n = mu_q_test(rho_n)
-    j = np.where(mu_q==0)
-    mu_n[j]=NUMZERO
-    return np.sqrt(mu_n)*(2*np.log(2*mu_n/np.abs(delta))+Lambda(6.5/mu_n))
 
 def Lambda(x):
     # Equation 16 from Phys Rev C 104
@@ -884,7 +812,7 @@ def Lambda(x):
     i = np.where(x<=0 ) # intended to catch delta values with invalid kF
     Lambda[i] = NUMZERO 
     j = np.where(x>0)
-    Lambda[j] = np.log(16.*x)+2.*np.sqrt(1.+x)-2.*np.log(1.+np.sqrt(1.+x))-4.
+    Lambda[j] = np.log(16. * x) + 2. * np.sqrt(1. + x) - 2. * np.log(1. + np.sqrt(1. + x)) - 4.
     return Lambda
 
 def mu_q(rho_n, rho_p, q):
@@ -916,18 +844,29 @@ def mu_q(rho_n, rho_p, q):
     mu_q[i] = NUMZERO
     return mu_q
 
-def mu_q_test(rho_n):
-# Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
-    """
-    Calculates the chemical potential :math:`\\mu` defined with the wavevector
-    :math:`k_F` for neutron matter.
-    
-    Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        
-    Returns:
-         float: chemical potential :math:`\\mu` [MeV]
-    """
-    M = effMn(rho_n, 0)
-    return HBARC**2*rho2kf(rho_n)**2/(2.*M)
+
+
+def b_test(rho_n, rho_p):
+    rho = rho_n + rho_p
+    return ( HBAR2M_n
+        + 0.25 * T1 * ((1. + 0.5 * X1) * rho - (0.5 + X1) * rho_n)
+        + 0.25 * T4 * ((1. + 0.5 * X4) * rho - (0.5 + X4) * rho_n) * np.power(rho, BETA)
+        + 0.25 * (0.5 * T2X2 * rho + T2X2 * rho_n)
+        + 0.25 * T5 * ((1. + 0.5 * X5) * rho + (0.5 + X5) * rho_n) * np.power(rho, GAMMA)
+        )
+
+def v_pi_test_n(rho_n, rho_p):
+    # b = b_test(rho_n, rho_p)
+    b = HBARC**2/2./effMn(rho_n, rho_p)
+    return -(8. * np.pi**2) / I(rho_n, rho_p, 'n') * b**1.5
+
+def v_pi_test_P(rho_n, rho_p):
+    # b = b_test(rho_n, rho_p)
+    b = HBARC**2/2./effMp(rho_n, rho_p)
+    return -(8. * np.pi**2) / I(rho_n, rho_p, 'p') * b**1.5
+
+
+def epsilon_pi_test(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p):
+    return ((1. / 4.) * (v_pi_test_n(rho_n, rho_p) + 0 *np.abs(rho_grad_n)**2) * nu_n * nu_n
+         + (1. / 4.) * (v_pi_test_P(rho_n, rho_p) + 0 * rho_grad_p**2) * nu_p * nu_p)
 
