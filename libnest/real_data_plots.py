@@ -948,6 +948,40 @@ def plot_temperature_delta(particles_nr):
     plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
     plt.show()
     
+    
+def plot_max_delta_temperature(particles_nr):
+    filenames = files_set_type('delta', files_set_particles(particles_nr))
+    new_filenames = [TXT_PATH + x for x in filenames]
+    
+    plt.figure()
+    plt.title(r"Pairing field $\Delta$ varying with temperature", fontsize=15)
+    plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
+    plt.ylabel(r"$\Delta_{max}$ [MeV]", fontsize=10)
+    
+    delta_max = []
+    temperature = []
+    
+    for file in new_filenames:
+        if file_check(file):
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            i = np.where(np.logical_and(r>=40, r<=60))
+            delta, arg = pairing_field(data[i,2], data[i,3])
+            delta_max.append(np.max(delta))
+            temperature.append(int(file[-14:-12]))       
+        else:
+            sys.exit('# ERROR: Cannot access file')
+    
+    plt.plot(temperature, delta_max)
+    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.show()
 
 if __name__ == '__main__':
     pass
