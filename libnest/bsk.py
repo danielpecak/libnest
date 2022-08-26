@@ -167,6 +167,7 @@ def neutron_pairing_field(rho_n):
                                               ((kF-1.38236)**2+(0.327517**2)))
     i = np.where(kF>1.38)
     delta[i] = NUMZERO
+    #delta = np.ma.masked_invalid(delta)
     return delta
 
 def symmetric_pairing_field(rho_n, rho_p):
@@ -781,17 +782,14 @@ def I(rho_n, rho_p, q):
         sys.exit('# ERROR: Nucleon q must be either n or p')
     
     mu = mu_q(rho_n, rho_p, q)
-    print(mu)
-    j = np.where(mu==0)
-    mu[j]=NUMZERO
-    print(mu)
-    I = mu #value for when delta == 0 
-
+    I = mu #getting the correct size
     x = np.where(delta==NUMZERO) # intended to catch delta values with invalid kF
-    I[x] = NUMZERO     
-    print(I)         
-    y = np.where(delta!=NUMZERO)
-    I[y] = np.sqrt(mu)*(2*np.log(2*mu/np.abs(delta))+Lambda(6.5/mu))
+    I[x] = NUMZERO    
+    I = np.ma.masked_where(delta == 0, I)   # masking I with incorrect delta value
+                                            # (if delta=0, I = inf)
+                                            # if delta(rho=0) is set to NUMZERO, I(rho=0) is too low
+    y = np.where(delta>NUMZERO)
+    I[y] = np.sqrt(mu[y])*(2*np.log(2*mu[y]/np.abs(delta[y]))+Lambda(6.5/mu[y]))
     return I
 
 def Lambda(x):
@@ -816,8 +814,6 @@ def Lambda(x):
     return Lambda
 
 def mu_q(rho_n, rho_p, q):
-# is this supposed to be a choice between protons or neutrons or should it be
-# mu = mu_p + mu_n? 
 # Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
     """
     Calculates the chemical potential :math:`\\mu` defined with the wavevector
@@ -842,6 +838,8 @@ def mu_q(rho_n, rho_p, q):
     mu_q = HBARC**2*rho2kf(rho)**2/(2.*M)
     i = np.where(mu_q==0)
     mu_q[i] = NUMZERO
+    j = np.where(rho==0)
+    mu_q[j] = NUMZERO
     return mu_q
 
 
