@@ -143,8 +143,6 @@ FPM  =1.04         # [1]
 KAPPAN =-36630.4   # [MeV*fm<sup>8</sup>]
 KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 
-
-
 # ================================
 #       Pairing fields
 # ================================
@@ -225,7 +223,6 @@ def proton_ref_pairing_field(rho_n, rho_p):
             -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)
 
 
-
 # ================================
 #       Effective masses
 # ================================
@@ -236,7 +233,6 @@ def proton_ref_pairing_field(rho_n, rho_p):
 # rho = rho_n + rho+p
 # Make plots for neutron matter (NeuM) where rho = rho_n [rho_p =0 ]
 # Make plots for symmetric matter (SM) where rho = 2*rho_n [rho_p =rho_n ]
-#
 
 def isoscalarM(rho_n, rho_p):
     """
@@ -281,14 +277,14 @@ def isovectorM(rho_n, rho_p):
 def effMn(rho_n, rho_p):
     """
     Returns the effective mass of a neutron in nuclear medium.
-    
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        
+
     Returns:
         float: effective mass of a neutron :math:`M_{n}^{*}` [MeV]
-        
+
     See also:
         :func:`B_q`
     """
@@ -297,14 +293,14 @@ def effMn(rho_n, rho_p):
 def effMp(rho_n, rho_p):
     """
     Returns the effective mass of a proton in nuclear medium.
-     
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        
+
     Returns:
         float: effective mass of a proton :math:`M_{p}^{*}` [MeV]
-    
+
     See also:
         :func:`B_q`
     """
@@ -314,17 +310,16 @@ def U_q(rho_n, rho_p,q):
     #     Formula (5.14) from NeST.pdf
     """
     Returns the mean field potential from density :math:`\\rho` variation.
-    
+
     rho_q is either rho_n or rho_p.
-    
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        
+
     Returns:
         float: Mean field potential :math:`U_q` [MeV]
-    
     """
     if(q=='n'):
         rho_q = rho_n + DENSEPSILON
@@ -339,21 +334,19 @@ def U_q(rho_n, rho_p,q):
         ((0.5+0.5*X3)*rho**2*(ALPHA+2))-(0.5+X3)*(2*rho*rho_q*ALPHA*
                                                   (rho_q_prime)**2))
 
-
 def B_q(rho_n, rho_p, q):
     #    Formula (5.13) from NeST.pdf
     """
     Returns the mean field potential B_q (coming from variation over kinetic
     density, or effective mass). rho_q is either rho_n or rho_p.
-    
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        
+
     Returns:
         float: effective mass of a proton :math:`M_{p}^{*}` [MeV fm :sup:`2`]
-    
     """
     if(q=='n'):
         rho_q = rho_n + DENSEPSILON
@@ -379,15 +372,13 @@ def energy_per_nucleon(rho_n, rho_p):
     density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
     Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
     :cite:p:`chamel2009further`.
-    
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
-        
     Returns:
         float: energy per neutron :math:`e_n` [MeV]
-
     """
     rho = rho_n+rho_p+DENSEPSILON
     kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
@@ -434,7 +425,6 @@ def C_tau(rho):
 
     Returns:
         float: C coefficient :math:`C^{\\tau}`
-
     """
     return (-T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*
             T5*(X5+1.)*rho**GAMMA)
@@ -449,12 +439,11 @@ def C_delta_rho(rho):
 
     Returns:
         float: C coefficient :math:`C^{\\Delta * \\rho}`
-
     """
     return (3./32.*T1*(X1-1.)+(3./32.*T2X2+3./32.*T2)+3./32.*T4*(X4-1.)*rho**BETA
              +3./32.*T5*(X5+1.)*rho**GAMMA)
 
-def g_C0_rho(rho_n, rho_p):
+def C0_rho(rho_n, rho_p):
     """
     Calculates the energy functional :math:`C^{\\rho}_0` cooefficient
 
@@ -468,7 +457,7 @@ def g_C0_rho(rho_n, rho_p):
     return 3. / 8. * T0 + 3. / 48. * T3 * np.power(rho_n + rho_p, ALPHA)
 
 
-def g_C1_rho(rho_n, rho_p):
+def C1_rho(rho_n, rho_p):
     """
     Calculates the energy functional :math:`C^{\\rho}_1` cooefficient
 
@@ -482,7 +471,7 @@ def g_C1_rho(rho_n, rho_p):
     return -1. / 4. * T0 * (1. / 2. + X0) - 1. / 24. * T3 * (1. / 2. + X3) * np.power(rho_n + rho_p, ALPHA)
 
 
-def g_C0_tau(rho_n, rho_p):
+def C0_tau(rho_n, rho_p):
     """
     Calculates the energy functional :math:`C^{\\tau}_0` cooefficient
 
@@ -497,7 +486,7 @@ def g_C0_tau(rho_n, rho_p):
     return (3. / 16.) * T1 + 5. / 16. * T2 + 1. / 4. * T2X2 + 3. / 16. * T4 * np.power(rho, BETA) + 1. / 4. * T5 * (1.25 + X5) * np.power(rho, GAMMA)
 
 
-def g_C1_tau(rho_n, rho_p):
+def C1_tau(rho_n, rho_p):
     """
     Calculates the energy functional :math:`C^{\\tau}_1` cooefficient
 
@@ -507,7 +496,6 @@ def g_C1_tau(rho_n, rho_p):
 
     Returns:
         float: :math:`C^{\\tau}_1` coefficient
-
     """
     rho = rho_n + rho_p
     return (-1. / 8.) * T1 * (1. / 2. + X1) + 1. / 16. * T2 + 1. / 8. * T2X2 - 1. / 8. * T4 * np.power(rho, BETA) * (1. / 2. + X4) + 1. / 8. * T5 * np.power(rho, GAMMA) * (1. / 2. + X5)
@@ -525,7 +513,7 @@ def epsilon_rho_np(rho_n, rho_p):
         float: energy functional :math:`\\epsilon_{\\rho}`
     """
     rho = rho_n + rho_p + DENSEPSILON
-    return g_C0_rho(rho_n, rho_p) * np.power(rho, 2) + g_C1_rho(rho_n, rho_p) * np.power(rho_n - rho_p, 2)
+    return C0_rho(rho_n, rho_p) * np.power(rho, 2) + C1_rho(rho_n, rho_p) * np.power(rho_n - rho_p, 2)
 
 
 def epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2):
@@ -544,7 +532,7 @@ def epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2):
     Returns:
         float: energy functional :math:`\\epsilon_{\\tau}`
     """
-    return g_C0_tau(rho_n, rho_p) * ((rho_n + rho_p) * (tau_n + tau_p) - jsum2) + g_C1_tau(rho_n, rho_p) * ((rho_n - rho_p) * (tau_n - tau_p) - jdiff2)
+    return C0_tau(rho_n, rho_p) * ((rho_n + rho_p) * (tau_n + tau_p) - jsum2) + C1_tau(rho_n, rho_p) * ((rho_n - rho_p) * (tau_n - tau_p) - jdiff2)
 
 
 def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square):
@@ -565,12 +553,12 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
     rho = rho_n+rho_p + DENSEPSILON
     grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
   
-    return (3./16.*T1*((1.+0.5*X1)*rho_grad_p_square-(0.5+X1)*(rho_grad_n_square+rho_grad_p_square))
-            -1./16.*T2X2*(0.5*rho_grad_p_square+rho_grad_n_square+rho_grad_p_square)
-            -1./16.*T2*(rho_grad_p_square+0.5*rho_grad_n_square+0.5*rho_grad_p_square)
-            +3./16.*T4*np.power(rho,BETA)*((1.+0.5*X4)*rho_grad_p_square-(0.5+X4)*(rho_grad_n_square+rho_grad_p_square))
-            -1./16.*T5*np.power(rho,GAMMA)*((1.+0.5*X5)*rho_grad_p_square+(0.5+X5)*(rho_grad_n_square+rho_grad_p_square))
-            +BETA/8.*T4*np.power(rho,BETA-1.)*((1.+0.5*X4)*rho*rho_grad_p_square-(0.5+X4)
+    return (3./16.*T1*((1.+0.5*X1)*rho_grad_square-(0.5+X1)*(rho_grad_n_square+rho_grad_p_square))
+            -1./16.*T2X2*(0.5*rho_grad_square+rho_grad_n_square+rho_grad_p_square)
+            -1./16.*T2*(rho_grad_square+0.5*rho_grad_n_square+0.5*rho_grad_p_square)
+            +3./16.*T4*np.power(rho,BETA)*((1.+0.5*X4)*rho_grad_square-(0.5+X4)*(rho_grad_n_square+rho_grad_p_square))
+            -1./16.*T5*np.power(rho,GAMMA)*((1.+0.5*X5)*rho_grad_square+(0.5+X5)*(rho_grad_n_square+rho_grad_p_square))
+            +BETA/8.*T4*np.power(rho,BETA-1.)*((1.+0.5*X4)*rho*rho_grad_square-(0.5+X4)
                                           *(rho_n*rho_grad_n_square+rho_p*rho_grad_p_square+rho*grad_rho_n_rho_p))
             )
 
@@ -592,7 +580,6 @@ def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
 
     Returns
         float: nergy functional :math:`\\epsilon`
-
     """
     rho = rho_n + rho_p + DENSEPSILON
     if(q=='n'):
@@ -602,7 +589,6 @@ def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
     return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa)
-
 
 def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
     """
@@ -623,12 +609,11 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
         kappa_n (float):
         kappa_p (float):
             what is kappa? (no Eq.9 in Ref.41)
-            
-            TO DO: write eq for jsum2 and jdiff2
+ 
+    TO DO: write eq for jsum2 and jdiff2
 
     Returns
         float: nergy functional :math:`\\epsilon`
-
     """
     rho_grad_n_square = (rho_grad_n)**2
     rho_grad_p_square = (rho_grad_p)**2
@@ -639,7 +624,6 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
             + epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2)
             + epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n, kappa_p)
             )
-
 
 def epsilon_rho(rho):
     """
@@ -667,7 +651,7 @@ def epsilon_delta_rho(rho, rho_grad):
         float: energy functional :math:`\\epsilon_{\\Delta \\rho}`
     """
     return (-(rho_grad)**2)*C_delta_rho(rho)
-    
+
 def epsilon_tau(rho, tau, j):
     """
     Energy functional :math:`\\epsilon_{\\tau}` for particle matter,
@@ -682,7 +666,7 @@ def epsilon_tau(rho, tau, j):
         float: energy functional :math:`\\epsilon_{\\tau}`
     """
     return (rho*tau-j**2)*C_tau(rho)
-    
+
 def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
     """
     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
@@ -700,10 +684,6 @@ def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
     Returns:
         float: energy functional :math:`\\epsilon_{\\pi}`
     """
-    # are nu = nu_n and nu* = nu_p?
-    # if so, is nu* = 1-nu ?
-    #
-    #rho = rho_n + rho_p
     return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)+kappa*(np.abs(rho_grad))**2
 
 def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n, 
@@ -715,19 +695,18 @@ def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        kappa (float):
-           - is this tern supposed to be included? 
+        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+        nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]
+        nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]
+        kappa_n (float):
+        kappa_p (float):
 
     Returns:
         float: energy functional :math:`\\epsilon_{\\pi}`
     """
-    #rho = rho_n + rho_p
     return (1./4.*(v_pi(rho_n, rho_p, 'n') + kappa_n*(np.abs(rho_grad_n))**2)*nu_n**2
             +1./4.*(v_pi(rho_n, rho_p, 'p') + kappa_p*(np.abs(rho_grad_p))**2 )* nu_p**2)
-
 
 def v_pi(rho_n, rho_p, q):
     # Equation 14 from Phys Rev C 104
@@ -754,7 +733,6 @@ def v_pi(rho_n, rho_p, q):
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
     return -8.*np.pi**2/I(rho_n, rho_p, q) * (HBARC**2/2./M)**(3./2.)
-    # return -8.*np.pi**2/I(rho_n, rho_p, q) * (B_q(rho_n, rho_p, q))**(3./2.)
 
 def I(rho_n, rho_p, q):
     # Equation 15 from Phys Rev C 104
@@ -769,10 +747,9 @@ def I(rho_n, rho_p, q):
 
     Returns:
         float: analytic integral solution
-        
+
     See also:
         :func:`Lambda`
-
     """
     if(q=='n'):
         delta = neutron_ref_pairing_field(rho_n, rho_p)
@@ -780,7 +757,7 @@ def I(rho_n, rho_p, q):
         delta = proton_ref_pairing_field(rho_n, rho_p)
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    
+
     mu = mu_q(rho_n, rho_p, q)
     I = mu #getting the correct size
     x = np.where(delta==NUMZERO) # intended to catch delta values with invalid kF
@@ -795,14 +772,14 @@ def I(rho_n, rho_p, q):
 def Lambda(x):
     # Equation 16 from Phys Rev C 104
     """
-    Function :mah:`\\Lambda` used in :func:`I`.
+    Function :math:`\\Lambda` used in :func:`I`.
 
     Args:
         x (float): variable
-    
+
     Returns:
         float: `\\Lambda`
-        
+
     See also:
         :func:`I`
     """
@@ -818,12 +795,12 @@ def mu_q(rho_n, rho_p, q):
     """
     Calculates the chemical potential :math:`\\mu` defined with the wavevector
     :math:`k_F`.
-    
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        
+ 
     Returns:
          float: chemical potential :math:`\\mu` [MeV]
     """
@@ -842,29 +819,5 @@ def mu_q(rho_n, rho_p, q):
     mu_q[j] = NUMZERO
     return mu_q
 
-
-
-def b_test(rho_n, rho_p):
-    rho = rho_n + rho_p
-    return ( HBAR2M_n
-        + 0.25 * T1 * ((1. + 0.5 * X1) * rho - (0.5 + X1) * rho_n)
-        + 0.25 * T4 * ((1. + 0.5 * X4) * rho - (0.5 + X4) * rho_n) * np.power(rho, BETA)
-        + 0.25 * (0.5 * T2X2 * rho + T2X2 * rho_n)
-        + 0.25 * T5 * ((1. + 0.5 * X5) * rho + (0.5 + X5) * rho_n) * np.power(rho, GAMMA)
-        )
-
-def v_pi_test_n(rho_n, rho_p):
-    # b = b_test(rho_n, rho_p)
-    b = HBARC**2/2./effMn(rho_n, rho_p)
-    return -(8. * np.pi**2) / I(rho_n, rho_p, 'n') * b**1.5
-
-def v_pi_test_P(rho_n, rho_p):
-    # b = b_test(rho_n, rho_p)
-    b = HBARC**2/2./effMp(rho_n, rho_p)
-    return -(8. * np.pi**2) / I(rho_n, rho_p, 'p') * b**1.5
-
-
-def epsilon_pi_test(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p):
-    return ((1. / 4.) * (v_pi_test_n(rho_n, rho_p) + 0 *np.abs(rho_grad_n)**2) * nu_n * nu_n
-         + (1. / 4.) * (v_pi_test_P(rho_n, rho_p) + 0 * rho_grad_p**2) * nu_p * nu_p)
-
+if __name__ == '__main__':
+    pass

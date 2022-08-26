@@ -62,7 +62,8 @@ HBAR2M_p = 20.749810921501915 # [MeV*fm<sup>2</sup>] 0.5*hbar^2/proton mass
 
 
 def KtoMev(temp):
-    """Function converts temperature units from Kelvins to MeVs.
+    """
+    Function converts temperature units from Kelvins to MeVs.
 
 
     .. todo::
@@ -80,7 +81,8 @@ def KtoMev(temp):
     return temp/11604525006.1598
 
 def MeVtoK(temp):
-    """Function converts temperature units from MeVs to Kelvins.
+    """
+    Function converts temperature units from MeVs to Kelvins.
 
 
     .. todo::
@@ -99,7 +101,8 @@ def MeVtoK(temp):
     return temp*11604525006.1598
 
 def fm3togcm3(rho):
-    """Function converts units 1/fm^3 into g/cm^3.
+    """
+    Function converts units 1/fm^3 into g/cm^3.
 
     .. todo::
         formula
@@ -116,7 +119,8 @@ def fm3togcm3(rho):
     return rho*1.67e15
 
 def gcm3tofm3(rho):
-    """Function converts units g/cm^3 into 1/fm^3.
+    """
+    Function converts units g/cm^3 into 1/fm^3.
 
     .. todo::
         formula

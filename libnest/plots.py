@@ -601,8 +601,6 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
     #plt.legend()
     plt.show() 
 
-
-
     
 if __name__ == '__main__':
     pass
