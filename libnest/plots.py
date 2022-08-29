@@ -375,9 +375,6 @@ def plot_epsilon_tau(rho_n, rho_p, tau, j):
         
     Returns:
         None
-    
-    See also:
-        :func:`isovectorM`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -405,9 +402,6 @@ def plot_epsilon_delta(rho_n, rho_p, rho_grad):
         
     Returns:
         None
-    
-    See also:
-        :func:`isovectorM`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -439,9 +433,6 @@ def plot_epsilon_rho_np(rho_n, rho_p):
         
     Returns:
         None
-    
-    See also:
-        :func:`isovectorM`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -497,7 +488,6 @@ def plot_epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n, rho_grad_p, rho_grad):
         
     Returns:
         None
-
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -536,7 +526,6 @@ def epsilon_test(rho_n, rho_p, rho_grad_n, rho_grad_p,  tau_n, tau_p, jsum2, jdi
         
     Returns:
         None
-
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -579,10 +568,7 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
         
     Returns:
         None
-    
-    See also:
-        :func:`isovectorM`
-    """
+        """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
     rho_p = rho_p * rho

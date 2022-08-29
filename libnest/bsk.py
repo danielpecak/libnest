@@ -356,7 +356,7 @@ def B_q(rho_n, rho_p, q):
         HBAR2M_q = HBAR2M_p
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    rho = rho_n + rho_p + DENSEPSILON
+    rho = rho_n + rho_p
     return (HBAR2M_q
              + T1/4.*((1.+X1/2.)*rho - (1./2.+X1)*rho_q)
              + T4/4.*((1.+X4/2.)*rho - (1./2.+X4)*rho_q)*np.power(rho,BETA)
