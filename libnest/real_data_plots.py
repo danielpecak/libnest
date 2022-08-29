@@ -11,6 +11,7 @@ import libnest.definitions
 import libnest.plots
 
 TXT_PATH = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\txt\\"
+TXT_PATH_UNIFORM = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\uniform-txt\\"
 #depends on the user (path did not work in main)
 
 # ================================
@@ -38,7 +39,7 @@ def file_check(filename):
         print(f"{filename}" + " not found. Check the directory and the file.")
         return False
 
-def files_set_particles(particles_nr):
+def files_set_particles(particles_nr, directory_path):
     """
     Returns an array with files containing data sets only for a specified
     number of particles.
@@ -49,7 +50,6 @@ def files_set_particles(particles_nr):
     Returns
         array: list of filenames
     """
-    directory_path = TXT_PATH
     filenames = []
 
     for path in os.listdir(directory_path):
@@ -445,8 +445,6 @@ def plot_current(filename):
 # ================================
 #        All data plots
 # ================================
-#size is actually 180x180 for all, not 120x120
-#possibly not 24 slices but 81 (see end of the function below)
 def plot_density_slice(filename):
     """
     Opens the specified file, checks its validity, and creates a 2D array from
@@ -484,12 +482,7 @@ def plot_density_slice(filename):
         #plt.legend()
         plt.show()
     else:
-        sys.exit('# ERROR: Cannot access file')
-
-    rho_total = np.sum(rho_q)
-    print(rho_total) #gives 2.66 instead of 9 or 216 for N216_T0.00.2_density.txt etc
-    print(rho_total*24) #generally fits with *81 instead of *24 slices for all
-    print(216/rho_total)
+        sys.exit('# ERROR: Cannot access file')    
 
 def plot_current_slice(filename):
     """
@@ -917,7 +910,7 @@ def plot_max_delta_temperature(particles_nr):
     Returns
         None
     """
-    filenames = files_set_type('delta', files_set_particles(particles_nr))
+    filenames = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
     path_filenames = [TXT_PATH + x for x in filenames]
     delta_max = []
     temperature = []
@@ -939,13 +932,84 @@ def plot_max_delta_temperature(particles_nr):
             temperature.append(int(file[-14:-12]))
         else:
             sys.exit('# ERROR: Cannot access file')
+
     plt.figure()
     plt.title(r"Pairing field $\Delta$ for "+particles_nr+" particles", fontsize=15)
     plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
     plt.ylabel(r"$\Delta_{max}$ [MeV]", fontsize=10)
-    plt.plot(temperature, delta_max)
-    # plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.plot(temperature, delta_max, label="vortex")
+    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
     plt.show()
+
+
+def plot_max_delta_temperature_uniform(particles_nr):
+    """
+    Plots the maximum value of pairing field :math:`\\Delta` [MeV] against temperature
+    T [MeV/k:sub:`B`]. The function creates an array of temperatures (taken from filenames)
+    and parses through the files to find the maximum pairing field :math:`\\Delta_{max}`
+    in the range 40-60 fm (which is assumed to be the flattest part of the curve).
+
+    Args:
+        particles_nr (string): choice of files with a specified number of particles
+
+    Returns
+        None
+    """
+    filenames = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
+    path_filenames = [TXT_PATH + x for x in filenames]
+    delta_max = []
+    temperature = []
+
+    for file in path_filenames:
+        if file_check(file):
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            i = np.where(np.logical_and(r>=40, r<=60))
+            delta, arg = pairing_field(data[i,2], data[i,3])
+            delta_max.append(np.max(delta))
+            temperature.append(int(file[-14:-12]))
+        else:
+            sys.exit('# ERROR: Cannot access file')
+    
+    filenames_uniform = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
+    path_filenames_uniform = [TXT_PATH_UNIFORM + x for x in filenames_uniform]
+    delta_max_uniform = []
+    temperature_uniform = []
+
+    for file in path_filenames_uniform:
+        if file_check(file):
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            data = data[data[:, -1] != 0]
+            #data[:,0] - x
+            #data[:,1] - y
+            #data[:,2] - delta_real
+            #data[:,3] - delta_imaginary
+
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            i = np.where(np.logical_and(r>=40, r<=60))
+            delta, arg = pairing_field(data[i,2], data[i,3])
+            delta_max_uniform.append(np.max(delta))
+            temperature_uniform.append(int(file[-14:-12]))
+        else:
+            sys.exit('# ERROR: Cannot access file')
+
+    plt.figure()
+    plt.title(r"Pairing field $\Delta$ for "+particles_nr+" particles", fontsize=15)
+    plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
+    plt.ylabel(r"$\Delta_{max}$ [MeV]", fontsize=10)
+    plt.plot(temperature, delta_max, label="vortex")
+    plt.plot(temperature_uniform, delta_max_uniform, label="uniform")
+    plt.legend(loc='upper right', ncol=1, markerscale=7)
+    plt.show()
+
 
 if __name__ == '__main__':
     pass
