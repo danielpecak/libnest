@@ -261,7 +261,6 @@ def plot_density(filename):
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - rho_q
-        #print(data[:,0]-45)
 
         r = cross_section_distance(data[:,0], data[:,1], 90)
         rho_bulk = 0.00590448
@@ -718,6 +717,149 @@ def plot_A_slice(filename):
     else:
         sys.exit('# ERROR: Cannot access file')
 
+
+# ================================
+#           Velocities
+# ================================
+
+def plot_vsf(filename):
+    filename = TXT_PATH + filename
+    if file_check(filename):
+        data = np.genfromtxt(filename, delimiter=' ', comments='#')
+        data = data[~np.isnan(data).any(axis=1)]
+        data = data[data[:, -1] != 0]
+        #data[:,0] - x
+        #data[:,1] - y
+        #data[:,2] - rho
+
+        r = cross_section_distance(data[:,0], data[:,1], 180)
+        vsf = libnest.definitions.vsf(r)
+        
+        plt.figure()
+        plt.title(r"$v_{sf}$ vs radius", fontsize=15)
+        plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.scatter(r, vsf, 0.5)
+        #plt.legend()
+        plt.show()
+    else:
+        sys.exit('# ERROR: Cannot access file')
+
+def plot_vsf_nv(filename_density, filename_A, filename_current):
+    filename_density = TXT_PATH + filename_density
+    filename_A = TXT_PATH + filename_A
+    filename_current = TXT_PATH + filename_current
+    if file_check(filename_density) & file_check(filename_A):
+        data_A = np.genfromtxt(filename_A, delimiter=' ', comments='#')
+        data_A = data_A[~np.isnan(data_A).any(axis=1)]
+        data_A = data_A[data_A[:, -1] != 0]
+        #data[:,0] - x
+        #data[:,1] - y
+        #data[:,2] - rho
+        data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
+        data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
+        # data_rho = data_rho[data_rho[:, -1] != 0]
+        
+        data_j = np.genfromtxt(filename_current, delimiter=' ', comments='#')
+        data_j = data_j[~np.isnan(data_j).any(axis=1)]
+        # data_j = data_j[data_j[:, -1] != 0]
+
+        r = cross_section_distance(data_A[:,0], data_A[:,1], 180)
+        B_q = libnest.bsk.B_q(data_rho[:,2], 0., 'n')
+        # print(len(data_rho[:,2]))
+        # print(B_q)
+        # print("B  " + str(len(B_q)))
+        vsf = libnest.definitions.vsf(r)
+        # print(vsf)
+        # print("VSF  " + str(len(vsf)))
+        A = vector_magnitude(data_A[:,2], data_A[:,3], data_A[:,4])
+        # print(len(data_A[:,2]))
+        # print(A)
+        # print("A  " + str(len(A)))
+        j = vector_magnitude(data_j[:,2], data_j[:,3], data_j[:,4])
+        
+        vsf_nv = libnest.definitions.vsf_NV(B_q, vsf, A)
+        # print(vsf_nv)
+        # print("VSF NV  " + str(len(vsf_nv)))
+        v_nv = libnest.definitions.v_NV(B_q, j, data_rho[:,2], A)
+        
+        
+        plt.figure()
+        plt.title(r"$v_{sf \: NV}$ vs radius", fontsize=15)
+        plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+        plt.ylabel(r"$ v_{sf \: NV}$ [c]", fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.scatter(r, vsf_nv, 0.5, label="v_sf_nv")
+        plt.scatter(r, v_nv, 0.5, label="v_nv")
+        #plt.legend()
+        plt.show()
+    else:
+        sys.exit('# ERROR: Cannot access file')
+
+def plot_landau_velocity(filename_density, filename_delta):
+    filename_density = TXT_PATH + filename_density
+    filename_delta = TXT_PATH + filename_delta
+    if file_check(filename_density) & file_check(filename_delta):
+        data_delta = np.genfromtxt(filename_delta, delimiter=' ', comments='#')
+        data_delta = data_delta[~np.isnan(data_delta).any(axis=1)]
+        # data_delta = data_delta[data_delta[:, -1] != 0]
+        #data[:,0] - x
+        #data[:,1] - y
+        #data[:,2] - rho
+        data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
+        data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
+        # data_rho = data_rho[data_rho[:, -1] != 0]
+
+        r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
+        delta, arg = pairing_field(data_delta[:,2], data_delta[:,3])
+        kf = libnest.definitions.rho2kf(data_rho[:,2])
+        v_landau = delta / kf
+        
+        
+        plt.figure()
+        plt.title(r"$v_{sf}$ vs radius", fontsize=15)
+        plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.plot(r, v_landau)
+        #plt.legend()
+        plt.show()
+    else:
+        sys.exit('# ERROR: Cannot access file')
+
+def plot_landau_critical_velocity(filename_density, filename_delta):
+    filename_density = TXT_PATH + filename_density
+    filename_delta = TXT_PATH + filename_delta
+    if file_check(filename_density) & file_check(filename_delta):
+        data_delta = np.genfromtxt(filename_delta, delimiter=' ', comments='#')
+        data_delta = data_delta[~np.isnan(data_delta).any(axis=1)]
+        # data_delta = data_delta[data_delta[:, -1] != 0]
+        #data[:,0] - x
+        #data[:,1] - y
+        #data[:,2] - rho
+        data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
+        data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
+        # data_rho = data_rho[data_rho[:, -1] != 0]
+
+        r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
+        delta, arg = pairing_field(data_delta[:,2], data_delta[:,3])
+        kf = libnest.definitions.rho2kf(data_rho[:,2])
+        v_landau = libnest.definitions.vLandau(delta, kf)
+        v_critical = libnest.definitions.vcritical(delta, kf)
+        
+        
+        plt.figure()
+        plt.title(r"$v_{sf}$ vs radius", fontsize=15)
+        plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.scatter(r, v_landau, 0.5, label="Landau")
+        plt.scatter(r, v_critical, 0.5, label="Critical")
+        plt.legend(loc="upper right")
+        plt.show()
+    else:
+        sys.exit('# ERROR: Cannot access file')
 
 # ================================
 #      Temperature variation
