@@ -19,6 +19,15 @@ to remove Coulomb interaction. In contrast to pure neutron matter, there is no
 symmetric nuclear matter in the nature. However this concept is very useful
 for theoretical considerations.
 
+
+******
+Energy
+******
+.. image:: _static/energySM.png
+  :width: 48 %
+.. image:: _static/energySMZoom.png
+  :width: 48 %
+
 *****
 Crust
 *****
