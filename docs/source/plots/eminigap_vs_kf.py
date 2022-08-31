@@ -13,7 +13,7 @@ else:
 
 kf = np.linspace(0., 1.7, 1000)
 
-e_mg = libnest.bsk.E_minigap_n(libnest.definitions.kf2rho(kf), 0.)
+e_mg = libnest.bsk.E_minigap_n(libnest.definitions.kf2rho(kf))
 
 plt.figure()
 plt.title("Energy of minigap", fontsize=15)

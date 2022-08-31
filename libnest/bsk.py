@@ -222,6 +222,32 @@ def proton_ref_pairing_field(rho_n, rho_p):
     return (symmetric_pairing_field(rho_n, rho_p)*(1-abs(eta/rho))
             -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)
 
+def eF_n(kF):
+    """
+    Returns Fermi energy for neutrons based on wavevector kF.
+
+    Args:
+        kF (float):  wavevector :math:`k_F`
+
+    Returns:
+        float: Fermi energy :math:`\\Epsilon_F` [fm :sup:`-1`]
+    """
+    return HBARC**2*kF**2/MN
+
+def E_minigap_n(rho_n):
+    """
+    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
+    
+    Parameters
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns
+        float: energy of minigap :math:`E_{mg}` [MeV]
+
+    """
+    delta = neutron_ref_pairing_field(rho_n, 0.)
+    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
+
 
 # ================================
 #       Effective masses
