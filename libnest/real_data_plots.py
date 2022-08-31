@@ -908,7 +908,7 @@ def plot_temperature_delta(particles_nr):
 # - magnitude of delta drops with temperature
 # - up to around 20 - 30 MeV/kB delta is very similar for all temperatures
 
-    filenames = files_set_type('delta', files_set_particles(particles_nr))
+    filenames = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
     # print(filenames)
     path_filenames = [TXT_PATH + x for x in filenames]
     # print(new_filenames)
@@ -935,7 +935,7 @@ def plot_temperature_delta(particles_nr):
             r = cross_section_distance(data[:,0], data[:,1], 180)
             delta, arg = pairing_field(data[:,2], data[:,3])
 
-            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+            plt.scatter(r, delta, 0.5, label=file[-16:-12]+' MeV/kB')
 
         else:
             sys.exit('# ERROR: Cannot access file')
@@ -966,7 +966,7 @@ def plot_temperature_delta(particles_nr):
             r = cross_section_distance(data[:,0], data[:,1], 180)
             delta, arg = pairing_field(data[:,2], data[:,3])
 
-            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+            plt.scatter(r, delta, 0.5, label=file[-16:-12]+' MeV/kB')
 
         else:
             sys.exit('# ERROR: Cannot access file')
@@ -1000,7 +1000,7 @@ def plot_temperature_delta(particles_nr):
             r = cross_section_distance(data[:,0], data[:,1], 180)
             delta, arg = pairing_field(data[:,2], data[:,3])
 
-            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+            plt.scatter(r, delta, 0.5, label=file[-16:-12]+' MeV/kB')
 
         else:
             sys.exit('# ERROR: Cannot access file')
@@ -1032,7 +1032,7 @@ def plot_temperature_delta(particles_nr):
             r = cross_section_distance(data[:,0], data[:,1], 180)
             delta, arg = pairing_field(data[:,2], data[:,3])
 
-            plt.scatter(r, delta, 0.5, label=file[-14:-12]+' MeV/kB')
+            plt.scatter(r, delta, 0.5, label=file[-16:-12]+' MeV/kB')
 
         else:
             sys.exit('# ERROR: Cannot access file')
@@ -1071,7 +1071,7 @@ def plot_max_delta_temperature(particles_nr):
             i = np.where(np.logical_and(r>=40, r<=60))
             delta, arg = pairing_field(data[i,2], data[i,3])
             delta_max.append(np.max(delta))
-            temperature.append(int(file[-14:-12]))
+            temperature.append(float(file[-16:-12]))
         else:
             sys.exit('# ERROR: Cannot access file')
 
@@ -1079,8 +1079,8 @@ def plot_max_delta_temperature(particles_nr):
     plt.title(r"Pairing field $\Delta$ for "+particles_nr+" particles", fontsize=15)
     plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
     plt.ylabel(r"$\Delta_{max}$ [MeV]", fontsize=10)
-    plt.plot(temperature, delta_max, label="vortex")
-    plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
+    plt.plot(temperature, delta_max)
+    # plt.legend(title='# particles: '+particles_nr, loc='upper right', ncol=1, markerscale=7)
     plt.show()
 
 
@@ -1116,7 +1116,7 @@ def plot_max_delta_temperature_uniform(particles_nr):
             i = np.where(np.logical_and(r>=40, r<=60))
             delta, arg = pairing_field(data[i,2], data[i,3])
             delta_max.append(np.max(delta))
-            temperature.append(int(file[-14:-12]))
+            temperature.append(float(file[-16:-12]))
         else:
             sys.exit('# ERROR: Cannot access file')
     
@@ -1139,19 +1139,35 @@ def plot_max_delta_temperature_uniform(particles_nr):
             i = np.where(np.logical_and(r>=40, r<=60))
             delta, arg = pairing_field(data[i,2], data[i,3])
             delta_max_uniform.append(np.max(delta))
-            temperature_uniform.append(int(file[-14:-12]))
+            temperature_uniform.append(float(file[-16:-12]))
         else:
             sys.exit('# ERROR: Cannot access file')
 
+    # temperature_critical = delta_max/1.764
+    delta_max = np.array(delta_max)
+    temperature_critical = np.mean(delta_max[0:4]/1.764)
+    print(temperature_critical)
+
+    delta_theoretical_zero = 1.764*temperature_critical
+    delta_theoretical_t_critical = 3.06*temperature_critical*np.sqrt(1-temperature/temperature_critical)
+    #np.where((temperature>temperature_critical), 3.06*temperature_critical*np.sqrt(1-temperature/temperature_critical), delta_theoretical_t_critical)
+    x = np.array(temperature)/float(temperature_critical)
+    x_uniform = np.array(temperature_uniform)/float(temperature_critical)
+
     plt.figure()
+    plt.xlim(0., 1.1)
     plt.title(r"Pairing field $\Delta$ for "+particles_nr+" particles", fontsize=15)
     plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
     plt.ylabel(r"$\Delta_{max}$ [MeV]", fontsize=10)
-    plt.plot(temperature, delta_max, label="vortex")
-    plt.plot(temperature_uniform, delta_max_uniform, label="uniform")
-    plt.legend(loc='upper right', ncol=1, markerscale=7)
+    # plt.scatter(temperature, delta_max, label="vortex")
+    # plt.scatter(temperature_uniform, delta_max_uniform, label="uniform")
+    plt.plot(x, delta_max, '-o', label="vortex")
+    plt.plot(x_uniform, delta_max_uniform, '-o', label="uniform")
+    plt.plot(x[6:], delta_theoretical_t_critical[6:], label="delta for T~T crit", linestyle='dashed', )
+    plt.legend(loc='upper right', ncol=1)
     plt.show()
+    
 
-
+    
 if __name__ == '__main__':
     pass
