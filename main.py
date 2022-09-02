@@ -13,11 +13,10 @@
 import libnest
 import libnest.plots
 import libnest.real_data_plots
+import libnest.delta_and_temperature
 import libnest.wdata
 import numpy as np
 import matplotlib.pyplot as plt
-
-#print(fm3togcm3(1.0))
 
 print("Siema")
 
@@ -63,7 +62,7 @@ print("Siema")
 
 # libnest.plots.epsilon_test(1., 0., 1., 0., 1., 0., 0., 0.) #rho_n, rho_p, grad_rho_n, grad_rho_p,  tau_n, tau_p, jsum2, jdiff2
 
-libnest.plots.epsilon_np(1., 0., 1., 0., 1., 0., 0., 0., 0.01, 0., 0., 0.) #libnest.bsk.KAPPAN, libnest.bsk.KAPPAP)
+# libnest.plots.epsilon_np(1., 0., 1., 0., 1., 0., 0., 0., 0.0, 0., 0., 0.) #libnest.bsk.KAPPAN, libnest.bsk.KAPPAP)
 # rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p
 
 #epsilon graphs agree when rho_p = 0 and rho_grad = 0
@@ -82,18 +81,17 @@ libnest.plots.epsilon_np(1., 0., 1., 0., 1., 0., 0., 0., 0.01, 0., 0., 0.) #libn
 
 
 
-# r = np.arange(0.000, 1., 0.0001)
+# r = np.arange(0.0001, 4., 0.01)
 # rho_n = r
-# # plt.plot(r, libnest.bsk.v_pi_test_P(r, 1),label='test')
-# # plt.plot(r, libnest.bsk.v_pi(r, 1, 'p'),label='og')
+# plt.plot(r, libnest.bsk.v_pi_test_P(r, 1),label='test')
+# plt.plot(r, libnest.bsk.v_pi(r, 1, 'p'),label='og')
 # plt.plot(r, libnest.bsk.epsilon_pi_np(r, 0, 0, 0, 0.01, 0, libnest.bsk.KAPPAN, libnest.bsk.KAPPAP), label='og')
 # plt.plot(r, libnest.bsk.epsilon_pi_test(r, 0, 0, 0, 0, 0), label='test')
-
-
-# # x=np.sqrt(libnest.bsk.mu_q(rho_n, 0., 'n'))*(2*np.log(2*libnest.bsk.mu_q(rho_n, 0., 'n')/np.abs(libnest.bsk.neutron_ref_pairing_field(rho_n, 0.))))
-# # plt.plot(r, x, label='first term')
+# plt.plot(r, libnest.bsk.neutron_ref_pairing_field(r, 0))
+# print(libnest.bsk.mu_q(r, 0, 'n'))
+# plt.plot(r, libnest.bsk.neutron_ref_pairing_field(r, 0.))
+# plt.plot(r, libnest.bsk.rho2kf(r))
 # plt.legend()
-
 
 
 #REAL PLOTS
@@ -124,10 +122,42 @@ libnest.plots.epsilon_np(1., 0., 1., 0., 1., 0., 0., 0., 0.01, 0., 0., 0.) #libn
 
 # libnest.real_data_plots.plot_A_slice("N216_T0.32.1_A.txt")
 
+#Velocities
+# libnest.real_data_plots.plot_vsf("N216_T0.00.2_density.txt")
+# libnest.real_data_plots.plot_vsf_nv("N216_T0.000.2_density.txt", "N216_T0.00.2_A.txt", "N216_T0.00.2_current.txt" )
+# libnest.real_data_plots.plot_landau_critical_velocity("N216_T0.00.2_density.txt", "N216_T0.00.2_delta.txt" )
+# libnest.real_data_plots.plot_landau_velocity("N216_T0.00.2_density.txt", "N216_T0.00.2_delta.txt")
+# libnest.real_data_plots.plot_landau_velocity_temp('8000')
+# #issue with kf being 0 when rho is 0
+
+
+#available separately: vsf, vsf_nv+v_nv, v_landau, v_landau+v_critical
+#can take fv_landau rom -60 to 60
+#nv *c
+#
+"""
+#minigap theory vs real data 
+#velocities for diff temps, for diff densities
+#andreiev? states fir diff temps + minigap
+#temp vs delta also from low r - bigger diff, changed t crit to come from uniform matter
+#pressure and sound speed
+#xi cisnienie i dzwiek (speed of sound later compaer to other velocities)
+#intergals numerically
+#eq a3 - grad/laplace = 0, uniform, rho = rho_n = rhoq, no last line
+# rozniczkowac
+"""
+
 
 # Temperature - delta
-libnest.real_data_plots.plot_temperature_delta('216')
+# libnest.delta_and_temperature.plot_temperature_delta('216')
 
-# libnest.real_data_plots.plot_temperature_delta('24000')
+# libnest.delta_and_temperature.plot_temperature_delta('24000')
+
+# libnest.delta_and_temperature.plot_max_delta_temperature('8000')
+
+# libnest.delta_and_temperature.plot_max_delta_temperature_uniform('216')
 
 
+#eminigap
+
+libnest.real_data_plots.plot_eminigap('216')

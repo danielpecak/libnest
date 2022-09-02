@@ -922,6 +922,31 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
     else:
         sys.exit('# ERROR: Cannot access file')    
 
+def plot_eminigap(particles_nr):
+    filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
+    path_filenames = [TXT_PATH + x for x in filenames]
+    e_max = []
+    temperature = []
+    
+    for file in path_filenames:
+        if file_check(file):
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+
+            # r = cross_section_distance(data[:,0], data[:,1], 180)
+            e_mg = libnest.bsk.E_minigap_n(data[:,2])
+            
+            e_max.append(np.max(e_mg))
+            temperature.append(float(file[-16:-12]))
+        else:
+            sys.exit('# ERROR: Cannot access file') 
+    
+    plt.figure()
+    plt.title("Energy of minigap", fontsize=15)
+    plt.xlabel(r"$\rho \: [{fm}^{-3}]$", fontsize=10)
+    plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
+    plt.plot(temperature, e_max, linewidth=2.0)
+    plt.legend()
 
     
 if __name__ == '__main__':
