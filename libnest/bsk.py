@@ -230,9 +230,9 @@ def eF_n(kF):
         kF (float):  wavevector :math:`k_F`
 
     Returns:
-        float: Fermi energy :math:`\\Epsilon_F` [fm :sup:`-1`]
+        float: Fermi energy :math:`\\Epsilon_F` [MeV]
     """
-    return HBARC**2*kF**2/MN
+    return HBAR2M_n * kF**2
 
 def E_minigap_n(rho_n):
     """
@@ -243,7 +243,6 @@ def E_minigap_n(rho_n):
 
     Returns
         float: energy of minigap :math:`E_{mg}` [MeV]
-
     """
     delta = neutron_ref_pairing_field(rho_n, 0.)
     return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
