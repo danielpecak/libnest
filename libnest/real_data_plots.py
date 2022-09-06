@@ -11,6 +11,7 @@ import libnest.definitions
 
 TXT_PATH = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\txt\\"
 TXT_PATH_UNIFORM = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\uniform-txt\\"
+TXT_PATH_ANDREEV = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\andreev\\"
 #depends on the user (path did not work in main)
 
 # ================================
@@ -118,6 +119,55 @@ def files_set_type(data_type, filenames):
         return p_A
     else:
         sys.exit('# ERROR: Incorrect data type input')
+        
+def file_andreev(filenames):
+    """
+    Parameters
+    ----------
+    filenames : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+    """
+    density = filenames[0][1:4]
+    if density == "216":
+        return "N135i.2_states.all.txt"
+    if density == "416":
+        return "N2600i_states.0000.txt"
+    if density == "800":
+        return "N5000i_states.0000.txt"
+    if density == "136":
+        return "N8500i_states.0000.txt"
+    if density == "166":
+        return "N10400i_states.0000.txt"
+    if density == "240":
+        return "N15000i_states.0000.txt"
+    
+def andreev_e_minimum(filename):
+    filename = TXT_PATH_ANDREEV + filename
+    if file_check(filename):
+        data = np.genfromtxt(filename, comments='#')  
+        # data[:,4] = Lz_u
+        # data[:,5] = Lz_v
+        
+        #index of data where Lz_u and Lz_v are close to 1 or 0, and the difference between them is ~0.
+        j, = np.where(np.logical_and(np.logical_or(np.abs(data[:,4])<=0.01,
+                                                   np.logical_and(np.abs(data[:,4])<=1.01,
+                                                                  np.abs(data[:,4])>=0.99)),
+                      (np.logical_or(np.abs(data[:,5])<=0.01, np.logical_and(np.abs(data[:,5])<=1.01,
+                                                                             np.abs(data[:,5])>=0.99))))) 
+
+        sub = data[j,5] - data[j,4]
+        i, = np.where(np.logical_and(np.abs(sub)>=0.99, np.abs(sub)<=1.01))
+        e_minigap = data[i,1]
+
+        print('E_mg: ' + str(np.min(e_minigap)))
+        e_minigap = np.sort(e_minigap)
+        print(e_minigap)
+        return np.min(e_minigap)
+
 
 # ================================
 #           Coordinates
@@ -479,8 +529,15 @@ def plot_density_slice(filename):
         plt.scatter(r, rho_q, 0.5) #plotting
         #plt.legend()
         plt.show()
+        
+        rho_total = np.sum(data[:,2])
+        print(rho_total)
+        n = 24000/180**3
+        print(n)
     else:
-        sys.exit('# ERROR: Cannot access file')    
+        sys.exit('# ERROR: Cannot access file') 
+        
+
 
 def plot_current_slice(filename):
     """
