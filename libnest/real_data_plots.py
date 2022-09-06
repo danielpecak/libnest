@@ -737,7 +737,7 @@ def plot_vsf(filename):
         plt.figure()
         plt.title(r"$v_{sf}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
+        plt.ylabel(r"$ v_{sf} $ [% c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, vsf, 0.5)
         #plt.legend()
@@ -773,10 +773,10 @@ def plot_vsf_nv(filename_density, filename_A, filename_current):
         plt.figure()
         plt.title(r"$v_{sf \: NV}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{sf \: NV}$ [c]", fontsize=10)
+        plt.ylabel(r"$ v_{sf \: NV}$ [% c]", fontsize=10)
         plt.xticks(fontsize=10)
-        plt.scatter(r, vsf_nv, 0.5, label="v_sf_nv")
-        plt.scatter(r, v_nv, 0.5, label="v_nv")
+        plt.scatter(r, vsf_nv, 0.5, label="v_{sf}_{nv}")
+        plt.scatter(r, v_nv, 0.5, label="v_{nv}")
         plt.legend(markerscale=5)
         plt.show()
     else:
@@ -799,9 +799,9 @@ def plot_landau_velocity(filename_density, filename_delta):
         v_landau = libnest.definitions.vLandau(delta, kf)       
 
         plt.figure()
-        plt.title(r"$v_{sf}$ vs radius", fontsize=15)
+        plt.title(r"$v_{Landau}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
+        plt.ylabel(r"$ v_{Landau} $ [% c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_landau, 0.5)
         # plt.legend()
@@ -822,7 +822,6 @@ def plot_landau_velocity_temp(particles_nr):
         if file_check(file_delta) & file_check(file_density):
             data_delta = np.genfromtxt(file_delta, dtype='float', delimiter=' ', comments='#')
             data_delta = data_delta[~np.isnan(data_delta).any(axis=1)]
-            print(data_delta[:,2])
             #data[:,0] - x
             #data[:,1] - y
             #data[:,2] - rho
@@ -840,15 +839,13 @@ def plot_landau_velocity_temp(particles_nr):
             delta, arg = pairing_field(data_delta[i,2], data_delta[i,3])
             kf = libnest.definitions.rho2kf(data_rho[i,2])
             v_landau = libnest.definitions.vLandau(delta, kf)
+            # v_sound = libnest.bsk.speed_of_sound_n(data_rho[i,2])
 
             v_max.append(np.max(v_landau))
             temperature.append(float(file_delta[-16:-12]))
         else:
             sys.exit('# ERROR: Cannot access file')
     
-    print(temperature)
-    print(v_max)
-
     
     filenames_delta_uniform = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
     path_filenames_delta_uniform = [TXT_PATH_UNIFORM + x for x in filenames_delta_uniform]
@@ -884,8 +881,6 @@ def plot_landau_velocity_temp(particles_nr):
     plt.ylabel(r"$v_{Landau}$ [% c]", fontsize=10)
     plt.plot(temperature, v_max, '-o', label="vortex")
     plt.plot(temperature_uniform, v_max_uniform, '-o', label="uniform")
-    # plt.plot(x_uniform, delta_max_uniform, '-o', label="uniform")
-    # plt.plot(x[4:], delta_theoretical_t_critical[4:], label=r"delta for $T \to T_{crit}$", linestyle='dashed')
     plt.legend(ncol=1)
     plt.show()
 
@@ -895,57 +890,125 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
     if file_check(filename_density) & file_check(filename_delta):
         data_delta = np.genfromtxt(filename_delta, delimiter=' ', comments='#')
         data_delta = data_delta[~np.isnan(data_delta).any(axis=1)]
-        # data_delta = data_delta[data_delta[:, -1] != 0]
-        #data[:,0] - x
-        #data[:,1] - y
-        #data[:,2] - rho
         data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
         data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
-        # data_rho = data_rho[data_rho[:, -1] != 0]
 
         r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
         delta, arg = pairing_field(data_delta[:,2], data_delta[:,3])
         kf = libnest.definitions.rho2kf(data_rho[:,2])
         v_landau = libnest.definitions.vLandau(delta, kf)
         v_critical = libnest.definitions.vcritical(delta, kf)
+        v_sound = libnest.bsk.speed_of_sound_n(data_rho[:,2])
         
         plt.figure()
         # plt.xlim(-90, 90)
-        plt.title(r"$v_{sf}$ vs radius", fontsize=15)
+        plt.title(r"Various velocities vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
+        plt.ylabel(r"% speed of light [% c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_landau, 0.5, label="Landau")
         plt.scatter(r, v_critical, 0.5, label="Critical")
+        plt.scatter(r, v_sound, 0.5, label='speed of sound')
         plt.legend(loc="upper right", markerscale=5)
         plt.show()
     else:
-        sys.exit('# ERROR: Cannot access file')    
+        sys.exit('# ERROR: Cannot access file')  
+        
+def plot_speed_of_sound(filename_density):
+    filename_density = TXT_PATH + filename_density
+    if file_check(filename_density):
+        data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
+        data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
 
-def plot_eminigap(particles_nr):
+        r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
+        v_sound = libnest.bsk.speed_of_sound_n(data_rho[:,2])
+        dev_p = libnest.bsk.derivative_pressure_rho_n(data_rho[:,2])
+        p = libnest.bsk.pressure_n(data_rho[:,2])
+        dev_e = libnest.bsk.derivative_epsilon_rho_n(data_rho[:,2])
+        
+        plt.figure()
+        plt.title(r"$v_{cs}$ vs radius", fontsize=15)
+        plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+        plt.ylabel(r"$ v_{cs} $ [c]", fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.scatter(r, v_sound, 0.5)
+        plt.legend(loc="upper right", markerscale=5)
+        plt.show()
+    else:
+        sys.exit('# ERROR: Cannot access file') 
+        
+# ================================
+#        Energy of minigap
+# ================================
+
+def plot_e_minigap(filename_density):
+    filename_density = TXT_PATH + filename_density
+    if file_check(filename_density):
+        data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
+        data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
+
+        r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
+        e_mg = libnest.bsk.E_minigap_n(data_rho[:,2])
+        
+        plt.figure()
+        plt.title("Energy of minigap", fontsize=15)
+        plt.xlabel(r"$ r\: [fm]$", fontsize=10)
+        plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
+        plt.xticks(fontsize=10)
+        plt.scatter(r, e_mg, 0.5)
+        plt.show()
+    else:
+        sys.exit('# ERROR: Cannot access file')  
+
+def plot_e_minigap_temperature(particles_nr):
     filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
     path_filenames = [TXT_PATH + x for x in filenames]
     e_max = []
     temperature = []
     
+    filenames_uniform = files_set_type('density', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
+    path_filenames_uniform = [TXT_PATH_UNIFORM + x for x in filenames_uniform]
+    e_max_uniform = []
+    temperature_uniform = []
+    
     for file in path_filenames:
         if file_check(file):
             data = np.genfromtxt(file, delimiter=' ', comments='#')
             data = data[~np.isnan(data).any(axis=1)]
-
-            # r = cross_section_distance(data[:,0], data[:,1], 180)
-            e_mg = libnest.bsk.E_minigap_n(data[:,2])
+            
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            i, = np.where(np.logical_and(r>=40, r<=60))
+            e_mg = libnest.bsk.E_minigap_n(data[i,2])
             
             e_max.append(np.max(e_mg))
-            temperature.append(float(file[-16:-12]))
+            temperature.append(float(file[-18:-14]))
         else:
-            sys.exit('# ERROR: Cannot access file') 
+            sys.exit('# ERROR: Cannot access file')
+            
+    for file in path_filenames_uniform:
+        if file_check(file):
+            data = np.genfromtxt(file, delimiter=' ', comments='#')
+            data = data[~np.isnan(data).any(axis=1)]
+            
+            r = cross_section_distance(data[:,0], data[:,1], 180)
+            i, = np.where(np.logical_and(r>=40, r<=60))
+            e_mg = libnest.bsk.E_minigap_n(data[i,2])
+            
+            e_max_uniform.append(np.max(e_mg))
+            temperature_uniform.append(float(file[-18:-14]))
+        else:
+            sys.exit('# ERROR: Cannot access file')
+
+    e_min = andreev_e_minimum(file_andreev(filenames))
     
     plt.figure()
-    plt.title("Energy of minigap", fontsize=15)
-    plt.xlabel(r"$\rho \: [{fm}^{-3}]$", fontsize=10)
+    plt.ylim(0., 0.3)
+    plt.title("Energy of minigap for "+particles_nr+" particles", fontsize=15)
+    plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
     plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
-    plt.plot(temperature, e_max, linewidth=2.0)
+    plt.plot(temperature, e_max, '-o', linewidth=2.0, label='vortex')
+    plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
+    plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
     plt.legend()
 
     

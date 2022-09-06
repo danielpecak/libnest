@@ -185,7 +185,6 @@ def symmetric_pairing_field(rho_n, rho_p):
                                              (((kF-1.3142)**2)+(0.906146**2)))
     i = np.where(kF>1.31)
     delta[i] = NUMZERO
-
     return delta
 
 def neutron_ref_pairing_field(rho_n, rho_p):
@@ -247,6 +246,55 @@ def E_minigap_n(rho_n):
     delta = neutron_ref_pairing_field(rho_n, 0.)
     return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
 
+
+def pressure_n(rho_n):
+    const = (3.*np.pi**2)**(2./3.)
+    return (2./5.*HBAR2M_n*const*2./3*rho_n**(-1./3.)
+            + 1./4.*T0*(1.-X0)
+            + 1./8.*T1*(1.-X1)*const*rho_n**(2./3.)
+            + 3./8.*(T2+T2X2)*const*rho_n**(2./3.)
+            + 1./24.*T3*(1.-X3)*(ALPHA+1)*rho_n**(ALPHA)
+            + 3./40.*T4*(1.-X4)*(BETA+5./3.)*const*rho_n**(BETA+2./3.)
+            + 9./40.*T5*(1.+X5)*(GAMMA+5./3.)*const*rho_n**(GAMMA+2./3.)
+            ) * rho_n**2
+
+def derivative_epsilon_rho_n(rho):
+    const = (3.*np.pi**2)**(2./3.)
+    return (MN + HBAR2M_n*const*rho*(2./3.)
+            + 1./2.*T0*(1.-X0)*rho
+            + 1./5.*T1*(1.-X1)*const*rho**(5./3.)
+            + 3./5.*(T2+T2X2)*const*rho**(5./3.)
+            + 1./24.*T3*(1.-X3)*(ALPHA+2)*rho**(ALPHA+1)
+            + 3./40.*T4*(1.-X4)*const*(BETA+8./3.)*rho**(BETA+5./3.)
+            + 9./40.*T5*(1.+X5)*(GAMMA+8./3.)*rho**(GAMMA+5./3.)
+            )
+
+def derivative_pressure_rho_n(rho):
+    const = (3.*np.pi**2)**(2./3.)
+    return (2./3.*HBAR2M_n*const*rho**(2./3.)
+            + 0.5*T0*(1.-X0)*rho
+            + 1./3.*T1*(1.-X1)*const*rho**(5./3.)
+            + (T2+T2X2)*const*rho**(5./3.)
+            + 1./24.*T3*(1.-X3)*(ALPHA+1)*(ALPHA+2)*rho**(ALPHA+1)
+            + 3./40.*T4*(1.-X4)*const*(BETA+5./3.)*(BETA+8./3.)*rho**(BETA+5./3.)
+            + 9./40.*T5*(1.+X5)*const*(GAMMA+5./3.)*(GAMMA+8./3.)*rho**(GAMMA+5./3.)
+            )
+
+def speed_of_sound_n(rho_n):
+    """
+    as a percentage of speed of light
+
+    Parameters
+    ----------
+    rho : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+    return np.sqrt(derivative_pressure_rho_n(rho_n)/derivative_epsilon_rho_n(rho_n))*100
 
 # ================================
 #       Effective masses
