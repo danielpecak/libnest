@@ -423,6 +423,10 @@ def isoscalarM(rho_n, rho_p):
     Calculates effective isoscalar mass M_s for a given uniform system
     with neutron and proton densities rho_n and rho_p respectively.
 
+    .. math::
+
+        M^*_s = 2 \\left( 1/M_n^* +  1/M_p^*  \\right)^{-1}
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
@@ -442,7 +446,11 @@ def isovectorM(rho_n, rho_p):
     Calculated effective isovector mass :math:`M_v` for a given uniform system
     with neutron and proton densities rho_n, rho_p respectively.
 
-     Args:
+    .. math::
+
+        M^{*}_v = M^{*}_s M_p^{*} \\frac{ 2 \\rho_p-\\rho}{2 M_p^*\\rho_p-\\rho}
+
+    Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
@@ -452,10 +460,10 @@ def isovectorM(rho_n, rho_p):
     See also:
         :func:`effMn`
         :func:`effMp`
+        :func:`isoscalarM`
     """
     Mp = effMp(rho_n, rho_p)
     rho = rho_n + rho_p + DENSEPSILON
-    rho = rho + DENSEPSILON
     return isoscalarM(rho_n, rho_p)*Mp*(2*rho_p-rho)/(2*Mp*rho_p-rho)
 
 def effMn(rho_n, rho_p):
@@ -693,6 +701,32 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
     Energy functional :math:`\\epsilon_{\\Delta \\rho}` for particle matter,
     related to the interaction of the nucleons with the background fluctuations.
 
+    .. math::
+
+    	\\varepsilon_{\\Delta\\rho}&(\\rho_n,\\vec\\nabla\\rho_n,\\rho_p,\\vec\\nabla\\rho_p)	=
+    	 +\\frac{3}{16} t_1 \\left[
+    	  \\left(          1 + \\frac{1}{2}x_1\\right)         \\left( \\nabla(\\rho_n+\\rho_p)   \\right)^2
+    	 -\\left(\\frac{1}{2} +           x_1 \\right)  \\sum_q \\left( \\nabla\\rho_q \\right)^2
+    	 \\right]  \\\\
+    	  &- \\frac{1}{16}t_2 \\left[
+    	     \\left(           1 + \\frac{1}{2} x_2\\right)          \\left( \\nabla(\\rho_n+\\rho_p)  \\right)^2
+    	   + \\left( \\frac{1}{2} +             x_2\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2  \\right]  \\\\
+    	  &+\\frac{3}{16} t_4  (\\rho_n+\\rho_p)^\\beta \\left[
+    	  \\left(1 + \\frac{1}{2}x_4\\right)           \\left( \\nabla(\\rho_n+\\rho_p)   \\right)^2
+    	 - \\left(\\frac{1}{2} + x_4 \\right)  \\sum_q  \\left( \\nabla\\rho_q \\right)^2
+    	 \\right]  \\\\
+    	 &+ \\frac{\\beta}{8}t_4 (\\rho_n+\\rho_p)^{\\beta-1} \\left[
+    	 \\left(1 + \\frac{1}{2}x_4\\right) (\\rho_n+\\rho_p)\\left(\\nabla(\\rho_n+\\rho_p)\\right)^2
+    	 - \\left(\\frac{1}{2} + x_4 \\right)
+    	 \\nabla(\\rho_n+\\rho_p)\\cdot\\left(\\sum_q \\rho_q\\nabla\\rho_q\\right)
+    	 \\right]  \\\\
+    	 &- \\frac{1}{16}t_5 (\\rho_n+\\rho_p)^\\gamma \\left[
+    	   \\left(          1 + \\frac{1}{2} x_5\\right) \\left( \\nabla(\\rho_n+\\rho_p)\\right)^2
+    	  +\\left(\\frac{1}{2} +             x_5\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2
+    	 \\right].
+
+
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
@@ -720,6 +754,14 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
     """
     Calculates the total energy functional :math:`\\epsilon`, with a limit for
     single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.
+
+    .. math::
+        \\varepsilon(\\rho_n,\\vec\\nabla\\rho_n, \\tilde{\\rho}_n,\\tau_n,{\\bm j}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p,\\tau_p,{\\bm j}_p) = \\nonumber \\\\
+     = \\frac{\\hbar^2}{2 M_n} \\tau_n + \\frac{\\hbar^2}{2 M_p} \\tau_p
+      + \\varepsilon_\\rho(\\rho_n,\\rho_p)
+      + \\varepsilon_\\tau(\\rho_n,\\tau_n,{\\bm j}_n,\\rho_p,\\tau_p,{\\bm j}_p) \\nonumber \\\\
+     + \\varepsilon_{\\Delta\\rho}(\\rho_n,\\vec\\nabla\\rho_n,\\rho_p,\\vec\\nabla\\rho_p)
+     + \\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p),
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -753,24 +795,6 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
 
 
 
-def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
-    """
-    Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
-    related to pairng energy density.
-
-    Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
-        kappa (float):
-           - is this tern supposed to be included?
-
-    Returns:
-        float: energy functional :math:`\\epsilon_{\\pi}`
-    """
-    return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)+kappa*(np.abs(rho_grad))**2
 
 def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
                     kappa_p):
@@ -816,13 +840,7 @@ def v_pi(rho_n, rho_p, q):
     .. math::
 
         v^{\\pi q}(\\rho_n,\\rho_p)
-        = - \\frac{8 \\pi^2}{I_q(\\rho_n,\\rho_p) } \\left(\\frac{\\hbar^2}{2 M^*_q(\\rho_n,\\rho_p) }\\right)^{3/2}
-
-        I_q(\\rho_n,\\rho_p)
-        = \\sqrt{\\mu_q(\\rho_n,\\rho_p) } \\left( 2 \\ln{\\frac{2 \\mu_q(\\rho_n,\\rho_p) }{\\Delta^U_q(\\rho_n,\\rho_p) }} + \\Lambda\\left( \\frac{\\varepsilon_\\Lambda}{\\mu_q(\\rho_n,\\rho_p) } \\right) \\right)
-
-        \\Lambda(x)
-        = \\ln(16x) + 2\\sqrt{1+x} - 2 \\ln\\left({1+\\sqrt{1+x}}\\right) - 4.
+        = - \\frac{8 \\pi^2}{I_q(\\rho_n,\\rho_p) } B_q(\\rho_n,\\rho_p)^{3/2}
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -834,6 +852,10 @@ def v_pi(rho_n, rho_p, q):
 
     See also:
         :func:`I`
+        :func:`effMn`
+        :func:`effMp`
+        :func:`Lambda`
+        :func:`B_q`
     """
     #rho = rho_n + rho_p
     if(q=='n'):
@@ -854,7 +876,7 @@ def I(rho_n, rho_p, q):
     .. math::
 
         I_q(\\rho_n,\\rho_p)
-        = \\sqrt{\\mu_q(\\rho_n,\\rho_p) } \\left( 2 \\ln{\\frac{2 \\mu_q(\\rho_n,\\rho_p) }{\\Delta^U_q(\\rho_n,\\rho_p) }} + \\Lambda\\left( \\frac{\\varepsilon_\\Lambda}{\\mu_q(\\rho_n,\\rho_p) } \\right) \\right)
+        = \\sqrt{\\mu_q(\\rho_n,\\rho_p) } \\left( 2 \\ln{\\frac{2 \\mu_q(\\rho_n,\\rho_p) }{\\Delta_q(\\rho_n,\\rho_p) }} + \\Lambda\\left( \\frac{\\varepsilon_\\Lambda}{\\mu_q(\\rho_n,\\rho_p) } \\right) \\right)
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -866,6 +888,9 @@ def I(rho_n, rho_p, q):
 
     See also:
         :func:`Lambda`
+        :func:`mu_q`
+        :func:`neutron_ref_pairing_field`
+        :func:`proton_ref_pairing_field`
     """
     if(q=='n'):
         delta = neutron_ref_pairing_field(rho_n, rho_p)
@@ -1063,6 +1088,25 @@ def mu_q(rho_n, rho_p, q):
 #     else:
 #         sys.exit('# ERROR: Nucleon q must be either n or p')
 #     return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa)
+#
+# def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
+#     """
+#     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
+#     related to pairng energy density.
+#
+#     Args:
+#         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+#         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+#         rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+#         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
+#         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+#         kappa (float):
+#            - is this tern supposed to be included?
+#
+#     Returns:
+#         float: energy functional :math:`\\epsilon_{\\pi}`
+#     """
+#     return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)+kappa*(np.abs(rho_grad))**2
 
 
 
