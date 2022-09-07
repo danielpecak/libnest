@@ -11,24 +11,24 @@ Formulas:
 	 -\left(\frac{1}{2} +           x_1 \right)  \sum_q \left( \nabla\rho_q \right)^2
 	 \right]  \\
 	  &- \frac{1}{16}t_2 \left[
-	     \left(           1 + \frac{1}{2} x_2\right)          \left( \nabla(\rho_n+\rho_p)  \right)^2 
+	     \left(           1 + \frac{1}{2} x_2\right)          \left( \nabla(\rho_n+\rho_p)  \right)^2
 	   + \left( \frac{1}{2} +             x_2\right) \sum_{q} \left( \nabla\rho_q\right)^2  \right]  \\
 	  &+\frac{3}{16} t_4  (\rho_n+\rho_p)^\beta \left[
-	  \left(1 + \frac{1}{2}x_4\right)           \left( \nabla(\rho_n+\rho_p)   \right)^2 
+	  \left(1 + \frac{1}{2}x_4\right)           \left( \nabla(\rho_n+\rho_p)   \right)^2
 	 - \left(\frac{1}{2} + x_4 \right)  \sum_q  \left( \nabla\rho_q \right)^2
 	 \right]  \\
 	 &+ \frac{\beta}{8}t_4 (\rho_n+\rho_p)^{\beta-1} \left[
-	 \left(1 + \frac{1}{2}x_4\right) (\rho_n+\rho_p)\left(\nabla(\rho_n+\rho_p)\right)^2  
-	 - \left(\frac{1}{2} + x_4 \right)   
+	 \left(1 + \frac{1}{2}x_4\right) (\rho_n+\rho_p)\left(\nabla(\rho_n+\rho_p)\right)^2
+	 - \left(\frac{1}{2} + x_4 \right)
 	 \nabla(\rho_n+\rho_p)\cdot\left(\sum_q \rho_q\nabla\rho_q\right)
 	 \right]  \\
 	 &- \frac{1}{16}t_5 (\rho_n+\rho_p)^\gamma \left[
-	   \left(          1 + \frac{1}{2} x_5\right) \left( \nabla(\rho_n+\rho_p)\right)^2 
-	  +\left(\frac{1}{2} +             x_5\right) \sum_{q} \left( \nabla\rho_q\right)^2 
+	   \left(          1 + \frac{1}{2} x_5\right) \left( \nabla(\rho_n+\rho_p)\right)^2
+	  +\left(\frac{1}{2} +             x_5\right) \sum_{q} \left( \nabla\rho_q\right)^2
 	 \right].
 
 .. math::
-	\varepsilon_\rho(\rho_n,\rho_p) 
+	\varepsilon_\rho(\rho_n,\rho_p)
 	&= C^\rho_0(\rho_n+\rho_p) \left( \rho_n + \rho_p \right)^2
 	 + C^\rho_1(\rho_n+\rho_p) \left( \rho_n - \rho_p \right)^2
 	 \\
@@ -54,16 +54,12 @@ Pairing
 	&+\frac{1}{4} f^\pm_p \left( v^{\pi p}(\rho_n,\rho_p) + \kappa_p|\nabla\rho_p|^2 \right) \tilde{\rho_p}^2,
 
 .. math::
-	 \Delta_q^U(\rho_n,\rho_p) = 
+	 \Delta_q^U(\rho_n,\rho_p) =
 	    \Delta_{SM}^U(\rho_n+\rho_p) \left( 1 - |\eta| \right)
 	\pm \Delta_{NM}^U(\rho_n) \eta \frac{\rho_q}{\rho_n+\rho_p},
 
 
-.. math::
-	\Delta_{NM}^U(k_F< 1.38 ) = \frac{3.37968 k_F^2}{k_F^2+0.556092^2} \frac{(k_F-1.38236)^2}{(k_F-1.38236)^2+0.327517^2},
 
-.. math::
-	 \Delta_{SM}^U(k_F<1.31) =  \frac{11.5586 k_F^2}{k_F^2 + 0.489932^2}\frac{(k_F - 1.3142)^2}{(k_F - 1.3142)^2 + 0.906146^2}.
 
 
 
@@ -71,20 +67,19 @@ Pairing
 Effective mass
 ~~~~~~~~~~~~~~
 .. math::
-	B_q  = \frac{\hbar^2}{2 M^*_q} 
-	 = \frac{\hbar^2}{2 M_q}  + C^\tau_0\rho  + C^\tau_1 (\rho_{q} - \rho_{q'}) 
+	B_q  = \frac{\hbar^2}{2 M^*_q}
+	 = \frac{\hbar^2}{2 M_q}  + C^\tau_0\rho  + C^\tau_1 (\rho_{q} - \rho_{q'})
 
 
 .. todo::
    Describe properties
-   
+
 .. todo::
    Give references
 
 .. automodule:: libnest.bsk
-    :members:    
+    :members:
 
 References
 ----------
 .. bibliography::
-

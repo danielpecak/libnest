@@ -1,5 +1,6 @@
 Physics
 =======
+Here you can find a brief introduction to the physics of neutron stars. 
 
 :math:`E=mc^2`
 

@@ -149,38 +149,55 @@ KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 def neutron_pairing_field(rho_n):
     #    Formula (5.12) from NeST.pdf
     """
-    Returns the pairing field for neutron nuclear matter for kF lower
-    than 1.38 fm^-1 (where the field is zero).
-    
+    Returns the pairing field for uniform pure neutron nuclear matter. For kF larger
+    than 1.38 fm :sup:`-1` it returns (numerical) zero.
+
+    .. math::
+
+	   \Delta_{\\mathrm{NeuM}}(k_F) = \\frac{3.37968 k_F^2}{k_F^2+0.556092^2} \\frac{(k_F-1.38236)^2}{(k_F-1.38236)^2+0.327517^2},
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: pairing field for symmetric matter :math:`\\Delta_{sym}` [fm :sup:`-3`]
-    
+        float: pairing field for neutron matter :math:`\\Delta_{\\mathrm{NeuM}}` [MeV]
+
+    See also:
+        :func:`symmetric_pairing_field`
+        :func:`neutron_ref_pairing_field`
+        :func:`proton_ref_pairing_field`
     """
     kF = rho2kf((rho_n)/2)
     delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
                                               ((kF-1.38236)**2+(0.327517**2)))
     i = np.where(kF>1.38)
     delta[i] = NUMZERO
-    #delta = np.ma.masked_invalid(delta)
     return delta
 
 def symmetric_pairing_field(rho_n, rho_p):
     #   Formula (5.11) from NeST.pdf
     """
-    Returns the pairing field for pure symmetric matter for kF lower than
-    1.31 fm^-1 (where the field is zero).
-    
+    Returns the pairing field for uniform symmetric matter. For kF larger than
+    1.31 fm :sup:`-1` it returns (numerical) zero.
+
+    .. math::
+
+	   \Delta_{\\mathrm{SM}}(k_F) =  \\frac{11.5586 k_F^2}{k_F^2 + 0.489932^2}\\frac{(k_F - 1.3142)^2}{(k_F - 1.3142)^2 + 0.906146^2}.
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
     Returns:
-        float: pairing field for neutron matter :math:`\\Delta_{NeuM}` [fm :sup:`-3`]
+        float: pairing field for symmetric matter :math:`\\Delta_{\\mathrm{SM}}` [MeV]
+
+
+    See also:
+        :func:`neutron_pairing_field`
+        :func:`neutron_ref_pairing_field`
+        :func:`proton_ref_pairing_field`
     """
-    kF = rho2kf((rho_n+rho_p)/2)
+    kF = rho2kf((rho_n+rho_p)/2.)
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
     i = np.where(kF>1.31)
@@ -191,13 +208,29 @@ def neutron_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
     """
     Returns the reference pairing field for neutrons in uniform matter.
-    
+    This is an extrapolation between :math:`\Delta_{\\mathrm{SM}}` and
+    :math:`\Delta_{\\mathrm{NeuM}}`. In limits :math:`\\eta \\rightarrow 0` reproduces
+    symmetric matter and :math:`\\eta \\rightarrow 1`, the neutron matter.
+
+    .. math::
+
+        \\Delta_n(\\rho_n,\\rho_p) =
+        \\Delta_{\\mathrm{SM}}(\\rho_n+\\rho_p)
+        \\left( 1 - |\\eta| \\right)
+        + \Delta_{\\mathrm{NeuM}}(\\rho_n) \\eta \\frac{\\rho_n}{\\rho_n+\\rho_p}
+
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        
+
     Returns:
-        float: pairing field for neutrons :math:`\\Delta_n` [fm :sup:`-3`]
+        float: pairing field for neutrons :math:`\\Delta_n` [MeV]
+
+    See also:
+        :func:`neutron_pairing_field`
+        :func:`symmetric_pairing_field`
+        :func:`proton_ref_pairing_field`
     """
     rho, eta = rhoEta(rho_n, rho_p)
     rho = rho + DENSEPSILON
@@ -208,13 +241,29 @@ def proton_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
     """
     Returns the reference pairing field for protons in uniform matter.
-    
+    This is an extrapolation between :math:`\Delta_{\\mathrm{SM}}` and
+    :math:`\Delta_{\\mathrm{NeuM}}`. In limits :math:`\\eta \\rightarrow 0` reproduces
+    symmetric matter and :math:`\\eta \\rightarrow 1`, the neutron matter.
+
+    .. math::
+
+        \\Delta_p(\\rho_n,\\rho_p) =
+        \\Delta_{\\mathrm{SM}}(\\rho_n+\\rho_p)
+        \\left( 1 - |\\eta| \\right)
+        - \Delta_{\\mathrm{NeuM}}(\\rho_n) \\eta \\frac{\\rho_p}{\\rho_n+\\rho_p}
+
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        
+
     Returns:
-        float: pairing field for protons :math:`\\Delta_p` [fm :sup:`-3`]
+        float: pairing field for protons :math:`\\Delta_p` [MeV]
+
+    See also:
+        :func:`neutron_pairing_field`
+        :func:`symmetric_pairing_field`
+        :func:`neutron_ref_pairing_field`
     """
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = rho + DENSEPSILON
@@ -229,14 +278,14 @@ def eF_n(kF):
         kF (float):  wavevector :math:`k_F`
 
     Returns:
-        float: Fermi energy :math:`\\Epsilon_F` [MeV]
+        float: Fermi energy :math:`\\epsilon_F` [MeV]
     """
     return HBAR2M_n * kF**2
 
 def E_minigap_n(rho_n):
     """
     Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
-    
+
     Parameters
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
@@ -310,19 +359,19 @@ def speed_of_sound_n(rho_n):
 def isoscalarM(rho_n, rho_p):
     """
     Calculates effective isoscalar mass M_s for a given uniform system
-    with neutron and proton densities rho_n and rho_p respectively. 
-    
+    with neutron and proton densities rho_n and rho_p respectively.
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        
+
     Returns:
         float: effective isoscalar mass :math:`M_{s}^{*}` [MeV]
-        
+
     See also:
         :func:`effMn`
         :func:`effMp`
-    
+
     """
     return 2/((1./effMn(rho_n, rho_p))+(1./effMp(rho_n, rho_p)))
 
@@ -330,14 +379,14 @@ def isovectorM(rho_n, rho_p):
     """
     Calculated effective isovector mass :math:`M_v` for a given uniform system
     with neutron and proton densities rho_n, rho_p respectively.
-    
+
      Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        
+
     Returns:
         float: effective isovector mass :math:`M_{v}^{*}` [MeV]
-    
+
     See also:
         :func:`effMn`
         :func:`effMp`
@@ -625,7 +674,7 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
     """
     rho = rho_n+rho_p + DENSEPSILON
     grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
-  
+
     return (3./16.*T1*((1.+0.5*X1)*rho_grad_square-(0.5+X1)*(rho_grad_n_square+rho_grad_p_square))
             -1./16.*T2X2*(0.5*rho_grad_square+rho_grad_n_square+rho_grad_p_square)
             -1./16.*T2*(rho_grad_square+0.5*rho_grad_n_square+0.5*rho_grad_p_square)
@@ -682,7 +731,7 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
         kappa_n (float):
         kappa_p (float):
             what is kappa? (no Eq.9 in Ref.41)
- 
+
     TO DO: write eq for jsum2 and jdiff2
 
     Returns
@@ -710,7 +759,7 @@ def epsilon_rho(rho):
         float: energy functional :math:`\\epsilon_{\\rho}`
     """
     return C_rho(rho)*rho**2
-    
+
 def epsilon_delta_rho(rho, rho_grad):
     """
     Energy functional :math:`\\epsilon_{\\Delta \\rho}` for particle matter,
@@ -752,37 +801,49 @@ def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
         kappa (float):
-           - is this tern supposed to be included? 
+           - is this tern supposed to be included?
 
     Returns:
         float: energy functional :math:`\\epsilon_{\\pi}`
     """
     return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)+kappa*(np.abs(rho_grad))**2
 
-def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n, 
+def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
                     kappa_p):
     """
     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
     related to pairng energy density.
 
+    .. math::
+
+    	\\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p)
+
+        =\\frac{1}{4} f^\\pm_n \\left( v^{\\pi n}(\\rho_n,\\rho_p) + \\kappa_n|\\nabla\\rho_n|^2 \\right) \\tilde{\\rho_n}^2
+
+        +\\frac{1}{4} f^\\pm_p \\left( v^{\\pi p}(\\rho_n,\\rho_p) + \\kappa_p|\\nabla\\rho_p|^2 \\right) \\tilde{\\rho_p}^2,
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-        nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]
-        nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]
-        kappa_n (float):
-        kappa_p (float):
+        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho_n` [fm :sup:`-4`]
+        rho_grad_p (float): proton  density gradient :math:`\\nabla \\rho_p` [fm :sup:`-4`]
+        nu_n (float): neutron anomalous density :math:`\\nu_n` [fm :sup:`-3`]
+        nu_p (float): proton anomalous density :math:`\\nu_p` [fm :sup:`-3`]
+        kappa_n: :math:`\\kappa_n` (float)
+        kappa_p: :math:`\\kappa_p` (float)
 
     Returns:
-        float: energy functional :math:`\\epsilon_{\\pi}`
+        float: energy functional :math:`\\epsilon_{\\pi}` [MeV]
+
+    See also:
+        :func:`v_pi`
     """
     return (1./4.*(v_pi(rho_n, rho_p, 'n') + kappa_n*(np.abs(rho_grad_n))**2)*nu_n**2
             +1./4.*(v_pi(rho_n, rho_p, 'p') + kappa_p*(np.abs(rho_grad_p))**2 )* nu_p**2)
 
 def v_pi(rho_n, rho_p, q):
     # Equation 14 from Phys Rev C 104
+    # TODO make different functions for neutrons and protons
     """
     Calculates pairing strength :math:`\\upsilon^{pi}_q` [fm :sup:`-3`] for neutrons
     or protons, for energies below 6.5 MeV.
@@ -834,7 +895,7 @@ def I(rho_n, rho_p, q):
     mu = mu_q(rho_n, rho_p, q)
     I = mu #getting the correct size
     x = np.where(delta==NUMZERO) # intended to catch delta values with invalid kF
-    I[x] = NUMZERO    
+    I[x] = NUMZERO
     I = np.ma.masked_where(delta == 0, I)   # masking I with incorrect delta value
                                             # (if delta=0, I = inf)
                                             # if delta(rho=0) is set to NUMZERO, I(rho=0) is too low
@@ -858,7 +919,7 @@ def Lambda(x):
     """
     Lambda = x
     i = np.where(x<=0 ) # intended to catch delta values with invalid kF
-    Lambda[i] = NUMZERO 
+    Lambda[i] = NUMZERO
     j = np.where(x>0)
     Lambda[j] = np.log(16. * x) + 2. * np.sqrt(1. + x) - 2. * np.log(1. + np.sqrt(1. + x)) - 4.
     return Lambda
@@ -873,7 +934,7 @@ def mu_q(rho_n, rho_p, q):
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
- 
+
     Returns:
          float: chemical potential :math:`\\mu` [MeV]
     """
