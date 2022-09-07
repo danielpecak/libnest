@@ -27,14 +27,6 @@ Formulas:
 	  +\left(\frac{1}{2} +             x_5\right) \sum_{q} \left( \nabla\rho_q\right)^2
 	 \right].
 
-.. math::
-	\varepsilon_\rho(\rho_n,\rho_p)
-	&= C^\rho_0(\rho_n+\rho_p) \left( \rho_n + \rho_p \right)^2
-	 + C^\rho_1(\rho_n+\rho_p) \left( \rho_n - \rho_p \right)^2
-	 \\
-	\varepsilon_\tau(\rho_n,\tau_n,{\bm j}_n,\rho_p,\tau_p,{\bm j}_p)
-	&= C^\tau_0(\rho_n+\rho_p) \left[ (\rho_n + \rho_p)(\tau_n + \tau_p) - ({\bm j}_n + {\bm j}_p)^2 \right] \nonumber \\
-	&+ C^\tau_1(\rho_n+\rho_p) \left[ (\rho_n - \rho_p)(\tau_n - \tau_p) - ({\bm j}_n - {\bm j}_p)^2 \right].
 
 
 Pairing
