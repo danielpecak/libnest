@@ -272,7 +272,13 @@ def proton_ref_pairing_field(rho_n, rho_p):
 
 def eF_n(kF):
     """
-    Returns Fermi energy for neutrons based on wavevector kF.
+    Returns Fermi energy for neutrons based on wavevector kF:
+
+    .. math::
+
+        \\epsilon_F = \\frac{\\hbar^2 k_F^2}{2 M_n},
+
+    where :math:`M_n` is mass of a neutron.
 
     Args:
         kF (float):  wavevector :math:`k_F`
@@ -285,12 +291,27 @@ def eF_n(kF):
 def E_minigap_n(rho_n):
     """
     Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
+    The minigap energy can be approximated:
 
-    Parameters
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+    .. math::
 
-    Returns
+        E_\\mathrm{mg} = \\frac{4}{3} \\frac{|\\Delta|^2}{\\varepsilon_F},
+
+    where :math:`\\Delta` is the pairing gap in the system, and :math:`\\varepsilon_F`
+    is the Fermi energy.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both
+            spin components
+
+    Returns:
         float: energy of minigap :math:`E_{mg}` [MeV]
+
+    See also:
+        :func:`neutron_ref_pairing_field`
+        :func:`rho2kf`
+        :func:`eF_n`
+
     """
     delta = neutron_ref_pairing_field(rho_n, 0.)
     return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
@@ -460,7 +481,13 @@ def B_q(rho_n, rho_p, q):
     #    Formula (5.13) from NeST.pdf
     """
     Returns the mean field potential B_q (coming from variation over kinetic
-    density, or effective mass). rho_q is either rho_n or rho_p.
+    density, or effective mass).
+
+    .. math::
+
+    	B_q  = \\frac{\\hbar^2}{2 M^*_q}
+    	 = \\frac{\\hbar^2}{2 M_q}  + C^\\tau_0\\rho  + C^\\tau_1 (\\rho_{q} - \\rho_{q'})
+
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -528,7 +555,7 @@ def energy_per_nucleon(rho_n, rho_p):
 
 def C_rho(rho):
     """
-    Calculates the energy functional :math:`C^{\\rho}` cooefficient for NeuM
+    Calculates the energy functional :math:`C^{\\rho}` coefficient for NeuM
 
     Args:
         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
@@ -540,7 +567,7 @@ def C_rho(rho):
 
 def C_tau(rho):
     """
-    Calculates the energy functional :math:`C^{\\tau}` cooefficient for NeuM
+    Calculates the energy functional :math:`C^{\\tau}` coefficient for NeuM
 
     Args:
         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]
@@ -553,7 +580,7 @@ def C_tau(rho):
 
 def C_delta_rho(rho):
     """
-    Calculates the energy functional :math:`C^{\\Delta * \\rho}` cooefficient
+    Calculates the energy functional :math:`C^{\\Delta * \\rho}` coefficient
     for NeuM
 
     Args:
@@ -567,7 +594,11 @@ def C_delta_rho(rho):
 
 def C0_rho(rho_n, rho_p):
     """
-    Calculates the energy functional :math:`C^{\\rho}_0` cooefficient
+    Calculates the energy functional :math:`C^{\\rho}_0` coefficient
+
+    .. math::
+
+    	 C^0_\\rho(\\rho) = \\frac{3}{8} t_0 + \\frac{3}{48} t_3 \\rho^\\alpha
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -581,7 +612,11 @@ def C0_rho(rho_n, rho_p):
 
 def C1_rho(rho_n, rho_p):
     """
-    Calculates the energy functional :math:`C^{\\rho}_1` cooefficient
+    Calculates the energy functional :math:`C^{\\rho}_1` coefficient
+
+    .. math::
+
+        C^1_\\rho(\\rho) = -\\frac{1}{4} t_0 \\left(\\frac{1}{2} + x_0\\right) - \\frac{1}{24} t_3 \\left(\\frac{1}{2} + x_3 \\right) \\rho^\\alpha
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -595,7 +630,11 @@ def C1_rho(rho_n, rho_p):
 
 def C0_tau(rho_n, rho_p):
     """
-    Calculates the energy functional :math:`C^{\\tau}_0` cooefficient
+    Calculates the energy functional :math:`C^{\\tau}_0` coefficient
+
+    .. math::
+
+    	 C^0_\\tau(\\rho) &=  \\frac{3}{16} t_1 + \\frac{1}{4} t_2 \\left(\\frac{5}{4} + x_2\\right) + \\frac{3}{16} t_4 \\rho^\\beta + \\frac{1}{4} t_5 \\left(\\frac{5}{4} + x_5 \\right) \\rho^\\gamma
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -610,7 +649,11 @@ def C0_tau(rho_n, rho_p):
 
 def C1_tau(rho_n, rho_p):
     """
-    Calculates the energy functional :math:`C^{\\tau}_1` cooefficient
+    Calculates the energy functional :math:`C^{\\tau}_1` coefficient
+
+    .. math::
+
+    	 C^1_\\tau(\\rho) = -\\frac{1}{8} t_1 \\left( \\frac{1}{2} + x_1 \\right) + \\frac{1}{8} t_2 \\left(\\frac{1}{2} + x_2\\right) - \\frac{1}{8} t_4 \\rho^\\beta \\left( \\frac{1}{2} + x_4 \\right)  + \\frac{1}{8} t_5 \\left(\\frac{1}{2} + x_5 \\right) \\rho^\\gamma
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -847,6 +890,18 @@ def v_pi(rho_n, rho_p, q):
     """
     Calculates pairing strength :math:`\\upsilon^{pi}_q` [fm :sup:`-3`] for neutrons
     or protons, for energies below 6.5 MeV.
+    Check :cite:`pecak2021properties` and earlier papers of Chamel.
+
+    .. math::
+
+        v^{\\pi q}(\\rho_n,\\rho_p)
+        = - \\frac{8 \\pi^2}{I_q(\\rho_n,\\rho_p) } \\left(\\frac{\\hbar^2}{2 M^*_q(\\rho_n,\\rho_p) }\\right)^{3/2}
+
+        I_q(\\rho_n,\\rho_p)
+        = \\sqrt{\\mu_q(\\rho_n,\\rho_p) } \\left( 2 \\ln{\\frac{2 \\mu_q(\\rho_n,\\rho_p) }{\\Delta^U_q(\\rho_n,\\rho_p) }} + \\Lambda\\left( \\frac{\\varepsilon_\\Lambda}{\\mu_q(\\rho_n,\\rho_p) } \\right) \\right)
+
+        \\Lambda(x)
+        = \\ln(16x) + 2\\sqrt{1+x} - 2 \\ln\\left({1+\\sqrt{1+x}}\\right) - 4.
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -873,6 +928,12 @@ def I(rho_n, rho_p, q):
     """
     Approximates the solution to the integral present in the original
     :math:`\\nu^{\\pi}` formula for single-particle energies below 6.5 MeV.
+    Check :cite:`pecak2021properties` and earlier papers of Chamel.
+
+    .. math::
+
+        I_q(\\rho_n,\\rho_p)
+        = \\sqrt{\\mu_q(\\rho_n,\\rho_p) } \\left( 2 \\ln{\\frac{2 \\mu_q(\\rho_n,\\rho_p) }{\\Delta^U_q(\\rho_n,\\rho_p) }} + \\Lambda\\left( \\frac{\\varepsilon_\\Lambda}{\\mu_q(\\rho_n,\\rho_p) } \\right) \\right)
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -907,6 +968,12 @@ def Lambda(x):
     # Equation 16 from Phys Rev C 104
     """
     Function :math:`\\Lambda` used in :func:`I`.
+    Check :cite:`pecak2021properties` and earlier papers of Chamel.
+
+    .. math::
+
+        \\Lambda(x)
+        = \\ln(16x) + 2\\sqrt{1+x} - 2 \\ln\\left({1+\\sqrt{1+x}}\\right) - 4.
 
     Args:
         x (float): variable
@@ -924,11 +991,18 @@ def Lambda(x):
     Lambda[j] = np.log(16. * x) + 2. * np.sqrt(1. + x) - 2. * np.log(1. + np.sqrt(1. + x)) - 4.
     return Lambda
 
+
+
+
 def mu_q(rho_n, rho_p, q):
 # Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
     """
     Calculates the chemical potential :math:`\\mu` defined with the wavevector
-    :math:`k_F`.
+    :math:`k_F` :cite:`chamel2009pairing`.
+
+    .. math::
+
+        \\mu_q = \\frac{\\hbar^2 k_F^2}{2M_q}
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components

@@ -1,6 +1,6 @@
 Physics
 =======
-Here you can find a brief introduction to the physics of neutron stars. 
+Here you can find a brief introduction to the physics of neutron stars.
 
 :math:`E=mc^2`
 
@@ -37,6 +37,9 @@ is to **outer crust** and **inner crust**.
 
 Pairing S
 ---------
+Make plots here. Descibe what is going on.
+
+
 
 Pairing P
 ---------
