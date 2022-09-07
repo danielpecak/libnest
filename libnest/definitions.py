@@ -72,9 +72,6 @@ def rho2tau(rho):
     Returns kinetic density :math:`\\tau` for uniform Fermi system of density
     :math:`\\rho`.
 
-    .. todo::
-        formula
-
     .. math::
         \\tau = \\frac{3}{5} \\left(3 \\pi\\right)^{2/3} \\rho^{5/3}
 
@@ -90,6 +87,12 @@ def rhoEta(rho_n, rho_p):
     """
     Returns total density :math:`\\rho` and difference :math:`\\eta` of
     densities from neutron and proton densities.
+
+    .. math::
+
+        \\rho = \\rho_n + \\rho_p
+
+        \\eta = \\rho_n - \\rho_p
 
     .. todo::
         Check if I should return rho_n-rho_p OR rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
@@ -110,6 +113,10 @@ def vsf(r):
     """
     Calculates the velocity based on gradient of the pairing field gradient.
 
+    .. math::
+
+        v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}
+
     Args:
         r (float): distance from the center of a vortex in femtometers [fm]
 
@@ -126,6 +133,7 @@ def vLandau(delta,kF):
     excited.
 
     .. math::
+
         v_L = \\frac{\\Delta}{\\hbar k_F} c
 
     Args:
@@ -159,6 +167,10 @@ def superfluidFraction(j,rho,vsf):
     """
     Returns superfluid fraction: how much of the matter is superfluid.
 
+    .. math::
+
+        \\eta_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{\\bm j}{\\rho} \\frac{1}{v_\\mathrm{sf}}
+
     Args:
         rho (float): density :math:`\\rho` [fm :sup:`-3`]
         j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]
@@ -175,13 +187,17 @@ def vsf_NV(B,vsf,A):
     However it is adjusted to the entrainment effects (definition by Nicolas Chamel
     Valentin Allard).
 
+    .. math::
+
+        v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{\\bm A}{M}
+
     Args:
         B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]
         vsf (float):  :math:`v_{\\mathrm{sf}}` [c]
         A (float): mean field potential coming from current variation A [MeV fm]
 
     Returns:
-        float: velocity :math:`v_{\\mathrm{SF NV}}` in units of percentage of speed of light [c]
+        float: velocity :math:`v_\\mathrm{SF}^{NV}` in units of percentage of speed of light [c]
     """
     return units.hbar22M0/B*vsf + units.VUNIT*A/units.HBARC
 
@@ -190,6 +206,10 @@ def v_NV(B,j,rho,A):
     Returns the velocity (mass velocity). It is adjusted to the entrainment
     effects (definition by Nicolas Chamel Valentin Allard).
 
+    .. math::
+
+        v^{\\mathrm{NV}} = \\hbar c \\frac{\\hbar^2}{2 M B} \\frac{\\bm j}{\\rho}  + \\frac{\\bm A}{M}
+
     Args:
         B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]
         j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]
@@ -197,7 +217,7 @@ def v_NV(B,j,rho,A):
         A (float): mean field potential coming from current variation A [MeV fm]
 
     Returns:
-        float: mass velocity :math:`v_{\\mathrm{NV}}` in units of percentage of speed of light [c]     
+        float: mass velocity :math:`v_{\\mathrm{NV}}` in units of percentage of speed of light [c]
     """
     return units.VUNIT*(units.hbar22M0/B*j/rho + A/units.HBARC)
 
