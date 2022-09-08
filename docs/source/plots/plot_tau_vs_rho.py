@@ -17,7 +17,7 @@ else:
     sys.exit("Specify the path for the image!")
 
 rho = np.linspace(0., 1., 100)
-    
+
 tau = libnest.definitions.rho2tau(rho)
 
 plt.figure()
