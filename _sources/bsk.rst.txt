@@ -8,6 +8,12 @@ regrouped by topic:
 
 Pairing
 ~~~~~~~
+.. image:: _static/pairing_vs_kf.png
+  :width: 48 %
+.. image:: _static/pairing_vs_rho.png
+  :width: 48 %
+
+
 * :func:`.neutron_pairing_field`
 * :func:`.symmetric_pairing_field`
 * :func:`.neutron_ref_pairing_field`
@@ -45,7 +51,7 @@ Mean field
 Density energy functional
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 See also:
-  * :func:`.epsilon_np`
+  * :func:`bsk.epsilon_np`
   * :func:`.epsilon_rho_np`
   * :func:`.epsilon_tau_np`
   * :func:`.epsilon_delta_rho_np`
@@ -54,6 +60,10 @@ See also:
 
 Auxiliary
 ~~~~~~~~~
+  .. image:: _static/Cs_vs_rho.png
+    :width: 60 %
+    :align: right
+
   * :func:`.C0_rho`
   * :func:`.C1_rho`
   * :func:`.C0_tau`
