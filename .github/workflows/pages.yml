@@ -16,6 +16,7 @@ jobs:
       with:
         documentation_path: './docs/source'
         target_path: './docs/build/html'
+        sphinx_version: '5.0.2'
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
