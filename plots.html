@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module: plots &mdash; libNeST 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial" href="tutorial.html" />
+    <link rel="prev" title="Module: IO" href="io.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instalation.html">Instalation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Other</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsk.html">Module:BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module: plots</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plots</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Module: plots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/plots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-plots">
+<h1>Module: plots<a class="headerlink" href="#module-plots" title="Permalink to this heading"></a></h1>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Describe properties</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Give references</p>
+</div>
+<span class="target" id="module-libnest.plots"></span><p>plots</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.epsilon_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">epsilon_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.epsilon_np" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the energy functional <span class="math">\epsilon</span> [MeV fm <sup>-3</sup>] against
+:math`rho`, the sum of proton and neutron of densities, <span class="math">\rho_p</span>
+and <span class="math">\rho_n</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n</strong> (<em>float</em>) – neutron density gradient <span class="math">\nabla \rho</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho_grad_p</strong> (<em>float</em>) – proton density gradient <span class="math">\nabla \rho</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau_n</strong> (<em>float</em>) – kinetic density <span class="math">\tau</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>tau_n</strong> – kinetic density <span class="math">\tau</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>jsum2</strong> (<em>float</em>) – sum of momentum density/current vectors <span class="math">j</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>jdiff2</strong> (<em>float</em>) – difference of momentum density/current vectors <span class="math">j</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_n</strong> (<em>float</em>) – neutron anomalous density <span class="math">\nu</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_p</strong> (<em>float</em>) – proton anomalous density <span class="math">\nu</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>kappa_n</strong> (<em>float</em>) – </p></li>
+<li><p><strong>kappa_p</strong> (<em>float</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.epsilon_test">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">epsilon_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.epsilon_test" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the energy density functional from bsk_functional_full code (for testing).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n</strong> (<em>float</em>) – neutron density gradient <span class="math">\nabla \rho</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho_grad_p</strong> (<em>float</em>) – proton density gradient <span class="math">\nabla \rho</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau_n</strong> (<em>float</em>) – kinetic density <span class="math">\tau</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>tau_n</strong> – kinetic density <span class="math">\tau</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>jsum2</strong> (<em>float</em>) – sum of momentum density/current vectors <span class="math">j</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>jdiff2</strong> (<em>float</em>) – difference of momentum density/current vectors <span class="math">j</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_B_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_B_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_B_q" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the mean field potential (from variation over kinetic density,
+or effective mass), <span class="math">B_{q}</span> [MeV fm <sup>2</sup>], in matter of
+density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton and neutron
+densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (neutron ‘n’ or proton ‘p’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">B_q()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_U_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_U_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_U_q" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the mean field potential (from variation over density <span class="math">\rho</span>),
+<span class="math">U_{q}</span> [MeV] in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span>
+is the sum of proton and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (neutron ‘n’ or proton ‘p’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">U_q()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_effective_mass_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_effective_mass_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_effective_mass_n" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the effective mass of neutron, <span class="math">M_{n}^{*} / M</span> [MeV] in matter of
+density <span class="math">\rho</span>. <span class="math">\rho</span> is the sum of proton and neutron densities,
+<span class="math">\rho_p</span> and <span class="math">\rho_n</span> respectively, and <span class="math">M</span> is the sum
+of neutron and proton masses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">effMn()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_effective_mass_p">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_effective_mass_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_effective_mass_p" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the effective mass of proton, <span class="math">M_{p}^{*}/ M</span> [MeV] in matter of
+density <span class="math">\rho</span>. <span class="math">\rho</span> is the sum of proton and neutron densities,
+<span class="math">\rho_p</span> and <span class="math">\rho_n</span> respectively, and <span class="math">M</span> is the sum
+of neutron and proton masses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">effMp()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_energy_per_nucleon">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_energy_per_nucleon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_energy_per_nucleon" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the energy per nucleon for uniform matter of density <span class="math">\rho</span>,
+the sum of proton and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>
+respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_energy_per_nucleon_both">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_energy_per_nucleon_both</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_energy_per_nucleon_both" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the energy per nucleon for symmetric uniform matter and neutron
+uniform matter of density <span class="math">\rho</span>, which is the sum of proton and
+neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the energy density <span class="math">\epsilon</span> [MeV fm <sup>-3</sup>]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad</strong> (<em>float</em>) – particle density gradient <span class="math">\nabla \rho</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau</strong> (<em>float</em>) – kinetic density <span class="math">\tau</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>j</strong> (<em>float</em>) – momentum density/current <span class="math">j</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu</strong> (<em>float</em>) – anomalous density <span class="math">\nu</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+<li><p><strong>kappa</strong> (<em>float</em>) – what is kappa? (no Eq.9 in Ref.41)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_delta">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_delta" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">M_v^*</span> [MeV]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_delta_rho_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_delta_rho_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_delta_rho_np" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">M_v^*</span> [MeV]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_rho_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_rho_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_rho_np" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">M_v^*</span> [MeV]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_tau">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_tau" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the energy density <span class="math">\epsilon</span> [MeV fm <sup>-3</sup>] in neutron matter,
+related to the density-dependent effective mass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_tau_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_tau_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_tau_np" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">M_v^*</span> [MeV]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_isoscalarM">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_isoscalarM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_isoscalarM" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the isoscalar effective mass, <span class="math">M_s^*</span> [MeV]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">isoscalarM()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_isovectorM">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_isovectorM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_isovectorM" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">M_v^*</span> [MeV]
+in matter of density <span class="math">\rho</span>, where <span class="math">\rho</span> is the sum of proton
+and neutron densities, <span class="math">\rho_p</span> and <span class="math">\rho_n</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">isovectorM()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_pairing_field_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_pairing_field_n" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the pairing field <span class="math">\Delta</span> [MeV] for neutrons in matter of
+density <span class="math">\rho</span>, the sum of proton and neutron densities,
+<span class="math">\rho_p</span> and <span class="math">\rho_n</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_pairing_field_p">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_pairing_field_p" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the pairing field <span class="math">\Delta</span> [MeV] for protons in matter of
+density <span class="math">\rho</span>, the sum of proton and neutron densities,
+<span class="math">\rho_p</span> and <span class="math">\rho_n</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></p>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="io.html" class="btn btn-neutral float-left" title="Module: IO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Daniel Pęcak, Aleksandra Bochenek.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
