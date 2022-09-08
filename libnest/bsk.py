@@ -117,7 +117,7 @@ import numpy as np
 from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
-from libnest.definitions import rho2kf, rhoEta
+from libnest.definitions import rho2kf, rhoEta, rho2tau
 
 T0   =-2302.01     # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
 T1   =762.99       # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]
@@ -359,54 +359,48 @@ def energy_per_nucleon(rho_n, rho_p):
 
 
 def pressure_n(rho_n):
-    const = (3.*np.pi**2)**(2./3.)
-    return (2./5.*HBAR2M_n*const*2./3*rho_n**(-1./3.)
-            + 1./4.*T0*(1.-X0)
-            + 1./8.*T1*(1.-X1)*const*rho_n**(2./3.)
-            + 3./8.*(T2+T2X2)*const*rho_n**(2./3.)
-            + 1./24.*T3*(1.-X3)*(ALPHA+1)*rho_n**(ALPHA)
-            + 3./40.*T4*(1.-X4)*(BETA+5./3.)*const*rho_n**(BETA+2./3.)
-            + 9./40.*T5*(1.+X5)*(GAMMA+5./3.)*const*rho_n**(GAMMA+2./3.)
-            ) * rho_n**2
+    """
+    Pressure :math:`P` in neutron matter, calculated using the derivative of the
+    :func:`energy_per_nucleon` function.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
-def derivative_epsilon_rho_n(rho):
-    const = (3.*np.pi**2)**(2./3.)
-    return (MN + HBAR2M_n*const*rho*(2./3.)
-            + 1./2.*T0*(1.-X0)*rho
-            + 1./5.*T1*(1.-X1)*const*rho**(5./3.)
-            + 3./5.*(T2+T2X2)*const*rho**(5./3.)
-            + 1./24.*T3*(1.-X3)*(ALPHA+2)*rho**(ALPHA+1)
-            + 3./40.*T4*(1.-X4)*const*(BETA+8./3.)*rho**(BETA+5./3.)
-            + 9./40.*T5*(1.+X5)*(GAMMA+8./3.)*rho**(GAMMA+5./3.)
-            )
+    Returns:
+        float: Pressure :math:`P` 
+    
+    See also:
+        :func:`energy_per_nucleon`
+    """
+    derivative = np.gradient(energy_per_nucleon(rho_n, 0.), rho_n)
+    return rho_n**2*derivative
 
-def derivative_pressure_rho_n(rho):
-    const = (3.*np.pi**2)**(2./3.)
-    return (2./3.*HBAR2M_n*const*rho**(2./3.)
-            + 0.5*T0*(1.-X0)*rho
-            + 1./3.*T1*(1.-X1)*const*rho**(5./3.)
-            + (T2+T2X2)*const*rho**(5./3.)
-            + 1./24.*T3*(1.-X3)*(ALPHA+1)*(ALPHA+2)*rho**(ALPHA+1)
-            + 3./40.*T4*(1.-X4)*const*(BETA+5./3.)*(BETA+8./3.)*rho**(BETA+5./3.)
-            + 9./40.*T5*(1.+X5)*const*(GAMMA+5./3.)*(GAMMA+8./3.)*rho**(GAMMA+5./3.)
-            )
+def derivative_pressure_n(rho_n):
+    """
+    Derivative of pressure :math:`P` with respect to density, for neutron matter.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: Derivative of :math:`P` 
+    """
+    return np.gradient(pressure_n(rho_n), rho_n)
 
 def speed_of_sound_n(rho_n):
     """
-    as a percentage of speed of light
+    Velocity of sound in neutron matter, dependent on total matter density equal
+    to neuton density :math:`\\rho_n`, given as a percentage of speed of light.
 
-    Parameters
-    ----------
-    rho : TYPE
-        DESCRIPTION.
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
-    Returns
-    -------
-    None.
+    Returns:
+        float: velocity of sound :math:`v_s` 
 
     """
-    return np.sqrt(derivative_pressure_rho_n(rho_n)/derivative_epsilon_rho_n(rho_n))*100
-
+    return np.sqrt(derivative_pressure_n(rho_n)/derivative_epsilon_n(rho_n))*100
+    
 # ================================
 #       Effective masses
 # ================================

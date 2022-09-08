@@ -320,6 +320,131 @@ def plot_isovectorM(rho_n, rho_p):
     #plt.legend()
     plt.show()
 
+# ================================
+#      Velocities & pressure
+# ================================
+
+def plot_pressure_n(rho_n):
+    """
+    Plots pressure :math:`P` inside NeuM of density :math:`rho_n` in units of
+    percentage of speed of sound.
+    
+    Args:
+        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+    
+    Returns:
+        None
+
+    See also:
+        :func:`pressure_n`
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    P = libnest.bsk.pressure_n(rho_n)
+    plt.title(r"Pressure inside NeuM $P_{NeuM}$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$P_{NeuM} [MeV {fm}^{-3}]$", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, P, linewidth=2.0)
+    plt.show()
+    
+def plot_speed_of_sound_n(rho_n):
+    """
+    Plots the speed of sound for NeuM of density :math:`rho_n` in units of
+    percentage of speed of sound.
+    
+    Args:
+        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+    
+    Returns:
+        None
+
+    See also:
+        :func:`speed_of_sound_n`
+    """
+    rho = np.linspace(0., 1., 100)
+    rho_n = rho_n * rho
+    v = libnest.bsk.speed_of_sound_n(rho_n)/100
+    plt.title(r"Speed of sound $v_{s}$ inside NeuM", fontsize=15)
+    plt.xlim(0., 0.08)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$ v_{s} $ [% c]", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho_n, v, linewidth=2.0)
+    plt.show()
+
+def plot_v_landau(delta, rho):
+    """
+    
+
+    Parameters
+    ----------
+    rho_n : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+    rho = np.linspace(0., 1., 100) * rho
+    delta = np.linspace(0., 1., 100) * delta
+    kf = libnest.definitions.rho2kf(rho)
+    v = libnest.definitions.vLandau(delta, kf)
+    plt.title(r"Landau velocity $v_{Landau}$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$ v_{Landau} $ [% c]", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, v, linewidth=2.0)
+    plt.show()
+
+def plot_v_critical(delta, rho):
+    """
+    Parameters
+    ----------
+    rho_n : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+    rho = np.linspace(0., 1., 100) * rho
+    delta = np.linspace(0., 1., 100) * delta
+    kf = libnest.definitions.rho2kf(rho)
+    v = libnest.definitions.vcritical(delta, kf)
+    plt.title(r"Critical velocity $v_{c}$", fontsize=15)
+    plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+    plt.ylabel(r"$ v_{c} $ [% c]", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(rho, v, linewidth=2.0)
+    plt.show()
+
+def plot_v_sf(r):
+    """
+    Parameters
+    ----------
+    rho_n : TYPE
+        DESCRIPTION.
+
+    Returns
+    -------
+    None.
+
+    """
+    v = libnest.definitions.vcritical(r)
+    plt.title(r"Velocity of sound inside NeuM $v_{s}$", fontsize=15)
+    plt.xlabel(r"$r [fm]$", fontsize=10)
+    plt.ylabel(r"$ v_{sf} $ [% c]", fontsize=10)
+    plt.xticks(fontsize=10)
+    plt.plot(r, v, linewidth=2.0)
+    plt.show()
+
+
+# ================================
+#        Energy densities
+# ================================
     
 def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
     """    

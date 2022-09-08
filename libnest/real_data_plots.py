@@ -874,6 +874,7 @@ def plot_landau_velocity_temp(particles_nr):
     path_filenames_density = [TXT_PATH + x for x in filenames_density]
     v_max = []
     temperature = []
+    v_sound_mean = []
     
     for file_delta, file_density in zip(path_filenames_delta, path_filenames_density):
         if file_check(file_delta) & file_check(file_density):
@@ -892,11 +893,12 @@ def plot_landau_velocity_temp(particles_nr):
             # kf = libnest.definitions.rho2kf(data_rho[:,2])
             # v_landau = libnest.definitions.vLandau(delta, kf)
         
-            i, = np.where(np.logical_and(r>=-60, r<=60))
+            i, = np.where(np.logical_and(r>=40, r<=60))
             delta, arg = pairing_field(data_delta[i,2], data_delta[i,3])
             kf = libnest.definitions.rho2kf(data_rho[i,2])
             v_landau = libnest.definitions.vLandau(delta, kf)
-            # v_sound = libnest.bsk.speed_of_sound_n(data_rho[i,2])
+            v_sound = libnest.bsk.speed_of_sound_n(data_rho[i,2])
+            v_sound_mean.append(np.nanmean(v_sound))
 
             v_max.append(np.max(v_landau))
             temperature.append(float(file_delta[-16:-12]))
@@ -910,6 +912,7 @@ def plot_landau_velocity_temp(particles_nr):
     path_filenames_density_uniform = [TXT_PATH_UNIFORM + x for x in filenames_density_uniform]
     v_max_uniform = []
     temperature_uniform = []
+    # v_sound_uniform = []
 
     for file_delta, file_density in zip(path_filenames_delta_uniform, path_filenames_density_uniform):
         if file_check(file_delta) & file_check(file_density):
@@ -922,11 +925,11 @@ def plot_landau_velocity_temp(particles_nr):
             data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
             
             r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
-            i, = np.where(np.logical_and(r>=-60, r<=60))
+            i, = np.where(np.logical_and(r>=40, r<=60))
             delta, arg = pairing_field(data_delta[i,2], data_delta[i,3])
             kf = libnest.definitions.rho2kf(data_rho[i,2])
             v_landau = libnest.definitions.vLandau(delta, kf)
-
+            
             v_max_uniform.append(np.max(v_landau))
             temperature_uniform.append(float(file_delta[-16:-12]))
         else:
@@ -938,6 +941,7 @@ def plot_landau_velocity_temp(particles_nr):
     plt.ylabel(r"$v_{Landau}$ [% c]", fontsize=10)
     plt.plot(temperature, v_max, '-o', label="vortex")
     plt.plot(temperature_uniform, v_max_uniform, '-o', label="uniform")
+    plt.plot(temperature, v_sound_mean, linestyle = 'dashed', label="speed of sound")
     plt.legend(ncol=1)
     plt.show()
 
@@ -955,17 +959,18 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
         kf = libnest.definitions.rho2kf(data_rho[:,2])
         v_landau = libnest.definitions.vLandau(delta, kf)
         v_critical = libnest.definitions.vcritical(delta, kf)
-        v_sound = libnest.bsk.speed_of_sound_n(data_rho[:,2])
+        # v_sound = libnest.bsk.speed_of_sound_n(data_rho[:,2])
         
         plt.figure()
         # plt.xlim(-90, 90)
+        # plt.ylim(0., 3.)
         plt.title(r"Various velocities vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
         plt.ylabel(r"% speed of light [% c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_landau, 0.5, label="Landau")
         plt.scatter(r, v_critical, 0.5, label="Critical")
-        plt.scatter(r, v_sound, 0.5, label='speed of sound')
+        # plt.scatter(r, v_sound, 0.5, label='speed of sound')
         plt.legend(loc="upper right", markerscale=5)
         plt.show()
     else:
@@ -979,14 +984,12 @@ def plot_speed_of_sound(filename_density):
 
         r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
         v_sound = libnest.bsk.speed_of_sound_n(data_rho[:,2])
-        dev_p = libnest.bsk.derivative_pressure_rho_n(data_rho[:,2])
-        p = libnest.bsk.pressure_n(data_rho[:,2])
-        dev_e = libnest.bsk.derivative_epsilon_rho_n(data_rho[:,2])
         
         plt.figure()
-        plt.title(r"$v_{cs}$ vs radius", fontsize=15)
+        # plt.ylim(0., 3.)
+        plt.title(r"$v_{s}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{cs} $ [c]", fontsize=10)
+        plt.ylabel(r"$ v_{s} $ [% c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_sound, 0.5)
         plt.legend(loc="upper right", markerscale=5)

@@ -11,7 +11,7 @@ if len(sys.argv) == 2:
 else:
     sys.exit("Specify the path for the image!")
 
-rho = np.linspace(0., 0.2, 10000)
+rho = np.linspace(0., 0.05, 10000)
 
 rho_n = rho #only for pure neutron matter
 rho_p = 0
