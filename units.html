@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Module: Units &mdash; libNeST 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -89,7 +88,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-units">
+  <div class="section" id="module-units">
 <h1>Module: Units<a class="headerlink" href="#module-units" title="Permalink to this heading"></a></h1>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
@@ -99,11 +98,11 @@
 <p class="admonition-title">Todo</p>
 <p>Give references</p>
 </div>
-<span class="target" id="module-libnest.units"></span><section id="units-py">
+<span class="target" id="module-libnest.units"></span><div class="section" id="units-py">
 <h2>units.py<a class="headerlink" href="#units-py" title="Permalink to this heading"></a></h2>
 <p>Module for converting the density units for nuclear matter in the ranges typical
 for neutron stars.</p>
-<section id="numerical">
+<div class="section" id="numerical">
 <h3>Numerical<a class="headerlink" href="#numerical" title="Permalink to this heading"></a></h3>
 <dl class="simple">
 <dt>Constants for dealing with extreme numerics:</dt><dd><ul class="simple">
@@ -118,8 +117,8 @@ for neutron stars.</p>
 <p><code class="docutils literal notranslate"><span class="pre">DENSEPSILON</span></code> is used whenever division by density has to be applied.
 Those cases usually will give zero in proper analytical limit.</p>
 </div>
-</section>
-<section id="physical">
+</div>
+<div class="section" id="physical">
 <h3>Physical<a class="headerlink" href="#physical" title="Permalink to this heading"></a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -150,7 +149,7 @@ Those cases usually will give zero in proper analytical limit.</p>
 <tr class="row-even"><td><p>HBARC</p></td>
 <td><p>197.3269804</p></td>
 <td><p>[MeV fm]</p></td>
-<td><p><span class="math">\hbar c</span></p></td>
+<td><p><img class="math" src="_images/math/d6a55cd2bf65e64f7ed2b9d82174c4c5d414c738.png" alt="\hbar c"/></p></td>
 </tr>
 <tr class="row-odd"><td><p>MN</p></td>
 <td><p>939.5654205</p></td>
@@ -164,12 +163,12 @@ Those cases usually will give zero in proper analytical limit.</p>
 </tr>
 <tr class="row-odd"><td><p>HBAR2M_n</p></td>
 <td><p>20.72124837</p></td>
-<td><p>[MeV*fm <span class="math">^2</span>]</p></td>
+<td><p>[MeV*fm <img class="math" src="_images/math/d30d71b3148d5e1e543690c4af182b4640bcce2e.png" alt="^2"/>]</p></td>
 <td><p>0.5*hbar^2/MN</p></td>
 </tr>
 <tr class="row-even"><td><p>HBAR2M_p</p></td>
 <td><p>20.74981092</p></td>
-<td><p>[MeV*fm <span class="math">^2</span>]</p></td>
+<td><p>[MeV*fm <img class="math" src="_images/math/d30d71b3148d5e1e543690c4af182b4640bcce2e.png" alt="^2"/>]</p></td>
 <td><p>0.5*hbar^2/MP</p></td>
 </tr>
 </tbody>
@@ -188,10 +187,10 @@ Those cases usually will give zero in proper analytical limit.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>temp</strong> (<em>float</em>) – temperature <span class="math">T</span> [K]</p>
+<dd class="field-odd"><p><strong>temp</strong> (<em>float</em>) – temperature <img class="math" src="_images/math/e8dea8254118f111b5fb20895b03528c17566f06.png" alt="T"/> [K]</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>temperature <span class="math">T</span> [MeV]</p>
+<dd class="field-even"><p>temperature <img class="math" src="_images/math/e8dea8254118f111b5fb20895b03528c17566f06.png" alt="T"/> [MeV]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -213,10 +212,10 @@ Those cases usually will give zero in proper analytical limit.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>temp</strong> (<em>float</em>) – temperature <span class="math">T</span> [MeV]</p>
+<dd class="field-odd"><p><strong>temp</strong> (<em>float</em>) – temperature <img class="math" src="_images/math/e8dea8254118f111b5fb20895b03528c17566f06.png" alt="T"/> [MeV]</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>temperature <span class="math">T</span> [K]</p>
+<dd class="field-even"><p>temperature <img class="math" src="_images/math/e8dea8254118f111b5fb20895b03528c17566f06.png" alt="T"/> [K]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -238,10 +237,10 @@ Those cases usually will give zero in proper analytical limit.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>temp</strong> (<em>rho</em>) – density <span class="math">\rho</span> [1/fm^3]</p>
+<dd class="field-odd"><p><strong>temp</strong> (<em>rho</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [1/fm^3]</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>rho <span class="math">\rho</span> [g/cm^3]</p>
+<dd class="field-even"><p>rho <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [g/cm^3]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -263,10 +262,10 @@ Those cases usually will give zero in proper analytical limit.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>temp</strong> (<em>rho</em>) – density <span class="math">\rho</span> [g/cm^3]</p>
+<dd class="field-odd"><p><strong>temp</strong> (<em>rho</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [g/cm^3]</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>rho <span class="math">\rho</span> [1/fm^3]</p>
+<dd class="field-even"><p>rho <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [1/fm^3]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -278,9 +277,9 @@ Those cases usually will give zero in proper analytical limit.</p>
 </div>
 </dd></dl>
 
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

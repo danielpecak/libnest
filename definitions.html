@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Module: Definitions &mdash; libNeST 0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -85,7 +84,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-definitions">
+  <div class="section" id="module-definitions">
 <h1>Module: Definitions<a class="headerlink" href="#module-definitions" title="Permalink to this heading"></a></h1>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
@@ -95,7 +94,7 @@
 <p class="admonition-title">Todo</p>
 <p>Give references</p>
 </div>
-<span class="target" id="module-libnest.definitions"></span><section id="definitions-py">
+<span class="target" id="module-libnest.definitions"></span><div class="section" id="definitions-py">
 <h2>definitions.py<a class="headerlink" href="#definitions-py" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.definitions.kf2rho">
@@ -103,16 +102,16 @@
 <dd><p>Returns rho based on wavevector kF.</p>
 <p>It uses the relation for a uniform Fermi system and yields:</p>
 <div class="math">
-<p><span class="math">\rho = \frac{k_F^3}{3 \pi^2}.</span></p>
+<p><img src="_images/math/9b4ba5ec1e17798844d05178434c43bcd70407d1.png" alt="\rho = \frac{k_F^3}{3 \pi^2}."/></p>
 </div><p>If we have a two-component mixture of protons and neutrons, both
-having two spin components (up and down), then <span class="math">\rho</span> states
+having two spin components (up and down), then <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> states
 for the density of one isospin, and one spin component only.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>kF</strong> (<em>float</em>) – density <span class="math">\rho</span> for a single component</p>
+<dd class="field-odd"><p><strong>kF</strong> (<em>float</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> for a single component</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>wavevector <span class="math">k_F</span> [fm <sup>-1</sup>]</p>
+<dd class="field-even"><p>wavevector <img class="math" src="_images/math/ce42c76e1e389547530be1fc7618d5e4b6559586.png" alt="k_F"/> [fm <sup>-1</sup>]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -130,16 +129,16 @@ for the density of one isospin, and one spin component only.</p>
 <dd><p>Returns wavevector kF based on density rho.</p>
 <p>It uses the relation for a uniform Fermi system and yields:</p>
 <div class="math">
-<p><span class="math">k_F = (3 \pi^2 \rho )^{1/3}.</span></p>
+<p><img src="_images/math/02c5df47931fbc82efd1d02d01dc3b6f0b0eba88.png" alt="k_F = (3 \pi^2 \rho )^{1/3}."/></p>
 </div><p>If we have a two-component mixture of protons and neutrons, both
-having two spin components (up and down), then <span class="math">\rho</span> states
+having two spin components (up and down), then <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> states
 for the density of one isospin, and one spin component only.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\rho</span> for a single component</p>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> for a single component</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>wavevector <span class="math">k_F</span> [fm <sup>-1</sup>]</p>
+<dd class="field-even"><p>wavevector <img class="math" src="_images/math/ce42c76e1e389547530be1fc7618d5e4b6559586.png" alt="k_F"/> [fm <sup>-1</sup>]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -154,16 +153,16 @@ for the density of one isospin, and one spin component only.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.definitions.rho2tau">
 <span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">rho2tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.rho2tau" title="Permalink to this definition"></a></dt>
-<dd><p>Returns kinetic density <span class="math">\tau</span> for uniform Fermi system of density
-<span class="math">\rho</span>.</p>
+<dd><p>Returns kinetic density <img class="math" src="_images/math/914b2d4b6659b86d3153d5510839dfb254dfc8a3.png" alt="\tau"/> for uniform Fermi system of density
+<img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/>.</p>
 <div class="math">
-<p><span class="math">\tau = \frac{3}{5} \left(3 \pi\right)^{2/3} \rho^{5/3}</span></p>
+<p><img src="_images/math/086af3abdfa6073d1df3fb5b47567727280a781f.png" alt="\tau = \frac{3}{5} \left(3 \pi\right)^{2/3} \rho^{5/3}"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\rho</span> [fm <sup>-3</sup>] for a single component</p>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [fm <sup>-3</sup>] for a single component</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>kinetic density <span class="math">\tau</span> [fm <sup>-3</sup>]</p>
+<dd class="field-even"><p>kinetic density <img class="math" src="_images/math/914b2d4b6659b86d3153d5510839dfb254dfc8a3.png" alt="\tau"/> [fm <sup>-3</sup>]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -174,12 +173,12 @@ for the density of one isospin, and one spin component only.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.definitions.rhoEta">
 <span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">rhoEta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.rhoEta" title="Permalink to this definition"></a></dt>
-<dd><p>Returns total density <span class="math">\rho</span> and difference <span class="math">\eta</span> of
+<dd><p>Returns total density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> and difference <img class="math" src="_images/math/97db043c7cba573ac389b71add78b048077e8a13.png" alt="\eta"/> of
 densities from neutron and proton densities.</p>
 <div class="math">
-<p><span class="math">\rho = \rho_n + \rho_p
+<p><img src="_images/math/8ab97cf2d5d2ec5691fd03de5cd67276051bb166.png" alt="\rho = \rho_n + \rho_p
 
-\eta = \rho_n - \rho_p</span></p>
+\eta = \rho_n - \rho_p"/></p>
 </div><div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <p>Check if I should return rho_n-rho_p OR rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
@@ -188,13 +187,13 @@ densities from neutron and proton densities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\rho_n</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
-<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\rho_p</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <img class="math" src="_images/math/c1394609a2447379cb7ccb2cfc999bc5b712e585.png" alt="\rho_p"/> [fm <sup>-3</sup>]; sum of both spin components</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pair of total density <span class="math">\rho</span> [fm <sup>-3</sup>], and density difference
-<span class="math">\eta</span> [fm <sup>-3</sup>]</p>
+<dd class="field-even"><p>pair of total density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [fm <sup>-3</sup>], and density difference
+<img class="math" src="_images/math/97db043c7cba573ac389b71add78b048077e8a13.png" alt="\eta"/> [fm <sup>-3</sup>]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -207,13 +206,13 @@ densities from neutron and proton densities.</p>
 <span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">superfluidFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vsf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.superfluidFraction" title="Permalink to this definition"></a></dt>
 <dd><p>Returns superfluid fraction: how much of the matter is superfluid.</p>
 <div class="math">
-<p><span class="math">\eta_\mathrm{sf} = \frac{\hbar c}{M} \frac{\bm j}{\rho} \frac{1}{v_\mathrm{sf}}</span></p>
+<p><img src="_images/math/fb8cd63f454c0eecdb6cdc4371c4d8624605d2ab.png" alt="\eta_\mathrm{sf} = \frac{\hbar c}{M} \frac{\bm j}{\rho} \frac{1}{v_\mathrm{sf}}"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\rho</span> [fm <sup>-3</sup>]</p></li>
-<li><p><strong>j</strong> (<em>float</em>) – a three-component current vector <span class="math">\vec j</span> [fm <sup>-4</sup>]</p></li>
-<li><p><strong>vsf</strong> (<em>float</em>) – <span class="math">v_{\mathrm{sf}}</span> [c]</p></li>
+<li><p><strong>rho</strong> (<em>float</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>j</strong> (<em>float</em>) – a three-component current vector <img class="math" src="_images/math/0b6c75d5120483cece5cf8cfb4d59bea12bf03f2.png" alt="\vec j"/> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>vsf</strong> (<em>float</em>) – <img class="math" src="_images/math/945fa161566ae7faf855a08f00c472fdd90544bc.png" alt="v_{\mathrm{sf}}"/> [c]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -232,16 +231,16 @@ densities from neutron and proton densities.</p>
 <p>Landau velocity shows at which velocity the superfluid medium starts to be
 excited.</p>
 <div class="math">
-<p><span class="math">v_L = \frac{\Delta}{\hbar k_F} c</span></p>
+<p><img src="_images/math/663815e55759fa0ce4c2356cbf6d04ddf156e767.png" alt="v_L = \frac{\Delta}{\hbar k_F} c"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>delta</strong> (<em>float</em>) – <span class="math">\Delta</span> [MeV]</p></li>
-<li><p><strong>kF</strong> (<em>float</em>) – <span class="math">k_F</span> [MeV]</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – <img class="math" src="_images/math/6450616b75212cb568e905db49efd0c3dd584648.png" alt="\Delta"/> [MeV]</p></li>
+<li><p><strong>kF</strong> (<em>float</em>) – <img class="math" src="_images/math/ce42c76e1e389547530be1fc7618d5e4b6559586.png" alt="k_F"/> [MeV]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Landau velocity <span class="math">v_L</span> in units of speed of light [c]</p>
+<dd class="field-even"><p>Landau velocity <img class="math" src="_images/math/80398418d631838a94149b98e6f84c075cf86eca.png" alt="v_L"/> in units of speed of light [c]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -255,18 +254,18 @@ excited.</p>
 <dd><p>Returns the velocity (mass velocity). It is adjusted to the entrainment
 effects (definition by Nicolas Chamel Valentin Allard).</p>
 <div class="math">
-<p><span class="math">v^{\mathrm{NV}} = \hbar c \frac{\hbar^2}{2 M B} \frac{\bm j}{\rho}  + \frac{\bm A}{M}</span></p>
+<p><img src="_images/math/c4ecfbf6f675716eb4e1476d833591c534d72371.png" alt="v^{\mathrm{NV}} = \hbar c \frac{\hbar^2}{2 M B} \frac{\bm j}{\rho}  + \frac{\bm A}{M}"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>B</strong> (<em>float</em>) – mean field potential coming from kinetic energy variation B [MeV fm <sup>2</sup>]</p></li>
-<li><p><strong>j</strong> (<em>float</em>) – a three-component current vector <span class="math">\vec j</span> [fm <sup>-4</sup>]</p></li>
-<li><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\rho</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>j</strong> (<em>float</em>) – a three-component current vector <img class="math" src="_images/math/0b6c75d5120483cece5cf8cfb4d59bea12bf03f2.png" alt="\vec j"/> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho</strong> (<em>float</em>) – density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582facea.png" alt="\rho"/> [fm <sup>-3</sup>]</p></li>
 <li><p><strong>A</strong> (<em>float</em>) – mean field potential coming from current variation A [MeV fm]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>mass velocity <span class="math">v_{\mathrm{NV}}</span> in units of percentage of speed of light [c]</p>
+<dd class="field-even"><p>mass velocity <img class="math" src="_images/math/4960a9bcdc72cccbd439684e8bb318aed412905e.png" alt="v_{\mathrm{NV}}"/> in units of percentage of speed of light [c]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -280,16 +279,16 @@ effects (definition by Nicolas Chamel Valentin Allard).</p>
 <dd><p>Returns critical velocity for superfluid.</p>
 <p>At this velocity the system is no longer superfluid.</p>
 <div class="math">
-<p><span class="math">v_L = e \frac{\Delta}{\hbar k_F} c</span></p>
+<p><img src="_images/math/078b48ac41f917376e9312a0888f080b28b41430.png" alt="v_L = e \frac{\Delta}{\hbar k_F} c"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>delta</strong> (<em>float</em>) – <span class="math">\Delta</span> [MeV]</p></li>
-<li><p><strong>kF</strong> (<em>float</em>) – <span class="math">k_F</span> [MeV]</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – <img class="math" src="_images/math/6450616b75212cb568e905db49efd0c3dd584648.png" alt="\Delta"/> [MeV]</p></li>
+<li><p><strong>kF</strong> (<em>float</em>) – <img class="math" src="_images/math/ce42c76e1e389547530be1fc7618d5e4b6559586.png" alt="k_F"/> [MeV]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Landau velocity <span class="math">v_c</span> in units of speed of light [c]</p>
+<dd class="field-even"><p>Landau velocity <img class="math" src="_images/math/74e38b6622eb19bdfb7062e139c090bae314d388.png" alt="v_c"/> in units of speed of light [c]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -302,7 +301,7 @@ effects (definition by Nicolas Chamel Valentin Allard).</p>
 <span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">vsf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.vsf" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates the velocity based on gradient of the pairing field gradient.</p>
 <div class="math">
-<p><span class="math">v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}</span></p>
+<p><img src="_images/math/61e3fdaf596f39e068d61f55507de0bc41850c96.png" alt="v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>r</strong> (<em>float</em>) – distance from the center of a vortex in femtometers [fm]</p>
@@ -323,17 +322,17 @@ effects (definition by Nicolas Chamel Valentin Allard).</p>
 However it is adjusted to the entrainment effects (definition by Nicolas Chamel
 Valentin Allard).</p>
 <div class="math">
-<p><span class="math">v_\mathrm{sf}^{NV} = \frac{\hbar^2}{2 M B}v_\mathrm{sf} + \frac{\bm A}{M}</span></p>
+<p><img src="_images/math/bfa3de8b0528c442f8adc035e966e2889332c89a.png" alt="v_\mathrm{sf}^{NV} = \frac{\hbar^2}{2 M B}v_\mathrm{sf} + \frac{\bm A}{M}"/></p>
 </div><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>B</strong> (<em>float</em>) – mean field potential coming from kinetic energy variation B [MeV fm <sup>2</sup>]</p></li>
-<li><p><strong>vsf</strong> (<em>float</em>) – <span class="math">v_{\mathrm{sf}}</span> [c]</p></li>
+<li><p><strong>vsf</strong> (<em>float</em>) – <img class="math" src="_images/math/945fa161566ae7faf855a08f00c472fdd90544bc.png" alt="v_{\mathrm{sf}}"/> [c]</p></li>
 <li><p><strong>A</strong> (<em>float</em>) – mean field potential coming from current variation A [MeV fm]</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>velocity <span class="math">v_\mathrm{SF}^{NV}</span> in units of percentage of speed of light [c]</p>
+<dd class="field-even"><p>velocity <img class="math" src="_images/math/ca4c537242e64e2424a24dfff7cd44c68281be7f.png" alt="v_\mathrm{SF}^{NV}"/> in units of percentage of speed of light [c]</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>float</p>
@@ -341,8 +340,8 @@ Valentin Allard).</p>
 </dl>
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
