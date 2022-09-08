@@ -470,6 +470,10 @@ def effMn(rho_n, rho_p):
     """
     Returns the effective mass of a neutron in nuclear medium.
 
+    .. math::
+
+        M_n^* = \\frac{\\hbar^2}{2 M_n} \\frac{1}{B_n(\\rho_n,\\rho_p)}
+
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
@@ -485,6 +489,10 @@ def effMn(rho_n, rho_p):
 def effMp(rho_n, rho_p):
     """
     Returns the effective mass of a proton in nuclear medium.
+
+    .. math::
+
+        M_p^* = \\frac{\\hbar^2}{2 M_p} \\frac{1}{B_p(\\rho_n,\\rho_p)}
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
