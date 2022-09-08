@@ -1,12 +1,1 @@
 Todo:
- * rho as a function of kF
- * tau as a function of kF
- * tau as a function of rho
- * vLandau as a function of kF
- * vLandau as a function of rho
- * Emg: minigap as a function of kF
- * Emg: minigap as a function of rho
-
-(everything for BOTH: symetric and neutron matter - SM, NeuM)
- * pairing as a function of rho
- * pairing as a function of kF
