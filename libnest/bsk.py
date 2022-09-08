@@ -291,7 +291,7 @@ def eF_n(kF):
     """
     return HBAR2M_n * kF**2
 
-def E_minigap_n(rho_n):
+def E_minigap_rho_n(rho_n):
     """
     .. todo::
         move to definitions
@@ -322,6 +322,22 @@ def E_minigap_n(rho_n):
     delta = neutron_ref_pairing_field(rho_n, 0.)
     return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
 
+def E_minigap_delta_n(delta, rho_n):
+    """
+    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
+    
+    Parameters
+        delta (float): pairing field for neutrons :math:`\\Delta_n` [fm :sup:`-3`]
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        
+    Returns
+        float: energy of minigap :math:`E_{mg}` [MeV]
+        
+    See also:
+        :func:`eF_n`
+    """
+    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
+    
 
 # ================================
 #        Thermodynamics

@@ -1021,45 +1021,53 @@ def plot_e_minigap(filename_density):
         sys.exit('# ERROR: Cannot access file')  
 
 def plot_e_minigap_temperature(particles_nr):
-    filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
-    path_filenames = [TXT_PATH + x for x in filenames]
+    filenames_density = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
+    path_filenames_density = [TXT_PATH + x for x in filenames_density]
+    filenames_delta = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
+    path_filenames_delta = [TXT_PATH + x for x in filenames_delta]
     e_max = []
     temperature = []
     
-    filenames_uniform = files_set_type('density', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
-    path_filenames_uniform = [TXT_PATH_UNIFORM + x for x in filenames_uniform]
+    filenames_density_uniform = files_set_type('density', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
+    path_filenames_density_uniform = [TXT_PATH_UNIFORM + x for x in filenames_density_uniform]
+    filenames_delta_uniform = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
+    path_filenames_delta_uniform = [TXT_PATH_UNIFORM + x for x in filenames_delta_uniform]
     e_max_uniform = []
     temperature_uniform = []
     
-    for file in path_filenames:
-        if file_check(file):
-            data = np.genfromtxt(file, delimiter=' ', comments='#')
-            data = data[~np.isnan(data).any(axis=1)]
+    for file_delta, file_density in zip(path_filenames_delta, path_filenames_density):
+        if file_check(file_delta) & file_check(file_density):
+            data_delta = np.genfromtxt(file_delta, dtype='float', delimiter=' ', comments='#')
+            data_delta = data_delta[~np.isnan(data_delta).any(axis=1)]
+            data_density = np.genfromtxt(file_density, delimiter=' ', comments='#')
+            data_density = data_density[~np.isnan(data_density).any(axis=1)]
             
-            r = cross_section_distance(data[:,0], data[:,1], 180)
+            r = cross_section_distance(data_density[:,0], data_density[:,1], 180)
             i, = np.where(np.logical_and(r>=40, r<=60))
-            e_mg = libnest.bsk.E_minigap_n(data[i,2])
+            e_mg = libnest.bsk.E_minigap_delta_n(data_delta[i,2], data_density[i,2])
             
             e_max.append(np.max(e_mg))
-            temperature.append(float(file[-18:-14]))
+            temperature.append(float(file_density[-18:-14]))
         else:
             sys.exit('# ERROR: Cannot access file')
             
-    for file in path_filenames_uniform:
-        if file_check(file):
-            data = np.genfromtxt(file, delimiter=' ', comments='#')
-            data = data[~np.isnan(data).any(axis=1)]
+    for file_delta, file_density in zip(path_filenames_delta_uniform, path_filenames_density_uniform):
+        if file_check(file_delta) & file_check(file_density):
+            data_delta = np.genfromtxt(file_delta, dtype='float', delimiter=' ', comments='#')
+            data_delta = data_delta[~np.isnan(data_delta).any(axis=1)]
+            data_density = np.genfromtxt(file_density, delimiter=' ', comments='#')
+            data_density = data_density[~np.isnan(data_density).any(axis=1)]
             
-            r = cross_section_distance(data[:,0], data[:,1], 180)
+            r = cross_section_distance(data_density[:,0], data_density[:,1], 180)
             i, = np.where(np.logical_and(r>=40, r<=60))
-            e_mg = libnest.bsk.E_minigap_n(data[i,2])
+            e_mg = libnest.bsk.E_minigap_delta_n(data_delta[i,2], data_density[i,2])
             
             e_max_uniform.append(np.max(e_mg))
-            temperature_uniform.append(float(file[-18:-14]))
+            temperature_uniform.append(float(file_density[-18:-14]))
         else:
             sys.exit('# ERROR: Cannot access file')
 
-    e_min = andreev_e_minimum(file_andreev(filenames))
+    e_min = andreev_e_minimum(file_andreev(filenames_density))
     
     plt.figure()
     plt.ylim(0., 0.3)
@@ -1070,6 +1078,56 @@ def plot_e_minigap_temperature(particles_nr):
     plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
     plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
     plt.legend()
+    
+    # filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
+    # path_filenames = [TXT_PATH + x for x in filenames]
+    # e_max = []
+    # temperature = []
+    
+    # filenames_uniform = files_set_type('density', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
+    # path_filenames_uniform = [TXT_PATH_UNIFORM + x for x in filenames_uniform]
+    # e_max_uniform = []
+    # temperature_uniform = []
+    
+    # for file in path_filenames:
+    #     if file_check(file):
+    #         data = np.genfromtxt(file, delimiter=' ', comments='#')
+    #         data = data[~np.isnan(data).any(axis=1)]
+            
+    #         r = cross_section_distance(data[:,0], data[:,1], 180)
+    #         i, = np.where(np.logical_and(r>=40, r<=60))
+    #         e_mg = libnest.bsk.E_minigap_n(data[i,2])
+            
+    #         e_max.append(np.max(e_mg))
+    #         temperature.append(float(file[-18:-14]))
+    #     else:
+    #         sys.exit('# ERROR: Cannot access file')
+            
+    # for file in path_filenames_uniform:
+    #     if file_check(file):
+    #         data = np.genfromtxt(file, delimiter=' ', comments='#')
+    #         data = data[~np.isnan(data).any(axis=1)]
+            
+    #         r = cross_section_distance(data[:,0], data[:,1], 180)
+    #         i, = np.where(np.logical_and(r>=40, r<=60))
+    #         e_mg = libnest.bsk.E_minigap_n(data[i,2])
+            
+    #         e_max_uniform.append(np.max(e_mg))
+    #         temperature_uniform.append(float(file[-18:-14]))
+    #     else:
+    #         sys.exit('# ERROR: Cannot access file')
+
+    # e_min = andreev_e_minimum(file_andreev(filenames))
+    
+    # plt.figure()
+    # plt.ylim(0., 0.3)
+    # plt.title("Energy of minigap for "+particles_nr+" particles", fontsize=15)
+    # plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
+    # plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
+    # plt.plot(temperature, e_max, '-o', linewidth=2.0, label='vortex')
+    # plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
+    # plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
+    # plt.legend()
 
     
 if __name__ == '__main__':
