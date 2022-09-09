@@ -3,7 +3,7 @@ import libnest
 import numpy as np
 import matplotlib.pyplot as plt
 from libnest.definitions import kf2rho
-from libnest.bsk import E_minigap_n
+from libnest.bsk import E_minigap_rho_n
 
 import sys
 if len(sys.argv) == 2:
@@ -11,8 +11,8 @@ if len(sys.argv) == 2:
 else:
     sys.exit("Specify the path for the image!")
 
-kf   = np.linspace(0., 1.5, 1000)
-e_mg = E_minigap_n(kf2rho(kf))
+kf   = np.linspace(0.001, 1.5, 1000)
+e_mg = E_minigap_rho_n(kf2rho(kf))
 
 plt.figure()
 plt.title("Energy of minigap", fontsize=15)
