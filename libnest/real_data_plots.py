@@ -1070,13 +1070,13 @@ def plot_e_minigap_temperature(particles_nr):
     e_min = andreev_e_minimum(file_andreev(filenames_density))
     
     plt.figure()
-    plt.ylim(0., 0.3)
+    # plt.ylim(0., 0.3)
     plt.title("Energy of minigap for "+particles_nr+" particles", fontsize=15)
     plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
     plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
     plt.plot(temperature, e_max, '-o', linewidth=2.0, label='vortex')
     plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
-    plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
+    # plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
     plt.legend()
     
     # filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))

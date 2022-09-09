@@ -356,7 +356,7 @@ def energy_per_nucleon(rho_n, rho_p):
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: energy per neutron :math:`e_n` [MeV]
+        float: energy per nucleon :math:`e_n` [MeV]
     """
     rho = rho_n+rho_p+DENSEPSILON
     kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
@@ -373,11 +373,64 @@ def energy_per_nucleon(rho_n, rho_p):
             + 3*T4/40*(kF**2)*np.power(rho,BETA+1)*((2+X4)*F_x_5-(1/2+X4)*F_x_8)
             + 3*T5/40*(kF**2)*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
 
-
-def pressure_n(rho_n):
+def numerical_derivative_energy_per_nucleon_n(rho_n):
     """
-    Pressure :math:`P` in neutron matter, calculated using the derivative of the
-    :func:`energy_per_nucleon` function.
+    First derivative of energy per nucleon, calculated numerically using
+    :func:`np.gradient`.
+
+    Args:
+    rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns
+        float: derivative of energy per neutron, :math:` \\frac{\\delta e_n}{\\delta \\rho}` [MeV]
+        
+    See also:
+        :func:`energy_per_nucleon`
+
+    """
+    e = energy_per_nucleon(rho_n, 0.)
+    return np.gradient(e, rho_n)
+
+def numerical_second_derivative_energy_per_nucleon_n(rho_n):
+    """
+    Second derivative of energy per nucleon, calculated numerically using
+    :func:`np.gradient`.
+
+    Args:
+    rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns
+        float: second derivative of energy per neutron, :math:` \\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]
+        
+    See also:
+        :func:`energy_per_nucleon`
+
+    """
+    e = numerical_derivative_energy_per_nucleon_n(rho_n)
+    return np.gradient(e, rho_n)
+
+def numerical_derivative_epsilon_n(rho_n):
+    """
+    Derivative of energy density :math:`\\Epsilon` with respect to density, calculated numerically using
+    :func:`np.gradient` for neutron matter and using the :func:`energy_per_nucleon` function, setting proton
+    density :math:`\\rho_p` to 0.
+    
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: Derivative of :math:`\\Epsilon` 
+    
+    See also:
+        :func:`energy_per_nucleon`
+    """
+    epsilon_neum = rho_n*(energy_per_nucleon(rho_n, 0.)+MN)
+    return np.gradient(epsilon_neum, rho_n)
+
+def numerical_pressure_n(rho_n):
+    """
+    Pressure :math:`P` in neutron matter, calculated using the :func:`np.gradient`
+    function to calculate the derivative of data calculated by :func:`energy_per_nucleon`.
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -391,17 +444,155 @@ def pressure_n(rho_n):
     derivative = np.gradient(energy_per_nucleon(rho_n, 0.), rho_n)
     return rho_n**2*derivative
 
-def derivative_pressure_n(rho_n):
+def numerical_derivative_pressure_n(rho_n):
     """
-    Derivative of pressure :math:`P` with respect to density, for neutron matter.
+    Derivative of pressure :math:`P` with respect to density for neutron matter,
+    calculated numerically using :func:`np.gradient`.
     
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
         float: Derivative of :math:`P` 
+    
+    See also:
+        :func:`numerical_pressure_n`
     """
     return np.gradient(pressure_n(rho_n), rho_n)
+
+def numerical_speed_of_sound_n(rho_n):
+    """
+    Velocity of sound in neutron matter dependent on total matter density equal
+    to neuton density :math:`\\rho_n`, given as a percentage of speed of light.
+    Calculated based on numerical data.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: velocity of sound :math:`v_s`
+        
+    See also:
+        :func:`numerical_derivative_pressure_n`
+        :func:`numerical_derivative_epsilon_n`
+    """
+    return np.sqrt(numerical_derivative_pressure_n(rho_n)/numerical_derivative_epsilon_n(rho_n))*100
+
+#ALGEBRAIC ATTEMPT
+def energy_per_nucleon_n(rho):
+    """
+    Energy per nucleon on infinite neutron matter of density :math:`\\rho_n`.
+    Derived from formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
+    :cite:p:`chamel2009further`.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: energy per neutron :math:`e_n` [MeV]
+    """
+    c = (3*np.pi**2)**(2./3.)
+    return (3./5.*HBAR2M_n*c*rho**(2./3.)
+            +1./4.*T0*(1-X0)*rho
+            +3./40.*T1*(1-X1)*c*rho**(5./3.)
+            +9./40.*(T2+T2X2)*c*rho**(5./3.)
+            +1./24.*T3*(1-X3)*rho**(ALPHA+1)
+            +3./40.*T4*(1-X4)*c*rho**(BETA+5./3.)
+            +9./40.*T5*(1+X5)*c*rho**(GAMMA+5./3.)
+            )
+
+def derivative_energy_per_nucleon_n(rho):
+    """
+    First derivative of energy per nucleon (for neutrons only).
+
+    Args:
+        rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: derivative of energy per neutron, :math:` \\frac{\\delta e_n}{\\delta \\rho}` [MeV]
+        
+    See also:
+        :func:`energy_per_nucleon_n`
+    """
+    c = (3*np.pi**2)**(2./3.)
+    return (2./5.*HBAR2M_n*c*rho**(-1./3.)
+            +1./4.*T0*(1-X0)
+            +1./8.*T1*(1-X1)*c*rho**(2./3.)
+            +3./8.*(T2+T2X2)*c*rho**(2./3.)
+            +1./24.*T3*(1-X3)*(ALPHA+1)*rho**(ALPHA)
+            +3./40.*T4*(1-X4)*c*(BETA+5./3.)*rho**(BETA+2./3.)
+            +9./40.*T5*(1+X5)*c*(GAMMA+5./3.)*rho**(GAMMA+2./3.)
+            )
+
+def second_derivative_energy_per_nucleon_n(rho):
+    """
+    Second derivative of energy per nucleon (for neutrons only).
+
+    Args:
+        rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: second derivative of energy per neutron, :math:` \\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]
+        
+    See also:
+        :func:`energy_per_nucleon_n`
+        :func:`derivative_energy_per_nucleon_n`
+    """
+    c = (3*np.pi**2)**(2./3.)
+    return (-2./15.*HBAR2M_n*c*rho**(-4./3.)
+            +1./12.*T1*(1-X1)*c*rho**(-1./3.)
+            +1./4.*(T2+T2X2)*c*rho**(-1./3.)
+            +1./24.*T3*(1-X3)*(ALPHA+1)*ALPHA*rho**(ALPHA-1)
+            +3./40.*T4*(1-X4)*c*(BETA+5./3.)*(BETA+2./3.)*rho**(BETA-1./3.)
+            +9./40.*T5*(1+X5)*c*(GAMMA+5./3.)*(GAMMA+2./3.)*rho**(GAMMA-1./3.)
+            )
+
+def pressure_n(rho):
+    """
+    Pressure :math:`P` in neutron matter.
+    
+    Args:
+        rho (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: Pressure :math:`P` 
+    
+    See also:
+        :func:`derivative_energy_per_nucleon_n`
+    """
+    return rho**2*derivative_energy_per_nucleon_n(rho)
+
+def pressure_derivative_n(rho):
+    """
+    Calculates the derivative of pressure :math:`\\frac{\\delta P}{\\delta \\rho}` in neutron matter.
+    
+    Args:
+        rho (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: derivative of pressure :math:`\\frac{\\delta P}{\\delta \\rho}`
+    
+    See also:
+        :func:`derivative_energy_per_nucleon_n`
+        :func:`second_derivative_energy_per_nucleon_n`
+    """
+    return 2*rho*derivative_energy_per_nucleon_n(rho) + rho**2*second_derivative_energy_per_nucleon_n(rho)
+
+def epsilon_derivative_n(rho):
+    """
+    Calculates the derivative of energy density :math:`\\frac{\\delta \\Epsilon}{\\delta \\rho}` in neutron matter.
+    
+    Args:
+        rho (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: derivative of energy density :math:`\\frac{\\delta \\Epsilon}{\\delta \\rho}`
+    
+    See also:
+        :func:`derivative_energy_per_nucleon_n`
+        :func:`energy_per_nucleon`       
+    """
+    return MN + energy_per_nucleon(rho, 0.) + rho*derivative_energy_per_nucleon_n(rho)
 
 def speed_of_sound_n(rho_n):
     """
@@ -414,9 +605,13 @@ def speed_of_sound_n(rho_n):
     Returns:
         float: velocity of sound :math:`v_s` 
 
+    See also:
+        :func:`pressure_derivative_n`
+        :func:`epsilon_derivative_n`
     """
-    return np.sqrt(derivative_pressure_n(rho_n)/derivative_epsilon_n(rho_n))*100
-    
+    return np.sqrt(pressure_derivative_n(rho_n)/epsilon_derivative_n(rho_n))*100
+
+
 # ================================
 #       Effective masses
 # ================================

@@ -366,7 +366,7 @@ def plot_speed_of_sound_n(rho_n):
     rho_n = rho_n * rho
     v = libnest.bsk.speed_of_sound_n(rho_n)/100
     plt.title(r"Speed of sound $v_{s}$ inside NeuM", fontsize=15)
-    plt.xlim(0., 0.08)
+    # plt.xlim(0., 0.08)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
     plt.ylabel(r"$ v_{s} $ [% c]", fontsize=10)
     plt.xticks(fontsize=10)
