@@ -167,7 +167,7 @@ def neutron_pairing_field(rho_n):
         :func:`neutron_ref_pairing_field`
         :func:`proton_ref_pairing_field`
     """
-    kF = rho2kf((rho_n)/2)
+    kF = rho2kf(rho_n)
     delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
                                               ((kF-1.38236)**2+(0.327517**2)))
     i = np.where(kF>1.38)
@@ -197,9 +197,10 @@ def symmetric_pairing_field(rho_n, rho_p):
         :func:`neutron_ref_pairing_field`
         :func:`proton_ref_pairing_field`
     """
-    kF = rho2kf((rho_n+rho_p)/2.)
+    kF = rho2kf((rho_n+rho_p))
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
+ # 11.5586*(x**2)*((x-1.3142)**2)/(((x**2)+(0.489932**2))*(((x-1.3142)**2)+(0.906146**2)))
     i = np.where(kF>1.31)
     delta[i] = NUMZERO
     return delta

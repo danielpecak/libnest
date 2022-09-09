@@ -11,7 +11,7 @@ else:
     sys.exit("Specify the path for the image!")
 
 
-rho = np.linspace(0, .2, 100)
+rho = np.linspace(0, .2, 200)
 rho_neum = rho #NeuM
 rho_n = 0.5 * rho
 rho_p = 0.5 * rho
@@ -21,10 +21,11 @@ En_neum = libnest.bsk.energy_per_nucleon(rho, 0)
 En_sym = libnest.bsk.energy_per_nucleon(rho_n, rho_p)
 energy_per_nucleon = plt.figure()
 energy_per_nucleon.add_subplot(111)
-plt.title("Energy per nucleon", fontsize=15)
-plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
+plt.title("Energy per nucleon (BSk31)", fontsize=15)
+plt.xlabel(r"$\rho \: {[fm^{-3}]}$", fontsize=10)
 plt.ylabel("E/A [MeV]", fontsize=10)
-plt.plot(rho_neum, En_neum, linewidth=2.0, label='e (NeuM)')
-plt.plot(rho_sym, En_sym, linewidth=2.0, label='e (sym)')
+plt.plot(rho_neum, En_neum, linewidth=2.0, label='NeuM')
+plt.plot(rho_sym, En_sym, linewidth=2.0, label='SM')
+plt.xlim([0,0.2])
 plt.legend()
 plt.savefig(filename)
