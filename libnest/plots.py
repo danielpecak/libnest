@@ -373,65 +373,81 @@ def plot_speed_of_sound_n(rho_n):
     plt.plot(rho_n, v, linewidth=2.0)
     plt.show()
 
-def plot_v_landau(delta, rho):
+def plot_v_landau(rho_n):
     """
-    
+    Plots the Landau velocity, which shows at which velocity the superfluid medium starts to become excited,
+    for neutron matter of density :math:`\\rho_n`.
 
-    Parameters
-    ----------
-    rho_n : TYPE
-        DESCRIPTION.
+    .. math::
 
-    Returns
-    -------
-    None.
+        v_L = \\frac{\\Delta}{\\hbar k_F} c
 
+    Args:
+        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        None.
+
+    See also:
+        :func:`vLandau`
+        :func:`rho2kf`
     """
-    rho = np.linspace(0., 1., 100) * rho
-    delta = np.linspace(0., 1., 100) * delta
-    kf = libnest.definitions.rho2kf(rho)
+    rho_n = np.linspace(0., 1., 100) * rho_n
+    delta = libnest.bsk.neutron_ref_pairing_field(rho_n, 0.)
+    kf = libnest.definitions.rho2kf(rho_n)
     v = libnest.definitions.vLandau(delta, kf)
     plt.title(r"Landau velocity $v_{Landau}$", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
     plt.ylabel(r"$ v_{Landau} $ [% c]", fontsize=10)
     plt.xticks(fontsize=10)
-    plt.plot(rho, v, linewidth=2.0)
+    plt.plot(rho_n, v, linewidth=2.0)
     plt.show()
 
-def plot_v_critical(delta, rho):
+def plot_v_critical(rho_n):
     """
-    Parameters
-    ----------
-    rho_n : TYPE
-        DESCRIPTION.
+    Plots the critical velocity for a superfluid.
 
-    Returns
-    -------
-    None.
+    .. math::
+        v_L = e \\frac{\\Delta}{\\hbar k_F} c
 
+    Args:
+        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        None
+
+    See also:
+        :func:`vcritical`
+        :func:`rho2kf`
     """
-    rho = np.linspace(0., 1., 100) * rho
-    delta = np.linspace(0., 1., 100) * delta
-    kf = libnest.definitions.rho2kf(rho)
+    rho_n = np.linspace(0., 1., 100) * rho_n
+    delta = libnest.bsk.neutron_ref_pairing_field(rho_n, 0.)
+    kf = libnest.definitions.rho2kf(rho_n)
     v = libnest.definitions.vcritical(delta, kf)
     plt.title(r"Critical velocity $v_{c}$", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
     plt.ylabel(r"$ v_{c} $ [% c]", fontsize=10)
     plt.xticks(fontsize=10)
-    plt.plot(rho, v, linewidth=2.0)
+    plt.plot(rho_n, v, linewidth=2.0)
     plt.show()
 
 def plot_v_sf(r):
     """
-    Parameters
-    ----------
-    rho_n : TYPE
-        DESCRIPTION.
+    Plots the superfluid velocity :math:`v_{sf}` based on the gradient of the
+    pairing field gradient.
 
-    Returns
-    -------
-    None.
+    .. math::
 
+        v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}
+
+    Args:
+        r (float): distance from the center of a vortex :math:`r` [fm]
+
+    Returns:
+        None
+
+    See also:
+        :func:`vsf`        
     """
     v = libnest.definitions.vcritical(r)
     plt.title(r"Velocity of sound inside NeuM $v_{s}$", fontsize=15)
