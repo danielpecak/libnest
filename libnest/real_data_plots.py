@@ -778,7 +778,26 @@ def plot_A_slice(filename):
 #           Velocities
 # ================================
 
-def plot_vsf(filename):
+def plot_v_sf_real(filename):
+    """
+    Opens the specified file, checks its validity, and creates a 2D array from
+    its data. The first two columns are the x and y coordinates, which are then used 
+    to calculate the superfluid velocity :math:`v_{sf}` based on the gradient of the
+    pairing field gradient.
+
+    .. math::
+
+        v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}
+
+    Args:
+        filename (string): name of the data set file
+
+    Returns:
+        None
+
+    See also:
+        :func:`vsf`   
+    """
     filename = TXT_PATH + filename
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
@@ -803,6 +822,35 @@ def plot_vsf(filename):
         sys.exit('# ERROR: Cannot access file')
 
 def plot_vsf_nv(filename_density, filename_A, filename_current):
+    """
+    Opens the specified files containing density, mean field potential from current
+    variation, and current data. The code checks their validity, and creates
+    three 2D data arrays. It calculates superfluid velocity :math:`v_{sf}_{NV}`
+    based on the gradient of the pairing field phase. It is adjusted to the
+    entrainment effects (definition by Nicolas Chamel Valentin Allard).
+    It also calculates the velocity (mass velocity) :math:`v_{NV},
+    also adjusted to the entrainment effects.
+    
+    .. math::
+
+        v^{\\mathrm{NV}} = \\hbar c \\frac{\\hbar^2}{2 M B} \\frac{\\bm j}{\\rho}  + \\frac{\\bm A}{M}
+
+    .. math::
+
+        v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{\\bm A}{M}
+        
+    Args:
+        filename_density (string): name of the file containing density data
+        filename_A (string): name of the file containing the mean field potential from the current variation data
+        filename_current (string): name of the file containing density data
+
+    Returns:
+        None
+
+    See also:
+        :func:`vsf_NV`   
+        :func:`v_NV`   
+    """
     filename_density = TXT_PATH + filename_density
     filename_A = TXT_PATH + filename_A
     filename_current = TXT_PATH + filename_current
@@ -840,6 +888,26 @@ def plot_vsf_nv(filename_density, filename_A, filename_current):
         sys.exit('# ERROR: Cannot access file')
 
 def plot_landau_velocity(filename_density, filename_delta):
+    """
+    Opens the specified files containing density and reference field data.
+    The code checks their validity, and creates 2D data arrays. It calculates 
+    the Landau velocity :math:`v_{Landau}`, which shows at which velocity the
+    superfluid medium starts to be excited.
+
+    .. math::
+
+        v_L = \\frac{\\Delta}{\\hbar k_F} c
+        
+    Args:
+        filename_density (string): name of the file containing density data
+        filename_delta (string): name of the file containing the reference pairing field data
+
+    Returns:
+        None
+
+    See also:
+        :func:`vLandau`   
+    """
     filename_density = TXT_PATH + filename_density
     filename_delta = TXT_PATH + filename_delta
     if file_check(filename_density) & file_check(filename_delta):
@@ -1078,56 +1146,6 @@ def plot_e_minigap_temperature(particles_nr):
     plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
     plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
     plt.legend()
-    
-    # filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
-    # path_filenames = [TXT_PATH + x for x in filenames]
-    # e_max = []
-    # temperature = []
-    
-    # filenames_uniform = files_set_type('density', files_set_particles(particles_nr, TXT_PATH_UNIFORM))
-    # path_filenames_uniform = [TXT_PATH_UNIFORM + x for x in filenames_uniform]
-    # e_max_uniform = []
-    # temperature_uniform = []
-    
-    # for file in path_filenames:
-    #     if file_check(file):
-    #         data = np.genfromtxt(file, delimiter=' ', comments='#')
-    #         data = data[~np.isnan(data).any(axis=1)]
-            
-    #         r = cross_section_distance(data[:,0], data[:,1], 180)
-    #         i, = np.where(np.logical_and(r>=40, r<=60))
-    #         e_mg = libnest.bsk.E_minigap_rho_n(data[i,2])
-            
-    #         e_max.append(np.max(e_mg))
-    #         temperature.append(float(file[-18:-14]))
-    #     else:
-    #         sys.exit('# ERROR: Cannot access file')
-            
-    # for file in path_filenames_uniform:
-    #     if file_check(file):
-    #         data = np.genfromtxt(file, delimiter=' ', comments='#')
-    #         data = data[~np.isnan(data).any(axis=1)]
-            
-    #         r = cross_section_distance(data[:,0], data[:,1], 180)
-    #         i, = np.where(np.logical_and(r>=40, r<=60))
-    #         e_mg = libnest.bsk.E_minigap_rho_n(data[i,2])
-            
-    #         e_max_uniform.append(np.max(e_mg))
-    #         temperature_uniform.append(float(file[-18:-14]))
-    #     else:
-    #         sys.exit('# ERROR: Cannot access file')
-
-    # e_min = andreev_e_minimum(file_andreev(filenames))
-    
-    # plt.figure()
-    # plt.ylim(0., 0.3)
-    # plt.title("Energy of minigap for "+particles_nr+" particles", fontsize=15)
-    # plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
-    # plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
-    # plt.plot(temperature, e_max, '-o', linewidth=2.0, label='vortex')
-    # plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
-    # plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
-    # plt.legend()
 
     
 if __name__ == '__main__':
