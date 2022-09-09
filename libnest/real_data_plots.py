@@ -1076,7 +1076,7 @@ def plot_e_minigap_temperature(particles_nr):
     plt.ylabel(r"$E_{mg} \: [MeV]$", fontsize=10)
     plt.plot(temperature, e_max, '-o', linewidth=2.0, label='vortex')
     plt.plot(temperature_uniform, e_max_uniform, '-o', linewidth=1.0, label='uniform')
-    # plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
+    plt.axhline(y = e_min, linestyle = 'dashed', label="numerical")
     plt.legend()
     
     # filenames = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
@@ -1096,7 +1096,7 @@ def plot_e_minigap_temperature(particles_nr):
             
     #         r = cross_section_distance(data[:,0], data[:,1], 180)
     #         i, = np.where(np.logical_and(r>=40, r<=60))
-    #         e_mg = libnest.bsk.E_minigap_n(data[i,2])
+    #         e_mg = libnest.bsk.E_minigap_rho_n(data[i,2])
             
     #         e_max.append(np.max(e_mg))
     #         temperature.append(float(file[-18:-14]))
@@ -1110,7 +1110,7 @@ def plot_e_minigap_temperature(particles_nr):
             
     #         r = cross_section_distance(data[:,0], data[:,1], 180)
     #         i, = np.where(np.logical_and(r>=40, r<=60))
-    #         e_mg = libnest.bsk.E_minigap_n(data[i,2])
+    #         e_mg = libnest.bsk.E_minigap_rho_n(data[i,2])
             
     #         e_max_uniform.append(np.max(e_mg))
     #         temperature_uniform.append(float(file[-18:-14]))
