@@ -195,9 +195,14 @@ def plot_temperature_delta(particles_nr):
 def plot_max_delta_temperature(particles_nr):
     """
     Plots the maximum value of pairing field :math:`\\Delta` [MeV] against temperature
-    T [MeV/k:sub:`B`]. The function creates an array of temperatures (taken from filenames)
-    and parses through the files to find the maximum pairing field :math:`\\Delta_{max}`
+    T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and :func:`files_set_particles`
+    functions to parse through the data and chose only files with pairing field data sets
+    for the chosen number of particles (respectively).
+    
+    The function creates an array of temperatures (taken from filenames)
+    and goes through the files to find the maximum pairing field :math:`\\Delta_{max}`
     in the range 40-60 fm (which is assumed to be the flattest part of the curve).
+    Then it plots the maximum pairing field for the vortex against temperature.
 
     Args:
         particles_nr (string): choice of files with a specified number of particles
@@ -240,9 +245,19 @@ def plot_max_delta_temperature(particles_nr):
 def plot_max_delta_temperature_uniform(particles_nr):
     """
     Plots the maximum value of pairing field :math:`\\Delta` [MeV] against temperature
-    T [MeV/k:sub:`B`]. The function creates an array of temperatures (taken from filenames)
-    and parses through the files to find the maximum pairing field :math:`\\Delta_{max}`
+    T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and :func:`files_set_particles`
+    functions to parse through the data and chose only files with pairing field data sets
+    for the chosen number of particles (respectively). It does so for vortex data and for
+    uniform matter data for comparison.
+    
+    The function creates an array of temperatures (taken from filenames)
+    and goes through the files to find the maximum pairing field :math:`\\Delta_{max}`
     in the range 40-60 fm (which is assumed to be the flattest part of the curve).
+    Then it plots the maximum pairing fields for the vortex and for the uniform matter
+    against temperature.
+    
+    It also plots critical temperature derived theoretically, using the value of
+    :math:`\\Delta` for 0.00 MeV/kb from uniform matter data set.
 
     Args:
         particles_nr (string): choice of files with a specified number of particles
@@ -266,8 +281,8 @@ def plot_max_delta_temperature_uniform(particles_nr):
             #data[:,3] - delta_imaginary
 
             r = cross_section_distance(data[:,0], data[:,1], 180)
-            # i = np.where(np.logical_and(r>=40, r<=60))
-            i = np.where(np.logical_and(r>=0, r<=10))
+            i = np.where(np.logical_and(r>=40, r<=60))
+            # i = np.where(np.logical_and(r>=0, r<=10))
             delta, arg = pairing_field(data[i,2], data[i,3])
             delta_max.append(np.max(delta))
             temperature.append(float(file[-16:-12]))
@@ -298,14 +313,11 @@ def plot_max_delta_temperature_uniform(particles_nr):
         else:
             sys.exit('# ERROR: Cannot access file')
 
-    # temperature_critical = delta_max/1.764
     delta_max = np.array(delta_max)
-    # temperature_critical = np.mean(delta_max[0:4]/1.764)
     temperature_critical = delta_max_uniform[0]/1.764
     print(temperature_critical)
 
     delta_theoretical_t_critical = 3.06*temperature_critical*np.sqrt(1-temperature/temperature_critical)
-    #np.where((temperature>temperature_critical), 3.06*temperature_critical*np.sqrt(1-temperature/temperature_critical), delta_theoretical_t_critical)
     x = np.array(temperature)/float(temperature_critical)
     x_uniform = np.array(temperature_uniform)/float(temperature_critical)
 

@@ -782,8 +782,11 @@ def plot_v_sf_real(filename):
     """
     Opens the specified file, checks its validity, and creates a 2D array from
     its data. The first two columns are the x and y coordinates, which are then used 
-    to calculate the superfluid velocity :math:`v_{sf}` based on the gradient of the
-    pairing field gradient.
+    to calculate the superfluid velocity :math:`v_{sf}`[% c]  based on the gradient
+    of the pairing field gradient.
+    
+    It is then plotted as a cross section through the 'box' containing
+    the vortex/uniform matter data.
 
     .. math::
 
@@ -826,10 +829,13 @@ def plot_vsf_nv(filename_density, filename_A, filename_current):
     Opens the specified files containing density, mean field potential from current
     variation, and current data. The code checks their validity, and creates
     three 2D data arrays. It calculates superfluid velocity :math:`v_{sf}_{NV}`
-    based on the gradient of the pairing field phase. It is adjusted to the
+    [% c] based on the gradient of the pairing field phase. It is adjusted to the
     entrainment effects (definition by Nicolas Chamel Valentin Allard).
-    It also calculates the velocity (mass velocity) :math:`v_{NV},
+    It also calculates the velocity (mass velocity) :math:`v_{NV} [% c],
     also adjusted to the entrainment effects.
+    
+    Both velocities are plotted as a cross section through the 'box' containing
+    the vortex/uniform matter data.
     
     .. math::
 
@@ -891,8 +897,11 @@ def plot_landau_velocity(filename_density, filename_delta):
     """
     Opens the specified files containing density and reference field data.
     The code checks their validity, and creates 2D data arrays. It calculates 
-    the Landau velocity :math:`v_{Landau}`, which shows at which velocity the
+    the Landau velocity :math:`v_{Landau}`[% c], which shows at which velocity the
     superfluid medium starts to be excited.
+    
+    It is plotted as a cross section through the 'box' containing
+    the vortex/uniform matter data.
 
     .. math::
 
@@ -935,7 +944,34 @@ def plot_landau_velocity(filename_density, filename_delta):
         sys.exit('# ERROR: Cannot access file')
         
 
-def plot_landau_velocity_temp(particles_nr):
+def plot_landau_velocity_temperature(particles_nr):
+    """
+    Plots the mean value of Landau velocity :math:`v_{Landau}` [% c] against
+    temperature T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and
+    :func:`files_set_particles` functions to parse through the data and chose
+    only files with pairing field, and density data sets for the chosen number
+    of particles (respectively). It does so for vortex data and for uniform
+    matter data for comparison.
+    
+    The function creates an array of temperatures (taken from filenames)
+    and goes through the files to find the mean :math:`v_{Landau} [% c]` in the range
+    of 40-60 fm (which is assumed to be the flattest part of the curve). The speed
+    of sound :math:`v_s` [% c] is also calculated analytically from the vortex data.
+    
+    A plot of :math:`v_{s}`, and :math:`v_{Landau} for vortex and uniform matter
+    against temperature is created.
+
+    Args:
+        particles_nr (string): choice of files with a specified number of particles
+
+    Returns
+        None
+
+    See also:
+        :func:`vLandau`   
+        :func:`vcritical`  
+        :func:`speed_of_sound_n`
+    """
     filenames_delta = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
     path_filenames_delta = [TXT_PATH + x for x in filenames_delta]
     filenames_density = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
@@ -954,13 +990,7 @@ def plot_landau_velocity_temp(particles_nr):
             data_rho = np.genfromtxt(file_density, dtype='float', delimiter=' ', comments='#')
             data_rho = data_rho[~np.isnan(data_rho).any(axis=1)]
             
-            r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)
-            # delta, arg = pairing_field(data_delta[:,2], data_delta[:,3])
-            # print(data_rho[:,2])
-            # print(delta)
-            # kf = libnest.definitions.rho2kf(data_rho[:,2])
-            # v_landau = libnest.definitions.vLandau(delta, kf)
-        
+            r = cross_section_distance(data_rho[:,0], data_rho[:,1], 180)        
             i, = np.where(np.logical_and(r>=40, r<=60))
             delta, arg = pairing_field(data_delta[i,2], data_delta[i,3])
             kf = libnest.definitions.rho2kf(data_rho[i,2])
@@ -1014,6 +1044,33 @@ def plot_landau_velocity_temp(particles_nr):
     plt.show()
 
 def plot_landau_critical_velocity(filename_density, filename_delta):
+    """
+    Opens the specified files containing density and reference field data.
+    The code checks their validity, and creates 2D data arrays. It calculates 
+    the Landau velocity :math:`v_{Landau}` [% c], which shows at which velocity the
+    superfluid medium starts to be excited, and the critical velocity,
+    :math:`v_{Critical}` [% c] (at this velocity the system is no longer superfluid).
+    Both velocities are plotted as a cross section through the 'box' containing
+    the vortex/uniform matter data.
+
+    .. math::
+
+        v_L = \\frac{\\Delta}{\\hbar k_F} c
+
+    .. math::
+        v_L = e \\frac{\\Delta}{\\hbar k_F} c
+        
+    Args:
+        filename_density (string): name of the file containing density data
+        filename_delta (string): name of the file containing the reference pairing field data
+
+    Returns:
+        None
+
+    See also:
+        :func:`vLandau`   
+        :func:`vcritical`  
+    """
     filename_density = TXT_PATH + filename_density
     filename_delta = TXT_PATH + filename_delta
     if file_check(filename_density) & file_check(filename_delta):
@@ -1045,6 +1102,21 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
         sys.exit('# ERROR: Cannot access file')  
         
 def plot_speed_of_sound(filename_density):
+    """
+    Opens the specified files containing the density data for NeuM. The code
+    checks its validity, and creates a 2D data array. It calculates the speed of
+    sound :math:`v_{s}` [% c], and plots it against a cross section through the
+    'box' containing the vortex/uniform matter data.
+    
+    Args:
+        filename_density (string): name of the file containing density data
+    
+    Returns:
+        None
+
+    See also:
+        :func:`speed_of_sound_n`
+    """
     filename_density = TXT_PATH + filename_density
     if file_check(filename_density):
         data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
@@ -1068,8 +1140,22 @@ def plot_speed_of_sound(filename_density):
 # ================================
 #        Energy of minigap
 # ================================
-
 def plot_e_minigap(filename_density):
+    """
+    Opens the specified files containing the density data for NeuM. The code
+    checks its validity, and creates a 2D data array. It calculates the energy 
+    of minigap :math:`E_{minigap}`, and plots it against a cross section through
+    the 'box' containing the vortex/uniform matter data.
+    
+    Args:
+        filename_density (string): name of the file containing density data
+    
+    Returns:
+        None
+
+    See also:
+        :func:`E_minigap_delta_n`
+    """
     filename_density = TXT_PATH + filename_density
     if file_check(filename_density):
         data_rho = np.genfromtxt(filename_density, delimiter=' ', comments='#')
@@ -1089,6 +1175,33 @@ def plot_e_minigap(filename_density):
         sys.exit('# ERROR: Cannot access file')  
 
 def plot_e_minigap_temperature(particles_nr):
+    """
+    Plots the maximum value the energy of minigap :math:`E_{minigap}` [MeV] against
+    temperature T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and
+    :func:`files_set_particles` functions to parse through the data and chose
+    only files with, (respectively), pairing field, and density data sets for
+    the chosen number of particles. It does so for vortex data and for uniform
+    matter data for comparison.
+    
+    The function creates an array of temperatures (taken from filenames)
+    and goes through the files to find the mean :math:`v_{Landau} [% c]` in the range
+    of 40-60 fm (which is assumed to be the flattest part of the curve).
+    
+    The function accesses also data with Andreev states simulation for the
+    specified number of particles and finds their minimum :math:`E_{minigap}` data point.
+    It is then plotted as a striaght line for comparison.
+
+    Args:
+        particles_nr (string): choice of files with a specified number of particles
+
+    Returns
+        None
+
+    See also:
+        :func:`E_minigap_delta_n`   
+        :func:`file_andreev`  
+        :func:`andreev_e_minimum`
+    """
     filenames_density = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
     path_filenames_density = [TXT_PATH + x for x in filenames_density]
     filenames_delta = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
