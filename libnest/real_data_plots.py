@@ -306,7 +306,6 @@ def plot_density(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - rho_q
@@ -345,7 +344,6 @@ def plot_density_contour(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - rho_q
@@ -414,7 +412,6 @@ def plot_pairing_field(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - delta_rel
@@ -609,7 +606,6 @@ def plot_pairing_field_slice(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - delta_real
@@ -654,7 +650,6 @@ def plot_B_q_slice(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - B_q_x
@@ -702,7 +697,6 @@ def plot_U_q_slice(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - U_q_x
@@ -750,7 +744,6 @@ def plot_A_slice(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - A_x
@@ -805,7 +798,6 @@ def plot_v_sf_real(filename):
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
         data = data[~np.isnan(data).any(axis=1)]
-        data = data[data[:, -1] != 0]
         #data[:,0] - x
         #data[:,1] - y
         #data[:,2] - rho
