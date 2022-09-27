@@ -127,7 +127,7 @@ def plot_pairing_field_p(rho_n, rho_p):
     See also:
         :func:`proton_ref_pairing_field`
     """
-    rho = np.linspace(0., rho_n+rho_p, 100)
+    rho = np.linspace(0., 0.2, 100)
     rho_n = rho * rho_n
     rho_p = rho * rho_p
     delta = libnest.bsk.proton_ref_pairing_field(rho_n, rho_p)
@@ -449,8 +449,9 @@ def plot_v_sf(r):
     See also:
         :func:`vsf`        
     """
-    v = libnest.definitions.vcritical(r)
-    plt.title(r"Velocity of sound inside NeuM $v_{s}$", fontsize=15)
+    r = np.linspace(0., 1., 100) * r
+    v = libnest.definitions.vsf(r)
+    plt.title(r"$v_{sf}$ vs radius", fontsize=15)
     plt.xlabel(r"$r [fm]$", fontsize=10)
     plt.ylabel(r"$ v_{sf} $ [% c]", fontsize=10)
     plt.xticks(fontsize=10)
