@@ -12,7 +12,9 @@ definitions.py
 
 import numpy as np
 import math
-import libnest.units as units
+# import libnest.bsk
+# import libnest.units as units
+from libnest import units
 from libnest.units import DENSEPSILON
 
 
@@ -108,6 +110,31 @@ def rhoEta(rho_n, rho_p):
     """
     #return rho_n+rho_p, rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
     return rho_n+rho_p, rho_n-rho_p
+
+
+
+def xiBCS(kF, delta=None):
+    """
+    Calculates the coherence length from BCS theory. If no delta argument is provided,
+    it is assumed that we consider pure neutron matter.
+
+    .. math::
+
+        \\xi_\\mathrm{BCS} = \\frac{(\\hbar c)^2 k_F}{\\pi \\Delta Mc^2}
+
+    Args:
+        k_F (float): Fermi momentum [fm :sup:`-1`]
+        delta (float): pairing field [MeV]
+
+    Returns:
+        float: coherence length [fm]
+    """
+    from libnest import bsk
+    if delta==None:
+        rho   = kf2rho(kF)
+        delta = bsk.neutron_pairing_field(rho)
+    return units.HBARC**2*kF/(np.pi*delta*units.MN)
+
 
 def vsf(r):
     """
