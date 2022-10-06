@@ -143,7 +143,7 @@ def vLandau(delta,kF):
     Returns:
         float: Landau velocity :math:`v_L` in units of speed of light [c]
     """
-    return delta/kF
+    return delta/kF/units.HBARC
 
 def vcritical(delta,kF):
     """
