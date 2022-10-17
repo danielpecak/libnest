@@ -171,7 +171,8 @@ def neutron_pairing_field(rho_n):
     delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
                                               ((kF-1.38236)**2+(0.327517**2)))
     i = np.where(kF>1.38)
-    delta[i] = NUMZERO
+    if (i[0].size != 0):
+        delta[i] = np.float64(1.0*NUMZERO)
     return delta
 
 def symmetric_pairing_field(rho_n, rho_p):
