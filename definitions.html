@@ -340,6 +340,29 @@ Valentin Allard).</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.xiBCS">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">xiBCS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.xiBCS" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the coherence length from BCS theory. If no delta argument is provided,
+it is assumed that we consider pure neutron matter.</p>
+<div class="math">
+<p><img src="_images/math/459ffab3e08c588098d5ef0b56b13e4ce38558b9.png" alt="\xi_\mathrm{BCS} = \frac{(\hbar c)^2 k_F}{\pi \Delta Mc^2}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k_F</strong> (<em>float</em>) – Fermi momentum [fm <sup>-1</sup>]</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – pairing field [MeV]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>coherence length [fm]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 </div>
 

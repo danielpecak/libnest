@@ -499,6 +499,108 @@ density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403a869b5870c582f
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_pressure_n" title="Permalink to this definition"></a></dt>
+<dd><p>Plots pressure <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> inside NeuM of density <img class="math" src="_images/math/cecaec6c9eabb4150dc4ddce9022056102a571f1.png" alt="rho_n"/> in units of
+percentage of speed of sound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_speed_of_sound_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_speed_of_sound_n" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the speed of sound for NeuM of density <img class="math" src="_images/math/cecaec6c9eabb4150dc4ddce9022056102a571f1.png" alt="rho_n"/> in units of
+percentage of speed of sound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_v_critical">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_critical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_v_critical" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the critical velocity for a superfluid.</p>
+<div class="math">
+<p><img src="_images/math/078b48ac41f917376e9312a0888f080b28b41430.png" alt="v_L = e \frac{\Delta}{\hbar k_F} c"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vcritical()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">rho2kf()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_v_landau">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_landau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_v_landau" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the Landau velocity, which shows at which velocity the superfluid medium starts to become excited,
+for neutron matter of density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/>.</p>
+<div class="math">
+<p><img src="_images/math/663815e55759fa0ce4c2356cbf6d04ddf156e767.png" alt="v_L = \frac{\Delta}{\hbar k_F} c"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">rho2kf()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_v_sf">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_sf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_v_sf" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the superfluid velocity <img class="math" src="_images/math/9d4c6e6c716c4b04dad36f9ad51b8cfdb83d6c00.png" alt="v_{sf}"/> based on the gradient of the
+pairing field gradient.</p>
+<div class="math">
+<p><img src="_images/math/61e3fdaf596f39e068d61f55507de0bc41850c96.png" alt="v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> (<em>float</em>) – distance from the center of a vortex <img class="math" src="_images/math/79a3d439d28652c547386f39b555d90d3aaf102d.png" alt="r"/> [fm]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vsf()</span></code></p>
+</div>
+</dd></dl>
+
 <span class="target" id="module-libnest.real_data_plots"></span><p>Plotting real data</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.real_data_plots.cross_section_distance">
@@ -853,6 +955,230 @@ column is the density <img class="math" src="_images/math/27dc86f9f1b1c3435b2403
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_e_minigap">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_e_minigap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_e_minigap" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the specified files containing the density data for NeuM. The code
+checks its validity, and creates a 2D data array. It calculates the energy
+of minigap <img class="math" src="_images/math/83db3223cbea07855ae6a7355725ab63be4d4939.png" alt="E_{minigap}"/>, and plots it against a cross section through
+the ‘box’ containing the vortex/uniform matter data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_e_minigap_temperature">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_e_minigap_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particles_nr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_e_minigap_temperature" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the maximum value the energy of minigap <img class="math" src="_images/math/83db3223cbea07855ae6a7355725ab63be4d4939.png" alt="E_{minigap}"/> [MeV] against
+temperature T [MeV/k:sub:<cite>B</cite>].The code uses <a class="reference internal" href="#libnest.real_data_plots.files_set_type" title="libnest.real_data_plots.files_set_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_type()</span></code></a> and
+<a class="reference internal" href="#libnest.real_data_plots.files_set_particles" title="libnest.real_data_plots.files_set_particles"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_particles()</span></code></a> functions to parse through the data and chose
+only files with, (respectively), pairing field, and density data sets for
+the chosen number of particles. It does so for vortex data and for uniform
+matter data for comparison.</p>
+<p>The function creates an array of temperatures (taken from filenames)
+and goes through the files to find the mean <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">v_{Landau} [% c]</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2020-02-02&gt; patch level 2
+L3 programming layer &lt;2020-02-14&gt;
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+No file math.aux.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 \end{document}
+                   
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 344 bytes).
+Transcript written on math.log.
+</p>
+</div>
+ in the range
+of 40-60 fm (which is assumed to be the flattest part of the curve).</p>
+<p>The function accesses also data with Andreev states simulation for the
+specified number of particles and finds their minimum <img class="math" src="_images/math/83db3223cbea07855ae6a7355725ab63be4d4939.png" alt="E_{minigap}"/> data point.
+It is then plotted as a striaght line for comparison.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>particles_nr</strong> (<em>string</em>) – choice of files with a specified number of particles</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code>
+<a class="reference internal" href="#libnest.real_data_plots.file_andreev" title="libnest.real_data_plots.file_andreev"><code class="xref py py-func docutils literal notranslate"><span class="pre">file_andreev()</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">andreev_e_minimum()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_landau_critical_velocity">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_landau_critical_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_delta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_landau_critical_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the specified files containing density and reference field data.
+The code checks their validity, and creates 2D data arrays. It calculates
+the Landau velocity <img class="math" src="_images/math/4eb7749e838352ad7e94e0db0c87aea3498a5ceb.png" alt="v_{Landau}"/> [% c], which shows at which velocity the
+superfluid medium starts to be excited, and the critical velocity,
+<img class="math" src="_images/math/fecdc80f99dceeb541398797a11f83278085863a.png" alt="v_{Critical}"/> [% c] (at this velocity the system is no longer superfluid).
+Both velocities are plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+<p><img src="_images/math/663815e55759fa0ce4c2356cbf6d04ddf156e767.png" alt="v_L = \frac{\Delta}{\hbar k_F} c"/></p>
+</div><div class="math">
+<p><img src="_images/math/078b48ac41f917376e9312a0888f080b28b41430.png" alt="v_L = e \frac{\Delta}{\hbar k_F} c"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p></li>
+<li><p><strong>filename_delta</strong> (<em>string</em>) – name of the file containing the reference pairing field data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">vcritical()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_landau_velocity">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_landau_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_delta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_landau_velocity" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the specified files containing density and reference field data.
+The code checks their validity, and creates 2D data arrays. It calculates
+the Landau velocity :math:<a href="#id3"><span class="problematic" id="id4">`</span></a>v_{Landau}`[% c], which shows at which velocity the
+superfluid medium starts to be excited.</p>
+<p>It is plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+<p><img src="_images/math/663815e55759fa0ce4c2356cbf6d04ddf156e767.png" alt="v_L = \frac{\Delta}{\hbar k_F} c"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p></li>
+<li><p><strong>filename_delta</strong> (<em>string</em>) – name of the file containing the reference pairing field data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_landau_velocity_temperature">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_landau_velocity_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particles_nr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_landau_velocity_temperature" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the mean value of Landau velocity <img class="math" src="_images/math/4eb7749e838352ad7e94e0db0c87aea3498a5ceb.png" alt="v_{Landau}"/> [% c] against
+temperature T [MeV/k:sub:<cite>B</cite>].The code uses <a class="reference internal" href="#libnest.real_data_plots.files_set_type" title="libnest.real_data_plots.files_set_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_type()</span></code></a> and
+<a class="reference internal" href="#libnest.real_data_plots.files_set_particles" title="libnest.real_data_plots.files_set_particles"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_particles()</span></code></a> functions to parse through the data and chose
+only files with pairing field, and density data sets for the chosen number
+of particles (respectively). It does so for vortex data and for uniform
+matter data for comparison.</p>
+<p>The function creates an array of temperatures (taken from filenames)
+and goes through the files to find the mean <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">v_{Landau} [% c]</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2020-02-02&gt; patch level 2
+L3 programming layer &lt;2020-02-14&gt;
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Missing $ inserted.
+&lt;inserted text&gt; 
+                $
+l.14 \end{document}
+                   
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 344 bytes).
+Transcript written on math.log.
+</p>
+</div>
+ in the range
+of 40-60 fm (which is assumed to be the flattest part of the curve). The speed
+of sound <img class="math" src="_images/math/cce2a12185fb6dce87e2721a2bfb567334e6c23b.png" alt="v_s"/> [% c] is also calculated analytically from the vortex data.</p>
+<p>A plot of <img class="math" src="_images/math/c2d0db4740470a146ef1b4a15b37b272633dc51f.png" alt="v_{s}"/>, and :math:<a href="#id5"><span class="problematic" id="id6">`</span></a>v_{Landau} for vortex and uniform matter
+against temperature is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>particles_nr</strong> (<em>string</em>) – choice of files with a specified number of particles</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">vcritical()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="libnest.real_data_plots.plot_pairing_field">
 <span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_pairing_field" title="Permalink to this definition"></a></dt>
 <dd><p>Opens the specified file, checks its validity, and creates a 2D array from
@@ -899,6 +1225,124 @@ calculated and plotted against each other.</p>
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
 <a class="reference internal" href="#libnest.real_data_plots.pairing_field" title="libnest.real_data_plots.pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_speed_of_sound">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_speed_of_sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_speed_of_sound" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the specified files containing the density data for NeuM. The code
+checks its validity, and creates a 2D data array. It calculates the speed of
+sound <img class="math" src="_images/math/c2d0db4740470a146ef1b4a15b37b272633dc51f.png" alt="v_{s}"/> [% c], and plots it against a cross section through the
+‘box’ containing the vortex/uniform matter data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_v_sf_real">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_sf_real</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_v_sf_real" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first two columns are the x and y coordinates, which are then used
+to calculate the superfluid velocity :math:<a href="#id7"><span class="problematic" id="id8">`</span></a>v_{sf}`[% c]  based on the gradient
+of the pairing field gradient.</p>
+<p>It is then plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+<p><img src="_images/math/61e3fdaf596f39e068d61f55507de0bc41850c96.png" alt="v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vsf()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_vsf_nv">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_vsf_nv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_current</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_vsf_nv" title="Permalink to this definition"></a></dt>
+<dd><p>Opens the specified files containing density, mean field potential from current
+variation, and current data. The code checks their validity, and creates
+three 2D data arrays. It calculates superfluid velocity <div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<span class="docutils literal">v_{sf}_{NV}</span>)</p>
+<p>latex exited with error
+[stdout]
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=latex)
+ restricted \write18 enabled.
+entering extended mode
+(./math.tex
+LaTeX2e &lt;2020-02-02&gt; patch level 2
+L3 programming layer &lt;2020-02-14&gt;
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size12.clo))
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/usr/share/texlive/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/bm.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-dvips.def)
+(./math.aux) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
+! Double subscript.
+l.13 \fontsize{12}{14}\selectfont $v_{sf}_
+                                          {NV}$
+[1] (./math.aux) )
+(see the transcript file for additional information)
+Output written on math.dvi (1 page, 308 bytes).
+Transcript written on math.log.
+</p>
+</div>
+
+[% c] based on the gradient of the pairing field phase. It is adjusted to the
+entrainment effects (definition by Nicolas Chamel Valentin Allard).
+It also calculates the velocity (mass velocity) :math:<a href="#id9"><span class="problematic" id="id10">`</span></a>v_{NV} [% c],
+also adjusted to the entrainment effects.</p>
+<p>Both velocities are plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+<p><img src="_images/math/c4ecfbf6f675716eb4e1476d833591c534d72371.png" alt="v^{\mathrm{NV}} = \hbar c \frac{\hbar^2}{2 M B} \frac{\bm j}{\rho}  + \frac{\bm A}{M}"/></p>
+</div><div class="math">
+<p><img src="_images/math/bfa3de8b0528c442f8adc035e966e2889332c89a.png" alt="v_\mathrm{sf}^{NV} = \frac{\hbar^2}{2 M B}v_\mathrm{sf} + \frac{\bm A}{M}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p></li>
+<li><p><strong>filename_A</strong> (<em>string</em>) – name of the file containing the mean field potential from the current variation data</p></li>
+<li><p><strong>filename_current</strong> (<em>string</em>) – name of the file containing density data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vsf_NV()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">v_NV()</span></code></p>
 </div>
 </dd></dl>
 

@@ -114,7 +114,7 @@ regrouped by topic:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference internal" href="#libnest.bsk.eF_n" title="libnest.bsk.eF_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">eF_n()</span></code></a></p></li>
-<li><p><a class="reference internal" href="#libnest.bsk.E_minigap_n" title="libnest.bsk.E_minigap_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_n()</span></code></a></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_n()</span></code></p></li>
 <li><p><a class="reference internal" href="#libnest.bsk.mu_q" title="libnest.bsk.mu_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">mu_q()</span></code></a></p></li>
 </ul>
 </div></blockquote>
@@ -124,7 +124,7 @@ regrouped by topic:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_n()</span></code></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.pressure_n" title="libnest.bsk.pressure_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_n()</span></code></a></p></li>
 <li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_epsilon_rho_n()</span></code></p></li>
 <li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_pressure_rho_n()</span></code></p></li>
 <li><p><a class="reference internal" href="#libnest.bsk.speed_of_sound_n" title="libnest.bsk.speed_of_sound_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></a></p></li>
@@ -357,7 +357,7 @@ density, or effective mass).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.bsk.C0_rho">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C0_rho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C0_rho" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the energy functional <img class="math" src="_images/math/046aadb2207a3875bb7819930f3d11862a5beeb4.png" alt="C^{\rho}_0"/> coefficient <span id="id3">[<a class="reference internal" href="#id54" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<dd><p>Calculates the energy functional <img class="math" src="_images/math/046aadb2207a3875bb7819930f3d11862a5beeb4.png" alt="C^{\rho}_0"/> coefficient <span id="id3">[<a class="reference internal" href="#id55" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
 <div class="math">
 <p><img src="_images/math/33caeec00cbc952fdd14850c5e27239662858080.png" alt="C^0_\rho(\rho) = \frac{3}{8} t_0 + \frac{3}{48} t_3 \rho^\alpha"/></p>
 </div><dl class="field-list simple">
@@ -379,7 +379,7 @@ density, or effective mass).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.bsk.C0_tau">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C0_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C0_tau" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the energy functional <img class="math" src="_images/math/620677d49b84927876491b070dca5f5fa16d631a.png" alt="C^{\tau}_0"/> coefficient <span id="id4">[<a class="reference internal" href="#id54" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<dd><p>Calculates the energy functional <img class="math" src="_images/math/620677d49b84927876491b070dca5f5fa16d631a.png" alt="C^{\tau}_0"/> coefficient <span id="id4">[<a class="reference internal" href="#id55" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
 <div class="math">
 <p><img src="_images/math/f1a4346606c944d0828ff3af3f93c7df2a374375.png" alt="C^0_\tau(\rho) &amp;=  \frac{3}{16} t_1 + \frac{1}{4} t_2 \left(\frac{5}{4} + x_2\right) + \frac{3}{16} t_4 \rho^\beta + \frac{1}{4} t_5 \left(\frac{5}{4} + x_5 \right) \rho^\gamma"/></p>
 </div><dl class="field-list simple">
@@ -401,7 +401,7 @@ density, or effective mass).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.bsk.C1_rho">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C1_rho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C1_rho" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the energy functional <img class="math" src="_images/math/6f4803f20cad6db769e1873d138f7ce02b98895e.png" alt="C^{\rho}_1"/> coefficient <span id="id5">[<a class="reference internal" href="#id54" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<dd><p>Calculates the energy functional <img class="math" src="_images/math/6f4803f20cad6db769e1873d138f7ce02b98895e.png" alt="C^{\rho}_1"/> coefficient <span id="id5">[<a class="reference internal" href="#id55" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
 <div class="math">
 <p><img src="_images/math/71e073c2870e49cf342f5648ae2f43d3864f3da8.png" alt="C^1_\rho(\rho) = -\frac{1}{4} t_0 \left(\frac{1}{2} + x_0\right) - \frac{1}{24} t_3 \left(\frac{1}{2} + x_3 \right) \rho^\alpha"/></p>
 </div><dl class="field-list simple">
@@ -423,7 +423,7 @@ density, or effective mass).</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.bsk.C1_tau">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C1_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C1_tau" title="Permalink to this definition"></a></dt>
-<dd><p>Calculates the energy functional <img class="math" src="_images/math/10f1a17dc33d76cf6faf3db9560dcfb7b6685530.png" alt="C^{\tau}_1"/> coefficient <span id="id6">[<a class="reference internal" href="#id54" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<dd><p>Calculates the energy functional <img class="math" src="_images/math/10f1a17dc33d76cf6faf3db9560dcfb7b6685530.png" alt="C^{\tau}_1"/> coefficient <span id="id6">[<a class="reference internal" href="#id55" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
 <div class="math">
 <p><img src="_images/math/27f1447b60259f7ac665c30878c543dad51ef5e9.png" alt="C^1_\tau(\rho) = -\frac{1}{8} t_1 \left( \frac{1}{2} + x_1 \right) + \frac{1}{8} t_2 \left(\frac{1}{2} + x_2\right) - \frac{1}{8} t_4 \rho^\beta \left( \frac{1}{2} + x_4 \right)  + \frac{1}{8} t_5 \left(\frac{1}{2} + x_5 \right) \rho^\gamma"/></p>
 </div><dl class="field-list simple">
@@ -443,8 +443,25 @@ density, or effective mass).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="libnest.bsk.E_minigap_n">
-<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">E_minigap_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.E_minigap_n" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="libnest.bsk.E_minigap_delta_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">E_minigap_delta_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.E_minigap_delta_n" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the energy of minigap <img class="math" src="_images/math/936f6602f25bcae3f5ea24bf8d507de2e902d292.png" alt="E_{mg}"/> [MeV] for neutron matter.</p>
+<dl class="simple">
+<dt>Parameters</dt><dd><p>delta (float): pairing field for neutrons <img class="math" src="_images/math/c8ef58ca4eb0f7ac37f4624b265ffe515923095f.png" alt="\Delta_n"/> [fm <sup>-3</sup>]
+rho_n (float): neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt>Returns</dt><dd><p>float: energy of minigap <img class="math" src="_images/math/936f6602f25bcae3f5ea24bf8d507de2e902d292.png" alt="E_{mg}"/> [MeV]</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.eF_n" title="libnest.bsk.eF_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">eF_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.E_minigap_rho_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">E_minigap_rho_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.E_minigap_rho_n" title="Permalink to this definition"></a></dt>
 <dd><div class="admonition-todo admonition" id="id7">
 <p class="admonition-title">Todo</p>
 <p>move to definitions</p>
@@ -480,7 +497,7 @@ spin components</p>
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">I</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.I" title="Permalink to this definition"></a></dt>
 <dd><p>Approximates the solution to the integral present in the original
 <img class="math" src="_images/math/1bdf05cc8dd0699c96b3d003453c81bf84eea7ce.png" alt="\nu^{\pi}"/> formula for single-particle energies below 6.5 MeV.
-Check <span id="id8">[<a class="reference internal" href="#id16" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
+Check <span id="id8">[<a class="reference internal" href="#id17" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
 <div class="math">
 <p><img src="_images/math/0baee713f5d1f031e67e0e309380eeec290a61b0.png" alt="I_q(\rho_n,\rho_p)
 = \sqrt{\mu_q(\rho_n,\rho_p) } \left( 2 \ln{\frac{2 \mu_q(\rho_n,\rho_p) }{\Delta_q(\rho_n,\rho_p) }} + \Lambda\left( \frac{\varepsilon_\Lambda}{\mu_q(\rho_n,\rho_p) } \right) \right)"/></p>
@@ -512,7 +529,7 @@ Check <span id="id8">[<a class="reference internal" href="#id16" title="Daniel P
 <dt class="sig sig-object py" id="libnest.bsk.Lambda">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.Lambda" title="Permalink to this definition"></a></dt>
 <dd><p>Function <img class="math" src="_images/math/65e60d95fc7bc06725cb967be10982e4bf310122.png" alt="\Lambda"/> used in <a class="reference internal" href="#libnest.bsk.I" title="libnest.bsk.I"><code class="xref py py-func docutils literal notranslate"><span class="pre">I()</span></code></a>.
-Check <span id="id9">[<a class="reference internal" href="#id16" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
+Check <span id="id9">[<a class="reference internal" href="#id17" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
 <div class="math">
 <p><img src="_images/math/faac8643f04f9be6c990319c21552e3c714c942f.png" alt="\Lambda(x)
 = \ln(16x) + 2\sqrt{1+x} - 2 \ln\left({1+\sqrt{1+x}}\right) - 4."/></p>
@@ -553,6 +570,27 @@ Check <span id="id9">[<a class="reference internal" href="#id16" title="Daniel P
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="Permalink to this definition"></a></dt>
+<dd><p>First derivative of energy per nucleon (for neutrons only).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – rho_n (float): neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>derivative of energy per neutron, :math:` frac{delta e_n}{delta rho}` [MeV]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon_n" title="libnest.bsk.energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon_n()</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -637,13 +675,32 @@ Check <span id="id9">[<a class="reference internal" href="#id16" title="Daniel P
 <dd><p>Returns the energy per nucleon on infinite nuclear matter of given
 density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
 Formula (A13) from <a class="reference external" href="https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804">https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</a>
-<span id="id11">[<a class="reference internal" href="#id62" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span>.</p>
+<span id="id11">[<a class="reference internal" href="physics.html#id66" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p></li>
 <li><p><strong>rho_p</strong> (<em>float</em>) – proton density <img class="math" src="_images/math/c1394609a2447379cb7ccb2cfc999bc5b712e585.png" alt="\rho_p"/> [fm <sup>-3</sup>]; sum of both spin components</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>energy per nucleon <img class="math" src="_images/math/5281964350ba2ac76b8428fdddd2d3e3fd2e3d1f.png" alt="e_n"/> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.energy_per_nucleon_n" title="Permalink to this definition"></a></dt>
+<dd><p>Energy per nucleon on infinite neutron matter of density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/>.
+Derived from formula (A13) from <a class="reference external" href="https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804">https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</a>
+<span id="id12">[<a class="reference internal" href="physics.html#id66" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>energy per neutron <img class="math" src="_images/math/5281964350ba2ac76b8428fdddd2d3e3fd2e3d1f.png" alt="e_n"/> [MeV]</p>
@@ -698,6 +755,28 @@ related to the interaction of the nucleons with the background fluctuations.</p>
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_derivative_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_derivative_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_derivative_n" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the derivative of energy density <img class="math" src="_images/math/072f33e8007296972b80b32f9525b91861b50103.png" alt="\frac{\delta \epsilon}{\delta \rho}"/> in neutron matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>derivative of energy density <img class="math" src="_images/math/072f33e8007296972b80b32f9525b91861b50103.png" alt="\frac{\delta \epsilon}{\delta \rho}"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -890,12 +969,12 @@ with neutron and proton densities rho_n, rho_p respectively.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="libnest.bsk.mu_q">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">mu_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.mu_q" title="Permalink to this definition"></a></dt>
-<dd><div class="admonition-todo admonition" id="id12">
+<dd><div class="admonition-todo admonition" id="id13">
 <p class="admonition-title">Todo</p>
 <p>move to definitions</p>
 </div>
 <p>Calculates the chemical potential <img class="math" src="_images/math/4a3598141469c2555591e66606a1b86d4ec6dca9.png" alt="\mu"/> defined with the wavevector
-<img class="math" src="_images/math/ce42c76e1e389547530be1fc7618d5e4b6559586.png" alt="k_F"/> <span id="id13">[<a class="reference internal" href="#id63" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. Phys. Rev. Lett., 102:152503, Apr 2009. URL: https://link.aps.org/doi/10.1103/PhysRevLett.102.152503, doi:10.1103/PhysRevLett.102.152503.">GCP09</a>]</span>.</p>
+<img class="math" src="_images/math/ce42c76e1e389547530be1fc7618d5e4b6559586.png" alt="k_F"/> <span id="id14">[<a class="reference internal" href="physics.html#id67" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. Phys. Rev. Lett., 102:152503, Apr 2009. URL: https://link.aps.org/doi/10.1103/PhysRevLett.102.152503, doi:10.1103/PhysRevLett.102.152503.">GCP09</a>]</span>.</p>
 <div class="math">
 <p><img src="_images/math/4da512b5baedac8354a5c367d9e94916ae07e14a.png" alt="\mu_q = \frac{\hbar^2 k_F^2}{2M_q}"/></p>
 </div><dl class="field-list simple">
@@ -976,6 +1055,174 @@ symmetric matter and <img class="math" src="_images/math/68d08d328c2ddd107269990
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_derivative_energy_per_nucleon_n" title="Permalink to this definition"></a></dt>
+<dd><p>First derivative of energy per nucleon, calculated numerically using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>.</p>
+<p>Args:
+rho_n (float): rho_n (float): neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: derivative of energy per neutron, :math:` frac{delta e_n}{delta rho}` [MeV]</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_derivative_epsilon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_derivative_epsilon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_derivative_epsilon_n" title="Permalink to this definition"></a></dt>
+<dd><p>Derivative of energy density <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/> with respect to density, calculated numerically using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code> for neutron matter and using the <a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a> function, setting proton
+density <img class="math" src="_images/math/c1394609a2447379cb7ccb2cfc999bc5b712e585.png" alt="\rho_p"/> to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Derivative of <img class="math" src="_images/math/0ad7b30534898f253002222f998f38001e604648.png" alt="\epsilon"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_derivative_pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_derivative_pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_derivative_pressure_n" title="Permalink to this definition"></a></dt>
+<dd><p>Derivative of pressure <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> with respect to density for neutron matter,
+calculated numerically using <code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Derivative of <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.numerical_pressure_n" title="libnest.bsk.numerical_pressure_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_pressure_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_pressure_n" title="Permalink to this definition"></a></dt>
+<dd><p>Pressure <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> in neutron matter, calculated using the <code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>
+function to calculate the derivative of data calculated by <a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pressure <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_second_derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_second_derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_second_derivative_energy_per_nucleon_n" title="Permalink to this definition"></a></dt>
+<dd><p>Second derivative of energy per nucleon, calculated numerically using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>.</p>
+<p>Args:
+rho_n (float): rho_n (float): neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: second derivative of energy per neutron, :math:` frac{delta^2 e_n}{delta rho^2}` [MeV]</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_speed_of_sound_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_speed_of_sound_n" title="Permalink to this definition"></a></dt>
+<dd><p>Velocity of sound in neutron matter dependent on total matter density equal
+to neuton density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/>, given as a percentage of speed of light.
+Calculated based on numerical data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>velocity of sound <img class="math" src="_images/math/cce2a12185fb6dce87e2721a2bfb567334e6c23b.png" alt="v_s"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.numerical_derivative_pressure_n" title="libnest.bsk.numerical_derivative_pressure_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_derivative_pressure_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.numerical_derivative_epsilon_n" title="libnest.bsk.numerical_derivative_epsilon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_derivative_epsilon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.pressure_derivative_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">pressure_derivative_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.pressure_derivative_n" title="Permalink to this definition"></a></dt>
+<dd><p>Calculates the derivative of pressure <img class="math" src="_images/math/adcc60d0c6c4439880f7296c12fd4df6e19e88e0.png" alt="\frac{\delta P}{\delta \rho}"/> in neutron matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>derivative of pressure <img class="math" src="_images/math/adcc60d0c6c4439880f7296c12fd4df6e19e88e0.png" alt="\frac{\delta P}{\delta \rho}"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.second_derivative_energy_per_nucleon_n" title="libnest.bsk.second_derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">second_derivative_energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.pressure_n" title="Permalink to this definition"></a></dt>
+<dd><p>Pressure <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/> in neutron matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pressure <img class="math" src="_images/math/c2aa3dff9bffb099e9dff196fd36aed56ec16baf.png" alt="P"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="libnest.bsk.proton_ref_pairing_field">
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">proton_ref_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.proton_ref_pairing_field" title="Permalink to this definition"></a></dt>
 <dd><p>Returns the reference pairing field for protons in uniform matter.
@@ -1010,17 +1257,48 @@ symmetric matter and <img class="math" src="_images/math/68d08d328c2ddd107269990
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="libnest.bsk.speed_of_sound_n">
-<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.speed_of_sound_n" title="Permalink to this definition"></a></dt>
-<dd><p>as a percentage of speed of light</p>
+<dt class="sig sig-object py" id="libnest.bsk.second_derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">second_derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.second_derivative_energy_per_nucleon_n" title="Permalink to this definition"></a></dt>
+<dd><p>Second derivative of energy per nucleon (for neutrons only).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rho</strong> (<em>TYPE</em>) – DESCRIPTION.</p>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – rho_n (float): neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>None.</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>second derivative of energy per neutron, :math:` frac{delta^2 e_n}{delta rho^2}` [MeV]</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon_n" title="libnest.bsk.energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.speed_of_sound_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.speed_of_sound_n" title="Permalink to this definition"></a></dt>
+<dd><p>Velocity of sound in neutron matter, dependent on total matter density equal
+to neuton density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/>, given as a percentage of speed of light.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <img class="math" src="_images/math/ea2cf16d624f291793ea3c9bad9a4dbeb0ef7ab8.png" alt="\rho_n"/> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>velocity of sound <img class="math" src="_images/math/cce2a12185fb6dce87e2721a2bfb567334e6c23b.png" alt="v_s"/></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.pressure_derivative_n" title="libnest.bsk.pressure_derivative_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_derivative_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.epsilon_derivative_n" title="libnest.bsk.epsilon_derivative_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_derivative_n()</span></code></a></p>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -1057,7 +1335,7 @@ symmetric matter and <img class="math" src="_images/math/68d08d328c2ddd107269990
 <span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">v_pi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.v_pi" title="Permalink to this definition"></a></dt>
 <dd><p>Calculates pairing strength <img class="math" src="_images/math/65f4435f5be78ddd36a5384b1d6b3a9bc694b57e.png" alt="\upsilon^{pi}_q"/> [fm <sup>-3</sup>] for neutrons
 or protons, for energies below 6.5 MeV.
-Check <span id="id14">[<a class="reference internal" href="#id16" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
+Check <span id="id15">[<a class="reference internal" href="#id17" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
 <div class="math">
 <p><img src="_images/math/e7ea3269e20babdf17023beabf7e4b450c2c999f.png" alt="v^{\pi q}(\rho_n,\rho_p)
 = - \frac{8 \pi^2}{I_q(\rho_n,\rho_p) } B_q(\rho_n,\rho_p)^{3/2}"/></p>
@@ -1089,19 +1367,43 @@ Check <span id="id14">[<a class="reference internal" href="#id16" title="Daniel 
 </div>
 <div class="section" id="references">
 <h3>References<a class="headerlink" href="#references" title="Permalink to this heading"></a></h3>
-<div class="docutils container" id="id15">
+<div class="docutils container" id="id16">
 <dl class="citation">
-<dt class="label" id="id54"><span class="brackets">BDEN02</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>,<a href="#id6">4</a>)</span></dt>
+<dt class="label" id="id55"><span class="brackets">BDEN02</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>,<a href="#id5">3</a>,<a href="#id6">4</a>)</span></dt>
 <dd><p>Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. <em>Physical Review C</em>, 65(5):054322, 2002. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.65.054322">https://link.aps.org/doi/10.1103/PhysRevC.65.054322</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.65.054322">doi:10.1103/PhysRevC.65.054322</a>.</p>
 </dd>
-<dt class="label" id="id62"><span class="brackets"><a class="fn-backref" href="#id11">CGP09</a></span></dt>
+<dt class="label" id="id20"><span class="brackets">BMRS16</span></dt>
+<dd><p>Aurel Bulgac, Piotr Magierski, Kenneth J Roche, and Ionel Stetcu. Induced fission of pu 240 within a real-time microscopic framework. <em>Physical review letters</em>, 116(12):122504, 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.116.122504">https://link.aps.org/doi/10.1103/PhysRevLett.116.122504</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.116.122504">doi:10.1103/PhysRevLett.116.122504</a>.</p>
+</dd>
+<dt class="label" id="id58"><span class="brackets">CLS06</span></dt>
+<dd><p>LG Cao, U Lombardo, and P Schuck. Screening effects in superfluid nuclear and neutron matter within brueckner theory. <em>Physical Review C</em>, 74(6):064301, 2006. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.74.064301">https://link.aps.org/doi/10.1103/PhysRevC.74.064301</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.74.064301">doi:10.1103/PhysRevC.74.064301</a>.</p>
+</dd>
+<dt class="label" id="id53"><span class="brackets">CBH+98</span></dt>
+<dd><p>E Chabanat, P Bonche, P Haensel, J Meyer, and R Schaeffer. A skyrme parametrization from subnuclear to neutron star densities part ii. nuclei far from stabilities. <em>Nuclear Physics A</em>, 635(1-2):231–256, 1998. URL: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0375947498001808">https://www.sciencedirect.com/science/article/pii/S0375947498001808</a>, <a class="reference external" href="https://doi.org/10.1016/S0375-9474(98)00180-8">doi:10.1016/S0375-9474(98)00180-8</a>.</p>
+</dd>
+<dt class="label" id="id65"><span class="brackets">Cha10</span></dt>
+<dd><p>Nicolas Chamel. Effective contact pairing forces from realistic calculations in infinite homogeneous nuclear matter. <em>Physical Review C</em>, 82(1):014313, 2010. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.82.014313">https://link.aps.org/doi/10.1103/PhysRevC.82.014313</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.82.014313">doi:10.1103/PhysRevC.82.014313</a>.</p>
+</dd>
+<dt class="label" id="id63"><span class="brackets">CGP09</span><span class="fn-backref">(<a href="#id11">1</a>,<a href="#id12">2</a>)</span></dt>
 <dd><p>Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. <em>Physical Review C</em>, 80(6):065804, 2009. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.80.065804">https://link.aps.org/doi/10.1103/PhysRevC.80.065804</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.80.065804">doi:10.1103/PhysRevC.80.065804</a>.</p>
 </dd>
-<dt class="label" id="id63"><span class="brackets"><a class="fn-backref" href="#id13">GCP09</a></span></dt>
+<dt class="label" id="id67"><span class="brackets">CGP13</span></dt>
+<dd><p>Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Pairing: from atomic nuclei to neutron star crusts. In <em>Fifty Years of Nuclear BCS: Pairing in Finite Systems</em>, pages 284–296. World Scientific, 2013. URL: <a class="reference external" href="https://doi.org/10.1142/9789814412490_0021">https://doi.org/10.1142/9789814412490_0021</a>, <a class="reference external" href="https://doi.org/10.1142/9789814412490_0021">doi:10.1142/9789814412490_0021</a>.</p>
+</dd>
+<dt class="label" id="id62"><span class="brackets">GCP10</span></dt>
+<dd><p>Stéphane Goriely, Nicolas Chamel, and JM Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xii. stiffness and stability of neutron-star matter. <em>Physical Review C</em>, 82(3):035804, 2010.</p>
+</dd>
+<dt class="label" id="id64"><span class="brackets"><a class="fn-backref" href="#id14">GCP09</a></span></dt>
 <dd><p>Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. <em>Phys. Rev. Lett.</em>, 102:152503, Apr 2009. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.102.152503">https://link.aps.org/doi/10.1103/PhysRevLett.102.152503</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.102.152503">doi:10.1103/PhysRevLett.102.152503</a>.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets">PkecakCMWlazlowski21</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id9">2</a>,<a href="#id14">3</a>)</span></dt>
+<dt class="label" id="id68"><span class="brackets">GCP16</span></dt>
+<dd><p>Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xvi. inclusion of self-energy effects in pairing. <em>Physical Review C</em>, 93(3):034337, 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.93.034337">https://link.aps.org/doi/10.1103/PhysRevC.93.034337</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.93.034337">doi:10.1103/PhysRevC.93.034337</a>.</p>
+</dd>
+<dt class="label" id="id17"><span class="brackets">PkecakCMWlazlowski21</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id9">2</a>,<a href="#id15">3</a>)</span></dt>
 <dd><p>Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. <em>Physical Review C</em>, 104(5):055801, 2021.</p>
+</dd>
+<dt class="label" id="id21"><span class="brackets">WlazlowskiSM+16</span></dt>
+<dd><p>Gabriel Wlazłowski, Kazuyuki Sekizawa, Piotr Magierski, Aurel Bulgac, and Michael McNeil Forbes. Vortex pinning and dynamics in the neutron star crust. <em>Physical review letters</em>, 117(23):232701, 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.117.232701">https://link.aps.org/doi/10.1103/PhysRevLett.117.232701</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.117.232701">doi:10.1103/PhysRevLett.117.232701</a>.</p>
 </dd>
 </dl>
 </div>
