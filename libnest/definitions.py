@@ -157,7 +157,7 @@ def vLandau(delta,kF):
     Returns Landau velocity.
 
     Landau velocity shows at which velocity the superfluid medium starts to be
-    excited.
+    excited: phonons appear.
 
     .. math::
 
@@ -176,7 +176,7 @@ def vcritical(delta,kF):
     """
     Returns critical velocity for superfluid.
 
-    At this velocity the system is no longer superfluid.
+    At this velocity the system is no longer superfluid: the Cooper pairs break.
 
     .. math::
         v_L = e \\frac{\\Delta}{\\hbar k_F} c
@@ -188,7 +188,7 @@ def vcritical(delta,kF):
     Returns:
         float: Landau velocity :math:`v_c` in units of speed of light [c]
     """
-    return delta/kF*math.e/2.
+    return math.e/2*delta/kF/units.HBARC
 
 def superfluidFraction(j,rho,vsf):
     """
