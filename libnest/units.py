@@ -52,6 +52,7 @@ NUMZERO = 1e-12
 NUMINF  = 1e30
 
 
+ALPHA=7.2973525693e-3 # fine-structure constants
 HBARC=197.3269804  # \hbar c [MeV fm]
 VUNIT=197./940*100 # alpha constant over the neutron mass (100 to have percentage)
 hbar22M0   =20.72  # neutron bare mass
