@@ -179,7 +179,7 @@ def vcritical(delta,kF):
     At this velocity the system is no longer superfluid: the Cooper pairs break.
 
     .. math::
-        v_L = e \\frac{\\Delta}{\\hbar k_F} c
+        v_L = \\frac{e}{2} \\frac{\\Delta}{\\hbar k_F} c
 
     Args:
         delta (float): :math:`\\Delta` [MeV]
