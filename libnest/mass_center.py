@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def plot_mass_center(data):
-    [nx,ny, nz] = [data.xyz[i].size for i in range(3)]
+    [nx, ny, nz] = [data.xyz[i].size for i in range(3)]
     pos_x=[]
     pos_y=[]
     pos_z=[]
