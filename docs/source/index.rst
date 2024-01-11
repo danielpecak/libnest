@@ -33,6 +33,7 @@ star without thinking about complexity of Skyrme functionals or data format.
    bsk
    io
    plots
+   tools
 
 .. toctree::
    :caption: Examples

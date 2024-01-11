@@ -5,5 +5,5 @@
 # from libnest.io import *
 # from libnest.bsk import *
 
-__version__ = "2022.04"
+__version__ = "2024.01"
 __author__  = "Daniel Pęcak <daniel.pecak@gmail.com>"
