@@ -7,11 +7,7 @@
 # October 2022, Brussels
 """
 tools.py
-========
-Module for analyzing the wdata for the inner crust.
-That includes slices through 3D and 2D data and genating
-2D and 1D data of reduced dimensionality.
-
+==============
 """
 import numpy as np
 import math
@@ -23,11 +19,11 @@ from libnest.bsk import eF_n
 def threeSlice(variable):
     """
     Returns 1, 2 or 3 dimensional numpy array with slices through given variable.
-
+    
     It works for 1D, 2D, 3D.
 
     By default it cuts through the center.
-
+    
 
     Args:
         numpy array
@@ -40,8 +36,8 @@ def threeSlice(variable):
     """
     if(len(variable.shape)==3):
         [nx, ny, nz] = [variable.shape[i] for i in range(3)]
-        return np.asarray([variable[:, int(ny/2),int(nz/2)],
-                         variable[int(nx/2), :, int(nz/2)],
+        return np.asarray([variable[:, int(ny/2),int(nz/2)], 
+                         variable[int(nx/2), :, int(nz/2)], 
                          variable[int(nx/2),int(ny/2), :]], dtype="object")
     elif(len(variable.shape)==2):
         [nx,ny] = [variable.shape[i] for i in range(2)]
@@ -67,22 +63,13 @@ def centerOfMass(density):
         2 dimensional numpy array of center of mass coordinates
         at subsequent time steps [[x0,y0,z0], [x1,y1,z1],...]
     """
-    [nx, ny, nz] = [density.shape[1], density.shape[2], density.shape[3]]
-    position=[]
-    for t in range(density.shape[0]):
-        mass=density[t]
-        total_mass=np.sum(mass)
-        x=0
-        y=0
-        z=0
-        for i in range(nx):
-            for j in range(ny):
-                for k in range(nz):
-                    x+=i*mass[i, j, k]
-                    y+=j*mass[i, j, k]
-                    z+=k*mass[i, j, k]
-        position.append([x/total_mass, y/total_mass, z/total_mass])
-    return np.array(position)
+    i, j, k = np.indices(density.shape[1:])
+    total_mass = np.sum(density, axis=(1, 2, 3))
+    x = np.sum(i * density, axis=(1, 2, 3))
+    y = np.sum(j * density, axis=(1, 2, 3))
+    z = np.sum(k * density, axis=(1, 2, 3))
+    position = np.column_stack((x / total_mass, y / total_mass, z / total_mass))
+    return position
 
 def condensationEnergy(density, delta):
     """
@@ -100,26 +87,18 @@ def condensationEnergy(density, delta):
         at subsequent time steps [e0, e1,...]
 
     """
-    [nx, ny, nz] = [density.shape[1], density.shape[2], density.shape[3]]
-    energy=[]
-    for t in range(density.shape[0]):
-        e=0
-        for i in range(nx):
-            for j in range(ny):
-                for k in range(nz):
-                    e+=np.absolute(delta[t][i, j, k])**2/(eF_n(rho2kf(density[t][i, j ,k]))*density[t][i, j, k])
-        energy.append(3./8.*e)
-    return np.array(energy)
+    e=np.sum(3./8.*np.absolute(delta)**2/(eF_n(rho2kf(density))*(density)+10**-12), axis=(1, 2, 3))
+    return e
 
 
 def flowEnergy(j, density_n, density_p):
     """
     Returns numpy array of values of flow energy.
-
+    
 
     It works for 1D, 2D, 3D.
 
-    Formula: \integral hbar*c*j^2/(2mc^2 density) dr
+    Formula: \integral hbar*c*j^2/(2mc^2 density) dr 
 
     Args:
         current numpy array, density of neutrons numpy array, density of protons numpy array
@@ -129,32 +108,24 @@ def flowEnergy(j, density_n, density_p):
         at subsequent time steps [e0, e1,...]
 
     """
-    [nx, ny, nz] = [density_n.shape[1], density_n.shape[2], density_n.shape[3]]
-    energy=[]
     density=density_n+density_p
-    for t in range(density.shape[0]):
-        e=0
-        for i in range(nx):
-            for m in range(ny):
-                for k in range(nz):
-                    e+=(j[t][0][i, 0, 0]**2+j[t][1][0, m, 0]**2+j[t][2][0, 0, k]**2)/(density[t][i, m, k])
-
-        energy.append(e*HBARC/(2*(MN*particleN(density_n)[t]+MP*particleN(density_p)[t]))/(particleN(density)[t]))
-
+    i, m, k = np.indices(density.shape[1:])
+    e=np.sum((j[:,0]**2+j[:, 1]**2+j[:, 2]**2)/(density), axis=(1,2,3))
+    energy=e*HBARC/(2*(MN*particleN(density_n)+MP*particleN(density_p))/(particleN(density)))
     return np.array(energy)
 
 
 
 def particleN(density):
     """
-
-
+    
+    
     Returns number of particles.
 
     It works for 1D, 2D, 3D.
     For static nucleus it is constant, however there are some system
     scenarios where the number of particles might change.
-
+        
 
     Args:
         density numpy array
@@ -164,11 +135,7 @@ def particleN(density):
         at subsequent time steps [N0, N1,...]
 
     """
-    particles=[]
-    for t in range(density.shape[0]):
-        particles.append(np.sum(density[t]))
-
-    return np.array(particles)
+    return np.sum(density, axis=(1, 2, 3))
 
 
 if __name__ == '__main__':
