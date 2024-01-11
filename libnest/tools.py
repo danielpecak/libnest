@@ -7,7 +7,11 @@
 # October 2022, Brussels
 """
 tools.py
-==============
+========
+Module for analyzing the wdata for the inner crust.
+That includes slices through 3D and 2D data and genating
+2D and 1D data of reduced dimensionality.
+
 """
 import numpy as np
 import math
@@ -19,11 +23,11 @@ from libnest.bsk import eF_n
 def threeSlice(variable):
     """
     Returns 1, 2 or 3 dimensional numpy array with slices through given variable.
-    
+
     It works for 1D, 2D, 3D.
 
     By default it cuts through the center.
-    
+
 
     Args:
         numpy array
@@ -36,8 +40,8 @@ def threeSlice(variable):
     """
     if(len(variable.shape)==3):
         [nx, ny, nz] = [variable.shape[i] for i in range(3)]
-        return np.asarray([variable[:, int(ny/2),int(nz/2)], 
-                         variable[int(nx/2), :, int(nz/2)], 
+        return np.asarray([variable[:, int(ny/2),int(nz/2)],
+                         variable[int(nx/2), :, int(nz/2)],
                          variable[int(nx/2),int(ny/2), :]], dtype="object")
     elif(len(variable.shape)==2):
         [nx,ny] = [variable.shape[i] for i in range(2)]
@@ -111,11 +115,11 @@ def condensationEnergy(density, delta):
 def flowEnergy(j, density_n, density_p):
     """
     Returns numpy array of values of flow energy.
-    
+
 
     It works for 1D, 2D, 3D.
 
-    Formula: \integral hbar*c*j^2/(2mc^2 density) dr 
+    Formula: \integral hbar*c*j^2/(2mc^2 density) dr
 
     Args:
         current numpy array, density of neutrons numpy array, density of protons numpy array
@@ -135,22 +139,22 @@ def flowEnergy(j, density_n, density_p):
                 for k in range(nz):
                     e+=(j[t][0][i, 0, 0]**2+j[t][1][0, m, 0]**2+j[t][2][0, 0, k]**2)/(density[t][i, m, k])
 
-        energy.append(e*HBARC/(2*(MN*particleN(density_n)[t]+MP*particleN(density_p)[t]))/(particleN(density)[t])) 
-       
+        energy.append(e*HBARC/(2*(MN*particleN(density_n)[t]+MP*particleN(density_p)[t]))/(particleN(density)[t]))
+
     return np.array(energy)
 
 
 
 def particleN(density):
     """
-    
-    
+
+
     Returns number of particles.
 
     It works for 1D, 2D, 3D.
     For static nucleus it is constant, however there are some system
     scenarios where the number of particles might change.
-        
+
 
     Args:
         density numpy array
