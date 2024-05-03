@@ -129,8 +129,9 @@ def xiBCS(kF, delta=None):
     Returns:
         float: coherence length [fm]
     """
+    # ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
     from libnest import bsk
-    if delta==None:
+    if delta.all()==None:
         rho   = kf2rho(kF)
         delta = bsk.neutron_pairing_field(rho)
     return units.HBARC**2*kF/(np.pi*delta*units.MN)
