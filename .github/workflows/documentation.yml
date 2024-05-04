@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install setuptools sphinx==5.0.2 sphinx_rtd_theme sphinxcontrib.bibtex myst_parser 
-          pip install sphinx.ext.intersphinx sphinx.ext.autodoc sphinx.ext.todo sphinx.ext.coverage sphinx.ext.napoleon sphinx.ext.imgmath sphinxcontrib.bibtex 
+          pip install sphinx.ext.autodoc sphinx.ext.todo sphinx.ext.coverage sphinx.ext.napoleon sphinx.ext.imgmath sphinxcontrib.bibtex 
       - name: Sphinx build
         run: |
           sphinx-build docs _build
