@@ -16,8 +16,9 @@ jobs:
           pip install setuptools sphinx==5.0.2 sphinx_rtd_theme sphinxcontrib.bibtex numpy matplotlib latex scipy
       - name: Sphinx build
         run: |
-          make -C source
-          sphinx-build docs _build
+          make html
+          #make -C source
+          #sphinx-build docs _build
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
