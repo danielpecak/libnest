@@ -1,15 +1,16 @@
+#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 import libnest
 import numpy as np
 import matplotlib.pyplot as plt
 import libnest.bsk
 
+
 import sys
 if len(sys.argv) == 2:
     filename = sys.argv[1]
 else:
     sys.exit("Specify the path for the image!")
-
 
 rho = np.linspace(0, 1., 200)
 rho_neum = rho #NeuM
