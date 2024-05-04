@@ -17,7 +17,7 @@ jobs:
       - name: Sphinx build
         run: |
           ls
-          make 
+          make -C docs html
           #make -C source
           #sphinx-build docs _build
       - name: Deploy to GitHub Pages
