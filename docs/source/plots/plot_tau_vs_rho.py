@@ -5,6 +5,10 @@ Created on Tue Aug 30 14:20:50 2022
 
 @author: aleks
 """
+import sys
+import os
+sys.path.insert(0, os.path.abspath('../../'))
+
 import libnest
 import numpy as np
 import matplotlib.pyplot as plt
