@@ -45,13 +45,15 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
     'sphinx.ext.imgmath',
+    'sphinx.ext.mathjax',
     'sphinxcontrib.bibtex',
 ]
 bibtex_bibfiles = ['bibtexNS.bib']
 
 # imgmath_image_format = 'svg'
 # imgmath_embed = True
-imgmath_latex = 'pdflatex'
+# imgmath_latex = 'pdflatex'
+mathjax_path = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
