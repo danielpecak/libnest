@@ -32,6 +32,7 @@ star without thinking about complexity of Skyrme functionals or data format.
    definitions
    bsk
    io
+   pasta
    plots
    tools
 
