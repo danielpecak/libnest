@@ -49,7 +49,7 @@ extensions = [
 ]
 bibtex_bibfiles = ['bibtexNS.bib']
 
-imgmath_image_format = 'svg'
+# imgmath_image_format = 'svg'
 # imgmath_embed = True
 
 # Add any paths that contain templates here, relative to this directory.
