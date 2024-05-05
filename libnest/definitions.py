@@ -197,7 +197,7 @@ def superfluidFraction(j,rho,vsf):
 
     .. math::
 
-        \\eta_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{\\bm j}{\\rho} \\frac{1}{v_\\mathrm{sf}}
+        \\eta_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{{ j}}{\\rho} \\frac{1}{v_\\mathrm{sf}}
 
     Args:
         rho (float): density :math:`\\rho` [fm :sup:`-3`]
@@ -217,7 +217,7 @@ def vsf_NV(B,vsf,A):
 
     .. math::
 
-        v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{\\bm A}{M}
+        v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{{ A}}{M}
 
     Args:
         B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]
@@ -236,7 +236,7 @@ def v_NV(B,j,rho,A):
 
     .. math::
 
-        v^{\\mathrm{NV}} = \\hbar c \\frac{\\hbar^2}{2 M B} \\frac{\\bm j}{\\rho}  + \\frac{\\bm A}{M}
+        v^{\\mathrm{NV}} = \\hbar c \\frac{\\hbar^2}{2 M B} \\frac{{ j}}{\\rho}  + \\frac{{ A}}{M}
 
     Args:
         B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]

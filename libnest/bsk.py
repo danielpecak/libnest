@@ -891,11 +891,11 @@ def epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2):
 
     .. math::
 
-    	\\varepsilon_\\tau(\\rho_n,\\tau_n,{\\bm j}_n,\\rho_p,\\tau_p,{\\bm j}_p)
+    	\\varepsilon_\\tau(\\rho_n,\\tau_n,{ j}_n,\\rho_p,\\tau_p,{ j}_p)
 
-        = C^\\tau_0(\\rho_n+\\rho_p) \\left[ (\\rho_n + \\rho_p)(\\tau_n + \\tau_p) - ({\\bm j}_n + {\\bm j}_p)^2 \\right]
+        = C^\\tau_0(\\rho_n+\\rho_p) \\left[ (\\rho_n + \\rho_p)(\\tau_n + \\tau_p) - ({ j}_n + { j}_p)^2 \\right]
 
-        + C^\\tau_1(\\rho_n+\\rho_p) \\left[ (\\rho_n - \\rho_p)(\\tau_n - \\tau_p) - ({\\bm j}_n - {\\bm j}_p)^2 \\right].
+        + C^\\tau_1(\\rho_n+\\rho_p) \\left[ (\\rho_n - \\rho_p)(\\tau_n - \\tau_p) - ({ j}_n - { j}_p)^2 \\right].
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -971,10 +971,10 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
     single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.
 
     .. math::
-        \\varepsilon(\\rho_n,\\vec\\nabla\\rho_n, \\tilde{\\rho}_n,\\tau_n,{\\bm j}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p,\\tau_p,{\\bm j}_p) = \\nonumber \\\\
+        \\varepsilon(\\rho_n,\\vec\\nabla\\rho_n, \\tilde{\\rho}_n,\\tau_n,{ j}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p,\\tau_p,{ j}_p) = \\nonumber \\\\
      = \\frac{\\hbar^2}{2 M_n} \\tau_n + \\frac{\\hbar^2}{2 M_p} \\tau_p
       + \\varepsilon_\\rho(\\rho_n,\\rho_p)
-      + \\varepsilon_\\tau(\\rho_n,\\tau_n,{\\bm j}_n,\\rho_p,\\tau_p,{\\bm j}_p) \\nonumber \\\\
+      + \\varepsilon_\\tau(\\rho_n,\\tau_n,{ j}_n,\\rho_p,\\tau_p,{ j}_p) \\nonumber \\\\
      + \\varepsilon_{\\Delta\\rho}(\\rho_n,\\vec\\nabla\\rho_n,\\rho_p,\\vec\\nabla\\rho_p)
      + \\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p),
 
