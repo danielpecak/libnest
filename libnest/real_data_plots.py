@@ -1,4 +1,4 @@
-{ j}# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Plotting real data
 """
