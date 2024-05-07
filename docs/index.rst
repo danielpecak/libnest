@@ -15,6 +15,49 @@ star without thinking about complexity of Skyrme functionals or data format.
 
 
 
+Contributors
+============
+
+- **Monika Marek**
+
+  Developing module tools
+
+- **Aleksandra Bochenek**
+
+  Developing module bsk by implementing and testing equations for Brussels-Montreal family
+  of density functionals.
+
+Acknowledgments
+===============
+Funding
+-------
+- **Sonatina 5 2021-2024**
+
+  This grant no. 2021/40/C/ST2/00072 supported the development of the project.
+
+  .. image:: _static/logo-ncn-en_large.png
+     :width: 350px
+     :alt: Logo of Polish National Science Center
+
+
+Computational grants
+--------------------
+LUMI consortium
+We acknowledge Polish high-performance computing infrastructure PLGrid for awarding access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through PLL/2022/03/016433 and PLL/2023/04/016476.
+
+.. figure:: _static/lumi_logo_medium.png
+   :width: 150px
+   :alt: Logo of Polish National Science Center
+
+.. image:: _static/plgrid_small.png
+   :width: 70px
+   :alt: Logo of Polish National Science Center
+
+
+
+
+
+
 .. toctree::
    :caption: Documentation
    :maxdepth: 1
