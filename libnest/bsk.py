@@ -831,7 +831,7 @@ def C0_tau(rho_n, rho_p):
 
     .. math::
 
-    	 C^0_\\tau(\\rho) &=  \\frac{3}{16} t_1 + \\frac{1}{4} t_2 \\left(\\frac{5}{4} + x_2\\right) + \\frac{3}{16} t_4 \\rho^\\beta + \\frac{1}{4} t_5 \\left(\\frac{5}{4} + x_5 \\right) \\rho^\\gamma
+    	 C^0_\\tau(\\rho) =  \\frac{3}{16} t_1 + \\frac{1}{4} t_2 \\left(\\frac{5}{4} + x_2\\right) + \\frac{3}{16} t_4 \\rho^\\beta + \\frac{1}{4} t_5 \\left(\\frac{5}{4} + x_5 \\right) \\rho^\\gamma
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -917,28 +917,31 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
     related to the interaction of the nucleons with the background fluctuations.
 
     .. math::
-
+       \\begin{equation*}
+       \\begin{split}
     	\\varepsilon_{\\Delta\\rho}&(\\rho_n,\\vec\\nabla\\rho_n,\\rho_p,\\vec\\nabla\\rho_p)	=
     	 +\\frac{3}{16} t_1 \\left[
     	  \\left(          1 + \\frac{1}{2}x_1\\right)         \\left( \\nabla(\\rho_n+\\rho_p)   \\right)^2
     	 -\\left(\\frac{1}{2} +           x_1 \\right)  \\sum_q \\left( \\nabla\\rho_q \\right)^2
-    	 \\right]  \\\\
+    	 \\right] \\\\
     	  &- \\frac{1}{16}t_2 \\left[
     	     \\left(           1 + \\frac{1}{2} x_2\\right)          \\left( \\nabla(\\rho_n+\\rho_p)  \\right)^2
-    	   + \\left( \\frac{1}{2} +             x_2\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2  \\right]  \\\\
+    	   + \\left( \\frac{1}{2} +             x_2\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2  \\right] \\\\
     	  &+\\frac{3}{16} t_4  (\\rho_n+\\rho_p)^\\beta \\left[
     	  \\left(1 + \\frac{1}{2}x_4\\right)           \\left( \\nabla(\\rho_n+\\rho_p)   \\right)^2
     	 - \\left(\\frac{1}{2} + x_4 \\right)  \\sum_q  \\left( \\nabla\\rho_q \\right)^2
-    	 \\right]  \\\\
+    	 \\right] \\\\
     	 &+ \\frac{\\beta}{8}t_4 (\\rho_n+\\rho_p)^{\\beta-1} \\left[
     	 \\left(1 + \\frac{1}{2}x_4\\right) (\\rho_n+\\rho_p)\\left(\\nabla(\\rho_n+\\rho_p)\\right)^2
     	 - \\left(\\frac{1}{2} + x_4 \\right)
     	 \\nabla(\\rho_n+\\rho_p)\\cdot\\left(\\sum_q \\rho_q\\nabla\\rho_q\\right)
-    	 \\right]  \\\\
+    	 \\right] \\\\
     	 &- \\frac{1}{16}t_5 (\\rho_n+\\rho_p)^\\gamma \\left[
     	   \\left(          1 + \\frac{1}{2} x_5\\right) \\left( \\nabla(\\rho_n+\\rho_p)\\right)^2
     	  +\\left(\\frac{1}{2} +             x_5\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2
     	 \\right].
+       \\end{split}
+       \\end{equation*}
 
 
 
