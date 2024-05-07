@@ -14,14 +14,16 @@
 #
 import os
 import sys
+import datetime
 sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'libNeST'
-copyright = '2022, Daniel Pęcak, Aleksandra Bochenek'
-author = 'Daniel Pęcak, Aleksandra Bochenek'
+current_year = datetime.datetime.now().year
+copyright = '{}, Daniel Pęcak'.format(current_year)
+author = 'Daniel Pęcak'
 
 # The short X.Y version
 version = ''
@@ -145,7 +147,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'libNeST.tex', 'libNeST Documentation',
-     'Daniel Pęcak, Aleksandra Bochenek', 'manual'),
+     'Daniel Pęcak', 'manual'),
 ]
 
 

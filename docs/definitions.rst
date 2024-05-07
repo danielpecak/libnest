@@ -7,5 +7,5 @@ Module: Definitions
 .. todo::
    Give references
 
-.. automodule:: libnest
+.. automodule:: libnest.definitions
     :members:
