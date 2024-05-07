@@ -249,6 +249,115 @@ def v_NV(B,j,rho,A):
     """
     return units.VUNIT*(units.hbar22M0/B*j/rho + A/units.HBARC)
 
+def eF_n(kF):
+    """
+    Returns Fermi energy for neutrons based on wavevector kF:
+
+    .. math::
+
+        \\epsilon_F = \\frac{\\hbar^2 k_F^2}{2 M_n},
+
+    where :math:`M_n` is mass of a neutron.
+
+    Args:
+        kF (float):  wavevector :math:`k_F`
+
+    Returns:
+        float: Fermi energy :math:`\\epsilon_F` [MeV]
+    """
+    return HBAR2M_n * kF**2
+
+def E_minigap_rho_n(rho_n):
+    """
+    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
+
+    .. todo:: join these two: :func:`E_minigap_delta_n` :func:`E_minigap_rho_n`
+
+    The minigap energy can be approximated:
+
+    .. math::
+
+        E_\\mathrm{mg} = \\frac{4}{3} \\frac{|\\Delta|^2}{\\varepsilon_F},
+
+    where :math:`\\Delta` is the pairing gap in the system, and :math:`\\varepsilon_F`
+    is the Fermi energy.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both
+            spin components
+
+    Returns:
+        float: energy of minigap :math:`E_{mg}` [MeV]
+
+    See also:
+        :func:`neutron_ref_pairing_field`
+        :func:`rho2kf`
+        :func:`eF_n`
+
+    """
+# https://stackoverflow.com/questions/22095000/how-to-code-a-function-that-accepts-float-list-or-numpy-array
+# import numpy as np
+# 
+# def get_lerp_factor(a, x, b):
+#     a, x, b = np.asarray(a), np.asarray(x), np.asarray(b)
+#     return ((x - a) / (b - a)).clip(0, 1)
+    delta = neutron_ref_pairing_field(rho_n, 0.)
+    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
+
+def E_minigap_delta_n(delta, rho_n):
+    """
+    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
+
+    .. todo:: join these two: :func:`E_minigap_delta_n` :func:`E_minigap_rho_n`
+
+
+    Parameters
+        delta (float): pairing field for neutrons :math:`\\Delta_n` [fm :sup:`-3`]
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+
+    Returns
+        float: energy of minigap :math:`E_{mg}` [MeV]
+
+    See also:
+        :func:`eF_n`
+    """
+    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
+
+
+def mu_q(rho_n, rho_p, q):
+# Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
+    """
+    Calculates the chemical potential :math:`\\mu` defined with the wavevector
+    :math:`k_F` :cite:`chamel2009pairing`.
+
+    .. math::
+
+        \\mu_q = \\frac{\\hbar^2 k_F^2}{2M_q}
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+
+    Returns:
+         float: chemical potential :math:`\\mu` [MeV]
+    """
+    if(q=='n'):
+        M = effMn(rho_n, rho_p)
+        rho = rho_n
+    elif(q=='p'):
+        M = effMp(rho_n, rho_p)
+        rho = rho_p
+    else:
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    mu_q = HBARC**2*rho2kf(rho)**2/(2.*M)
+    i = np.where(mu_q==0)
+    mu_q[i] = NUMZERO
+    j = np.where(rho==0)
+    mu_q[j] = NUMZERO
+    return mu_q
+
+
 
 if __name__ == '__main__':
     pass
