@@ -1,5 +1,8 @@
 # Images
 *.png
+!docs/_static/plgrid_small.png
+!docs/_static/logo-ncn-en_large.png
+!docs/_static/lumi_logo_medium.png
 
 # Data
 */data/*.txt
