@@ -18,11 +18,11 @@ from libnest.definitions import rho2kf, eF_n
 def threeSlice(variable):
     """
     Returns 1, 2 or 3 dimensional numpy array with slices through given variable.
-    
+
     It works for 1D, 2D, 3D.
 
     By default it cuts through the center.
-    
+
 
     Args:
         numpy array
@@ -35,8 +35,8 @@ def threeSlice(variable):
     """
     if(len(variable.shape)==3):
         [nx, ny, nz] = [variable.shape[i] for i in range(3)]
-        return np.asarray([variable[:, int(ny/2),int(nz/2)], 
-                         variable[int(nx/2), :, int(nz/2)], 
+        return np.asarray([variable[:, int(ny/2),int(nz/2)],
+                         variable[int(nx/2), :, int(nz/2)],
                          variable[int(nx/2),int(ny/2), :]], dtype="object")
     elif(len(variable.shape)==2):
         [nx,ny] = [variable.shape[i] for i in range(2)]
@@ -70,20 +70,26 @@ def centerOfMass(density):
     position = np.column_stack((x / total_mass, y / total_mass, z / total_mass))
     return position
 
-def condensationEnergy(density, delta):
+def condensationEnergy(density, delta,dV=1.0):
     """
-    Returns numpy array of values of condensation energy.
-
+    Calculates the condensation energy by calculating proper function of system density :math:`\\rho`, and pairing field :math:`\\Delta`. The Fermi energy :math:`\\epsilon^*_{F}` is calculated under the assumption that the effective mass is taken into account.
     It works for 1D, 2D, 3D.
+    Returns numpy array of values of condensation energy.
+    1 dimensional numpy array of condensation energy
 
-    Formula: integral 3/8 |Delta(r)|^2/EFermi(r)density(r)dr
+
+    .. math::
+
+	   E_{\\mathrm{cond}} = \\int_V \\frac{3}{8} \\frac{|\\Delta(\\bm r)|^2}{\\epsilon^*_{F}(\\bm r)}\\rho(\\bm r)d{\\bm r}
+
 
     Args:
-        density numpy array, delta numpy array
+        density (float): :math:`\\rho` [fm :sup:`-3`]
+        delta (float): :math:`\\Delta` [MeV]
+        dV (float): infinitesimal element of volume (by default set to 1.0)
 
     Returns:
-        1 dimensional numpy array of condensation energy
-        at subsequent time steps [e0, e1,...]
+        float: condensation energy :math:`E_{\\mathrm{cond}}` at subsequent time steps [e0, e1,...]
 
     """
     e=np.sum(3./8.*np.absolute(delta)**2/(eF_n(rho2kf(density))*(density)+10**-12), axis=(1, 2, 3))
@@ -93,11 +99,11 @@ def condensationEnergy(density, delta):
 def flowEnergy(j, density_n, density_p):
     """
     Returns numpy array of values of flow energy.
-    
+
 
     It works for 1D, 2D, 3D.
 
-    Formula: \integral hbar*c*j^2/(2mc^2 density) dr 
+    Formula: \integral hbar*c*j^2/(2mc^2 density) dr
 
     Args:
         current numpy array, density of neutrons numpy array, density of protons numpy array
@@ -117,14 +123,14 @@ def flowEnergy(j, density_n, density_p):
 
 def particleN(density):
     """
-    
-    
+
+
     Returns number of particles.
 
     It works for 1D, 2D, 3D.
     For static nucleus it is constant, however there are some system
     scenarios where the number of particles might change.
-        
+
 
     Args:
         density numpy array

@@ -271,6 +271,26 @@ def eF_n(kF):
     """
     return HBAR2M_n * kF**2
 
+def Meff_hydro(rho_in, rho_out, R):
+    """
+    Returns effective mass of a spherical nucleus of radius :math:`R` of density :math:`\\rho_{\\mathrm{in}}` immersed in superfluid neutrons of density :math:`\\rho_{\\mathrm{out}}`.
+    The formula is from: :cite:`magierski2004medium`
+
+    .. math::
+
+        M_{\\mathrm{eff}} = \\frac{4}{3} \\pi R^3 m_n \\frac{(\\rho_{\\mathrm{in}}-\\rho_{\\mathrm{out}})^2}{\\rho_{\\mathrm{in}}+2\\rho_{\\mathrm{out}}},
+
+    where :math:`m_n` is mass of a neutron.
+
+    Args:
+        rho_in (float):  density of nucleus :math:`\\rho_{\\mathrm{in}}` [fm :sup:`-3`]
+        rho_out (float):  density of superlufid neutrons :math:`\\rho_{\\mathrm{out}}` [fm :sup:`-3`]
+
+    Returns:
+        float: effective mass :math:`M_{\\mathrm{eff}}` in units neutron mass
+    """
+    return HBAR2M_n * kF**2
+
 def E_minigap_rho_n(rho_n):
     """
     Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
