@@ -14,3 +14,6 @@ all: $(addprefix $(OUT), $(FILES))
 
 $(OUT)%.png: $(IN)plot_%.py
 	$(PYTHON) $^ $@
+
+clean:
+	rm $(addprefix $(OUT), $(FILES))

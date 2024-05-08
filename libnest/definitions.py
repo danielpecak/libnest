@@ -15,6 +15,8 @@ import math
 # import libnest.bsk
 # import libnest.units as units
 from libnest import units
+from libnest.units import HBARC, DENSEPSILON, NUMZERO
+from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
 from libnest.units import DENSEPSILON
 
 
@@ -297,10 +299,11 @@ def E_minigap_rho_n(rho_n):
     """
 # https://stackoverflow.com/questions/22095000/how-to-code-a-function-that-accepts-float-list-or-numpy-array
 # import numpy as np
-# 
+#
 # def get_lerp_factor(a, x, b):
 #     a, x, b = np.asarray(a), np.asarray(x), np.asarray(b)
 #     return ((x - a) / (b - a)).clip(0, 1)
+    from libnest.bsk import neutron_ref_pairing_field
     delta = neutron_ref_pairing_field(rho_n, 0.)
     return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
 

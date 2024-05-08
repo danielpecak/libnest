@@ -7,7 +7,7 @@ import libnest
 import numpy as np
 import matplotlib.pyplot as plt
 from libnest.definitions import kf2rho
-from libnest.bsk import E_minigap_rho_n
+from libnest.definitions import E_minigap_rho_n
 
 import sys
 if len(sys.argv) == 2:
