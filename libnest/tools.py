@@ -7,14 +7,13 @@
 # October 2022, Brussels
 """
 tools.py
-==============
+========
 """
 import numpy as np
 import math
 from libnest import units
 from libnest.units import DENSEPSILON
-from libnest.definitions import rho2kf
-from libnest.bsk import eF_n
+from libnest.definitions import rho2kf, eF_n
 
 def threeSlice(variable):
     """
@@ -57,7 +56,7 @@ def centerOfMass(density):
     It works for 1D, 2D, 3D.
 
     Args:
-        density numpy array
+        density(float): :math:`\\rho_n` [fm :sup:`-3`]
 
     Returns:
         2 dimensional numpy array of center of mass coordinates

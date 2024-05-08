@@ -6,8 +6,10 @@
 # On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
 # March 2022, Brussels
 """
-definitions.py
-==============
+Module: Definitions
+===================
+
+
 """
 
 import numpy as np

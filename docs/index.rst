@@ -18,11 +18,11 @@ star without thinking about complexity of Skyrme functionals or data format.
 Contributors
 ============
 
-- **Monika Marek**
+- **Monika Marek** (2023)
 
   Developing module tools
 
-- **Aleksandra Bochenek**
+- **Aleksandra Bochenek** (2022)
 
   Developing module bsk by implementing and testing equations for Brussels-Montreal family
   of density functionals.

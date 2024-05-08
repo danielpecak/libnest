@@ -4,7 +4,7 @@ Functions that let work with deep layers of inner crust,
 where pasta phase might occur
 
 Minkowsky funcionals
------------------
+--------------------
 
 
 .. todo::
