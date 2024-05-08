@@ -51,6 +51,7 @@ extensions = [
 ]
 # 'sphinx.ext.imgmath',
 bibtex_bibfiles = ['bibtexNS.bib']
+# bibtex_default_style = 'plain'
 
 # imgmath_image_format = 'svg'
 # imgmath_embed = True

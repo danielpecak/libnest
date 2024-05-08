@@ -156,6 +156,7 @@ symmetric nuclear matter in the nature. However this concept is very useful
 for theoretical considerations.
 
 
+
 Pairing models
 ==============
 References for pairing models:
@@ -164,6 +165,7 @@ References for pairing models:
  * :cite:`chamel2010effective`
  * :cite:`chamel2013pairing`
  * :cite:`chamel2016further`
+
 
 
 .. todo::

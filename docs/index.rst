@@ -66,6 +66,7 @@ We acknowledge Polish high-performance computing infrastructure PLGrid for award
    instalation
    physics
    help
+   bibliography
 
 .. toctree::
    :caption: Modules
