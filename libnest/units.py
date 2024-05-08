@@ -6,17 +6,16 @@
 # On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
 # March 2022, Brussels
 """
-units.py
-========
-Module for converting the density units for nuclear matter in the ranges typical
-for neutron stars.
+Module: Units
+=============
+This module contains physical constants relevant for nuclear matter and neutron star physics. It also provides functions for converting one type of units into another.
 
 Numerical
 ---------
 Constants for dealing with extreme numerics:
  * ``NUMZERO`` = 1e-12 (the lowest numerical value allowed)
  * ``NUMINF``  = 1e30  (the largest numerical value allowed)
- * ``DENSEPSILON`` = 1e-12
+ * ``DENSEPSILON`` = 1e-12 this value is used to renormalize division and avoid dividing but extremely small numbers that cause numerical instabilities
 
 .. note::
     ``DENSEPSILON`` is used whenever division by density has to be applied.
@@ -35,14 +34,12 @@ Physical
 Constant  Value       Unit                Description
 ========  =========== =================== ===========
 HBARC     197.3269804 [MeV fm]            :math:`\hbar c`
-MN        939.5654205 [MeV]               neutron mass
-MP        938.2720882 [MeV]               proton  mass
-HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] 0.5*hbar^2/MN
-HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] 0.5*hbar^2/MP
+MN        939.5654205 [MeV]               neutron mass :math:`m_n`
+MP        938.2720882 [MeV]               proton  mass :math:`m_p`
+HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] :math:`\\hbar^2/(2 m_n)`
+HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] :math:`\\hbar^2/(2 m_p)`
 ========  =========== =================== ===========
 
-.. todo::
-    Redefine ``VUNIT`` with removing 100
 
 """
 import numpy as np
@@ -54,7 +51,6 @@ NUMINF  = 1e30
 
 ALPHA=7.2973525693e-3 # fine-structure constants
 HBARC=197.3269804  # \hbar c [MeV fm]
-VUNIT=197./940*100 # alpha constant over the neutron mass (100 to have percentage)
 hbar22M0   =20.72  # neutron bare mass
 MN   =939.56542052 # neutron mass [MeV]
 MP   =938.27208816 # proton  mass [MeV]

@@ -155,7 +155,7 @@ def vsf(r):
     Returns:
         float: velocity in units of percentage of speed of light [c]
     """
-    return units.VUNIT*0.5/abs(r)
+    return units.ALPHA/units.MN*0.5/abs(r)
 
 def vLandau(delta,kF):
     """
@@ -211,7 +211,7 @@ def superfluidFraction(j,rho,vsf):
     Returns:
         float: superfluid fraction: a number between 0 and 1 [1]
     """
-    return units.VUNIT*j/(rho*vsf)
+    return units.ALPHA/units.MN*j/(rho*vsf)
 
 def vsf_NV(B,vsf,A):
     """
@@ -231,7 +231,7 @@ def vsf_NV(B,vsf,A):
     Returns:
         float: velocity :math:`v_\\mathrm{SF}^{NV}` in units of percentage of speed of light [c]
     """
-    return units.hbar22M0/B*vsf + units.VUNIT*A/units.HBARC
+    return units.hbar22M0/B*vsf + units.ALPHA/units.MN*A/units.HBARC
 
 def v_NV(B,j,rho,A):
     """
@@ -251,7 +251,7 @@ def v_NV(B,j,rho,A):
     Returns:
         float: mass velocity :math:`v_{\\mathrm{NV}}` in units of percentage of speed of light [c]
     """
-    return units.VUNIT*(units.hbar22M0/B*j/rho + A/units.HBARC)
+    return units.ALPHA/units.MN*(units.hbar22M0/B*j/rho + A/units.HBARC)
 
 def eF_n(kF):
     """
