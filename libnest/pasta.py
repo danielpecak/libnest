@@ -5,14 +5,13 @@
 # Warsaw Technical University
 # On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
 # May  2024, Brussels
-# =========== Description
-# To work with pasta phase and describe it.
 """
-pasta.py
-========
-This module is handling input and output.
+Module: Pasta
+=============
+This module provides tools for characterizing pasta phase.
 
-
+List of functions
+-----------------
 """
 
 def volume(nx,ny,nz):

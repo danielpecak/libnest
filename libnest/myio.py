@@ -11,15 +11,16 @@
 # =========== Usage example
 # $ ./units.py
 """
-io.py
-=====
-This module is handling input and output.
+Module: Myio
+============
+This module providing functions to read and write in different format.
 
 
 .. todo::
     Handling WDATA format with Forbes' python library.
 
-=====
+List of functions
+-----------------
 """
 import pandas as pd
 

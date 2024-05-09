@@ -8,12 +8,15 @@
 # According to Goriely, Chamel, Pearson PRC 93 034337 (2016)
 #================================
 """
-BSk.py
-======
+Module: BSk
+===========
 The module that contains Brussels-Montreal parametrization with formulas
 for energy density, effective masses, etc.
 Both for uniform system and general expressions.
 
+
+.. todo::
+    make table of those parameters below!
 
 The constants for BSk31:
 
@@ -108,9 +111,8 @@ Note:
 
     [MeV fm :sup:`8`]
 
-
-==========
-
+List of functions
+-----------------
 """
 import sys
 import numpy as np

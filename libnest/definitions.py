@@ -8,8 +8,10 @@
 """
 Module: Definitions
 ===================
+Handy functions from different fields of physics
 
-
+List of functions
+-----------------
 """
 
 import numpy as np

@@ -6,8 +6,10 @@
 # On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
 # October 2022, Brussels
 """
-tools.py
-========
+Module: tools
+=============
+List of functions
+-----------------
 """
 import numpy as np
 import math
