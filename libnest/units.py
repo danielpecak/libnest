@@ -40,7 +40,37 @@ HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] :math:`\\hbar^2/(2 m_n)`
 HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] :math:`\\hbar^2/(2 m_p)`
 ========  =========== =================== ===========
 
+Nucleon masses
+--------------
+The masses of proton, neutron and nucleon (which is their averaged mass). The nucleon mass is an average of proton and neutron mass:
 
+.. math::
+    m_N=\\frac{1}{2} (m_n + m_p) \\approx 1.67377585 \\cdot 10^{-27}.
+
+
+..  csv-table::
+    :header: "Mass", "Value"
+    :widths: 10, 15
+
+    neutron :math:`m_n`,    1.6749286 :math:`\cdot 10^{27}` kg
+    proton  :math:`m_p`,    1.6726231 :math:`\cdot 10^{27}` kg
+    nucleon :math:`m_N`,    1.6737759 :math:`\cdot 10^{27}` kg
+
+
+Neutron star
+------------
+Some constants are relevant from the point of view of neutron star's physics.
+One of them is the *neutron drip* density :math:`\\rho_{\\mathrm{ND}}` at which excesive neutrons are not bound to the nuclei anymore and form superfluid sea. This is how the border of outer crust and inner crust are defined.  Then, there is saturation density :math:`\\rho_0` at which the crust-core transition should occure. This is the density of nuclei.
+
+..  csv-table::
+    :header: "Variable", "Density", "[g cm :sup:`-3`]", "[fm :sup:`-3`]"
+    :widths: 15, 15, 15, 15
+
+    "RHOSAT", ":math:`\\rho_0`", "3 :math:`\\cdot 10^{14}`", 0.18
+    "RHOND", ":math:`\\rho_{\\mathrm{ND}}`", "4 :math:`\\cdot 10^{11}`", 0.00042
+
+List of functions
+-----------------
 """
 import numpy as np
 
@@ -48,7 +78,9 @@ DENSEPSILON = 1e-12
 NUMZERO = 1e-12
 NUMINF  = 1e30
 
-
+# EXACT:
+E  = 1.602176634e-19 # elementary charge [C]
+kB = 1.380649e-23 # Boltzmann constant [J/K]
 ALPHA=7.2973525693e-3 # fine-structure constants
 HBARC=197.3269804  # \hbar c [MeV fm]
 hbar22M0   =20.72  # neutron bare mass
@@ -60,33 +92,32 @@ HBAR2M_p = 20.749810921501915 # [MeV*fm<sup>2</sup>] 0.5*hbar^2/proton mass
 
 def KtoMev(temp):
     """
-    Function converts temperature units from Kelvins to MeVs.
+    Converts temperature :math:`T` units from Kelvins to energy :math:`E` units in MeVs by setting the Boltzmann constant to 1.
 
-
-    .. todo::
-        formula
+    .. math::
+        E = \\frac{k_B}{1eV} 10^{-6} T \\approx 11604525006.1598 \\cdot T
 
     Args:
         temp (float): temperature :math:`T` [K]
 
     Returns:
-        float: temperature :math:`T` [MeV]
+        float: energy :math:`E` [MeV]
 
     See also:
         :func:`MeVtoK`
     """
     return temp/11604525006.1598
 
-def MeVtoK(temp):
+def MeVtoK(energy):
     """
-    Function converts temperature units from MeVs to Kelvins.
+    Converts energy :math:`E` units in MeVs to temperature :math:`T` units from Kelvins by setting the Boltzmann constant to 1.
 
+    .. math::
+        T = \\frac{e V}{k_B} 10^6 E \\approx 11604525006.1598 \\cdot E
 
-    .. todo::
-        formula
 
     Args:
-        temp (float): temperature :math:`T` [MeV]
+        energy (float): energy :math:`E` [MeV]
 
     Returns:
         float: temperature :math:`T` [K]
@@ -99,39 +130,41 @@ def MeVtoK(temp):
 
 def fm3togcm3(rho):
     """
-    Function converts units 1/fm^3 into g/cm^3.
+    Function converts desnity units: fm :sup:`-3` into g cm :sup:`-3`. See more `here <#nucleon-masses>`_. The numerical factor
 
-    .. todo::
-        formula
+    .. math::
+        \\frac{m_N}{\\mathrm{fm}^3} = 1.67377585 \\cdot  10^{15}\\frac{\\mathrm{g}}{\\mathrm{cm}^3}
 
     Args:
-        temp (rho): density :math:`\\rho` [1/fm^3]
+        rho (float): density :math:`\\rho` [fm :sup:`-3`]
 
     Returns:
-        float: rho :math:`\\rho` [g/cm^3]
+        float: rho :math:`\\rho` [g cm :sup:`-3`]
 
     See also:
         :func:`gcm3tofm3`
     """
-    return rho*1.67e15
+    return rho*1.67377585e15
 
 def gcm3tofm3(rho):
     """
-    Function converts units g/cm^3 into 1/fm^3.
+    Function converts desnity units: fm :sup:`-3` into g cm :sup:`-3`. See more `here <#nucleon-masses>`_. The numerical factor
 
-    .. todo::
-        formula
+    .. math::
+        \\frac{\\mathrm{g}}{\\mathrm{cm}^3} =
+        \\frac{10^{-15}}{1.67377585}
+        \\frac{m_N}{\\mathrm{fm}^3}
 
     Args:
-        temp (rho): density :math:`\\rho` [g/cm^3]
+        rho (float): density :math:`\\rho` [g cm :sup:`-3`]
 
     Returns:
-        float: rho :math:`\\rho` [1/fm^3]
+        float: rho :math:`\\rho` [fm :sup:`-3`]
 
     See also:
         :func:`fm3togcm3`
     """
-    return rho/1.67e15
+    return rho/1.67377585e15
 
 if __name__ == '__main__':
     print("# Unit conversion: 1/fm^3 into g/cm^3")
