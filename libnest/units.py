@@ -106,6 +106,7 @@ def KtoMev(temp):
     See also:
         :func:`MeVtoK`
     """
+    temp = np.asarray(temp)
     return temp/11604525006.1598
 
 def MeVtoK(energy):
@@ -125,8 +126,8 @@ def MeVtoK(energy):
     See also:
         :func:`KtoMev`
     """
-
-    return temp*11604525006.1598
+    energy = np.asarray(energy)
+    return energy*11604525006.1598
 
 def fm3togcm3(rho):
     """
@@ -144,6 +145,7 @@ def fm3togcm3(rho):
     See also:
         :func:`gcm3tofm3`
     """
+    rho = np.asarray(rho)
     return rho*1.67377585e15
 
 def gcm3tofm3(rho):
@@ -164,6 +166,7 @@ def gcm3tofm3(rho):
     See also:
         :func:`fm3togcm3`
     """
+    rho = np.asarray(rho)
     return rho/1.67377585e15
 
 if __name__ == '__main__':
