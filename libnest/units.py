@@ -169,13 +169,19 @@ def gcm3tofm3(rho):
     rho = np.asarray(rho)
     return rho/1.67377585e15
 
+RHOSAT = gcm3tofm3(3.e14)
+RHOND  = gcm3tofm3(4.e11)
+
 if __name__ == '__main__':
     print("# Unit conversion: 1/fm^3 into g/cm^3")
     print("# 1/fm^3 = 1.67 * 10^15 g/cm^3")
-    print("{0:.2E}".format(fm3togcm3(1.)))
-    print("{0:.2E}".format(fm3togcm3(.08)))
-    print("{0:.2E}".format(fm3togcm3(.05)))
-    print("{0:.2E}".format(fm3togcm3(.03)))
+    print("")
+    for dens in [1., 0.08, 0.05, 0.03]:
+        print("{:f} [1/fm^3] ==  {:.2E} [g/cm^3]".format(dens,fm3togcm3(dens)))
+
+    # print("{0:.2E}".format(fm3togcm3(.08)))
+    # print("{0:.2E}".format(fm3togcm3(.05)))
+    # print("{0:.2E}".format(fm3togcm3(.03)))
 
     print("\n\n")
     print("# Unit conversion: g/cm^3 into 1/fm^3.")
@@ -183,6 +189,3 @@ if __name__ == '__main__':
     print("# Nuclear saturation: {0:.2E}".format(gcm3tofm3(3.e14)))
     print("# Neutron drip: {0:.2E}".format(gcm3tofm3(4.e11)))
     print("{:.6f}".format(gcm3tofm3(4.e11)))
-
-rhoSAT = gcm3tofm3(3.e14)
-rhoND  = gcm3tofm3(4.e11)
