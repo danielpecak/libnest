@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 """
 Plotting real data
+==================
+This module...
+
+List of functions
+-----------------
 """
 import os
 import sys
@@ -180,8 +185,8 @@ def cross_section_distance(x, y, size):
 
      Args:
         x (float): x-coordinate of :math:`r` [fm]
-        y (float): y=coordinate of :math:`r` [fm`]
-        size (float): full size of one axis of the square/box [fm`]
+        y (float): y=coordinate of :math:`r` [fm]
+        size (float): full size of one axis of the square/box [fm]
 
     Returns:
         float: cross section distance :math:`r` [fm]
@@ -200,8 +205,8 @@ def phi(x,y, size): #just in case
 
      Args:
         x (float): x-coordinate :math:`r` [fm]
-        y (float): y=coordinate :math:`r` [fm`]
-        size (float): full size of one axis of the square/box [fm`]
+        y (float): y=coordinate :math:`r` [fm]
+        size (float): full size of one axis of the square/box [fm]
 
     Returns:
         float: angle :math:`\\phi` [rad]
@@ -775,7 +780,7 @@ def plot_v_sf_real(filename):
     """
     Opens the specified file, checks its validity, and creates a 2D array from
     its data. The first two columns are the x and y coordinates, which are then used
-    to calculate the superfluid velocity :math:`v_{sf}`[% c]  based on the gradient
+    to calculate the superfluid velocity :math:`v_{sf}` [c]  based on the gradient
     of the pairing field gradient.
 
     It is then plotted as a cross section through the 'box' containing
@@ -808,7 +813,7 @@ def plot_v_sf_real(filename):
         plt.figure()
         plt.title(r"$v_{sf}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{sf} $ [% c]", fontsize=10)
+        plt.ylabel(r"$ v_{sf} $ [c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, vsf, 0.5)
         #plt.legend()
@@ -821,9 +826,9 @@ def plot_vsf_nv(filename_density, filename_A, filename_current):
     Opens the specified files containing density, mean field potential from current
     variation, and current data. The code checks their validity, and creates
     three 2D data arrays. It calculates superfluid velocity :math:`v_{sf}_{NV}`
-    [% c] based on the gradient of the pairing field phase. It is adjusted to the
+    [c] based on the gradient of the pairing field phase. It is adjusted to the
     entrainment effects (definition by Nicolas Chamel Valentin Allard).
-    It also calculates the velocity (mass velocity) :math:`v_{NV} [% c],
+    It also calculates the velocity (mass velocity) :math:`v_{NV}` [c],
     also adjusted to the entrainment effects.
 
     Both velocities are plotted as a cross section through the 'box' containing
@@ -876,7 +881,7 @@ def plot_vsf_nv(filename_density, filename_A, filename_current):
         plt.figure()
         plt.title(r"$v_{sf \: NV}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{sf \: NV}$ [% c]", fontsize=10)
+        plt.ylabel(r"$ v_{sf \: NV}$ [c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, vsf_nv, 0.5, label="v_{sf}_{nv}")
         plt.scatter(r, v_nv, 0.5, label="v_{nv}")
@@ -889,7 +894,7 @@ def plot_landau_velocity(filename_density, filename_delta):
     """
     Opens the specified files containing density and reference field data.
     The code checks their validity, and creates 2D data arrays. It calculates
-    the Landau velocity :math:`v_{Landau}`[% c], which shows at which velocity the
+    the Landau velocity :math:`v_{Landau}` [c], which shows at which velocity the
     superfluid medium starts to be excited.
 
     It is plotted as a cross section through the 'box' containing
@@ -927,7 +932,7 @@ def plot_landau_velocity(filename_density, filename_delta):
         plt.figure()
         plt.title(r"$v_{Landau}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{Landau} $ [% c]", fontsize=10)
+        plt.ylabel(r"$ v_{Landau} $ [c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_landau, 0.5)
         # plt.legend()
@@ -938,7 +943,7 @@ def plot_landau_velocity(filename_density, filename_delta):
 
 def plot_landau_velocity_temperature(particles_nr):
     """
-    Plots the mean value of Landau velocity :math:`v_{Landau}` [% c] against
+    Plots the mean value of Landau velocity :math:`v_{Landau}` [c] against
     temperature T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and
     :func:`files_set_particles` functions to parse through the data and chose
     only files with pairing field, and density data sets for the chosen number
@@ -946,11 +951,11 @@ def plot_landau_velocity_temperature(particles_nr):
     matter data for comparison.
 
     The function creates an array of temperatures (taken from filenames)
-    and goes through the files to find the mean :math:`v_{Landau} [% c]` in the range
+    and goes through the files to find the mean :math:`v_{Landau} [c]` in the range
     of 40-60 fm (which is assumed to be the flattest part of the curve). The speed
-    of sound :math:`v_s` [% c] is also calculated analytically from the vortex data.
+    of sound :math:`v_s` [c] is also calculated analytically from the vortex data.
 
-    A plot of :math:`v_{s}`, and :math:`v_{Landau} for vortex and uniform matter
+    A plot of :math:`v_{s}`, and :math:`v_{Landau}` for vortex and uniform matter
     against temperature is created.
 
     Args:
@@ -1028,7 +1033,7 @@ def plot_landau_velocity_temperature(particles_nr):
     plt.figure()
     plt.title(r"$v_{Landau}$ for "+particles_nr+" particles", fontsize=15)
     plt.xlabel(r"$ T \: [MeV/k_B]$", fontsize=10)
-    plt.ylabel(r"$v_{Landau}$ [% c]", fontsize=10)
+    plt.ylabel(r"$v_{Landau}$ [c]", fontsize=10)
     plt.plot(temperature, v_max, '-o', label="vortex")
     plt.plot(temperature_uniform, v_max_uniform, '-o', label="uniform")
     plt.plot(temperature, v_sound_mean, linestyle = 'dashed', label="speed of sound")
@@ -1039,9 +1044,9 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
     """
     Opens the specified files containing density and reference field data.
     The code checks their validity, and creates 2D data arrays. It calculates
-    the Landau velocity :math:`v_{Landau}` [% c], which shows at which velocity the
+    the Landau velocity :math:`v_{Landau}` [c], which shows at which velocity the
     superfluid medium starts to be excited, and the critical velocity,
-    :math:`v_{Critical}` [% c] (at this velocity the system is no longer superfluid).
+    :math:`v_{Critical}` [c] (at this velocity the system is no longer superfluid).
     Both velocities are plotted as a cross section through the 'box' containing
     the vortex/uniform matter data.
 
@@ -1083,7 +1088,7 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
         # plt.ylim(0., 3.)
         plt.title(r"Various velocities vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"% speed of light [% c]", fontsize=10)
+        plt.ylabel(r"% speed of light [c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_landau, 0.5, label="Landau")
         plt.scatter(r, v_critical, 0.5, label="Critical")
@@ -1097,7 +1102,7 @@ def plot_speed_of_sound(filename_density):
     """
     Opens the specified files containing the density data for NeuM. The code
     checks its validity, and creates a 2D data array. It calculates the speed of
-    sound :math:`v_{s}` [% c], and plots it against a cross section through the
+    sound :math:`v_{s}` [c], and plots it against a cross section through the
     'box' containing the vortex/uniform matter data.
 
     Args:
@@ -1121,7 +1126,7 @@ def plot_speed_of_sound(filename_density):
         # plt.ylim(0., 3.)
         plt.title(r"$v_{s}$ vs radius", fontsize=15)
         plt.xlabel(r"$ r\: [fm]$", fontsize=10)
-        plt.ylabel(r"$ v_{s} $ [% c]", fontsize=10)
+        plt.ylabel(r"$ v_{s} $ [c]", fontsize=10)
         plt.xticks(fontsize=10)
         plt.scatter(r, v_sound, 0.5)
         plt.legend(loc="upper right", markerscale=5)
@@ -1176,7 +1181,7 @@ def plot_e_minigap_temperature(particles_nr):
     matter data for comparison.
 
     The function creates an array of temperatures (taken from filenames)
-    and goes through the files to find the mean :math:`v_{Landau} [% c]` in the range
+    and goes through the files to find the mean :math:`v_{Landau} [c]` in the range
     of 40-60 fm (which is assumed to be the flattest part of the curve).
 
     The function accesses also data with Andreev states simulation for the
