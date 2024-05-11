@@ -20,11 +20,11 @@ Contributors
 
 - **Monika Marek** (2023)
 
-  Developing module tools
+  Developing module :mod:`.tools`.
 
 - **Aleksandra Bochenek** (2022)
 
-  Developing module bsk by implementing and testing equations for Brussels-Montreal family
+  Developing :mod:`.bsk` by implementing and testing equations for Brussels-Montreal family
   of density functionals.
 
 Acknowledgments

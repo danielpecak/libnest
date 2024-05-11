@@ -694,7 +694,7 @@ def epsilon_test(rho_n, rho_p, rho_grad_n, rho_grad_p,  tau_n, tau_p, jsum2, jdi
     #plt.legend()
     plt.show()
 
-def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
+def plot_epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
     """
     Plots the energy functional :math:`\\epsilon` [MeV fm :sup:`-3`] against
     :math`\\rho`, the sum of proton and neutron of densities, :math:`\\rho_p`

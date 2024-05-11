@@ -33,7 +33,7 @@ def threeSlice(variable):
         n dimensional numpy array with slices
 
     See also:
-        :func:`kf2rho`
+        :func:`.kf2rho`
     """
     if(len(variable.shape)==3):
         [nx, ny, nz] = [variable.shape[i] for i in range(3)]

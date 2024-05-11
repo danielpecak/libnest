@@ -165,9 +165,9 @@ def neutron_pairing_field(rho_n):
         float: pairing field for neutron matter :math:`\\Delta_{\\mathrm{NeuM}}` [MeV]
 
     See also:
-        :func:`symmetric_pairing_field`
-        :func:`neutron_ref_pairing_field`
-        :func:`proton_ref_pairing_field`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_ref_pairing_field`
+        :func:`.proton_ref_pairing_field`
     """
     kF = rho2kf(rho_n)
     delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
@@ -196,9 +196,9 @@ def symmetric_pairing_field(rho_n, rho_p):
 
 
     See also:
-        :func:`neutron_pairing_field`
-        :func:`neutron_ref_pairing_field`
-        :func:`proton_ref_pairing_field`
+        :func:`.neutron_pairing_field`
+        :func:`.neutron_ref_pairing_field`
+        :func:`.proton_ref_pairing_field`
     """
     kF = rho2kf((rho_n+rho_p))
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
@@ -232,9 +232,9 @@ def neutron_ref_pairing_field(rho_n, rho_p):
         float: pairing field for neutrons :math:`\\Delta_n` [MeV]
 
     See also:
-        :func:`neutron_pairing_field`
-        :func:`symmetric_pairing_field`
-        :func:`proton_ref_pairing_field`
+        :func:`.neutron_pairing_field`
+        :func:`.symmetric_pairing_field`
+        :func:`.proton_ref_pairing_field`
     """
     rho, eta = rhoEta(rho_n, rho_p)
     rho = rho + DENSEPSILON
@@ -265,9 +265,9 @@ def proton_ref_pairing_field(rho_n, rho_p):
         float: pairing field for protons :math:`\\Delta_p` [MeV]
 
     See also:
-        :func:`neutron_pairing_field`
-        :func:`symmetric_pairing_field`
-        :func:`neutron_ref_pairing_field`
+        :func:`.neutron_pairing_field`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_ref_pairing_field`
     """
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = rho + DENSEPSILON
@@ -320,10 +320,10 @@ def numerical_derivative_energy_per_nucleon_n(rho_n):
     rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns
-        float: derivative of energy per neutron, :math:` \\frac{\\delta e_n}{\\delta \\rho}` [MeV]
+        float: derivative of energy per neutron, :math:`\\frac{\\delta e_n}{\\delta \\rho}` [MeV]
 
     See also:
-        :func:`energy_per_nucleon`
+        :func:`.energy_per_nucleon`
 
     """
     e = energy_per_nucleon(rho_n, 0.)
@@ -338,10 +338,10 @@ def numerical_second_derivative_energy_per_nucleon_n(rho_n):
     rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns
-        float: second derivative of energy per neutron, :math:` \\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]
+        float: second derivative of energy per neutron, :math:`\\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]
 
     See also:
-        :func:`energy_per_nucleon`
+        :func:`.energy_per_nucleon`
 
     """
     e = numerical_derivative_energy_per_nucleon_n(rho_n)
@@ -350,7 +350,7 @@ def numerical_second_derivative_energy_per_nucleon_n(rho_n):
 def numerical_derivative_epsilon_n(rho_n):
     """
     Derivative of energy density :math:`\\epsilon` with respect to density, calculated numerically using
-    :func:`np.gradient` for neutron matter and using the :func:`energy_per_nucleon` function, setting proton
+    :func:`np.gradient` for neutron matter and using the :func:`.energy_per_nucleon` function, setting proton
     density :math:`\\rho_p` to 0.
 
     Args:
@@ -360,7 +360,7 @@ def numerical_derivative_epsilon_n(rho_n):
         float: Derivative of :math:`\\epsilon`
 
     See also:
-        :func:`energy_per_nucleon`
+        :func:`.energy_per_nucleon`
     """
     epsilon_neum = rho_n*(energy_per_nucleon(rho_n, 0.)+MN)
     return np.gradient(epsilon_neum, rho_n)
@@ -368,7 +368,7 @@ def numerical_derivative_epsilon_n(rho_n):
 def numerical_pressure_n(rho_n):
     """
     Pressure :math:`P` in neutron matter, calculated using the :func:`np.gradient`
-    function to calculate the derivative of data calculated by :func:`energy_per_nucleon`.
+    function to calculate the derivative of data calculated by :func:`.energy_per_nucleon`.
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -377,7 +377,7 @@ def numerical_pressure_n(rho_n):
         float: Pressure :math:`P`
 
     See also:
-        :func:`energy_per_nucleon`
+        :func:`.energy_per_nucleon`
     """
     derivative = np.gradient(energy_per_nucleon(rho_n, 0.), rho_n)
     return rho_n**2*derivative
@@ -394,7 +394,7 @@ def numerical_derivative_pressure_n(rho_n):
         float: Derivative of :math:`P`
 
     See also:
-        :func:`numerical_pressure_n`
+        :func:`.numerical_pressure_n`
     """
     return np.gradient(pressure_n(rho_n), rho_n)
 
@@ -411,8 +411,8 @@ def numerical_speed_of_sound_n(rho_n):
         float: velocity of sound :math:`v_s`
 
     See also:
-        :func:`numerical_derivative_pressure_n`
-        :func:`numerical_derivative_epsilon_n`
+        :func:`.numerical_derivative_pressure_n`
+        :func:`.numerical_derivative_epsilon_n`
     """
     return np.sqrt(numerical_derivative_pressure_n(rho_n)/numerical_derivative_epsilon_n(rho_n))*100
 
@@ -447,10 +447,10 @@ def derivative_energy_per_nucleon_n(rho):
         rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: derivative of energy per neutron, :math:` \\frac{\\delta e_n}{\\delta \\rho}` [MeV]
+        float: derivative of energy per neutron, :math:`\\frac{\\delta e_n}{\\delta \\rho}` [MeV]
 
     See also:
-        :func:`energy_per_nucleon_n`
+        :func:`.energy_per_nucleon_n`
     """
     c = (3*np.pi**2)**(2./3.)
     return (2./5.*HBAR2M_n*c*rho**(-1./3.)
@@ -470,11 +470,11 @@ def second_derivative_energy_per_nucleon_n(rho):
         rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: second derivative of energy per neutron, :math:` \\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]
+        float: second derivative of energy per neutron, :math:`\\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]
 
     See also:
-        :func:`energy_per_nucleon_n`
-        :func:`derivative_energy_per_nucleon_n`
+        :func:`.energy_per_nucleon_n`
+        :func:`.derivative_energy_per_nucleon_n`
     """
     c = (3*np.pi**2)**(2./3.)
     return (-2./15.*HBAR2M_n*c*rho**(-4./3.)
@@ -496,7 +496,7 @@ def pressure_n(rho):
         float: Pressure :math:`P`
 
     See also:
-        :func:`derivative_energy_per_nucleon_n`
+        :func:`.derivative_energy_per_nucleon_n`
     """
     return rho**2*derivative_energy_per_nucleon_n(rho)
 
@@ -511,8 +511,8 @@ def pressure_derivative_n(rho):
         float: derivative of pressure :math:`\\frac{\\delta P}{\\delta \\rho}`
 
     See also:
-        :func:`derivative_energy_per_nucleon_n`
-        :func:`second_derivative_energy_per_nucleon_n`
+        :func:`.derivative_energy_per_nucleon_n`
+        :func:`.second_derivative_energy_per_nucleon_n`
     """
     return 2*rho*derivative_energy_per_nucleon_n(rho) + rho**2*second_derivative_energy_per_nucleon_n(rho)
 
@@ -527,8 +527,8 @@ def epsilon_derivative_n(rho):
         float: derivative of energy density :math:`\\frac{\\delta \\epsilon}{\\delta \\rho}`
 
     See also:
-        :func:`derivative_energy_per_nucleon_n`
-        :func:`energy_per_nucleon`
+        :func:`.derivative_energy_per_nucleon_n`
+        :func:`.energy_per_nucleon`
     """
     return MN + energy_per_nucleon(rho, 0.) + rho*derivative_energy_per_nucleon_n(rho)
 
@@ -544,8 +544,8 @@ def speed_of_sound_n(rho_n):
         float: velocity of sound :math:`v_s`
 
     See also:
-        :func:`pressure_derivative_n`
-        :func:`epsilon_derivative_n`
+        :func:`.pressure_derivative_n`
+        :func:`.epsilon_derivative_n`
     """
     return np.sqrt(pressure_derivative_n(rho_n)/epsilon_derivative_n(rho_n))*100
 
@@ -578,8 +578,8 @@ def isoscalarM(rho_n, rho_p):
         float: effective isoscalar mass :math:`M_{s}^{*}` [MeV]
 
     See also:
-        :func:`effMn`
-        :func:`effMp`
+        :func:`.effMn`
+        :func:`.effMp`
 
     """
     return 2/((1./effMn(rho_n, rho_p))+(1./effMp(rho_n, rho_p)))
@@ -601,9 +601,9 @@ def isovectorM(rho_n, rho_p):
         float: effective isovector mass :math:`M_{v}^{*}` [MeV]
 
     See also:
-        :func:`effMn`
-        :func:`effMp`
-        :func:`isoscalarM`
+        :func:`.effMn`
+        :func:`.effMp`
+        :func:`.isoscalarM`
     """
     Mp = effMp(rho_n, rho_p)
     rho = rho_n + rho_p + DENSEPSILON
@@ -625,7 +625,7 @@ def effMn(rho_n, rho_p):
         float: effective mass of a neutron :math:`M_{n}^{*}` [MeV]
 
     See also:
-        :func:`B_q`
+        :func:`.B_q`
     """
     return HBAR2M_n/B_q(rho_n, rho_p,'n')
 
@@ -645,7 +645,7 @@ def effMp(rho_n, rho_p):
         float: effective mass of a proton :math:`M_{p}^{*}` [MeV]
 
     See also:
-        :func:`B_q`
+        :func:`.B_q`
     """
     return HBAR2M_p/B_q(rho_n, rho_p,'p')
 
@@ -978,7 +978,7 @@ def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
         float: energy functional :math:`\\epsilon_{\\pi}` [MeV]
 
     See also:
-        :func:`v_pi`
+        :func:`.v_pi`
     """
     return (1./4.*(v_pi(rho_n, rho_p, 'n') + kappa_n*(np.abs(rho_grad_n))**2)*nu_n**2
             +1./4.*(v_pi(rho_n, rho_p, 'p') + kappa_p*(np.abs(rho_grad_p))**2 )* nu_p**2)
@@ -1005,11 +1005,11 @@ def v_pi(rho_n, rho_p, q):
         float: pairing strength :math:`\\upsilon^{pi}` [fm :sup:`-3`]
 
     See also:
-        :func:`I`
-        :func:`effMn`
-        :func:`effMp`
-        :func:`Lambda`
-        :func:`B_q`
+        :func:`.I`
+        :func:`.effMn`
+        :func:`.effMp`
+        :func:`.Lambda`
+        :func:`.B_q`
     """
     #rho = rho_n + rho_p
     if(q=='n'):
@@ -1041,10 +1041,10 @@ def I(rho_n, rho_p, q):
         float: analytic integral solution
 
     See also:
-        :func:`Lambda`
-        :func:`mu_q`
-        :func:`neutron_ref_pairing_field`
-        :func:`proton_ref_pairing_field`
+        :func:`.Lambda`
+        :func:`.mu_q`
+        :func:`.neutron_ref_pairing_field`
+        :func:`.proton_ref_pairing_field`
     """
     if(q=='n'):
         delta = neutron_ref_pairing_field(rho_n, rho_p)
@@ -1067,7 +1067,7 @@ def I(rho_n, rho_p, q):
 def Lambda(x):
     # Equation 16 from Phys Rev C 104
     """
-    Function :math:`\\Lambda` used in :func:`I`.
+    Function :math:`\\Lambda` used in :func:`.I`.
     Check :cite:`pecak2021properties` and earlier papers of Chamel.
 
     .. math::
@@ -1082,7 +1082,7 @@ def Lambda(x):
         float: `\\Lambda`
 
     See also:
-        :func:`I`
+        :func:`.I`
     """
     Lambda = x
     i = np.where(x<=0 ) # intended to catch delta values with invalid kF

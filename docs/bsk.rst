@@ -51,7 +51,7 @@ Mean field
 Density energy functional
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 See also:
-  * :func:`bsk.epsilon_np`
+  * :func:`.epsilon_np`
   * :func:`.epsilon_rho_np`
   * :func:`.epsilon_tau_np`
   * :func:`.epsilon_delta_rho_np`

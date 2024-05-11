@@ -71,7 +71,7 @@ def kf2rho(kF):
         float: wavevector :math:`k_F` [fm :sup:`-1`]
 
     See also:
-        :func:`rho2kf`
+        :func:`.rho2kf`
     """
     return kF**3/(3.*np.pi*np.pi)
 
@@ -297,7 +297,7 @@ def E_minigap_rho_n(rho_n):
     """
     Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
 
-    .. todo:: join these two: :func:`E_minigap_delta_n` :func:`E_minigap_rho_n`
+    .. todo:: join these two: :func:`.E_minigap_delta_n` :func:`.E_minigap_rho_n`
 
     The minigap energy can be approximated:
 
@@ -316,9 +316,9 @@ def E_minigap_rho_n(rho_n):
         float: energy of minigap :math:`E_{mg}` [MeV]
 
     See also:
-        :func:`neutron_ref_pairing_field`
-        :func:`rho2kf`
-        :func:`eF_n`
+        :func:`.neutron_ref_pairing_field`
+        :func:`.rho2kf`
+        :func:`.eF_n`
 
     """
 # https://stackoverflow.com/questions/22095000/how-to-code-a-function-that-accepts-float-list-or-numpy-array
@@ -335,7 +335,7 @@ def E_minigap_delta_n(delta, rho_n):
     """
     Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
 
-    .. todo:: join these two: :func:`E_minigap_delta_n` :func:`E_minigap_rho_n`
+    .. todo:: join these two: :func:`.E_minigap_delta_n` :func:`.E_minigap_rho_n`
 
 
     Parameters

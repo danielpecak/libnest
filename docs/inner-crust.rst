@@ -4,11 +4,11 @@ Tables and data considering inner crust, taken from :cite:p:`pecak2024WBSkMeff`.
 
 Bulk neutron properties
 -----------------------
-Quantities extracted from simulations for each density of the inner crust $\bar\rho$: $\rho_{Bn}$ -- bulk density of neutrons, $\Delta_n$ -- pairing energy of neutrons, $\kF$ -- wave vector calculated for bulk density of neutrons, $\eF$ -- Fermi energy, $\eF^*$ -- Fermi energy calculated with regard to effective mass, $N$ -- number of neutrons, $\xi$ -- coherence length, $R$ -- radius of impurity, $\Meff$ -- effective mass of impurity.
+Quantities extracted from simulations for each density of the inner crust :math:`\bar\rho`: :math:`\rho_{Bn}` -- bulk density of neutrons, :math:`\Delta_n` -- pairing energy of neutrons, :math:`k_{\mathrm{F}}` -- wave vector calculated for bulk density of neutrons,  :math:`\epsilon_{\mathrm{F}}` -- Fermi energy, :math:`\epsilon_{\mathrm{F}}^*` -- Fermi energy calculated with regard to effective mass, :math:`N` -- number of neutrons, :math:`\xi` -- coherence length, :math:`R` -- radius of impurity, :math:`M_{\mathrm{eff}}` -- effective mass of impurity.
 
 ..  csv-table::
-    :header: ":math:`\\bar\\rho` [fm :sup:`-3`]", ":math:`\\rho_{Bn}` [fm :sup:`-3`]", " :math:`\\Delta_n` [MeV]", " :math:`k_{\\mathrm{F}}` [fm :sup:`-1`]", " :math:`\\epsilon_{\\mathrm{F}}` [MeV]", " :math:`\\epsilon_{\\mathrm{F}}^* [\MeV]`", " :math:`N`", " :math:`\\xi` [fm]", " R [fm]", " :math:`M_{\\mathrm{eff}}` [ :math:`m_n`]"
-    :widths: 15, 15, 15, 15, 15, 15, 15, 15, 15, 15
+    :header: ":math:`\\bar\\rho` [fm :sup:`-3`]", ":math:`\\rho_{Bn}` [fm :sup:`-3`]", ":math:`\\Delta_n` [MeV]", ":math:`k_{\\mathrm{F}}` [fm :sup:`-1`]", ":math:`\\epsilon_{\\mathrm{F}}`" [MeV], ":math:`\\epsilon_{\\mathrm{F}}^*` [\MeV]", ":math:`N`", ":math:`\\xi` [fm]", "R [fm]", ":math:`M_{\\mathrm{eff}}` [ :math:`m_n`]"
+    :widths: 15, 12, 12, 15, 15, 15, 15, 15, 8, 15
 
     0.0023, 0.0016, 0.826, 0.363, 2.723, 2.694, 376.6, 5.79, 5.32, 150.75 :math:`\pm` 1.8
     0.0058, 0.0045, 1.236, 0.512, 5.436, 5.301, 934.4, 5.47, 5.21, 139.30 :math:`\pm` 1.0
@@ -27,7 +27,7 @@ Effective masses
 Effective masses for dynamical, static, and hydro approaches for zirconium cluster in the inner crust. For the static case one can think about :math:`M_{\mathrm{eff}}^s` semi-classically like the number of protons plus bound neutrons. But due to the neutron medium it is not proper picture.
 
 ..  csv-table::
-    :header: " :math:`\\bar\\rho` [fm :sup:`-3`]", " :math:`\\rho_{Bn}` [fm :sup:`-3`]",   " :math:`M_{\\mathrm{eff}}^d` [ :math:`m_n`]", " :math:`M_{\\mathrm{eff}}^s` [ :math:`m_n`]", " :math:`M_{\\mathrm{eff}}^h` [ :math:`m_n`]"
+    :header: ":math:`\\bar\\rho` [fm :sup:`-3`]", ":math:`\\rho_{Bn}` [fm :sup:`-3`]",   ":math:`M_{\\mathrm{eff}}^d` [ :math:`m_n`]", ":math:`M_{\\mathrm{eff}}^s` [ :math:`m_n`]", ":math:`M_{\\mathrm{eff}}^h` [ :math:`m_n`]"
     :widths: 15, 15, 15, 15, 15
 
     0.0023, 0.0016, 150.75, 145.02, 55.98
