@@ -41,3 +41,38 @@ Effective masses for dynamical, static, and hydro approaches for zirconium clust
     0.0338, 0.0276, 166.15, 216.84, 53.57
     0.0428, 0.0351, 150.50, 229.78, 42.70
     0.0510, 0.0422, 150.60, 161.96, 34.32
+
+
+Collisions initial state
+------------------------
+.. error::
+
+  The system description is not true. Correct it!
+
+Two nuclei in an elongated box. The Coulomb interaction is present,
+the ultrarelativistic electrons are treated as un uniform gas.
+Schematic:
+
+.. code::
+
+      +-----------+
+      | o |   | o |
+      +-----------+
+
+The nuclei are two zirconium atoms, so in total there are :math:`Z=80` protons. The units of energy :math:`E_{\mathrm{tot}}`, pairing :math:`\Delta`, and chemical potential :math:`\mu` are in [MeV]. The densities are measured in [fm :sup:`-3`].
+
+..  csv-table::
+    :header: ":math:`\\bar\\rho`", ":math:`\\rho_{Bn}`", ":math:`\\mu_p`", :math:`N` , ":math:`\\mu_n`", ":math:`\\Delta_n`", ":math:`\\Delta_p`", ":math:`E_{\\mathrm{tot}}`"
+
+    0.000, 0.000101,  -25.255,   246.725, 0.373642, 0.192, 0.0069, -5.420
+    0.002, 0.001624,  -25.828,   623.797, 1.937040, 0.832, 0.0494, -1.796
+    0.006, 0.004533,  -29.776,  1370.09,  3.555630, 1.256, 0.1061,  0.659
+    0.010, 0.008369,  -37.631,  2404.02,  4.962623, 1.478, 0.1066,  2.230
+    0.015, 0.011945,  -38.414,  3322.71,  5.862966, 1.579, 0.1193,  3.153
+    0.019, 0.015194,  -42.382,  4203.90,  6.589333, 1.599, 0.1057,  3.825
+    0.024, 0.019125,  -45.139,  5209.08,  7.239645, 1.639, 0.1057,  4.463
+    0.027, 0.021536,  -45.138,  5836.39,  7.591119, 1.591, 0.1051,  4.792
+    0.030, 0.024601,  -47.516,  6636.53,  8.032960, 1.538, 0.1031,  5.174
+    0.034, 0.027579,  -49.270,  7409.12,  8.423588, 1.512, 0.1013,  5.508
+    0.043, 0.035360,  -52.454,  9401.53,  9.212281, 1.354, 0.0907,  6.241
+    0.051, 0.041282,  -55.162, 10923.8,   9.842774, 1.106, 0.0795,  6.712
