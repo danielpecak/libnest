@@ -2,6 +2,9 @@ Inner crust
 ===========
 Tables and data considering inner crust, taken from :cite:p:`pecak2024WBSkMeff`.
 
+.. todo::
+  Add information about Landau velocity
+
 Bulk neutron properties
 -----------------------
 Quantities extracted from simulations for each density of the inner crust :math:`\bar\rho`: :math:`\rho_{Bn}` -- bulk density of neutrons, :math:`\Delta_n` -- pairing energy of neutrons, :math:`k_{\mathrm{F}}` -- wave vector calculated for bulk density of neutrons,  :math:`\epsilon_{\mathrm{F}}` -- Fermi energy, :math:`\epsilon_{\mathrm{F}}^*` -- Fermi energy calculated with regard to effective mass, :math:`N` -- number of neutrons, :math:`\xi` -- coherence length, :math:`R` -- radius of impurity, :math:`M_{\mathrm{eff}}` -- effective mass of impurity.
