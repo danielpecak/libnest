@@ -306,10 +306,21 @@ def energy_per_nucleon(rho_n, rho_p):
                                                 +np.power((1-eta),5/3)/MP))
             + T0/8.*rho*(3-(2*X0 + 1)*eta**2)
             + 3.*T1/40*rho*(kF**2)*((2+X1)*F_x_5 -(0.5+X1)*F_x_8)
-            + 3./40*((2*T2+T2X2)*F_x_5 +(1./2*T2+T2X2)*F_x_8)*rho*(kF**2)
+            + 3./40*((2.*T2+T2X2)*F_x_5 +(0.5*T2+T2X2)*F_x_8)*rho*(kF**2)
             + T3/48*np.power(rho,(ALPHA+1))*(3-(1+2*X3)*(eta**2))
-            + 3*T4/40*(kF**2)*np.power(rho,BETA+1)*((2+X4)*F_x_5-(1/2+X4)*F_x_8)
-            + 3*T5/40*(kF**2)*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(1/2+X5)*F_x_8))
+            + 3.*T4/40.*(kF**2)*np.power(rho,BETA+1)*((2+X4)*F_x_5-(0.5+X4)*F_x_8)
+            + 3.*T5/40.*(kF**2)*np.power(rho,GAMMA+1)*((2+X5)*F_x_5+(0.5+X5)*F_x_8))
+
+def testMe(rho):
+    rho = rho+DENSEPSILON
+    kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
+    r = 3*HBAR2M_n/5*kF**2
+    r =r+ 3./8*T0*rho
+    r =r+ 3./80*(3*T1 + 5*T2 + 4*T2X2) * rho * kF**2
+    r =r+ 1./16*T3*np.power(rho, ALPHA+1)
+    r =r+ 9./80*T4*np.power(rho,BETA+1)*kF**2
+    r =r+ 3./80*T5*(5+4*X5)*np.power(rho,GAMMA+1)*kF**2
+    return r
 
 def numerical_derivative_energy_per_nucleon_n(rho_n):
     """
