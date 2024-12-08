@@ -57,6 +57,9 @@ def centerOfMass(density):
 
     It works for 1D, 2D, 3D.
 
+    .. note::
+        The center of mass unit here is unitless (units of grid)
+
     Args:
         density(float): :math:`\\rho_n` [fm :sup:`-3`]
 

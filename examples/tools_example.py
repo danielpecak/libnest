@@ -18,7 +18,8 @@ from libnest import tools
 # print( "test")
 # print(dir(tools))
 
-path = "" # NOTE add path here
+path = "/media/data/cernbox/kolo-crust/2024_01_11_nocoulomb/" # NOTE add path here
+# path="/media/data/supercomputing/meff/Z40/td/"
 file = path+"n0.006F2.0r1.wtxt" # NOTE add filename
 # print(file)
 data = WData.load(file, check_data=False)
@@ -26,8 +27,8 @@ data = WData.load(file, check_data=False)
 datax = data.xyz[0].reshape(-1,)  # Array of x coordinates
 datat = data.t
 # print(datat)
-rhon=data.rho_n[490:]
-datat   = datat[490:]
+rhon=data.rho_n#[490:]
+datat   = datat#[490:]
 cms = tools.centerOfMass(rhon)
 cms=np.transpose(cms)
 
@@ -54,6 +55,6 @@ for i in range(2):
     ax[i].set_ylabel(labels[i])
     ax[i].legend(loc='upper left')
 
-# plt.savefig("crossection.png")
-plt.show()
+plt.savefig("crossectionNEW.png")
+# plt.show()
 plt.close()

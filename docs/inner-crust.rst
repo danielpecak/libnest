@@ -1,6 +1,11 @@
 Inner crust
 ===========
-Tables and data considering inner crust, taken from :cite:p:`pecak2024WBSkMeff`.
+Tables and data considering inner crust, taken from many sources for example :cite:p:`pecak2024WBSkMeff`.
+
+.. contents:: Table of Contents
+    :depth: 3
+    :local:
+    :backlinks: none
 
 .. todo::
   Add information about Landau velocity
