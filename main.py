@@ -1,167 +1,78 @@
 #!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-# =========== Info: who, where, when
-# Author: Daniel Pęcak <daniel.pecak@pw.edu.pl>
-# Warsaw Technical University, Université Libre de Bruxelles
-# On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
-# April 2022, Brussels
-# =========== Description
-# TODO
-# =========== Usage example
-# $ ./test_libnest.py
+"""
+LibNest - Library for Neutron Star Physics
+===========================================
+
+This is a simple example demonstrating basic usage of the libnest library.
+For more comprehensive examples, see the examples/ directory.
+
+Author: Daniel Pęcak <daniel.pecak@pw.edu.pl>
+Warsaw Technical University, Université Libre de Bruxelles
+Institute of Physics, Polish Academy of Sciences, Warsaw
+"""
 
 import libnest
-import libnest.plots
-import libnest.real_data_plots
-import libnest.delta_and_temperature
-# import libnest.wdata
+import libnest.bsk
+import libnest.definitions
+import libnest.units
 import numpy as np
-import matplotlib.pyplot as plt
-
-print("Siema")
 
 
-#BSK
-# libnest.plots.plot_energy_per_nucleon_both()
-# libnest.plots.plot_energy_per_nucleon(0.5, 0.5)
+def main():
+    """Main function demonstrating basic libnest functionality."""
+    
+    print("=" * 60)
+    print("LibNest - Library for Neutron Star Physics")
+    print("=" * 60)
+    print()
+    
+    # Example 1: Unit conversions
+    print("Example 1: Unit Conversions")
+    print("-" * 40)
+    rho_fm3 = 0.16  # saturation density in fm^-3
+    rho_gcm3 = libnest.units.fm3togcm3(rho_fm3)
+    print(f"Saturation density: {rho_fm3:.3f} fm⁻³ = {rho_gcm3:.2e} g/cm³")
+    
+    temp_mev = 1.0  # temperature in MeV
+    temp_k = libnest.units.MeVtoK(temp_mev)
+    print(f"Temperature: {temp_mev:.1f} MeV = {temp_k:.2e} K")
+    print()
+    
+    # Example 2: Fermi wavevector calculations
+    print("Example 2: Fermi Wavevector")
+    print("-" * 40)
+    rho_n = 0.08  # neutron density in fm^-3
+    kF = libnest.definitions.rho2kf(rho_n)
+    eF = libnest.definitions.eF_n(kF)
+    print(f"Neutron density: {rho_n:.3f} fm⁻³")
+    print(f"Fermi wavevector: {kF:.3f} fm⁻¹")
+    print(f"Fermi energy: {eF:.3f} MeV")
+    print()
+    
+    # Example 3: BSk energy functional
+    print("Example 3: Brussels-Montreal Energy Functional (BSk)")
+    print("-" * 40)
+    rho_n = 0.08  # neutron density
+    rho_p = 0.08  # proton density (symmetric matter)
+    E_per_A = libnest.bsk.energy_per_nucleon(rho_n, rho_p)
+    print(f"Symmetric nuclear matter (ρₙ = ρₚ = {rho_n:.2f} fm⁻³)")
+    print(f"Energy per nucleon: {E_per_A:.3f} MeV")
+    print()
+    
+    # Example 4: Pairing field
+    print("Example 4: Neutron Pairing Field")
+    print("-" * 40)
+    rho_n = 0.05
+    delta_n = libnest.bsk.neutron_pairing_field(rho_n)
+    print(f"Neutron density: {rho_n:.3f} fm⁻³")
+    print(f"Pairing gap: {delta_n:.3f} MeV")
+    print()
+    
+    print("=" * 60)
+    print("For more examples, see the examples/ directory")
+    print("For legacy test cases, see examples/legacy_tests.py")
+    print("=" * 60)
 
 
-# libnest.plots.plot_pairing_field_n(0.5, 0.5)
-# libnest.plots.plot_pairing_field_p(0.5, 0.5)
-# libnest.plots.plot_effective_mass_n(0.5, 0.5)
-# libnest.plots.plot_effective_mass_p(0.5, 0.5)
-
-# libnest.plots.plot_pairing_field_n(1., 0)
-# libnest.plots.plot_pairing_field_p(1., 0.)
-# libnest.plots.plot_effective_mass_n(1., 0.)
-
-
-# libnest.plots.plot_B_q(1., 0., 'n')
-# libnest.plots.plot_U_q(1., 0., 'n')
-# libnest.plots.plot_isoscalarM(1., 0.)
-# libnest.plots.plot_isovectorM(1., 0.)
-
-
-
-#EPSILON
-# libnest.plots.plot_epsilon(1., 0., 0., 0., 0., 0., 'n', 0.) #rho_n, rho_p, rho_grad, tau, j, nu, q, kappa
-
-# libnest.plots.epsilon_rho_np(1., 0.)
-# libnest.plots.epsilon_tau_np(1., 0., 1., 0., 0., 0.)
-# libnest.plots.epsilon_delta_rho_np(1., 0., 1., 0., 1.)
-# g_e_laplace agrees with the previous delta eq without the beta term.
-
-# libnest.plots.epsilon_np(1., 0., 0., 0., 0., 0., 0., 0., 0.0, 0., 0., 0.)
-# libnest.plots.epsilon_np(1., 0., 1., 0., 0., 0., 0., 0., 0.0, 0., 0., 0.)
-# libnest.plots.epsilon_np(1., 0., 1., 0., 1., 0., 0., 0., 0.0, 0., 0., 0.)
-# rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p
-
-#epsilon graphs agree when rho_p = 0 and rho_grad = 0
-
-
-
-#REAL PLOTS
-# libnest.real_data_plots.plot_density("N2600i_density.txt")
-# libnest.real_data_plots.plot_density_contour("N2600i_density.txt")
-# libnest.real_data_plots.plot_pairing_field("N2600i_delta.txt")
-# libnest.real_data_plots.plot_current("N2600i.3_current.txt")
-
-
-#REAL PLOTS - CONT - SLICES
-# libnest.real_data_plots.plot_density_slice("N24000_T0.36.1_density.txt")
-# libnest.real_data_plots.plot_density_slice("N24000_T0.00.3_density.txt")
-# libnest.real_data_plots.plot_density_slice("N24000_T0.60.1_density.txt")
-
-# libnest.real_data_plots.plot_density_slice("N216_T0.00.2_density.txt")
-# libnest.real_data_plots.plot_density_slice("N216_T0.36.1_density.txt")
-# libnest.real_data_plots.plot_density_slice("N216_T0.60.1_density.txt")
-
-
-
-# libnest.real_data_plots.plot_pairing_field_slice("N24000_T0.36.1_delta.txt")
-# libnest.real_data_plots.plot_pairing_field_slice("N24000_T0.00.3_delta.txt")
-# libnest.real_data_plots.plot_pairing_field_slice("N24000_T0.60.1_delta.txt")
-
-# libnest.real_data_plots.plot_pairing_field_slice("N216_T0.00.2_delta.txt")
-# libnest.real_data_plots.plot_pairing_field_slice("N216_T0.36.1_delta.txt")
-# libnest.real_data_plots.plot_pairing_field_slice("N216_T0.60.1_delta.txt")
-
-
-
-# libnest.real_data_plots.plot_B_q_slice("N24000_T0.36.1_density.txt")
-# libnest.real_data_plots.plot_B_q_slice("N24000_T0.00.3_density.txt")
-# libnest.real_data_plots.plot_B_q_slice("N24000_T0.60.1_density.txt")
-
-# libnest.real_data_plots.plot_U_q_slice("N24000_T0.36.1_density.txt")
-# libnest.real_data_plots.plot_U_q_slice("N24000_T0.00.3_density.txt")
-# libnest.real_data_plots.plot_U_q_slice("N24000_T0.60.1_density.txt")
-
-# libnest.real_data_plots.plot_A_slice("N24000_T0.36.1_A.txt")
-# libnest.real_data_plots.plot_A_slice("N24000_T0.00.3_A.txt")
-# libnest.real_data_plots.plot_A_slice("N24000_T0.60.1_A.txt")
-
-
-# libnest.real_data_plots.plot_B_q_slice("N216_T0.36.1_density.txt")
-# libnest.real_data_plots.plot_B_q_slice("N216_T0.00.2_density.txt")
-# libnest.real_data_plots.plot_B_q_slice("N216_T0.60.1_density.txt")
-
-# libnest.real_data_plots.plot_U_q_slice("N216_T0.36.1_density.txt")
-# libnest.real_data_plots.plot_U_q_slice("N216_T0.00.2_density.txt")
-# libnest.real_data_plots.plot_U_q_slice("N216_T0.60.1_density.txt")
-
-# libnest.real_data_plots.plot_A_slice("N216_T0.36.1_A.txt")
-# libnest.real_data_plots.plot_A_slice("N216_T0.00.2_A.txt")
-# libnest.real_data_plots.plot_A_slice("N216_T0.60.1_A.txt")
-
-
-
-# libnest.real_data_plots.plot_current_slice("N216_T0.56.1_current.txt")
-# libnest.real_data_plots.plot_current_slice("N216_T0.36.1_current.txt")
-# libnest.real_data_plots.plot_current_slice("N216_T0.00.2_current.txt")
-
-# libnest.real_data_plots.plot_current_slice("N24000_T0.60.1_current.txt")
-# libnest.real_data_plots.plot_current_slice("N24000_T0.36.1_current.txt")
-# libnest.real_data_plots.plot_current_slice("N24000_T0.00.3_current.txt")
-#current too low to be visible
-
-
-
-#Velocities
-# libnest.real_data_plots.plot_vsf("N216_T0.00.2_density.txt")
-# libnest.real_data_plots.plot_vsf_nv("N216_T0.000.2_density.txt", "N216_T0.00.2_A.txt", "N216_T0.00.2_current.txt" )
-# libnest.real_data_plots.plot_landau_critical_velocity("N24000_T0.00.3_density.txt", "N24000_T0.00.3_delta.txt" )
-# libnest.real_data_plots.plot_landau_critical_velocity("N24000_T0.36.1_density.txt", "N24000_T0.36.1_delta.txt" )
-# libnest.real_data_plots.plot_landau_critical_velocity("N24000_T0.60.1_density.txt", "N24000_T0.60.1_delta.txt" )
-
-# libnest.real_data_plots.plot_landau_velocity("N216_T0.00.2_density.txt", "N216_T0.00.2_delta.txt")
-# libnest.real_data_plots.plot_landau_velocity_temperature('216')
-# libnest.real_data_plots.plot_landau_velocity_temperature('8000')
-# libnest.real_data_plots.plot_landau_velocity_temperature('24000')
-# libnest.real_data_plots.plot_speed_of_sound("N24000_T0.60.1_density.txt")
-# #issue with kf being 0 when rho is 0
-
-# libnest.plots.plot_speed_of_sound_n(1.1)
-# libnest.plots.plot_speed_of_sound_n(0.09)
-# libnest.plots.plot_pressure_n(0.09)
-# libnest.plots.plot_v_landau(0.09)
-# libnest.plots.plot_v_critical(0.09)
-# libnest.plots.plot_v_sf(1.)
-
-
-
-# Temperature - delta
-# libnest.delta_and_temperature.plot_temperature_delta('24000')
-# libnest.delta_and_temperature.plot_max_delta_temperature('24000')
-# libnest.delta_and_temperature.plot_max_delta_temperature_uniform('24000')
-
-
-
-#eminigap
-# libnest.real_data_plots.plot_e_minigap_temperature('216')
-# libnest.real_data_plots.plot_e_minigap_temperature('4160')
-# libnest.real_data_plots.plot_e_minigap_temperature('8000')
-# libnest.real_data_plots.plot_e_minigap_temperature('13600')
-# libnest.real_data_plots.plot_e_minigap_temperature('16640')
-# libnest.real_data_plots.plot_e_minigap_temperature('24000')
-
-# libnest.real_data_plots.andreev_e_minimum("N15000i_states.0000.txt")
+if __name__ == '__main__':
+    main()

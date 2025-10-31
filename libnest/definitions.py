@@ -14,6 +14,7 @@ List of functions
 -----------------
 """
 
+import sys
 import numpy as np
 import math
 # import libnest.bsk
@@ -21,7 +22,6 @@ import math
 from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
-from libnest.units import DENSEPSILON
 
 
 def rho2kf(rho):
@@ -370,6 +370,8 @@ def mu_q(rho_n, rho_p, q):
     Returns:
          float: chemical potential :math:`\\mu` [MeV]
     """
+    from libnest.bsk import effMn, effMp
+    
     if(q=='n'):
         M = effMn(rho_n, rho_p)
         rho = rho_n
