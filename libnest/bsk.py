@@ -15,10 +15,66 @@ for energy density, effective masses, etc.
 Both for uniform system and general expressions.
 
 
-.. todo::
-    make table of those parameters below!
+BSk31 Skyrme Parameters
+-----------------------
 
-The constants for BSk31:
+The following table lists all Skyrme parameters used in the BSk31 functional:
+
+.. list-table:: BSk31 Skyrme Parameters
+   :header-rows: 1
+   :widths: 15 15 40
+
+   * - Parameter
+     - Value
+     - Unit
+   * - t₀
+     - -2302.01
+     - MeV fm³
+   * - t₁
+     - 762.99
+     - MeV fm⁵
+   * - t₂
+     - 0.0
+     - MeV fm⁵
+   * - t₃
+     - 13797.83
+     - MeV fm⁽³⁺³ᵅ⁾
+   * - t₄
+     - -500.0
+     - MeV fm⁽⁵⁺³ᵝ⁾
+   * - t₅
+     - -40.0
+     - MeV fm⁽⁵⁺³ᵞ⁾
+   * - x₀
+     - 0.676655
+     - dimensionless
+   * - x₁
+     - 2.658109
+     - dimensionless
+   * - x₂t₂
+     - -422.29
+     - MeV fm⁵
+   * - x₃
+     - 0.83982
+     - dimensionless
+   * - x₄
+     - 5.0
+     - dimensionless
+   * - x₅
+     - -12.0
+     - dimensionless
+   * - α
+     - 1/5
+     - dimensionless
+   * - β
+     - 1/12
+     - dimensionless
+   * - γ
+     - 1/4
+     - dimensionless
+
+Individual Parameters
+---------------------
 
 .. data:: T0   =-2302.01
 
@@ -564,13 +620,18 @@ def speed_of_sound_n(rho_n):
 # ================================
 #       Effective masses
 # ================================
-# TODO list:
+# Implementation based on:
 # https://journals.aps.org/prc/pdf/10.1103/PhysRevC.82.035804
-# Code function: Eq. 10 and plot it as a function of rho (I suppose this is what is done in
-# Fig 5 in the inset). q=n or p (neutron or proton counterpart)
-# rho = rho_n + rho+p
-# Make plots for neutron matter (NeuM) where rho = rho_n [rho_p =0 ]
-# Make plots for symmetric matter (SM) where rho = 2*rho_n [rho_p =rho_n ]
+# Equation 10, plotted as function of rho (see Fig 5, inset)
+# 
+# NOTE: Functions calculate effective masses for both species (q=n or p)
+# where total density rho = rho_n + rho_p
+#
+# Common use cases:
+# - Neutron matter (NeuM): rho = rho_n, rho_p = 0
+# - Symmetric matter (SM): rho = 2*rho_n, rho_p = rho_n
+#
+# TODO: Add plotting functions to visualize M* vs rho for different asymmetries
 
 def isoscalarM(rho_n, rho_p):
     """
@@ -729,10 +790,17 @@ def B_q(rho_n, rho_p, q):
 # ================================
 #        Energy functional
 # ================================
-# TODO list:
+# Implementation based on:
 # PHYSICAL REVIEW C 104, 055801 (2021)
-# NOTE: densities such as TAU, MU, J will be given in the future from the data
-# Formulas 9-14,23, A8-A10
+# Formulas: 9-14, 23, A8-A10
+# 
+# NOTE: Current implementation uses uniform matter approximation.
+# Future extensions will include:
+# - Non-uniform densities (TAU, MU, J) from simulation data
+# - Gradient corrections
+# - Spin-orbit and tensor terms
+#
+# TODO: Extend to non-uniform matter with kinetic densities from data files
 
 
 
@@ -995,12 +1063,17 @@ def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
             +1./4.*(v_pi(rho_n, rho_p, 'p') + kappa_p*(np.abs(rho_grad_p))**2 )* nu_p**2)
 
 def v_pi(rho_n, rho_p, q):
-    # Equation 14 from Phys Rev C 104
-    # TODO make different functions for neutrons and protons
     """
-    Calculates pairing strength :math:`\\upsilon^{pi}_q` [fm :sup:`-3`] for neutrons
+    Calculates pairing strength :math:`\\upsilon^{\\pi}_q` for neutrons
     or protons, for energies below 6.5 MeV.
+    
+    Based on Equation 14 from Phys Rev C 104.
     Check :cite:`pecak2021properties` and earlier papers of Chamel.
+    
+    .. note::
+        This function handles both neutron (q='n') and proton (q='p') cases
+        with the same implementation. Consider splitting into separate functions
+        for better code organization if species-specific modifications are needed.
 
     .. math::
 

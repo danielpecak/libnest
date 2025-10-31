@@ -47,7 +47,9 @@ def cm(data,t=-1):
         qx = 0.0
         qy = 0.0
         qz = 0.0
-        # TODO DEALING WITH background density
+        # NOTE: Background density subtraction
+        # Currently only neutron background is subtracted (rho_back)
+        # TODO: Implement proper background density handling for both species
         rhon = data.rho_n[t0] - rho_back
         rhop = data.rho_p[t0]
         # rho = rhop + rhon
@@ -59,7 +61,8 @@ def cm(data,t=-1):
         for i in range(nx):
             for j in range(ny):
                 for k in range(nz):
-                    # TODO include X, Y, Z directions
+                    # NOTE: Currently only Z direction is used
+                    # TODO: Generalize to include X, Y, Z directions for 3D systems
                     qx = qx + rho[i][j][k]*datax[i]
                     qy = qy + rho[i][j][k]*datay[j]
                     qz = qz + rho[i][j][k]*dataz[k]
@@ -78,24 +81,33 @@ def cm(data,t=-1):
 # ================================
 def q20(data,t=-1,rcm=np.array([[0,0,0]])):
     """
-    Quadrupole moment
+    Calculates the quadrupole moment Q₂₀ of the nuclear density distribution.
+
+    The quadrupole moment characterizes the deformation of the nucleus from
+    spherical shape.
 
     .. math::
 
-	   Q_{20} = \\int
+	   Q_{20} = \\int \\rho(\\mathbf{r}) (2z^2 - x^2 - y^2) d\\mathbf{r}
+
+    .. note::
+        This function is under development. The complete formula and proper
+        normalization need to be verified.
 
     Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        data: WDATA object containing density information
+        t (int): timestep index, -1 for last timestep (default: -1)
+        rcm (array): center of mass coordinates [x, y, z]
 
     Returns:
-        float: pairing field for neutron matter :math:`\\Delta_{\\mathrm{NeuM}}` [MeV]
+        float or list: quadrupole moment Q₂₀ [fm²] for single or multiple timesteps
 
     See also:
-        :func:`symmetric_pairing_field`
-        :func:`neutron_ref_pairing_field`
-        :func:`proton_ref_pairing_field`
+        :func:`centerOfMass`
     """
-    # TODO DODUMENTATION, FORMULA
+    # NOTE: Function implementation is incomplete
+    # TODO: Complete documentation with proper formula and units
+    # TODO: Verify normalization and comparison with standard definitions
     # data # wdata
     # t0=-1 # if not specified the last timestep
     if(type(t)==int):
