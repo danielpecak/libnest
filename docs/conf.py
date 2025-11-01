@@ -33,9 +33,8 @@ release = '0.1'
 
 # -- General configuration ---------------------------------------------------
 
-# If your documentation needs a minimal Sphinx version, state it here.
-#
-# needs_sphinx = '1.0'
+# Minimum Sphinx version
+needs_sphinx = '4.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -52,6 +51,9 @@ extensions = [
 # 'sphinx.ext.imgmath',
 bibtex_bibfiles = ['bibtexNS.bib']
 # bibtex_default_style = 'plain'
+
+# Suppress epub builder warnings (not needed for HTML documentation)
+suppress_warnings = ['epub.unknown_project_files']
 
 # imgmath_image_format = 'svg'
 # imgmath_embed = True
