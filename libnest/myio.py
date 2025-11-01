@@ -21,8 +21,6 @@ Currently supported formats:
 
 Planned features:
 - WDATA format support using Forbes' python library
-- HDF5 format for large datasets
-- NetCDF format for multidimensional data
 
 List of functions
 -----------------
