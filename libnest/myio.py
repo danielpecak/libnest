@@ -13,11 +13,14 @@
 """
 Module: Myio
 ============
-This module providing functions to read and write in different format.
+This module provides functions to read and write data in different formats.
 
+Currently supported formats:
+- Text files (.txt) with columnar data
+- Grid information files (_info.txt)
 
-.. todo::
-    Handling WDATA format with Forbes' python library.
+Planned features:
+- WDATA format support using Forbes' python library
 
 List of functions
 -----------------

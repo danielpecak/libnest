@@ -25,8 +25,8 @@ class TestUnits(unittest.TestCase):
     def test_fm3togcm3_one(self):
         """Test 1 fm^{-3} density"""
         actual   = libnest.units.fm3togcm3(1.0)
-        expected = 1.67e15
-        self.assertEqual(actual, expected)
+        expected = 1.67377585e15  # More precise value
+        self.assertAlmostEqual(actual, expected, places=5)
 
 
 if __name__ == '__main__':

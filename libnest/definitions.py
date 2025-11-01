@@ -14,6 +14,7 @@ List of functions
 -----------------
 """
 
+import sys
 import numpy as np
 import math
 # import libnest.bsk
@@ -21,7 +22,6 @@ import math
 from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
-from libnest.units import DENSEPSILON
 
 
 def rho2kf(rho):
@@ -102,9 +102,12 @@ def rhoEta(rho_n, rho_p):
 
         \\eta = \\rho_n - \\rho_p
 
-    .. todo::
-        Check if I should return rho_n-rho_p OR rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)
-        #for now rho_n-rho_p because of the  function: neutron_ref_pairing_field(rho_n, rho_p)
+    .. note::
+        The function returns the absolute difference :math:`\\eta = \\rho_n - \\rho_p`,
+        not the relative asymmetry :math:`\\eta/(\\rho_n + \\rho_p)`.
+        This is consistent with usage in :func:`.neutron_ref_pairing_field` and
+        :func:`.proton_ref_pairing_field` where the ratio :math:`\\eta/\\rho` is
+        computed explicitly.
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -294,11 +297,41 @@ def Meff_hydro(rho_in, rho_out, R):
     """
     return HBAR2M_n * kF**2
 
+def E_minigap_delta_n(delta, rho_n):
+    """
+    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter
+    given the pairing field and density.
+
+    The minigap energy can be approximated:
+
+    .. math::
+
+        E_\\mathrm{mg} = \\frac{4}{3} \\frac{|\\Delta|^2}{\\varepsilon_F},
+
+    where :math:`\\Delta` is the pairing gap in the system, and :math:`\\varepsilon_F`
+    is the Fermi energy.
+
+    Args:
+        delta (float): pairing field for neutrons :math:`\\Delta_n` [MeV]
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both
+            spin components
+
+    Returns:
+        float: energy of minigap :math:`E_{mg}` [MeV]
+
+    See also:
+        :func:`.E_minigap_rho_n`
+        :func:`.eF_n`
+    """
+    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
+
 def E_minigap_rho_n(rho_n):
     """
-    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
+    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter,
+    calculating the pairing field automatically from density.
 
-    .. todo:: join these two: :func:`.E_minigap_delta_n` :func:`.E_minigap_rho_n`
+    This is a convenience wrapper around :func:`.E_minigap_delta_n` that
+    computes the neutron pairing field using the BSk functional.
 
     The minigap energy can be approximated:
 
@@ -317,39 +350,16 @@ def E_minigap_rho_n(rho_n):
         float: energy of minigap :math:`E_{mg}` [MeV]
 
     See also:
+        :func:`.E_minigap_delta_n`
         :func:`.neutron_ref_pairing_field`
         :func:`.rho2kf`
         :func:`.eF_n`
 
     """
-# https://stackoverflow.com/questions/22095000/how-to-code-a-function-that-accepts-float-list-or-numpy-array
-# import numpy as np
-#
-# def get_lerp_factor(a, x, b):
-#     a, x, b = np.asarray(a), np.asarray(x), np.asarray(b)
-#     return ((x - a) / (b - a)).clip(0, 1)
     from libnest.bsk import neutron_ref_pairing_field
     delta = neutron_ref_pairing_field(rho_n, 0.)
-    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
+    return E_minigap_delta_n(delta, rho_n)
 
-def E_minigap_delta_n(delta, rho_n):
-    """
-    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter.
-
-    .. todo:: join these two: :func:`.E_minigap_delta_n` :func:`.E_minigap_rho_n`
-
-
-    Parameters
-        delta (float): pairing field for neutrons :math:`\\Delta_n` [fm :sup:`-3`]
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-
-    Returns
-        float: energy of minigap :math:`E_{mg}` [MeV]
-
-    See also:
-        :func:`eF_n`
-    """
-    return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
 
 
 def mu_q(rho_n, rho_p, q):
@@ -370,6 +380,8 @@ def mu_q(rho_n, rho_p, q):
     Returns:
          float: chemical potential :math:`\\mu` [MeV]
     """
+    from libnest.bsk import effMn, effMp
+    
     if(q=='n'):
         M = effMn(rho_n, rho_p)
         rho = rho_n
