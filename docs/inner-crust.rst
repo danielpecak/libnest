@@ -1,6 +1,6 @@
-Inner crust
+Inner Crust
 ===========
-Tables and data considering inner crust, taken from many sources for example :cite:p:`pecak2024WBSkMeff`.
+Tables and data concerning the inner crust, taken from multiple sources, for example :cite:p:`pecak2024WBSkMeff`.
 
 .. contents:: Table of Contents
     :depth: 3
@@ -10,9 +10,9 @@ Tables and data considering inner crust, taken from many sources for example :ci
 .. todo::
   Add information about Landau velocity
 
-Bulk neutron properties
+Bulk Neutron Properties
 -----------------------
-Quantities extracted from simulations for each density of the inner crust :math:`\bar\rho`: :math:`\rho_{Bn}` -- bulk density of neutrons, :math:`\Delta_n` -- pairing energy of neutrons, :math:`k_{\mathrm{F}}` -- wave vector calculated for bulk density of neutrons,  :math:`\epsilon_{\mathrm{F}}` -- Fermi energy, :math:`\epsilon_{\mathrm{F}}^*` -- Fermi energy calculated with regard to effective mass, :math:`N` -- number of neutrons, :math:`\xi` -- coherence length, :math:`R` -- radius of impurity, :math:`M_{\mathrm{eff}}` -- effective mass of impurity.
+Quantities extracted from simulations for each density of the inner crust :math:`\bar\rho`: :math:`\rho_{Bn}` -- bulk density of neutrons, :math:`\Delta_n` -- pairing energy of neutrons, :math:`k_{\mathrm{F}}` -- wave vector calculated for bulk density of neutrons,  :math:`\epsilon_{\mathrm{F}}` -- Fermi energy, :math:`\epsilon_{\mathrm{F}}^*` -- Fermi energy calculated with respect to effective mass, :math:`N` -- number of neutrons, :math:`\xi` -- coherence length, :math:`R` -- radius of impurity, :math:`M_{\mathrm{eff}}` -- effective mass of impurity.
 
 ..  csv-table::
     :header: ":math:`\\bar\\rho` [fm :sup:`-3`]", ":math:`\\rho_{Bn}` [fm :sup:`-3`]", ":math:`\\Delta_n` [MeV]", ":math:`k_{\\mathrm{F}}` [fm :sup:`-1`]", ":math:`\\epsilon_{\\mathrm{F}}`" [MeV], ":math:`\\epsilon_{\\mathrm{F}}^*` [\MeV]", ":math:`N`", ":math:`\\xi` [fm]", "R [fm]", ":math:`M_{\\mathrm{eff}}` [ :math:`m_n`]"
@@ -30,9 +30,9 @@ Quantities extracted from simulations for each density of the inner crust :math:
     0.0428, 0.0351, 1.327, 1.013, 21.28, 19.260, 6925.0, 10.1, 8.71, 150.50 :math:`\pm` 8.8
     0.0510, 0.0422, 1.097, 1.077, 24.05, 21.618, 8070.6, 13.0, 9.03, 150.60 :math:`\pm` 8.8
 
-Effective masses
+Effective Masses
 ----------------
-Effective masses for dynamical, static, and hydro approaches for zirconium cluster in the inner crust. For the static case one can think about :math:`M_{\mathrm{eff}}^s` semi-classically like the number of protons plus bound neutrons. But due to the neutron medium it is not proper picture.
+Effective masses for dynamical, static, and hydro approaches for zirconium clusters in the inner crust. For the static case, one can think about :math:`M_{\mathrm{eff}}^s` semi-classically as the number of protons plus bound neutrons. However, due to the neutron medium, this is not the proper picture.
 
 ..  csv-table::
     :header: ":math:`\\bar\\rho` [fm :sup:`-3`]", ":math:`\\rho_{Bn}` [fm :sup:`-3`]",   ":math:`M_{\\mathrm{eff}}^d` [ :math:`m_n`]", ":math:`M_{\\mathrm{eff}}^s` [ :math:`m_n`]", ":math:`M_{\\mathrm{eff}}^h` [ :math:`m_n`]"
@@ -51,14 +51,14 @@ Effective masses for dynamical, static, and hydro approaches for zirconium clust
     0.0510, 0.0422, 150.60, 161.96, 34.32
 
 
-Collisions initial state
+Collisions Initial State
 ------------------------
 .. error::
 
-  The system description is not true. Correct it!
+  The system description is not accurate. Please correct it!
 
 Two nuclei in an elongated box. The Coulomb interaction is present,
-the ultrarelativistic electrons are treated as un uniform gas.
+and the ultrarelativistic electrons are treated as a uniform gas.
 Schematic:
 
 .. code::
@@ -67,7 +67,7 @@ Schematic:
       | o |   | o |
       +-----------+
 
-The nuclei are two zirconium atoms, so in total there are :math:`Z=80` protons. The units of energy :math:`E_{\mathrm{tot}}`, pairing :math:`\Delta`, and chemical potential :math:`\mu` are in [MeV]. The densities are measured in [fm :sup:`-3`].
+The nuclei are two zirconium atoms, so in total there are :math:`Z=80` protons. The units of energy :math:`E_{\mathrm{tot}}`, pairing :math:`\Delta`, and chemical potential :math:`\mu` are in MeV. The densities are measured in fm :sup:`-3`.
 
 ..  csv-table::
     :header: ":math:`\\bar\\rho`", ":math:`\\rho_{Bn}`", ":math:`\\mu_p`", :math:`N` , ":math:`\\mu_n`", ":math:`\\Delta_n`", ":math:`\\Delta_p`", ":math:`E_{\\mathrm{tot}}`"

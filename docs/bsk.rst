@@ -1,6 +1,6 @@
-Module:BSk
-==========
-The functions are listed below in alphabetic order. Here, please find those functions
+Module: BSk
+===========
+The functions are listed below in alphabetical order. Here, please find those functions
 regrouped by topic:
 
 

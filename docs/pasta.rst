@@ -1,10 +1,10 @@
 Module: Pasta
 =============
-Functions that let work with deep layers of inner crust,
-where pasta phase might occur
+Functions that allow working with deep layers of the inner crust,
+where the pasta phase might occur.
 
-Minkowsky funcionals
---------------------
+Minkowski Functionals
+---------------------
 
 
 .. todo::

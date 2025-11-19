@@ -1,9 +1,10 @@
 libNeST Documentation
 =====================
-libNeST stands for library for Neutron Star Toolkit. It contains a variety
-of tools that help handling in the complicated physics of neutrons stars.
-The aim is to use and learn about physics of nuclear matter inside a neutron
-star without thinking about complexity of Skyrme functionals or data format.
+libNeST stands for Library for Neutron Star Toolkit. It contains a variety
+of tools that help with handling the complicated physics of neutron stars.
+The aim is to enable users to work with and learn about the physics of nuclear 
+matter inside a neutron star without worrying about the complexity of Skyrme 
+functionals or data formats.
 
 .. seealso::
   The following projects are strongly interconnected:
@@ -20,20 +21,24 @@ Contributors
 
 - **Monika Marek** (2023)
 
-  Developing module :mod:`.tools`.
+  Developed module :mod:`.tools`.
 
 - **Aleksandra Bochenek** (2022)
 
-  Developing :mod:`.bsk` by implementing and testing equations for Brussels-Montreal family
+  Developed :mod:`.bsk` by implementing and testing equations for the Brussels-Montreal family
   of density functionals.
 
 Acknowledgments
 ===============
 Funding
 -------
-- **Sonatina 5 2021-2024**
+- **Sonata 20 (2025-)**
 
-  This grant no. 2021/40/C/ST2/00072 supported the development of the project.
+  Grant no. 2024/55/D/ST2/01516
+
+- **Sonatina 5 (2021-2024)**
+
+  Grant no. 2021/40/C/ST2/00072 supported the development of this project.
 
   .. image:: _static/logo-ncn-en_large.png
      :width: 350px
@@ -42,16 +47,20 @@ Funding
 
 Computational grants
 --------------------
-LUMI consortium
-We acknowledge Polish high-performance computing infrastructure PLGrid for awarding access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through PLL/2022/03/016433 and PLL/2023/04/016476.
+**LUMI Consortium**
+
+We acknowledge the Polish high-performance computing infrastructure PLGrid for 
+awarding access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, 
+hosted by CSC (Finland) and the LUMI consortium through grants PLL/2022/03/016433 
+and PLL/2023/04/016476.
 
 .. figure:: _static/lumi_logo_medium.png
    :width: 150px
-   :alt: Logo of Polish National Science Center
+   :alt: Logo of LUMI
 
 .. image:: _static/plgrid_small.png
    :width: 70px
-   :alt: Logo of Polish National Science Center
+   :alt: Logo of PLGrid
 
 
 

@@ -1,9 +1,9 @@
-Instalation
-===========
+Installation
+============
 Dependencies
 ------------
-The library need the following package `py-WDATA <https://pypi.org/project/wdata/>`_ to work.
-According to its documentation, to install it type:
+The library requires the following package `py-WDATA <https://pypi.org/project/wdata/>`_ to work.
+To install it, type:
 
 .. code:: console
 
@@ -20,6 +20,6 @@ To use the library, clone the repository:
     $ git clone git@github.com:danielpecak/libnest.git
 
 
-Next steps
+Next Steps
 ----------
-See :ref:`tutorial` to see examples.
+See :ref:`tutorial` for examples.

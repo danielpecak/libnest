@@ -1,20 +1,20 @@
 Plots
 =====
 
-How to make shiny plots.
+How to make professional plots.
 
-Uniform matter
+Uniform Matter
 --------------
 
-Example vortices
+Example Vortices
 ----------------
 
-Text files
+Text Files
 ~~~~~~~~~~
 
 .. todo::
-   Data for vorticex
+   Data for vortices
    
    
-WDATA extension
+WDATA Extension
 ~~~~~~~~~~~~~~~

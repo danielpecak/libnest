@@ -1,4 +1,4 @@
-Module: plots
+Module: Plots
 =============
 
 .. todo::
