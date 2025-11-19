@@ -1,0 +1,1483 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module: BSk &mdash; libNeST 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module: IO" href="io.html" />
+    <link rel="prev" title="Module: Definitions" href="definitions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instalation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Other</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module: BSk</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pairing">Pairing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#move">Move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#effective-mass">Effective mass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mean-field">Mean field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#density-energy-functional">Density energy functional</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#auxiliary">Auxiliary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-libnest.bsk">Module: BSk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bsk31-skyrme-parameters">BSk31 Skyrme Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#individual-parameters">Individual Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list-of-functions">List of functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.B_q"><code class="docutils literal notranslate"><span class="pre">B_q()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.C0_rho"><code class="docutils literal notranslate"><span class="pre">C0_rho()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.C0_tau"><code class="docutils literal notranslate"><span class="pre">C0_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.C1_rho"><code class="docutils literal notranslate"><span class="pre">C1_rho()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.C1_tau"><code class="docutils literal notranslate"><span class="pre">C1_tau()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.I"><code class="docutils literal notranslate"><span class="pre">I()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.Lambda"><code class="docutils literal notranslate"><span class="pre">Lambda()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.U_q"><code class="docutils literal notranslate"><span class="pre">U_q()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n"><code class="docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.effMn"><code class="docutils literal notranslate"><span class="pre">effMn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.effMp"><code class="docutils literal notranslate"><span class="pre">effMp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.energy_per_nucleon"><code class="docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.energy_per_nucleon_n"><code class="docutils literal notranslate"><span class="pre">energy_per_nucleon_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.epsilon_delta_rho_np"><code class="docutils literal notranslate"><span class="pre">epsilon_delta_rho_np()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.epsilon_derivative_n"><code class="docutils literal notranslate"><span class="pre">epsilon_derivative_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.epsilon_np"><code class="docutils literal notranslate"><span class="pre">epsilon_np()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.epsilon_pi_np"><code class="docutils literal notranslate"><span class="pre">epsilon_pi_np()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.epsilon_rho_np"><code class="docutils literal notranslate"><span class="pre">epsilon_rho_np()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.epsilon_tau_np"><code class="docutils literal notranslate"><span class="pre">epsilon_tau_np()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.isoscalarM"><code class="docutils literal notranslate"><span class="pre">isoscalarM()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.isovectorM"><code class="docutils literal notranslate"><span class="pre">isovectorM()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.neutron_pairing_field"><code class="docutils literal notranslate"><span class="pre">neutron_pairing_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.neutron_ref_pairing_field"><code class="docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.numerical_derivative_energy_per_nucleon_n"><code class="docutils literal notranslate"><span class="pre">numerical_derivative_energy_per_nucleon_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.numerical_derivative_epsilon_n"><code class="docutils literal notranslate"><span class="pre">numerical_derivative_epsilon_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.numerical_derivative_pressure_n"><code class="docutils literal notranslate"><span class="pre">numerical_derivative_pressure_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.numerical_pressure_n"><code class="docutils literal notranslate"><span class="pre">numerical_pressure_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.numerical_second_derivative_energy_per_nucleon_n"><code class="docutils literal notranslate"><span class="pre">numerical_second_derivative_energy_per_nucleon_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.numerical_speed_of_sound_n"><code class="docutils literal notranslate"><span class="pre">numerical_speed_of_sound_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.pressure_derivative_n"><code class="docutils literal notranslate"><span class="pre">pressure_derivative_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.pressure_n"><code class="docutils literal notranslate"><span class="pre">pressure_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.proton_ref_pairing_field"><code class="docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.second_derivative_energy_per_nucleon_n"><code class="docutils literal notranslate"><span class="pre">second_derivative_energy_per_nucleon_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.speed_of_sound_n"><code class="docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.symmetric_pairing_field"><code class="docutils literal notranslate"><span class="pre">symmetric_pairing_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libnest.bsk.v_pi"><code class="docutils literal notranslate"><span class="pre">v_pi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module: BSk</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/bsk.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-bsk">
+<h1>Module: BSk<a class="headerlink" href="#module-bsk" title="Link to this heading"></a></h1>
+<p>The functions are listed below in alphabetical order. Here, please find those functions
+regrouped by topic:</p>
+<section id="pairing">
+<h2>Pairing<a class="headerlink" href="#pairing" title="Link to this heading"></a></h2>
+<a class="reference internal image-reference" href="_images/pairing_vs_kf.png"><img alt="_images/pairing_vs_kf.png" src="_images/pairing_vs_kf.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="_images/pairing_vs_rho.png"><img alt="_images/pairing_vs_rho.png" src="_images/pairing_vs_rho.png" style="width: 48%;" />
+</a>
+<ul class="simple">
+<li><p><a class="reference internal" href="#libnest.bsk.neutron_pairing_field" title="libnest.bsk.neutron_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_pairing_field()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.symmetric_pairing_field" title="libnest.bsk.symmetric_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">symmetric_pairing_field()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.proton_ref_pairing_field" title="libnest.bsk.proton_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a></p></li>
+</ul>
+</section>
+<section id="move">
+<h2>Move<a class="headerlink" href="#move" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="definitions.html#libnest.definitions.eF_n" title="libnest.definitions.eF_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">eF_n()</span></code></a></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_n()</span></code></p></li>
+<li><p><a class="reference internal" href="definitions.html#libnest.definitions.mu_q" title="libnest.definitions.mu_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">mu_q()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="statistics">
+<h2>Statistics<a class="headerlink" href="#statistics" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.pressure_n" title="libnest.bsk.pressure_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_n()</span></code></a></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_epsilon_rho_n()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_pressure_rho_n()</span></code></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.speed_of_sound_n" title="libnest.bsk.speed_of_sound_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="effective-mass">
+<h2>Effective mass<a class="headerlink" href="#effective-mass" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#libnest.bsk.effMn" title="libnest.bsk.effMn"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMn()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.effMp" title="libnest.bsk.effMp"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMp()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.isoscalarM" title="libnest.bsk.isoscalarM"><code class="xref py py-func docutils literal notranslate"><span class="pre">isoscalarM()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.isovectorM" title="libnest.bsk.isovectorM"><code class="xref py py-func docutils literal notranslate"><span class="pre">isovectorM()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="mean-field">
+<h2>Mean field<a class="headerlink" href="#mean-field" title="Link to this heading"></a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#libnest.bsk.U_q" title="libnest.bsk.U_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">U_q()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.B_q" title="libnest.bsk.B_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">B_q()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="density-energy-functional">
+<h2>Density energy functional<a class="headerlink" href="#density-energy-functional" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>See also:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="#libnest.bsk.epsilon_np" title="libnest.bsk.epsilon_np"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_np()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.epsilon_rho_np" title="libnest.bsk.epsilon_rho_np"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_rho_np()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.epsilon_tau_np" title="libnest.bsk.epsilon_tau_np"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_tau_np()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.epsilon_delta_rho_np" title="libnest.bsk.epsilon_delta_rho_np"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_delta_rho_np()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.epsilon_pi_np" title="libnest.bsk.epsilon_pi_np"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_pi_np()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.v_pi" title="libnest.bsk.v_pi"><code class="xref py py-func docutils literal notranslate"><span class="pre">v_pi()</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="auxiliary">
+<h2>Auxiliary<a class="headerlink" href="#auxiliary" title="Link to this heading"></a></h2>
+<blockquote>
+<div><a class="reference internal image-reference" href="_images/Cs_vs_rho.png"><img alt="_images/Cs_vs_rho.png" class="align-right" src="_images/Cs_vs_rho.png" style="width: 60%;" />
+</a>
+<ul class="simple">
+<li><p><a class="reference internal" href="#libnest.bsk.C0_rho" title="libnest.bsk.C0_rho"><code class="xref py py-func docutils literal notranslate"><span class="pre">C0_rho()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.C1_rho" title="libnest.bsk.C1_rho"><code class="xref py py-func docutils literal notranslate"><span class="pre">C1_rho()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.C0_tau" title="libnest.bsk.C0_tau"><code class="xref py py-func docutils literal notranslate"><span class="pre">C0_tau()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.C1_tau" title="libnest.bsk.C1_tau"><code class="xref py py-func docutils literal notranslate"><span class="pre">C1_tau()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.I" title="libnest.bsk.I"><code class="xref py py-func docutils literal notranslate"><span class="pre">I()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#libnest.bsk.Lambda" title="libnest.bsk.Lambda"><code class="xref py py-func docutils literal notranslate"><span class="pre">Lambda()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Describe properties</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Give references</p>
+</div>
+<section id="module-libnest.bsk">
+<span id="id3"></span><h3>Module: BSk<a class="headerlink" href="#module-libnest.bsk" title="Link to this heading"></a></h3>
+<p>The module that contains Brussels-Montreal parametrization with formulas
+for energy density, effective masses, etc.
+Both for uniform system and general expressions.</p>
+<section id="bsk31-skyrme-parameters">
+<h4>BSk31 Skyrme Parameters<a class="headerlink" href="#bsk31-skyrme-parameters" title="Link to this heading"></a></h4>
+<p>The following table lists all Skyrme parameters used in the BSk31 functional:</p>
+<table class="docutils align-default" id="id110">
+<caption><span class="caption-text">BSk31 Skyrme Parameters</span><a class="headerlink" href="#id110" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 21.4%" />
+<col style="width: 21.4%" />
+<col style="width: 57.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>t₀</p></td>
+<td><p>-2302.01</p></td>
+<td><p>MeV fm³</p></td>
+</tr>
+<tr class="row-odd"><td><p>t₁</p></td>
+<td><p>762.99</p></td>
+<td><p>MeV fm⁵</p></td>
+</tr>
+<tr class="row-even"><td><p>t₂</p></td>
+<td><p>0.0</p></td>
+<td><p>MeV fm⁵</p></td>
+</tr>
+<tr class="row-odd"><td><p>t₃</p></td>
+<td><p>13797.83</p></td>
+<td><p>MeV fm⁽³⁺³ᵅ⁾</p></td>
+</tr>
+<tr class="row-even"><td><p>t₄</p></td>
+<td><p>-500.0</p></td>
+<td><p>MeV fm⁽⁵⁺³ᵝ⁾</p></td>
+</tr>
+<tr class="row-odd"><td><p>t₅</p></td>
+<td><p>-40.0</p></td>
+<td><p>MeV fm⁽⁵⁺³ᵞ⁾</p></td>
+</tr>
+<tr class="row-even"><td><p>x₀</p></td>
+<td><p>0.676655</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-odd"><td><p>x₁</p></td>
+<td><p>2.658109</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-even"><td><p>x₂t₂</p></td>
+<td><p>-422.29</p></td>
+<td><p>MeV fm⁵</p></td>
+</tr>
+<tr class="row-odd"><td><p>x₃</p></td>
+<td><p>0.83982</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-even"><td><p>x₄</p></td>
+<td><p>5.0</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-odd"><td><p>x₅</p></td>
+<td><p>-12.0</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-even"><td><p>α</p></td>
+<td><p>1/5</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-odd"><td><p>β</p></td>
+<td><p>1/12</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+<tr class="row-even"><td><p>γ</p></td>
+<td><p>1/4</p></td>
+<td><p>dimensionless</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="individual-parameters">
+<h4>Individual Parameters<a class="headerlink" href="#individual-parameters" title="Link to this heading"></a></h4>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T0</span>&#160;&#160; <span class="pre">=-2302.01</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(t_0\)</span> [MeV fm <sup>3</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T1</span>&#160;&#160; <span class="pre">=762.99</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(t_1\)</span> [MeV fm <sup>5</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T2</span>&#160;&#160; <span class="pre">=0.0</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(t_2\)</span> [MeV fm <sup>5</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T3</span>&#160;&#160; <span class="pre">=13797.83</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(t_3\)</span> [MeV fm <sup>(3+3*ALPHA)</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T4</span>&#160;&#160; <span class="pre">=-500.</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(t_4\)</span> [MeV fm <sup>(5+3*BETA)</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T5</span>&#160;&#160; <span class="pre">=-40.</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(t_5\)</span> [MeV fm <sup>(5+3*GAMMA)</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">X0</span>&#160;&#160; <span class="pre">=0.676655</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(x_0\)</span> [1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">X1</span>&#160;&#160; <span class="pre">=2.658109</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(x_1\)</span> [1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">T2X2</span> <span class="pre">=-422.29</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(x_2t_2\)</span> [1][MeV fm <sup>5</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">X3</span>&#160;&#160; <span class="pre">=0.83982</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(x_3\)</span> [1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">X4</span>&#160;&#160; <span class="pre">=5.</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(x_4\)</span> [1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">X5</span>&#160;&#160; <span class="pre">=-12.</span></span></dt>
+<dd><p>Skyrme parameter <span class="math">\(x_5\)</span> [1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">ALPHA</span> <span class="pre">=(1./5.)</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">BETA</span>&#160; <span class="pre">=(1./12.)</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">GAMMA</span> <span class="pre">=(1./4.)</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>these are not important at the moment</p>
+</div>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">YW</span>&#160;&#160; <span class="pre">=2.</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FNP</span>&#160; <span class="pre">=1.00</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FNM</span>&#160; <span class="pre">=1.06</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FPP</span>&#160; <span class="pre">=1.00</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">FPM</span>&#160; <span class="pre">=1.04</span></span></dt>
+<dd><p>[1]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">KAPPAN</span> <span class="pre">=-36630.4</span></span></dt>
+<dd><p>[MeV fm <sup>8</sup>]</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">KAPPAP</span> <span class="pre">=-45207.2</span></span></dt>
+<dd><p>[MeV fm <sup>8</sup>]</p>
+</dd></dl>
+
+</section>
+<section id="list-of-functions">
+<h4>List of functions<a class="headerlink" href="#list-of-functions" title="Link to this heading"></a></h4>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.B_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">B_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.B_q" title="Link to this definition"></a></dt>
+<dd><p>Returns the mean field potential B_q (coming from variation over kinetic
+density, or effective mass).</p>
+<div class="math">
+\[B_q  = \frac{\hbar^2}{2 M^*_q}
+ = \frac{\hbar^2}{2 M_q}  + C^\tau_0\rho  + C^\tau_1 (\rho_{q} - \rho_{q'})\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>effective mass of a proton <span class="math">\(M_{p}^{*}\)</span> [MeV fm <sup>2</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.C0_rho">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C0_rho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C0_rho" title="Link to this definition"></a></dt>
+<dd><p>Calculates the energy functional <span class="math">\(C^{\rho}_0\)</span> coefficient <span id="id4">[<a class="reference internal" href="#id53" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<div class="math">
+\[C^0_\rho(\rho) = \frac{3}{8} t_0 + \frac{3}{48} t_3 \rho^\alpha\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math">\(C^{\rho}_0\)</span> coefficient</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.C0_tau">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C0_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C0_tau" title="Link to this definition"></a></dt>
+<dd><p>Calculates the energy functional <span class="math">\(C^{\tau}_0\)</span> coefficient <span id="id5">[<a class="reference internal" href="#id53" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<div class="math">
+\[C^0_\tau(\rho) =  \frac{3}{16} t_1 + \frac{1}{4} t_2 \left(\frac{5}{4} + x_2\right) + \frac{3}{16} t_4 \rho^\beta + \frac{1}{4} t_5 \left(\frac{5}{4} + x_5 \right) \rho^\gamma\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math">\(C^{\tau}_0\)</span> coefficient</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.C1_rho">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C1_rho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C1_rho" title="Link to this definition"></a></dt>
+<dd><p>Calculates the energy functional <span class="math">\(C^{\rho}_1\)</span> coefficient <span id="id6">[<a class="reference internal" href="#id53" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<div class="math">
+\[C^1_\rho(\rho) = -\frac{1}{4} t_0 \left(\frac{1}{2} + x_0\right) - \frac{1}{24} t_3 \left(\frac{1}{2} + x_3 \right) \rho^\alpha\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math">\(C^{\rho}_1\)</span> coefficient</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.C1_tau">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">C1_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.C1_tau" title="Link to this definition"></a></dt>
+<dd><p>Calculates the energy functional <span class="math">\(C^{\tau}_1\)</span> coefficient <span id="id7">[<a class="reference internal" href="#id53" title="Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. Physical Review C, 65(5):054322, 2002. URL: https://link.aps.org/doi/10.1103/PhysRevC.65.054322, doi:10.1103/PhysRevC.65.054322.">BDEN02</a>]</span>.</p>
+<div class="math">
+\[C^1_\tau(\rho) = -\frac{1}{8} t_1 \left( \frac{1}{2} + x_1 \right) + \frac{1}{8} t_2 \left(\frac{1}{2} + x_2\right) - \frac{1}{8} t_4 \rho^\beta \left( \frac{1}{2} + x_4 \right)  + \frac{1}{8} t_5 \left(\frac{1}{2} + x_5 \right) \rho^\gamma\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="math">\(C^{\tau}_1\)</span> coefficient</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.I">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">I</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.I" title="Link to this definition"></a></dt>
+<dd><p>Approximates the solution to the integral present in the original
+<span class="math">\(\nu^{\pi}\)</span> formula for single-particle energies below 6.5 MeV.
+Check <span id="id8">[<a class="reference internal" href="#id14" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
+<div class="math">
+\[I_q(\rho_n,\rho_p)
+= \sqrt{\mu_q(\rho_n,\rho_p) } \left( 2 \ln{\frac{2 \mu_q(\rho_n,\rho_p) }{\Delta_q(\rho_n,\rho_p) }} + \Lambda\left( \frac{\varepsilon_\Lambda}{\mu_q(\rho_n,\rho_p) } \right) \right)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>analytic integral solution</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.Lambda" title="libnest.bsk.Lambda"><code class="xref py py-func docutils literal notranslate"><span class="pre">Lambda()</span></code></a>
+<a class="reference internal" href="definitions.html#libnest.definitions.mu_q" title="libnest.definitions.mu_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">mu_q()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.proton_ref_pairing_field" title="libnest.bsk.proton_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.Lambda">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.Lambda" title="Link to this definition"></a></dt>
+<dd><p>Function <span class="math">\(\Lambda\)</span> used in <a class="reference internal" href="#libnest.bsk.I" title="libnest.bsk.I"><code class="xref py py-func docutils literal notranslate"><span class="pre">I()</span></code></a>.
+Check <span id="id9">[<a class="reference internal" href="#id14" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
+<div class="math">
+\[\Lambda(x)
+= \ln(16x) + 2\sqrt{1+x} - 2 \ln\left({1+\sqrt{1+x}}\right) - 4.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>float</em>) – variable</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><cite>Lambda</cite></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.I" title="libnest.bsk.I"><code class="xref py py-func docutils literal notranslate"><span class="pre">I()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.U_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">U_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.U_q" title="Link to this definition"></a></dt>
+<dd><p>Returns the mean field potential from density <span class="math">\(\rho\)</span> variation.</p>
+<p>rho_q is either rho_n or rho_p.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mean field potential <span class="math">\(U_q\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="Link to this definition"></a></dt>
+<dd><p>First derivative of energy per nucleon (for neutrons only).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – rho_n (float): neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>derivative of energy per neutron, <span class="math">\(\frac{\delta e_n}{\delta \rho}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon_n" title="libnest.bsk.energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.effMn">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">effMn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.effMn" title="Link to this definition"></a></dt>
+<dd><p>Returns the effective mass of a neutron in nuclear medium.</p>
+<div class="math">
+\[M_n^* = \frac{\hbar^2}{2 M_n} \frac{1}{B_n(\rho_n,\rho_p)}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>effective mass of a neutron <span class="math">\(M_{n}^{*}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.B_q" title="libnest.bsk.B_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">B_q()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.effMp">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">effMp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.effMp" title="Link to this definition"></a></dt>
+<dd><p>Returns the effective mass of a proton in nuclear medium.</p>
+<div class="math">
+\[M_p^* = \frac{\hbar^2}{2 M_p} \frac{1}{B_p(\rho_n,\rho_p)}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>effective mass of a proton <span class="math">\(M_{p}^{*}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.B_q" title="libnest.bsk.B_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">B_q()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.energy_per_nucleon">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">energy_per_nucleon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.energy_per_nucleon" title="Link to this definition"></a></dt>
+<dd><p>Returns the energy per nucleon on infinite nuclear matter of given
+density of protons and neutrons, rho_p and rho_n, respectively, in MeV.
+Formula (A13) from <a class="reference external" href="https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804">https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</a>
+<span id="id10">[<a class="reference internal" href="physics.html#id67" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy per nucleon <span class="math">\(e_n\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.energy_per_nucleon_n" title="Link to this definition"></a></dt>
+<dd><p>Energy per nucleon on infinite neutron matter of density <span class="math">\(\rho_n\)</span>.
+Derived from formula (A13) from <a class="reference external" href="https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804">https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</a>
+<span id="id11">[<a class="reference internal" href="physics.html#id67" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy per neutron <span class="math">\(e_n\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_delta_rho_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_delta_rho_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n_square</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p_square</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_square</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_delta_rho_np" title="Link to this definition"></a></dt>
+<dd><p>Energy functional <span class="math">\(\epsilon_{\Delta \rho}\)</span> for particle matter,
+related to the interaction of the nucleons with the background fluctuations.</p>
+<div class="math">
+\[\begin{equation*}
+\begin{split}
+ \varepsilon_{\Delta\rho}&(\rho_n,\vec\nabla\rho_n,\rho_p,\vec\nabla\rho_p)      =
+  +\frac{3}{16} t_1 \left[
+   \left(          1 + \frac{1}{2}x_1\right)         \left( \nabla(\rho_n+\rho_p)   \right)^2
+  -\left(\frac{1}{2} +           x_1 \right)  \sum_q \left( \nabla\rho_q \right)^2
+  \right] \\
+   &- \frac{1}{16}t_2 \left[
+      \left(           1 + \frac{1}{2} x_2\right)          \left( \nabla(\rho_n+\rho_p)  \right)^2
+    + \left( \frac{1}{2} +             x_2\right) \sum_{q} \left( \nabla\rho_q\right)^2  \right] \\
+   &+\frac{3}{16} t_4  (\rho_n+\rho_p)^\beta \left[
+   \left(1 + \frac{1}{2}x_4\right)           \left( \nabla(\rho_n+\rho_p)   \right)^2
+  - \left(\frac{1}{2} + x_4 \right)  \sum_q  \left( \nabla\rho_q \right)^2
+  \right] \\
+  &+ \frac{\beta}{8}t_4 (\rho_n+\rho_p)^{\beta-1} \left[
+  \left(1 + \frac{1}{2}x_4\right) (\rho_n+\rho_p)\left(\nabla(\rho_n+\rho_p)\right)^2
+  - \left(\frac{1}{2} + x_4 \right)
+  \nabla(\rho_n+\rho_p)\cdot\left(\sum_q \rho_q\nabla\rho_q\right)
+  \right] \\
+  &- \frac{1}{16}t_5 (\rho_n+\rho_p)^\gamma \left[
+    \left(          1 + \frac{1}{2} x_5\right) \left( \nabla(\rho_n+\rho_p)\right)^2
+   +\left(\frac{1}{2} +             x_5\right) \sum_{q} \left( \nabla\rho_q\right)^2
+  \right].
+\end{split}
+\end{equation*}
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n_square</strong> (<em>float</em>) – neutron density gradient squared <span class="math">\(\nabla \rho\)</span> [fm <sup>-8</sup>]</p></li>
+<li><p><strong>rho_grad_p_square</strong> (<em>float</em>) – proton density gradient squared <span class="math">\(\nabla \rho\)</span> [fm <sup>-8</sup>]</p></li>
+<li><p><strong>rho_grad_square</strong> (<em>float</em>) – total density gradient squared <span class="math">\(\nabla \rho\)</span> [fm <sup>-8</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy functional <span class="math">\(\epsilon_{\Delta \rho}\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_derivative_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_derivative_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_derivative_n" title="Link to this definition"></a></dt>
+<dd><p>Calculates the derivative of energy density <span class="math">\(\frac{\delta \epsilon}{\delta \rho}\)</span> in neutron matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>derivative of energy density <span class="math">\(\frac{\delta \epsilon}{\delta \rho}\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_np" title="Link to this definition"></a></dt>
+<dd><p>Calculates the total energy functional <span class="math">\(\epsilon\)</span>, with a limit for
+single-particle energies <span class="math">\(\epsilon_{\Lambda}\)</span> = 6.5 MeV.</p>
+<div class="math">
+\[\varepsilon(\rho_n,\vec\nabla\rho_n, \tilde{\rho}_n,\tau_n,{ j}_n,\rho_p,\vec\nabla\rho_p,\tilde{\rho}_p,\tau_p,{ j}_p) = \nonumber \\
+= \frac{\hbar^2}{2 M_n} \tau_n + \frac{\hbar^2}{2 M_p} \tau_p
+ + \varepsilon_\rho(\rho_n,\rho_p)
+ + \varepsilon_\tau(\rho_n,\tau_n,{ j}_n,\rho_p,\tau_p,{ j}_p) \nonumber \\
++ \varepsilon_{\Delta\rho}(\rho_n,\vec\nabla\rho_n,\rho_p,\vec\nabla\rho_p)
++ \varepsilon_\pi(\rho_n,\vec\nabla\rho_n,\tilde{\rho}_n,\rho_p,\vec\nabla\rho_p,\tilde{\rho}_p),
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n</strong> (<em>float</em>) – neutron density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho_grad_p</strong> (<em>float</em>) – proton density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau_n</strong> (<em>float</em>) – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>tau_n</strong> – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>jsum2</strong> (<em>float</em>) – sum of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>jdiff2</strong> (<em>float</em>) – difference of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_n</strong> (<em>float</em>) – neutron anomalous density <span class="math">\(\nu\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_p</strong> (<em>float</em>) – proton anomalous density <span class="math">\(\nu\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>kappa_n</strong> (<em>float</em>)</p></li>
+<li><p><strong>kappa_p</strong> (<em>float</em>) – what is kappa? (no Eq.9 in Ref.41)</p></li>
+</ul>
+</dd>
+</dl>
+<p>TO DO: write eq for jsum2 and jdiff2</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: nergy functional <span class="math">\(\epsilon\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_pi_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_pi_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_pi_np" title="Link to this definition"></a></dt>
+<dd><p>Energy functional <span class="math">\(\epsilon_{\pi}\)</span> for particle matter,
+related to pairng energy density.</p>
+<div class="math">
+\[\varepsilon_\pi(\rho_n,\vec\nabla\rho_n,\tilde{\rho}_n,\rho_p,\vec\nabla\rho_p,\tilde{\rho}_p)
+
+=\frac{1}{4} f^\pm_n \left( v^{\pi n}(\rho_n,\rho_p) + \kappa_n|\nabla\rho_n|^2 \right) \tilde{\rho_n}^2
+
++\frac{1}{4} f^\pm_p \left( v^{\pi p}(\rho_n,\rho_p) + \kappa_p|\nabla\rho_p|^2 \right) \tilde{\rho_p}^2,\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n</strong> (<em>float</em>) – neutron density gradient <span class="math">\(\nabla \rho_n\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho_grad_p</strong> (<em>float</em>) – proton  density gradient <span class="math">\(\nabla \rho_p\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>nu_n</strong> (<em>float</em>) – neutron anomalous density <span class="math">\(\nu_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_p</strong> (<em>float</em>) – proton anomalous density <span class="math">\(\nu_p\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>kappa_n</strong> – <span class="math">\(\kappa_n\)</span> (float)</p></li>
+<li><p><strong>kappa_p</strong> – <span class="math">\(\kappa_p\)</span> (float)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy functional <span class="math">\(\epsilon_{\pi}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.v_pi" title="libnest.bsk.v_pi"><code class="xref py py-func docutils literal notranslate"><span class="pre">v_pi()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_rho_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_rho_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_rho_np" title="Link to this definition"></a></dt>
+<dd><p>Energy functional <span class="math">\(\epsilon_{\rho}\)</span> for particle matter, related to
+the interaction of the nucleons with the background matter density.</p>
+<div class="math">
+\[\varepsilon_\rho(\rho_n,\rho_p)
+= C^\rho_0(\rho_n+\rho_p) \left( \rho_n + \rho_p \right)^2
+ + C^\rho_1(\rho_n+\rho_p) \left( \rho_n - \rho_p \right)^2\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy functional <span class="math">\(\epsilon_{\rho}\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.epsilon_tau_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">epsilon_tau_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.epsilon_tau_np" title="Link to this definition"></a></dt>
+<dd><p>Energy functional <span class="math">\(\epsilon_{\tau}\)</span> for particle matter,
+related to the density-dependent effective mass. It gives rise to current couplings.</p>
+<div class="math">
+\[\varepsilon_\tau(\rho_n,\tau_n,{ j}_n,\rho_p,\tau_p,{ j}_p)
+
+= C^\tau_0(\rho_n+\rho_p) \left[ (\rho_n + \rho_p)(\tau_n + \tau_p) - ({ j}_n + { j}_p)^2 \right]
+
++ C^\tau_1(\rho_n+\rho_p) \left[ (\rho_n - \rho_p)(\tau_n - \tau_p) - ({ j}_n - { j}_p)^2 \right].\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>tau_n</strong> (<em>float</em>) – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>tau_n</strong> – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>jsum2</strong> (<em>float</em>) – sum of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>jdiff2</strong> (<em>float</em>) – difference of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy functional <span class="math">\(\epsilon_{\tau}\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.isoscalarM">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">isoscalarM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.isoscalarM" title="Link to this definition"></a></dt>
+<dd><p>Calculates effective isoscalar mass M_s for a given uniform system
+with neutron and proton densities rho_n and rho_p respectively.</p>
+<div class="math">
+\[M^*_s = 2 \left( 1/M_n^* +  1/M_p^*  \right)^{-1}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>effective isoscalar mass <span class="math">\(M_{s}^{*}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.effMn" title="libnest.bsk.effMn"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMn()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.effMp" title="libnest.bsk.effMp"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMp()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.isovectorM">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">isovectorM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.isovectorM" title="Link to this definition"></a></dt>
+<dd><p>Calculated effective isovector mass <span class="math">\(M_v\)</span> for a given uniform system
+with neutron and proton densities rho_n, rho_p respectively.</p>
+<div class="math">
+\[M^{*}_v = M^{*}_s M_p^{*} \frac{ 2 \rho_p-\rho}{2 M_p^*\rho_p-\rho}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>effective isovector mass <span class="math">\(M_{v}^{*}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.effMn" title="libnest.bsk.effMn"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMn()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.effMp" title="libnest.bsk.effMp"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMp()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.isoscalarM" title="libnest.bsk.isoscalarM"><code class="xref py py-func docutils literal notranslate"><span class="pre">isoscalarM()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.neutron_pairing_field">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">neutron_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.neutron_pairing_field" title="Link to this definition"></a></dt>
+<dd><p>Returns the pairing field for uniform pure neutron nuclear matter. For kF larger
+than 1.38 fm <sup>-1</sup> it returns (numerical) zero.</p>
+<div class="math">
+\[\Delta_{\mathrm{NeuM}}(k_F) = \frac{3.37968 k_F^2}{k_F^2+0.556092^2} \frac{(k_F-1.38236)^2}{(k_F-1.38236)^2+0.327517^2},\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pairing field for neutron matter <span class="math">\(\Delta_{\mathrm{NeuM}}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.symmetric_pairing_field" title="libnest.bsk.symmetric_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">symmetric_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.proton_ref_pairing_field" title="libnest.bsk.proton_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.neutron_ref_pairing_field">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">neutron_ref_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.neutron_ref_pairing_field" title="Link to this definition"></a></dt>
+<dd><p>Returns the reference pairing field for neutrons in uniform matter.
+This is an extrapolation between <span class="math">\(\Delta_{\mathrm{SM}}\)</span> and
+<span class="math">\(\Delta_{\mathrm{NeuM}}\)</span>. In limits <span class="math">\(\eta \rightarrow 0\)</span> reproduces
+symmetric matter and <span class="math">\(\eta \rightarrow 1\)</span>, the neutron matter.</p>
+<div class="math">
+\[\Delta_n(\rho_n,\rho_p) =
+\Delta_{\mathrm{SM}}(\rho_n+\rho_p)
+\left( 1 - |\eta| \right)
++ \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_n}{\rho_n+\rho_p}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pairing field for neutrons <span class="math">\(\Delta_n\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.neutron_pairing_field" title="libnest.bsk.neutron_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.symmetric_pairing_field" title="libnest.bsk.symmetric_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">symmetric_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.proton_ref_pairing_field" title="libnest.bsk.proton_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_derivative_energy_per_nucleon_n" title="Link to this definition"></a></dt>
+<dd><p>First derivative of energy per nucleon, calculated numerically using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>.</p>
+<p>Args:
+rho_n (float): rho_n (float): neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: derivative of energy per neutron, <span class="math">\(\frac{\delta e_n}{\delta \rho}\)</span> [MeV]</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_derivative_epsilon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_derivative_epsilon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_derivative_epsilon_n" title="Link to this definition"></a></dt>
+<dd><p>Derivative of energy density <span class="math">\(\epsilon\)</span> with respect to density, calculated numerically using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code> for neutron matter and using the <a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a> function, setting proton
+density <span class="math">\(\rho_p\)</span> to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Derivative of <span class="math">\(\epsilon\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_derivative_pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_derivative_pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_derivative_pressure_n" title="Link to this definition"></a></dt>
+<dd><p>Derivative of pressure <span class="math">\(P\)</span> with respect to density for neutron matter,
+calculated numerically using <code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Derivative of <span class="math">\(P\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.numerical_pressure_n" title="libnest.bsk.numerical_pressure_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_pressure_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_pressure_n" title="Link to this definition"></a></dt>
+<dd><p>Pressure <span class="math">\(P\)</span> in neutron matter, calculated using the <code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>
+function to calculate the derivative of data calculated by <a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pressure <span class="math">\(P\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_second_derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_second_derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_second_derivative_energy_per_nucleon_n" title="Link to this definition"></a></dt>
+<dd><p>Second derivative of energy per nucleon, calculated numerically using
+<code class="xref py py-func docutils literal notranslate"><span class="pre">np.gradient()</span></code>.</p>
+<p>Args:
+rho_n (float): rho_n (float): neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: second derivative of energy per neutron, <span class="math">\(\frac{\delta^2 e_n}{\delta \rho^2}\)</span> [MeV]</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon" title="libnest.bsk.energy_per_nucleon"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.numerical_speed_of_sound_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">numerical_speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.numerical_speed_of_sound_n" title="Link to this definition"></a></dt>
+<dd><p>Velocity of sound in neutron matter dependent on total matter density equal
+to neuton density <span class="math">\(\rho_n\)</span>, given as a percentage of speed of light.
+Calculated based on numerical data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>velocity of sound <span class="math">\(v_s\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.numerical_derivative_pressure_n" title="libnest.bsk.numerical_derivative_pressure_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_derivative_pressure_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.numerical_derivative_epsilon_n" title="libnest.bsk.numerical_derivative_epsilon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">numerical_derivative_epsilon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.pressure_derivative_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">pressure_derivative_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.pressure_derivative_n" title="Link to this definition"></a></dt>
+<dd><p>Calculates the derivative of pressure <span class="math">\(\frac{\delta P}{\delta \rho}\)</span> in neutron matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>derivative of pressure <span class="math">\(\frac{\delta P}{\delta \rho}\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.second_derivative_energy_per_nucleon_n" title="libnest.bsk.second_derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">second_derivative_energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.pressure_n" title="Link to this definition"></a></dt>
+<dd><p>Pressure <span class="math">\(P\)</span> in neutron matter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pressure <span class="math">\(P\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.proton_ref_pairing_field">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">proton_ref_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.proton_ref_pairing_field" title="Link to this definition"></a></dt>
+<dd><p>Returns the reference pairing field for protons in uniform matter.
+This is an extrapolation between <span class="math">\(\Delta_{\mathrm{SM}}\)</span> and
+<span class="math">\(\Delta_{\mathrm{NeuM}}\)</span>. In limits <span class="math">\(\eta \rightarrow 0\)</span> reproduces
+symmetric matter and <span class="math">\(\eta \rightarrow 1\)</span>, the neutron matter.</p>
+<div class="math">
+\[\Delta_p(\rho_n,\rho_p) =
+\Delta_{\mathrm{SM}}(\rho_n+\rho_p)
+\left( 1 - |\eta| \right)
+- \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_p}{\rho_n+\rho_p}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pairing field for protons <span class="math">\(\Delta_p\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.neutron_pairing_field" title="libnest.bsk.neutron_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.symmetric_pairing_field" title="libnest.bsk.symmetric_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">symmetric_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.second_derivative_energy_per_nucleon_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">second_derivative_energy_per_nucleon_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.second_derivative_energy_per_nucleon_n" title="Link to this definition"></a></dt>
+<dd><p>Second derivative of energy per nucleon (for neutrons only).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – rho_n (float): neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>second derivative of energy per neutron, <span class="math">\(\frac{\delta^2 e_n}{\delta \rho^2}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.energy_per_nucleon_n" title="libnest.bsk.energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.derivative_energy_per_nucleon_n" title="libnest.bsk.derivative_energy_per_nucleon_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">derivative_energy_per_nucleon_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.speed_of_sound_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.speed_of_sound_n" title="Link to this definition"></a></dt>
+<dd><p>Velocity of sound in neutron matter, dependent on total matter density equal
+to neuton density <span class="math">\(\rho_n\)</span>, given as a percentage of speed of light.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>velocity of sound <span class="math">\(v_s\)</span></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.pressure_derivative_n" title="libnest.bsk.pressure_derivative_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_derivative_n()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.epsilon_derivative_n" title="libnest.bsk.epsilon_derivative_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon_derivative_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.symmetric_pairing_field">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">symmetric_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.symmetric_pairing_field" title="Link to this definition"></a></dt>
+<dd><p>Returns the pairing field for uniform symmetric matter. For kF larger than
+1.31 fm <sup>-1</sup> it returns (numerical) zero.</p>
+<div class="math">
+\[\Delta_{\mathrm{SM}}(k_F) =  \frac{11.5586 k_F^2}{k_F^2 + 0.489932^2}\frac{(k_F - 1.3142)^2}{(k_F - 1.3142)^2 + 0.906146^2}.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pairing field for symmetric matter <span class="math">\(\Delta_{\mathrm{SM}}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.neutron_pairing_field" title="libnest.bsk.neutron_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.proton_ref_pairing_field" title="libnest.bsk.proton_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.bsk.v_pi">
+<span class="sig-prename descclassname"><span class="pre">libnest.bsk.</span></span><span class="sig-name descname"><span class="pre">v_pi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.bsk.v_pi" title="Link to this definition"></a></dt>
+<dd><p>Calculates pairing strength <span class="math">\(\upsilon^{\pi}_q\)</span> for neutrons
+or protons, for energies below 6.5 MeV.</p>
+<p>Based on Equation 14 from Phys Rev C 104.
+Check <span id="id12">[<a class="reference internal" href="#id14" title="Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. Physical Review C, 104(5):055801, 2021.">PkecakCMWlazlowski21</a>]</span> and earlier papers of Chamel.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function handles both neutron (q=’n’) and proton (q=’p’) cases
+with the same implementation. Consider splitting into separate functions
+for better code organization if species-specific modifications are needed.</p>
+</div>
+<div class="math">
+\[v^{\pi q}(\rho_n,\rho_p)
+= - \frac{8 \pi^2}{I_q(\rho_n,\rho_p) } B_q(\rho_n,\rho_p)^{3/2}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pairing strength <span class="math">\(\upsilon^{pi}\)</span> [fm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.bsk.I" title="libnest.bsk.I"><code class="xref py py-func docutils literal notranslate"><span class="pre">I()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.effMn" title="libnest.bsk.effMn"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMn()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.effMp" title="libnest.bsk.effMp"><code class="xref py py-func docutils literal notranslate"><span class="pre">effMp()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.Lambda" title="libnest.bsk.Lambda"><code class="xref py py-func docutils literal notranslate"><span class="pre">Lambda()</span></code></a>
+<a class="reference internal" href="#libnest.bsk.B_q" title="libnest.bsk.B_q"><code class="xref py py-func docutils literal notranslate"><span class="pre">B_q()</span></code></a></p>
+</div>
+</dd></dl>
+
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<div class="docutils container" id="id13">
+<div role="list" class="citation-list">
+<div class="citation" id="id53" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BDEN02<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id5">2</a>,<a role="doc-backlink" href="#id6">3</a>,<a role="doc-backlink" href="#id7">4</a>)</span>
+<p>Michaël Bender, Jacek Dobaczewski, Jonathan Engel, and Witold Nazarewicz. Gamow-teller strength and the spin-isospin coupling constants of the skyrme energy functional. <em>Physical Review C</em>, 65(5):054322, 2002. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.65.054322">https://link.aps.org/doi/10.1103/PhysRevC.65.054322</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.65.054322">doi:10.1103/PhysRevC.65.054322</a>.</p>
+</div>
+<div class="citation" id="id61" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CGP09<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id10">1</a>,<a role="doc-backlink" href="#id11">2</a>)</span>
+<p>Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. <em>Physical Review C</em>, 80(6):065804, 2009. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.80.065804">https://link.aps.org/doi/10.1103/PhysRevC.80.065804</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.80.065804">doi:10.1103/PhysRevC.80.065804</a>.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PkecakCMWlazlowski21<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id8">1</a>,<a role="doc-backlink" href="#id9">2</a>,<a role="doc-backlink" href="#id12">3</a>)</span>
+<p>Daniel Pęcak, Nicolas Chamel, Piotr Magierski, and Gabriel Wlazłowski. Properties of a quantum vortex in neutron matter at finite temperatures. <em>Physical Review C</em>, 104(5):055801, 2021.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="definitions.html" class="btn btn-neutral float-left" title="Module: Definitions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="io.html" class="btn btn-neutral float-right" title="Module: IO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

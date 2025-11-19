@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module: Units &mdash; libNeST 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module: Definitions" href="definitions.html" />
+    <link rel="prev" title="Bibliography" href="bibliography.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instalation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Other</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module: Units</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numerical">Numerical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#physical">Physical</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nucleon-masses">Nucleon masses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neutron-star">Neutron star</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-of-functions">List of functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module: Units</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/units.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-units">
+<span id="module-libnest.units"></span><h1>Module: Units<a class="headerlink" href="#module-units" title="Link to this heading"></a></h1>
+<p>This module contains physical constants relevant for nuclear matter and neutron star physics. It also provides functions for converting one type of units into another.</p>
+<section id="numerical">
+<h2>Numerical<a class="headerlink" href="#numerical" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Constants for dealing with extreme numerics:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NUMZERO</span></code> = 1e-12 (the lowest numerical value allowed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NUMINF</span></code>  = 1e30  (the largest numerical value allowed)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DENSEPSILON</span></code> = 1e-12 this value is used to renormalize division and avoid dividing but extremely small numbers that cause numerical instabilities</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">DENSEPSILON</span></code> is used whenever division by density has to be applied.
+Those cases usually will give zero in proper analytical limit.</p>
+</div>
+</section>
+<section id="physical">
+<h2>Physical<a class="headerlink" href="#physical" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>Physical constants are from NIST website:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://physics.nist.gov/cgi-bin/cuu/Value?hbcmevf">https://physics.nist.gov/cgi-bin/cuu/Value?hbcmevf</a></p></li>
+<li><p><a class="reference external" href="https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev">https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev</a></p></li>
+<li><p><a class="reference external" href="https://physics.nist.gov/cgi-bin/cuu/Value?mpc2mev">https://physics.nist.gov/cgi-bin/cuu/Value?mpc2mev</a></p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Constant</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Unit</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>HBARC</p></td>
+<td><p>197.3269804</p></td>
+<td><p>[MeV fm]</p></td>
+<td><p><span class="math">\(\hbar c\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>MN</p></td>
+<td><p>939.5654205</p></td>
+<td><p>[MeV]</p></td>
+<td><p>neutron mass <span class="math">\(m_n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>MP</p></td>
+<td><p>938.2720882</p></td>
+<td><p>[MeV]</p></td>
+<td><p>proton  mass <span class="math">\(m_p\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>HBAR2M_n</p></td>
+<td><p>20.72124837</p></td>
+<td><p>[MeV*fm <span class="math">\(^2\)</span>]</p></td>
+<td><p><span class="math">\(\hbar^2/(2 m_n)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>HBAR2M_p</p></td>
+<td><p>20.74981092</p></td>
+<td><p>[MeV*fm <span class="math">\(^2\)</span>]</p></td>
+<td><p><span class="math">\(\hbar^2/(2 m_p)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="nucleon-masses">
+<h2>Nucleon masses<a class="headerlink" href="#nucleon-masses" title="Link to this heading"></a></h2>
+<p>The masses of proton, neutron and nucleon (which is their averaged mass). The nucleon mass is an average of proton and neutron mass:</p>
+<div class="math">
+\[m_N=\frac{1}{2} (m_n + m_p) \approx 1.67377585 \cdot 10^{-27}.
+
+\]</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mass</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>neutron <span class="math">\(m_n\)</span></p></td>
+<td><p>1.6749286 <span class="math">\(\cdot 10^{27}\)</span> kg</p></td>
+</tr>
+<tr class="row-odd"><td><p>proton  <span class="math">\(m_p\)</span></p></td>
+<td><p>1.6726231 <span class="math">\(\cdot 10^{27}\)</span> kg</p></td>
+</tr>
+<tr class="row-even"><td><p>nucleon <span class="math">\(m_N\)</span></p></td>
+<td><p>1.6737759 <span class="math">\(\cdot 10^{27}\)</span> kg</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="neutron-star">
+<h2>Neutron star<a class="headerlink" href="#neutron-star" title="Link to this heading"></a></h2>
+<p>Some constants are relevant from the point of view of neutron star’s physics.
+One of them is the <em>neutron drip</em> density <span class="math">\(\rho_{\mathrm{ND}}\)</span> at which excesive neutrons are not bound to the nuclei anymore and form superfluid sea. This is how the border of outer crust and inner crust are defined.  Then, there is saturation density <span class="math">\(\rho_0\)</span> at which the crust-core transition should occure. This is the density of nuclei.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Density</p></th>
+<th class="head"><p>[g cm <sup>-3</sup>]</p></th>
+<th class="head"><p>[fm <sup>-3</sup>]</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RHOSAT</p></td>
+<td><p><span class="math">\(\rho_0\)</span></p></td>
+<td><p>3 <span class="math">\(\cdot 10^{14}\)</span></p></td>
+<td><p>0.18</p></td>
+</tr>
+<tr class="row-odd"><td><p>RHOND</p></td>
+<td><p><span class="math">\(\rho_{\mathrm{ND}}\)</span></p></td>
+<td><p>4 <span class="math">\(\cdot 10^{11}\)</span></p></td>
+<td><p>0.00042</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="list-of-functions">
+<h2>List of functions<a class="headerlink" href="#list-of-functions" title="Link to this heading"></a></h2>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.units.KtoMev">
+<span class="sig-prename descclassname"><span class="pre">libnest.units.</span></span><span class="sig-name descname"><span class="pre">KtoMev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.units.KtoMev" title="Link to this definition"></a></dt>
+<dd><p>Converts temperature <span class="math">\(T\)</span> units from Kelvins to energy <span class="math">\(E\)</span> units in MeVs by setting the Boltzmann constant to 1.</p>
+<div class="math">
+\[E = \frac{k_B}{1eV} 10^{-6} T \approx 11604525006.1598 \cdot T
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temp</strong> (<em>float</em>) – temperature <span class="math">\(T\)</span> [K]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy <span class="math">\(E\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.units.MeVtoK" title="libnest.units.MeVtoK"><code class="xref py py-func docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.units.MeVtoK">
+<span class="sig-prename descclassname"><span class="pre">libnest.units.</span></span><span class="sig-name descname"><span class="pre">MeVtoK</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.units.MeVtoK" title="Link to this definition"></a></dt>
+<dd><p>Converts energy <span class="math">\(E\)</span> units in MeVs to temperature <span class="math">\(T\)</span> units from Kelvins by setting the Boltzmann constant to 1.</p>
+<div class="math">
+\[T = \frac{e V}{k_B} 10^6 E \approx 11604525006.1598 \cdot E
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>energy</strong> (<em>float</em>) – energy <span class="math">\(E\)</span> [MeV]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>temperature <span class="math">\(T\)</span> [K]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.units.KtoMev" title="libnest.units.KtoMev"><code class="xref py py-func docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.units.fm3togcm3">
+<span class="sig-prename descclassname"><span class="pre">libnest.units.</span></span><span class="sig-name descname"><span class="pre">fm3togcm3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.units.fm3togcm3" title="Link to this definition"></a></dt>
+<dd><p>Function converts desnity units: fm <sup>-3</sup> into g cm <sup>-3</sup>. See more <a class="reference external" href="#nucleon-masses">here</a>. The numerical factor</p>
+<div class="math">
+\[\frac{m_N}{\mathrm{fm}^3} = 1.67377585 \cdot  10^{15}\frac{\mathrm{g}}{\mathrm{cm}^3}
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>rho <span class="math">\(\rho\)</span> [g cm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.units.gcm3tofm3" title="libnest.units.gcm3tofm3"><code class="xref py py-func docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.units.gcm3tofm3">
+<span class="sig-prename descclassname"><span class="pre">libnest.units.</span></span><span class="sig-name descname"><span class="pre">gcm3tofm3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.units.gcm3tofm3" title="Link to this definition"></a></dt>
+<dd><p>Function converts desnity units: fm <sup>-3</sup> into g cm <sup>-3</sup>. See more <a class="reference external" href="#nucleon-masses">here</a>. The numerical factor</p>
+<div class="math">
+\[\frac{\mathrm{g}}{\mathrm{cm}^3} =
+\frac{10^{-15}}{1.67377585}
+\frac{m_N}{\mathrm{fm}^3}
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> [g cm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>rho <span class="math">\(\rho\)</span> [fm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.units.fm3togcm3" title="libnest.units.fm3togcm3"><code class="xref py py-func docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></p>
+</div>
+</dd></dl>
+
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bibliography.html" class="btn btn-neutral float-left" title="Bibliography" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="definitions.html" class="btn btn-neutral float-right" title="Module: Definitions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

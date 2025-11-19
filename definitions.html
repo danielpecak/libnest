@@ -1,0 +1,581 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module: Definitions &mdash; libNeST 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module: BSk" href="bsk.html" />
+    <link rel="prev" title="Module: Units" href="units.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instalation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Other</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module: Definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-libnest.definitions">Module: Definitions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-of-functions">List of functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.E_minigap_delta_n"><code class="docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.E_minigap_rho_n"><code class="docutils literal notranslate"><span class="pre">E_minigap_rho_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.Meff_hydro"><code class="docutils literal notranslate"><span class="pre">Meff_hydro()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.eF_n"><code class="docutils literal notranslate"><span class="pre">eF_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.kf2rho"><code class="docutils literal notranslate"><span class="pre">kf2rho()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.mu_q"><code class="docutils literal notranslate"><span class="pre">mu_q()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.rho2kf"><code class="docutils literal notranslate"><span class="pre">rho2kf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.rho2tau"><code class="docutils literal notranslate"><span class="pre">rho2tau()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.rhoEta"><code class="docutils literal notranslate"><span class="pre">rhoEta()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.superfluidFraction"><code class="docutils literal notranslate"><span class="pre">superfluidFraction()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.vLandau"><code class="docutils literal notranslate"><span class="pre">vLandau()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.v_NV"><code class="docutils literal notranslate"><span class="pre">v_NV()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.vcritical"><code class="docutils literal notranslate"><span class="pre">vcritical()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.vsf"><code class="docutils literal notranslate"><span class="pre">vsf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.vsf_NV"><code class="docutils literal notranslate"><span class="pre">vsf_NV()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.definitions.xiBCS"><code class="docutils literal notranslate"><span class="pre">xiBCS()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module: Definitions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/definitions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-definitions">
+<h1>Module: Definitions<a class="headerlink" href="#module-definitions" title="Link to this heading"></a></h1>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Describe properties</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Give references</p>
+</div>
+<section id="module-libnest.definitions">
+<span id="id3"></span><h2>Module: Definitions<a class="headerlink" href="#module-libnest.definitions" title="Link to this heading"></a></h2>
+<p>Handy functions from different fields of physics</p>
+<section id="list-of-functions">
+<h3>List of functions<a class="headerlink" href="#list-of-functions" title="Link to this heading"></a></h3>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.E_minigap_delta_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">E_minigap_delta_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.E_minigap_delta_n" title="Link to this definition"></a></dt>
+<dd><p>Returns the energy of minigap <span class="math">\(E_{mg}\)</span> [MeV] for neutron matter
+given the pairing field and density.</p>
+<p>The minigap energy can be approximated:</p>
+<div class="math">
+\[E_\mathrm{mg} = \frac{4}{3} \frac{|\Delta|^2}{\varepsilon_F},\]</div>
+<p>where <span class="math">\(\Delta\)</span> is the pairing gap in the system, and <span class="math">\(\varepsilon_F\)</span>
+is the Fermi energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta</strong> (<em>float</em>) – pairing field for neutrons <span class="math">\(\Delta_n\)</span> [MeV]</p></li>
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both
+spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy of minigap <span class="math">\(E_{mg}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.definitions.E_minigap_rho_n" title="libnest.definitions.E_minigap_rho_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_rho_n()</span></code></a>
+<a class="reference internal" href="#libnest.definitions.eF_n" title="libnest.definitions.eF_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">eF_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.E_minigap_rho_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">E_minigap_rho_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.E_minigap_rho_n" title="Link to this definition"></a></dt>
+<dd><p>Returns the energy of minigap <span class="math">\(E_{mg}\)</span> [MeV] for neutron matter,
+calculating the pairing field automatically from density.</p>
+<p>This is a convenience wrapper around <a class="reference internal" href="#libnest.definitions.E_minigap_delta_n" title="libnest.definitions.E_minigap_delta_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code></a> that
+computes the neutron pairing field using the BSk functional.</p>
+<p>The minigap energy can be approximated:</p>
+<div class="math">
+\[E_\mathrm{mg} = \frac{4}{3} \frac{|\Delta|^2}{\varepsilon_F},\]</div>
+<p>where <span class="math">\(\Delta\)</span> is the pairing gap in the system, and <span class="math">\(\varepsilon_F\)</span>
+is the Fermi energy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both
+spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>energy of minigap <span class="math">\(E_{mg}\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.definitions.E_minigap_delta_n" title="libnest.definitions.E_minigap_delta_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code></a>
+<a class="reference internal" href="bsk.html#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a>
+<a class="reference internal" href="#libnest.definitions.rho2kf" title="libnest.definitions.rho2kf"><code class="xref py py-func docutils literal notranslate"><span class="pre">rho2kf()</span></code></a>
+<a class="reference internal" href="#libnest.definitions.eF_n" title="libnest.definitions.eF_n"><code class="xref py py-func docutils literal notranslate"><span class="pre">eF_n()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.Meff_hydro">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">Meff_hydro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.Meff_hydro" title="Link to this definition"></a></dt>
+<dd><p>Returns effective mass of a spherical nucleus of radius <span class="math">\(R\)</span> of density <span class="math">\(\rho_{\mathrm{in}}\)</span> immersed in superfluid neutrons of density <span class="math">\(\rho_{\mathrm{out}}\)</span>.
+The formula is from: <span id="id4">[<a class="reference internal" href="bibliography.html#id65" title="Piotr Magierski. In-medium ion mass renormalization and lattice vibrations in the neutron star crust. International Journal of Modern Physics E, 13(01):371–374, 2004.">Mag04</a>]</span></p>
+<div class="math">
+\[M_{\mathrm{eff}} = \frac{4}{3} \pi R^3 m_n \frac{(\rho_{\mathrm{in}}-\rho_{\mathrm{out}})^2}{\rho_{\mathrm{in}}+2\rho_{\mathrm{out}}},\]</div>
+<p>where <span class="math">\(m_n\)</span> is mass of a neutron.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_in</strong> (<em>float</em>) – density of nucleus <span class="math">\(\rho_{\mathrm{in}}\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_out</strong> (<em>float</em>) – density of superlufid neutrons <span class="math">\(\rho_{\mathrm{out}}\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>effective mass <span class="math">\(M_{\mathrm{eff}}\)</span> in units neutron mass</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.eF_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">eF_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.eF_n" title="Link to this definition"></a></dt>
+<dd><p>Returns Fermi energy for neutrons based on wavevector kF:</p>
+<div class="math">
+\[\epsilon_F = \frac{\hbar^2 k_F^2}{2 M_n},\]</div>
+<p>where <span class="math">\(M_n\)</span> is mass of a neutron.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kF</strong> (<em>float</em>) – wavevector <span class="math">\(k_F\)</span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Fermi energy <span class="math">\(\epsilon_F\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.kf2rho">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">kf2rho</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.kf2rho" title="Link to this definition"></a></dt>
+<dd><p>Returns rho based on wavevector kF.</p>
+<p>It uses the relation for a uniform Fermi system and yields:</p>
+<div class="math">
+\[\rho = \frac{k_F^3}{3 \pi^2}.\]</div>
+<p>If we have a two-component mixture of protons and neutrons, both
+having two spin components (up and down), then <span class="math">\(\rho\)</span> states
+for the density of one isospin, and one spin component only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kF</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> for a single component</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wavevector <span class="math">\(k_F\)</span> [fm <sup>-1</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.definitions.rho2kf" title="libnest.definitions.rho2kf"><code class="xref py py-func docutils literal notranslate"><span class="pre">rho2kf()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.mu_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">mu_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.mu_q" title="Link to this definition"></a></dt>
+<dd><p>Calculates the chemical potential <span class="math">\(\mu\)</span> defined with the wavevector
+<span class="math">\(k_F\)</span> <span id="id5">[<a class="reference internal" href="physics.html#id68" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. Phys. Rev. Lett., 102:152503, Apr 2009. URL: https://link.aps.org/doi/10.1103/PhysRevLett.102.152503, doi:10.1103/PhysRevLett.102.152503.">GCP09</a>]</span>.</p>
+<div class="math">
+\[\mu_q = \frac{\hbar^2 k_F^2}{2M_q}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>chemical potential <span class="math">\(\mu\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.rho2kf">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">rho2kf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.rho2kf" title="Link to this definition"></a></dt>
+<dd><p>Returns wavevector kF based on density rho.</p>
+<p>It uses the relation for a uniform Fermi system and yields:</p>
+<div class="math">
+\[k_F = (3 \pi^2 \rho )^{1/3}.\]</div>
+<p>If we have a two-component mixture of protons and neutrons, both
+having two spin components (up and down), then <span class="math">\(\rho\)</span> states
+for the density of one isospin, and one spin component only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> for a single component</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wavevector <span class="math">\(k_F\)</span> [fm <sup>-1</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.definitions.kf2rho" title="libnest.definitions.kf2rho"><code class="xref py py-func docutils literal notranslate"><span class="pre">kf2rho()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.rho2tau">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">rho2tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.rho2tau" title="Link to this definition"></a></dt>
+<dd><p>Returns kinetic density <span class="math">\(\tau\)</span> for uniform Fermi system of density
+<span class="math">\(\rho\)</span>.</p>
+<div class="math">
+\[\tau = \frac{3}{5} \left(3 \pi\right)^{2/3} \rho^{5/3}
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>] for a single component</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>kinetic density <span class="math">\(\tau\)</span> [fm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.rhoEta">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">rhoEta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.rhoEta" title="Link to this definition"></a></dt>
+<dd><p>Returns total density <span class="math">\(\rho\)</span> and difference <span class="math">\(\eta\)</span> of
+densities from neutron and proton densities.</p>
+<div class="math">
+\[\rho = \rho_n + \rho_p
+
+\eta = \rho_n - \rho_p\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function returns the absolute difference <span class="math">\(\eta = \rho_n - \rho_p\)</span>,
+not the relative asymmetry <span class="math">\(\eta/(\rho_n + \rho_p)\)</span>.
+This is consistent with usage in <a class="reference internal" href="bsk.html#libnest.bsk.neutron_ref_pairing_field" title="libnest.bsk.neutron_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></a> and
+<a class="reference internal" href="bsk.html#libnest.bsk.proton_ref_pairing_field" title="libnest.bsk.proton_ref_pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></a> where the ratio <span class="math">\(\eta/\rho\)</span> is
+computed explicitly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pair of total density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>], and density difference
+<span class="math">\(\eta\)</span> [fm <sup>-3</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.superfluidFraction">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">superfluidFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vsf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.superfluidFraction" title="Link to this definition"></a></dt>
+<dd><p>Returns superfluid fraction: how much of the matter is superfluid.</p>
+<div class="math">
+\[\eta_\mathrm{sf} = \frac{\hbar c}{M} \frac{{ j}}{\rho} \frac{1}{v_\mathrm{sf}}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>j</strong> (<em>float</em>) – a three-component current vector <span class="math">\(\vec j\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>vsf</strong> (<em>float</em>) – <span class="math">\(v_{\mathrm{sf}}\)</span> [c]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>superfluid fraction: a number between 0 and 1 [1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.vLandau">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">vLandau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.vLandau" title="Link to this definition"></a></dt>
+<dd><p>Returns Landau velocity.</p>
+<p>Landau velocity shows at which velocity the superfluid medium starts to be
+excited: phonons appear.</p>
+<div class="math">
+\[v_L = \frac{\Delta}{\hbar k_F} c\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta</strong> (<em>float</em>) – <span class="math">\(\Delta\)</span> [MeV]</p></li>
+<li><p><strong>kF</strong> (<em>float</em>) – <span class="math">\(k_F\)</span> [MeV]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Landau velocity <span class="math">\(v_L\)</span> in units of speed of light [c]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.v_NV">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">v_NV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.v_NV" title="Link to this definition"></a></dt>
+<dd><p>Returns the velocity (mass velocity). It is adjusted to the entrainment
+effects (definition by Nicolas Chamel Valentin Allard).</p>
+<div class="math">
+\[v^{\mathrm{NV}} = \hbar c \frac{\hbar^2}{2 M B} \frac{{ j}}{\rho}  + \frac{{ A}}{M}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>B</strong> (<em>float</em>) – mean field potential coming from kinetic energy variation B [MeV fm <sup>2</sup>]</p></li>
+<li><p><strong>j</strong> (<em>float</em>) – a three-component current vector <span class="math">\(\vec j\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho</strong> (<em>float</em>) – density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>A</strong> (<em>float</em>) – mean field potential coming from current variation A [MeV fm]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>mass velocity <span class="math">\(v_{\mathrm{NV}}\)</span> in units of percentage of speed of light [c]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.vcritical">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">vcritical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kF</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.vcritical" title="Link to this definition"></a></dt>
+<dd><p>Returns critical velocity for superfluid.</p>
+<p>At this velocity the system is no longer superfluid: the Cooper pairs break.</p>
+<div class="math">
+\[v_L = \frac{e}{2} \frac{\Delta}{\hbar k_F} c
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delta</strong> (<em>float</em>) – <span class="math">\(\Delta\)</span> [MeV]</p></li>
+<li><p><strong>kF</strong> (<em>float</em>) – <span class="math">\(k_F\)</span> [MeV]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Landau velocity <span class="math">\(v_c\)</span> in units of speed of light [c]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.vsf">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">vsf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.vsf" title="Link to this definition"></a></dt>
+<dd><p>Calculates the velocity based on gradient of the pairing field gradient.</p>
+<div class="math">
+\[v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r</strong> (<em>float</em>) – distance from the center of a vortex in femtometers [fm]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>velocity in units of percentage of speed of light [c]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.vsf_NV">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">vsf_NV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vsf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.vsf_NV" title="Link to this definition"></a></dt>
+<dd><p>Returns the velocity based on the gradient of the pairing field phase.
+However it is adjusted to the entrainment effects (definition by Nicolas Chamel
+Valentin Allard).</p>
+<div class="math">
+\[v_\mathrm{sf}^{NV} = \frac{\hbar^2}{2 M B}v_\mathrm{sf} + \frac{{ A}}{M}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>B</strong> (<em>float</em>) – mean field potential coming from kinetic energy variation B [MeV fm <sup>2</sup>]</p></li>
+<li><p><strong>vsf</strong> (<em>float</em>) – <span class="math">\(v_{\mathrm{sf}}\)</span> [c]</p></li>
+<li><p><strong>A</strong> (<em>float</em>) – mean field potential coming from current variation A [MeV fm]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>velocity <span class="math">\(v_\mathrm{SF}^{NV}\)</span> in units of percentage of speed of light [c]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.definitions.xiBCS">
+<span class="sig-prename descclassname"><span class="pre">libnest.definitions.</span></span><span class="sig-name descname"><span class="pre">xiBCS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kF</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.definitions.xiBCS" title="Link to this definition"></a></dt>
+<dd><p>Calculates the coherence length from BCS theory. If no delta argument is provided,
+it is assumed that we consider pure neutron matter.</p>
+<div class="math">
+\[\xi_\mathrm{BCS} = \frac{(\hbar c)^2 k_F}{\pi \Delta Mc^2}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k_F</strong> (<em>float</em>) – Fermi momentum [fm <sup>-1</sup>]</p></li>
+<li><p><strong>delta</strong> (<em>float</em>) – pairing field [MeV]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>coherence length [fm]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="units.html" class="btn btn-neutral float-left" title="Module: Units" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bsk.html" class="btn btn-neutral float-right" title="Module: BSk" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

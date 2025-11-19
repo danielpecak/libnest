@@ -1,0 +1,1383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module: Plots &mdash; libNeST 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Module: Tools" href="tools.html" />
+    <link rel="prev" title="Module: Pasta" href="pasta.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="instalation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Other</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module: Plots</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-libnest.plots">Module: Plots</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list-of-functions">List of functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.epsilon_test"><code class="docutils literal notranslate"><span class="pre">epsilon_test()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_B_q"><code class="docutils literal notranslate"><span class="pre">plot_B_q()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_U_q"><code class="docutils literal notranslate"><span class="pre">plot_U_q()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_effective_mass_n"><code class="docutils literal notranslate"><span class="pre">plot_effective_mass_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_effective_mass_p"><code class="docutils literal notranslate"><span class="pre">plot_effective_mass_p()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_energy_per_nucleon"><code class="docutils literal notranslate"><span class="pre">plot_energy_per_nucleon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_energy_per_nucleon_both"><code class="docutils literal notranslate"><span class="pre">plot_energy_per_nucleon_both()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon"><code class="docutils literal notranslate"><span class="pre">plot_epsilon()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon_delta"><code class="docutils literal notranslate"><span class="pre">plot_epsilon_delta()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon_delta_rho_np"><code class="docutils literal notranslate"><span class="pre">plot_epsilon_delta_rho_np()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon_np"><code class="docutils literal notranslate"><span class="pre">plot_epsilon_np()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon_rho_np"><code class="docutils literal notranslate"><span class="pre">plot_epsilon_rho_np()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon_tau"><code class="docutils literal notranslate"><span class="pre">plot_epsilon_tau()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_epsilon_tau_np"><code class="docutils literal notranslate"><span class="pre">plot_epsilon_tau_np()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_isoscalarM"><code class="docutils literal notranslate"><span class="pre">plot_isoscalarM()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_isovectorM"><code class="docutils literal notranslate"><span class="pre">plot_isovectorM()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_pairing_field_n"><code class="docutils literal notranslate"><span class="pre">plot_pairing_field_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_pairing_field_p"><code class="docutils literal notranslate"><span class="pre">plot_pairing_field_p()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_pressure_n"><code class="docutils literal notranslate"><span class="pre">plot_pressure_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_speed_of_sound_n"><code class="docutils literal notranslate"><span class="pre">plot_speed_of_sound_n()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_v_critical"><code class="docutils literal notranslate"><span class="pre">plot_v_critical()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_v_landau"><code class="docutils literal notranslate"><span class="pre">plot_v_landau()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.plots.plot_v_sf"><code class="docutils literal notranslate"><span class="pre">plot_v_sf()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plotting-real-data">Plotting real data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">List of functions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance"><code class="docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.file_andreev"><code class="docutils literal notranslate"><span class="pre">file_andreev()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.file_check"><code class="docutils literal notranslate"><span class="pre">file_check()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.files_set_particles"><code class="docutils literal notranslate"><span class="pre">files_set_particles()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.files_set_type"><code class="docutils literal notranslate"><span class="pre">files_set_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.jdiff2"><code class="docutils literal notranslate"><span class="pre">jdiff2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.jsum2"><code class="docutils literal notranslate"><span class="pre">jsum2()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.pairing_field"><code class="docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.phi"><code class="docutils literal notranslate"><span class="pre">phi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_A_slice"><code class="docutils literal notranslate"><span class="pre">plot_A_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_B_q_slice"><code class="docutils literal notranslate"><span class="pre">plot_B_q_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_U_q_slice"><code class="docutils literal notranslate"><span class="pre">plot_U_q_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_current"><code class="docutils literal notranslate"><span class="pre">plot_current()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_current_slice"><code class="docutils literal notranslate"><span class="pre">plot_current_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_density"><code class="docutils literal notranslate"><span class="pre">plot_density()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_density_contour"><code class="docutils literal notranslate"><span class="pre">plot_density_contour()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_density_slice"><code class="docutils literal notranslate"><span class="pre">plot_density_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_e_minigap"><code class="docutils literal notranslate"><span class="pre">plot_e_minigap()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_e_minigap_temperature"><code class="docutils literal notranslate"><span class="pre">plot_e_minigap_temperature()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_landau_critical_velocity"><code class="docutils literal notranslate"><span class="pre">plot_landau_critical_velocity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_landau_velocity"><code class="docutils literal notranslate"><span class="pre">plot_landau_velocity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_landau_velocity_temperature"><code class="docutils literal notranslate"><span class="pre">plot_landau_velocity_temperature()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_pairing_field"><code class="docutils literal notranslate"><span class="pre">plot_pairing_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_pairing_field_slice"><code class="docutils literal notranslate"><span class="pre">plot_pairing_field_slice()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_speed_of_sound"><code class="docutils literal notranslate"><span class="pre">plot_speed_of_sound()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_v_sf_real"><code class="docutils literal notranslate"><span class="pre">plot_v_sf_real()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.plot_vsf_nv"><code class="docutils literal notranslate"><span class="pre">plot_vsf_nv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#libnest.real_data_plots.vector_magnitude"><code class="docutils literal notranslate"><span class="pre">vector_magnitude()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module: Plots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/plots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-plots">
+<h1>Module: Plots<a class="headerlink" href="#module-plots" title="Link to this heading"></a></h1>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Describe properties</p>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Give references</p>
+</div>
+<section id="module-libnest.plots">
+<span id="id3"></span><h2>Module: Plots<a class="headerlink" href="#module-libnest.plots" title="Link to this heading"></a></h2>
+<p>This module provides ready-to-go functions for plotting. Probably should be
+moved and work as a scirpt.</p>
+<section id="list-of-functions">
+<h3>List of functions<a class="headerlink" href="#list-of-functions" title="Link to this heading"></a></h3>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.epsilon_test">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">epsilon_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.epsilon_test" title="Link to this definition"></a></dt>
+<dd><p>Plots the energy density functional from bsk_functional_full code (for testing).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n</strong> (<em>float</em>) – neutron density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho_grad_p</strong> (<em>float</em>) – proton density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau_n</strong> (<em>float</em>) – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>tau_n</strong> – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>jsum2</strong> (<em>float</em>) – sum of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>jdiff2</strong> (<em>float</em>) – difference of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_B_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_B_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_B_q" title="Link to this definition"></a></dt>
+<dd><p>Plots the mean field potential (from variation over kinetic density,
+or effective mass), <span class="math">\(B_{q}\)</span> [MeV fm <sup>2</sup>], in matter of
+density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton and neutron
+densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (neutron ‘n’ or proton ‘p’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">B_q()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_U_q">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_U_q</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_U_q" title="Link to this definition"></a></dt>
+<dd><p>Plots the mean field potential (from variation over density <span class="math">\(\rho\)</span>),
+<span class="math">\(U_{q}\)</span> [MeV] in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span>
+is the sum of proton and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (neutron ‘n’ or proton ‘p’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">U_q()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_effective_mass_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_effective_mass_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_effective_mass_n" title="Link to this definition"></a></dt>
+<dd><p>Plots the effective mass of neutron, <span class="math">\(M_{n}^{*} / M\)</span> [MeV] in matter of
+density <span class="math">\(\rho\)</span>. <span class="math">\(\rho\)</span> is the sum of proton and neutron densities,
+<span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span> respectively, and <span class="math">\(M\)</span> is the sum
+of neutron and proton masses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">effMn()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_effective_mass_p">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_effective_mass_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_effective_mass_p" title="Link to this definition"></a></dt>
+<dd><p>Plots the effective mass of proton, <span class="math">\(M_{p}^{*}/ M\)</span> [MeV] in matter of
+density <span class="math">\(\rho\)</span>. <span class="math">\(\rho\)</span> is the sum of proton and neutron densities,
+<span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span> respectively, and <span class="math">\(M\)</span> is the sum
+of neutron and proton masses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">effMp()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_energy_per_nucleon">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_energy_per_nucleon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_energy_per_nucleon" title="Link to this definition"></a></dt>
+<dd><p>Plots the energy per nucleon for uniform matter of density <span class="math">\(\rho\)</span>,
+the sum of proton and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>
+respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_energy_per_nucleon_both">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_energy_per_nucleon_both</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_energy_per_nucleon_both" title="Link to this definition"></a></dt>
+<dd><p>Plots the energy per nucleon for symmetric uniform matter and neutron
+uniform matter of density <span class="math">\(\rho\)</span>, which is the sum of proton and
+neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">energy_per_nucleon()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon" title="Link to this definition"></a></dt>
+<dd><p>Plots the energy density <span class="math">\(\epsilon\)</span> [MeV fm <sup>-3</sup>]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad</strong> (<em>float</em>) – particle density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau</strong> (<em>float</em>) – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>j</strong> (<em>float</em>) – momentum density/current <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu</strong> (<em>float</em>) – anomalous density <span class="math">\(\nu\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>q</strong> (<em>string</em>) – nucleon type choice (‘p’ - proton, or ‘n’ - neutron)</p></li>
+<li><p><strong>kappa</strong> (<em>float</em>) – what is kappa? (no Eq.9 in Ref.41)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">epsilon()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_delta">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_delta" title="Link to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">\(M_v^*`\)</span> [MeV]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_delta_rho_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_delta_rho_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_delta_rho_np" title="Link to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">\(M_v^*`\)</span> [MeV]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_grad_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nu_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_np" title="Link to this definition"></a></dt>
+<dd><p>Plots the energy functional <span class="math">\(\epsilon\)</span> [MeV fm <sup>-3</sup>] against
+:math`rho`, the sum of proton and neutron of densities, <span class="math">\(\rho_p\)</span>
+and <span class="math">\(\rho_n\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]; sum of both spin components</p></li>
+<li><p><strong>rho_grad_n</strong> (<em>float</em>) – neutron density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>rho_grad_p</strong> (<em>float</em>) – proton density gradient <span class="math">\(\nabla \rho\)</span> [fm <sup>-4</sup>]</p></li>
+<li><p><strong>tau_n</strong> (<em>float</em>) – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>tau_n</strong> – kinetic density <span class="math">\(\tau\)</span> [fm <sup>-5</sup>]</p></li>
+<li><p><strong>jsum2</strong> (<em>float</em>) – sum of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>jdiff2</strong> (<em>float</em>) – difference of momentum density/current vectors <span class="math">\(j\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_n</strong> (<em>float</em>) – neutron anomalous density <span class="math">\(\nu\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>nu_p</strong> (<em>float</em>) – proton anomalous density <span class="math">\(\nu\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>kappa_n</strong> (<em>float</em>)</p></li>
+<li><p><strong>kappa_p</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_rho_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_rho_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_rho_np" title="Link to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">\(M_v^*`\)</span> [MeV]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_tau">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_tau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_tau" title="Link to this definition"></a></dt>
+<dd><p>Plots the energy density <span class="math">\(\epsilon\)</span> [MeV fm <sup>-3</sup>] in neutron matter,
+related to the density-dependent effective mass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_epsilon_tau_np">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_epsilon_tau_np</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jsum2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jdiff2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_epsilon_tau_np" title="Link to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">\(M_v^*`\)</span> [MeV]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_isoscalarM">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_isoscalarM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_isoscalarM" title="Link to this definition"></a></dt>
+<dd><p>Plots the isoscalar effective mass, <span class="math">\(M_s^*\)</span> [MeV]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">isoscalarM()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_isovectorM">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_isovectorM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_isovectorM" title="Link to this definition"></a></dt>
+<dd><p>Plots the isovector effective mass, <span class="math">\(M_v^*`\)</span> [MeV]
+in matter of density <span class="math">\(\rho\)</span>, where <span class="math">\(\rho\)</span> is the sum of proton
+and neutron densities, <span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">isovectorM()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_pairing_field_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_pairing_field_n" title="Link to this definition"></a></dt>
+<dd><p>Plots the pairing field <span class="math">\(\Delta\)</span> [MeV] for neutrons in matter of
+density <span class="math">\(\rho\)</span>, the sum of proton and neutron densities,
+<span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">neutron_ref_pairing_field()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_pairing_field_p">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_pairing_field_p" title="Link to this definition"></a></dt>
+<dd><p>Plots the pairing field <span class="math">\(\Delta\)</span> [MeV] for protons in matter of
+density <span class="math">\(\rho\)</span>, the sum of proton and neutron densities,
+<span class="math">\(\rho_p\)</span> and <span class="math">\(\rho_n\)</span> respectively.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rho_n</strong> (<em>float</em>) – neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]</p></li>
+<li><p><strong>rho_p</strong> (<em>float</em>) – proton density <span class="math">\(\rho_p\)</span> [fm <sup>-3</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">proton_ref_pairing_field()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_pressure_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_pressure_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_pressure_n" title="Link to this definition"></a></dt>
+<dd><p>Plots pressure <span class="math">\(P\)</span> inside NeuM of density <span class="math">\(rho_n\)</span> in units of
+percentage of speed of sound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">pressure_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_speed_of_sound_n">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_speed_of_sound_n</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_speed_of_sound_n" title="Link to this definition"></a></dt>
+<dd><p>Plots the speed of sound for NeuM of density <span class="math">\(rho_n\)</span> in units of
+percentage of speed of sound.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_v_critical">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_critical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_v_critical" title="Link to this definition"></a></dt>
+<dd><p>Plots the critical velocity for a superfluid.</p>
+<div class="math">
+\[v_L = e \frac{\Delta}{\hbar k_F} c
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vcritical()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">rho2kf()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_v_landau">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_landau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rho_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_v_landau" title="Link to this definition"></a></dt>
+<dd><p>Plots the Landau velocity, which shows at which velocity the superfluid medium starts to become excited,
+for neutron matter of density <span class="math">\(\rho_n\)</span>.</p>
+<div class="math">
+\[v_L = \frac{\Delta}{\hbar k_F} c\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rho_n</strong> (<em>float</em>) – maximum neutron density <span class="math">\(\rho_n\)</span> [fm <sup>-3</sup>]; sum of both spin components</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">rho2kf()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.plots.plot_v_sf">
+<span class="sig-prename descclassname"><span class="pre">libnest.plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_sf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.plots.plot_v_sf" title="Link to this definition"></a></dt>
+<dd><p>Plots the superfluid velocity <span class="math">\(v_{sf}\)</span> based on the gradient of the
+pairing field gradient.</p>
+<div class="math">
+\[v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r</strong> (<em>float</em>) – distance from the center of a vortex <span class="math">\(r\)</span> [fm]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vsf()</span></code></p>
+</div>
+</dd></dl>
+
+<section id="plotting-real-data">
+<span id="module-libnest.real_data_plots"></span><h2>Plotting real data<a class="headerlink" href="#plotting-real-data" title="Link to this heading"></a></h2>
+<p>This module…</p>
+<section id="id4">
+<h3>List of functions<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+</section>
+</section>
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.cross_section_distance">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">cross_section_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.cross_section_distance" title="Link to this definition"></a></dt>
+<dd><p>Returns the distance to the centre of the 90x90 fm box as cross-section,
+changing it from a coordinate system with origin at one corner of the box.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>x (float): x-coordinate of <span class="math">\(r\)</span> [fm]
+y (float): y=coordinate of <span class="math">\(r\)</span> [fm]
+size (float): full size of one axis of the square/box [fm]</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>cross section distance <span class="math">\(r\)</span> [fm]</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.file_andreev">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">file_andreev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.file_andreev" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filenames</strong> (<em>TYPE</em>) – DESCRIPTION.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.file_check">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">file_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.file_check" title="Link to this definition"></a></dt>
+<dd><p>Checks if all files are present in the directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>FileNotFoundError</strong> – </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.files_set_particles">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">files_set_particles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particles_nr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.files_set_particles" title="Link to this definition"></a></dt>
+<dd><p>Returns an array with files containing data sets only for a specified
+number of particles.</p>
+<p>Args:
+particles_nr (string): number of particles of the data set</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>array: list of filenames</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.files_set_type">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">files_set_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filenames</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.files_set_type" title="Link to this definition"></a></dt>
+<dd><p>Takes an array of files and returns an array with files containing data sets of
+a specified kind: rho (matter density), current, delta (pairing field),
+or A (mean field potential)</p>
+<p>Args:
+data_type (string): choice of type of files
+filenames (array): list of filenames to sort through</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>array: list of filenames of a specified kind</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.jdiff2">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">jdiff2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_z</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.jdiff2" title="Link to this definition"></a></dt>
+<dd><p>Difference of currents <span class="math">\(\vec i\)</span> and <span class="math">\(\vec j\)</span>, squared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i_x</strong> (<em>float</em>) – x component of <span class="math">\(\vec i\)</span></p></li>
+<li><p><strong>i_y</strong> (<em>float</em>) – y component of <span class="math">\(\vec i\)</span></p></li>
+<li><p><strong>i_z</strong> (<em>float</em>) – z component of <span class="math">\(\vec i\)</span></p></li>
+<li><p><strong>j_x</strong> (<em>float</em>) – x component of <span class="math">\(\vec j\)</span></p></li>
+<li><p><strong>j_y</strong> (<em>float</em>) – y component of <span class="math">\(\vec j\)</span></p></li>
+<li><p><strong>j_z</strong> (<em>float</em>) – z component of <span class="math">\(\vec j\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: squared difference of currents <span class="math">\((\vec j - \vec j)^2\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.jsum2">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">jsum2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j_z</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.jsum2" title="Link to this definition"></a></dt>
+<dd><p>Sum of of currents <span class="math">\(\vec i\)</span> and <span class="math">\(\vec j\)</span>, squared.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i_x</strong> (<em>float</em>) – x component of <span class="math">\(\vec i\)</span></p></li>
+<li><p><strong>i_y</strong> (<em>float</em>) – y component of <span class="math">\(\vec i\)</span></p></li>
+<li><p><strong>i_z</strong> (<em>float</em>) – z component of <span class="math">\(\vec i\)</span></p></li>
+<li><p><strong>j_x</strong> (<em>float</em>) – x component of <span class="math">\(\vec j\)</span></p></li>
+<li><p><strong>j_y</strong> (<em>float</em>) – y component of <span class="math">\(\vec j\)</span></p></li>
+<li><p><strong>j_z</strong> (<em>float</em>) – z component of <span class="math">\(\vec j\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>float: squared sum of currents, <span class="math">\((\vec i + \vec j)^2\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.pairing_field">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.pairing_field" title="Link to this definition"></a></dt>
+<dd><p>Calculates the absolute value/modulus and the argument of the field
+potential from its imaginary and real parts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rel</strong> (<em>float</em>) – real part of field potential <span class="math">\(\Delta_{rel}\)</span> [MeV]</p></li>
+<li><p><strong>im</strong> (<em>float</em>) – imaginary part of field potential <span class="math">\(\Delta_{im}\)</span> [MeV]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>pairing field <span class="math">\(\Delta\)</span> [MeV]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.phi">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">phi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.phi" title="Link to this definition"></a></dt>
+<dd><p>Returns the angle of the line connecting the coordinates to the centre
+of the 90x90 “box”, for a coordinate system with origin at a corner of the
+box.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>x (float): x-coordinate <span class="math">\(r\)</span> [fm]
+y (float): y=coordinate <span class="math">\(r\)</span> [fm]
+size (float): full size of one axis of the square/box [fm]</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>angle <span class="math">\(\phi\)</span> [rad]</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_A_slice">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_A_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_A_slice" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third,
+fourth, and fifth columns are the x, y, and z components of the mean-field
+potential vector <span class="math">\(A\)</span>. The field is defined as the variation over thee
+components of the current j.</p>
+<p>Cross section distance is calculated and the resulting <span class="math">\(A\)</span> is plotted
+against it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<a class="reference internal" href="#libnest.real_data_plots.pairing_field" title="libnest.real_data_plots.pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_B_q_slice">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_B_q_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_B_q_slice" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>].</p>
+<p>Cross section distance and the mean field potential B_q, coming from the
+variation over kinetic density, <span class="math">\(B_q\)</span>, are calculated. <span class="math">\(B_q\)</span> is
+then plotted against the cross section distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<a class="reference internal" href="#libnest.real_data_plots.pairing_field" title="libnest.real_data_plots.pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_U_q_slice">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_U_q_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_U_q_slice" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the real part of the pairing field <span class="math">\(\Delta_{rel}\)</span> [MeV] and
+the fourth is the imaginary part of the pairing field <span class="math">\(\Delta_{im}\)</span> [MeV].</p>
+<p>Cross section distance and the  mean field potential from density
+<span class="math">\(\rho\)</span> variation, <span class="math">\(U_q\)</span>, are calculated. <span class="math">\(U_q\)</span> is
+plotted against the cross section distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<a class="reference internal" href="#libnest.real_data_plots.pairing_field" title="libnest.real_data_plots.pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_current">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_current</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_current" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third,
+fourth, and fifth columns are <span class="math">\(\vec x\)</span>, <span class="math">\(\vec y\)</span>, <span class="math">\(\vec z\)</span>
+current components [fm <sup>-4</sup>]</p>
+<p>Cross section distance and the total current vector <span class="math">\(\vec j\)</span> are
+calculated. The current is then plotted against the cross section distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">current()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_current_slice">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_current_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_current_slice" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third,
+fourth, and fifth columns are <span class="math">\(\vec x\)</span>, <span class="math">\(\vec y\)</span>, <span class="math">\(\vec z\)</span>
+current components [fm <sup>-4</sup>]</p>
+<p>Cross section distance and the total current vector <span class="math">\(\vec j\)</span> are
+calculated. The current is then plotted against the cross section distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">current()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_density">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_density</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_density" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>].</p>
+<p>Cross section distance is calculated and the density is divided by bulk
+density. The ratio is plotted against the cross section distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_density_contour">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_density_contour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_density_contour" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>].</p>
+<p>//A grid is created and populated using triangulation (“scipy.interpolate.triangulate”).
+A contour plot of density as a vertical cross section is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_density_slice">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_density_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_density_slice" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the density <span class="math">\(\rho\)</span> [fm <sup>-3</sup>].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_e_minigap">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_e_minigap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_e_minigap" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified files containing the density data for NeuM. The code
+checks its validity, and creates a 2D data array. It calculates the energy
+of minigap <span class="math">\(E_{minigap}\)</span>, and plots it against a cross section through
+the ‘box’ containing the vortex/uniform matter data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_e_minigap_temperature">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_e_minigap_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particles_nr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_e_minigap_temperature" title="Link to this definition"></a></dt>
+<dd><p>Plots the maximum value the energy of minigap <span class="math">\(E_{minigap}\)</span> [MeV] against
+temperature T [MeV/k:sub:<cite>B</cite>].The code uses <a class="reference internal" href="#libnest.real_data_plots.files_set_type" title="libnest.real_data_plots.files_set_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_type()</span></code></a> and
+<a class="reference internal" href="#libnest.real_data_plots.files_set_particles" title="libnest.real_data_plots.files_set_particles"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_particles()</span></code></a> functions to parse through the data and chose
+only files with, (respectively), pairing field, and density data sets for
+the chosen number of particles. It does so for vortex data and for uniform
+matter data for comparison.</p>
+<p>The function creates an array of temperatures (taken from filenames)
+and goes through the files to find the mean <span class="math">\(v_{Landau} [c]\)</span> in the range
+of 40-60 fm (which is assumed to be the flattest part of the curve).</p>
+<p>The function accesses also data with Andreev states simulation for the
+specified number of particles and finds their minimum <span class="math">\(E_{minigap}\)</span> data point.
+It is then plotted as a striaght line for comparison.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>particles_nr</strong> (<em>string</em>) – choice of files with a specified number of particles</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">E_minigap_delta_n()</span></code>
+<a class="reference internal" href="#libnest.real_data_plots.file_andreev" title="libnest.real_data_plots.file_andreev"><code class="xref py py-func docutils literal notranslate"><span class="pre">file_andreev()</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">andreev_e_minimum()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_landau_critical_velocity">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_landau_critical_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_delta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_landau_critical_velocity" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified files containing density and reference field data.
+The code checks their validity, and creates 2D data arrays. It calculates
+the Landau velocity <span class="math">\(v_{Landau}\)</span> [c], which shows at which velocity the
+superfluid medium starts to be excited, and the critical velocity,
+<span class="math">\(v_{Critical}\)</span> [c] (at this velocity the system is no longer superfluid).
+Both velocities are plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+\[v_L = \frac{\Delta}{\hbar k_F} c\]</div>
+<div class="math">
+\[v_L = e \frac{\Delta}{\hbar k_F} c
+
+\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p></li>
+<li><p><strong>filename_delta</strong> (<em>string</em>) – name of the file containing the reference pairing field data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">vcritical()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_landau_velocity">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_landau_velocity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_delta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_landau_velocity" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified files containing density and reference field data.
+The code checks their validity, and creates 2D data arrays. It calculates
+the Landau velocity <span class="math">\(v_{Landau}\)</span> [c], which shows at which velocity the
+superfluid medium starts to be excited.</p>
+<p>It is plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+\[v_L = \frac{\Delta}{\hbar k_F} c\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p></li>
+<li><p><strong>filename_delta</strong> (<em>string</em>) – name of the file containing the reference pairing field data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_landau_velocity_temperature">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_landau_velocity_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">particles_nr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_landau_velocity_temperature" title="Link to this definition"></a></dt>
+<dd><p>Plots the mean value of Landau velocity <span class="math">\(v_{Landau}\)</span> [c] against
+temperature T [MeV/k:sub:<cite>B</cite>].The code uses <a class="reference internal" href="#libnest.real_data_plots.files_set_type" title="libnest.real_data_plots.files_set_type"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_type()</span></code></a> and
+<a class="reference internal" href="#libnest.real_data_plots.files_set_particles" title="libnest.real_data_plots.files_set_particles"><code class="xref py py-func docutils literal notranslate"><span class="pre">files_set_particles()</span></code></a> functions to parse through the data and chose
+only files with pairing field, and density data sets for the chosen number
+of particles (respectively). It does so for vortex data and for uniform
+matter data for comparison.</p>
+<p>The function creates an array of temperatures (taken from filenames)
+and goes through the files to find the mean <span class="math">\(v_{Landau} [c]\)</span> in the range
+of 40-60 fm (which is assumed to be the flattest part of the curve). The speed
+of sound <span class="math">\(v_s\)</span> [c] is also calculated analytically from the vortex data.</p>
+<p>A plot of <span class="math">\(v_{s}\)</span>, and <span class="math">\(v_{Landau}\)</span> for vortex and uniform matter
+against temperature is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>particles_nr</strong> (<em>string</em>) – choice of files with a specified number of particles</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vLandau()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">vcritical()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_pairing_field">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_pairing_field" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the real part of the pairing field <span class="math">\(\Delta_{rel}\)</span> [MeV] and
+the fourth is the imaginary part of the pairing field <span class="math">\(\Delta_{im}\)</span> [MeV].</p>
+<p>Cross section distance and the total pairing field are calculated. The total
+pairing field is divided by the bulk pairing field, and the ratio is plotted
+against the cross section distance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<a class="reference internal" href="#libnest.real_data_plots.pairing_field" title="libnest.real_data_plots.pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_pairing_field_slice">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_pairing_field_slice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_pairing_field_slice" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first and second columns are x- and y-coordinates. The third
+column is the real part of the pairing field <span class="math">\(\Delta_{rel}\)</span> [MeV]
+and the fourth is the imaginary part of the pairing field
+<span class="math">\(\Delta_{im}\)</span> [MeV].</p>
+<p>Cross section distance and the total pairing field <span class="math">\(\Delta\)</span> are
+calculated and plotted against each other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#libnest.real_data_plots.cross_section_distance" title="libnest.real_data_plots.cross_section_distance"><code class="xref py py-func docutils literal notranslate"><span class="pre">cross_section_distance()</span></code></a>
+<a class="reference internal" href="#libnest.real_data_plots.pairing_field" title="libnest.real_data_plots.pairing_field"><code class="xref py py-func docutils literal notranslate"><span class="pre">pairing_field()</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_speed_of_sound">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_speed_of_sound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_speed_of_sound" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified files containing the density data for NeuM. The code
+checks its validity, and creates a 2D data array. It calculates the speed of
+sound <span class="math">\(v_{s}\)</span> [c], and plots it against a cross section through the
+‘box’ containing the vortex/uniform matter data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">speed_of_sound_n()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_v_sf_real">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_v_sf_real</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_v_sf_real" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified file, checks its validity, and creates a 2D array from
+its data. The first two columns are the x and y coordinates, which are then used
+to calculate the superfluid velocity <span class="math">\(v_{sf}\)</span> [c]  based on the gradient
+of the pairing field gradient.</p>
+<p>It is then plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+\[v_\mathrm{sf} = \frac{\hbar c}{M} \frac{1}{2r}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – name of the data set file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vsf()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.plot_vsf_nv">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">plot_vsf_nv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename_density</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_current</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.plot_vsf_nv" title="Link to this definition"></a></dt>
+<dd><p>Opens the specified files containing density, mean field potential from current
+variation, and current data. The code checks their validity, and creates
+three 2D data arrays. It calculates superfluid velocity <span class="math">\(v_{sf}_{NV}\)</span>
+[c] based on the gradient of the pairing field phase. It is adjusted to the
+entrainment effects (definition by Nicolas Chamel Valentin Allard).
+It also calculates the velocity (mass velocity) <span class="math">\(v_{NV}\)</span> [c],
+also adjusted to the entrainment effects.</p>
+<p>Both velocities are plotted as a cross section through the ‘box’ containing
+the vortex/uniform matter data.</p>
+<div class="math">
+\[v^{\mathrm{NV}} = \hbar c \frac{\hbar^2}{2 M B} \frac{{ j}}{\rho}  + \frac{{ A}}{M}\]</div>
+<div class="math">
+\[v_\mathrm{sf}^{NV} = \frac{\hbar^2}{2 M B}v_\mathrm{sf} + \frac{{ A}}{M}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename_density</strong> (<em>string</em>) – name of the file containing density data</p></li>
+<li><p><strong>filename_A</strong> (<em>string</em>) – name of the file containing the mean field potential from the current variation data</p></li>
+<li><p><strong>filename_current</strong> (<em>string</em>) – name of the file containing density data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-func docutils literal notranslate"><span class="pre">vsf_NV()</span></code>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">v_NV()</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="libnest.real_data_plots.vector_magnitude">
+<span class="sig-prename descclassname"><span class="pre">libnest.real_data_plots.</span></span><span class="sig-name descname"><span class="pre">vector_magnitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#libnest.real_data_plots.vector_magnitude" title="Link to this definition"></a></dt>
+<dd><p>Calculates the magnitude of a vector with its vector x, y, and z components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>float</em>) – <span class="math">\(\vec x\)</span> component [fm <sup>-4</sup>]</p></li>
+<li><p><strong>y</strong> (<em>float</em>) – <span class="math">\(\vec y\)</span> component [fm <sup>-4</sup>]</p></li>
+<li><p><strong>z</strong> (<em>float</em>) – <span class="math">\(\vec z\)</span> component [fm <sup>-4</sup>]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>magnitude of a vector [fm <sup>-4</sup>]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pasta.html" class="btn btn-neutral float-left" title="Module: Pasta" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tools.html" class="btn btn-neutral float-right" title="Module: Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

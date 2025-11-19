@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Physics &mdash; libNeST 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Other" href="help.html" />
+    <link rel="prev" title="Installation" href="instalation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="instalation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Physics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure-of-neutron-star">Structure of Neutron Star</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#crust">Crust</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pairing-s">Pairing S</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pairing-p">Pairing P</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pasta-phase">Pasta phase</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#density-functional">Density Functional</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#skyrme-force">Skyrme force</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-bsk-functional">Why BSk functional?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#history-of-development-of-bsk">History of development of BSk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bsk-functional">BSk functional</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#energy">Energy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pairing-models">Pairing models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Other</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Physics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/physics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="physics">
+<h1><a class="toc-backref" href="#id116" role="doc-backlink">Physics</a><a class="headerlink" href="#physics" title="Link to this heading"></a></h1>
+<p>Here you can find a brief introduction to the physics of neutron stars.</p>
+<nav class="contents" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#physics" id="id116">Physics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#structure-of-neutron-star" id="id117">Structure of Neutron Star</a></p>
+<ul>
+<li><p><a class="reference internal" href="#crust" id="id118">Crust</a></p>
+<ul>
+<li><p><a class="reference internal" href="#pairing-s" id="id119">Pairing S</a></p></li>
+<li><p><a class="reference internal" href="#pairing-p" id="id120">Pairing P</a></p></li>
+<li><p><a class="reference internal" href="#pasta-phase" id="id121">Pasta phase</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#density-functional" id="id122">Density Functional</a></p>
+<ul>
+<li><p><a class="reference internal" href="#skyrme-force" id="id123">Skyrme force</a></p></li>
+<li><p><a class="reference internal" href="#why-bsk-functional" id="id124">Why BSk functional?</a></p></li>
+<li><p><a class="reference internal" href="#history-of-development-of-bsk" id="id125">History of development of BSk</a></p></li>
+<li><p><a class="reference internal" href="#bsk-functional" id="id126">BSk functional</a></p>
+<ul>
+<li><p><a class="reference internal" href="#energy" id="id127">Energy</a></p>
+<ul>
+<li><p><a class="reference internal" href="#pure-neutron-matter" id="id128">Pure neutron matter</a></p></li>
+<li><p><a class="reference internal" href="#symmetric-matter" id="id129">Symmetric matter</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#pairing-models" id="id130">Pairing models</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="structure-of-neutron-star">
+<h2><a class="toc-backref" href="#id117" role="doc-backlink">Structure of Neutron Star</a><a class="headerlink" href="#structure-of-neutron-star" title="Link to this heading"></a></h2>
+<section id="crust">
+<h3><a class="toc-backref" href="#id118" role="doc-backlink">Crust</a><a class="headerlink" href="#crust" title="Link to this heading"></a></h3>
+<p>In the crust we can show certain densities that are relevant. The major division
+is to <strong>outer crust</strong> and <strong>inner crust</strong>.</p>
+<section id="pairing-s">
+<h4><a class="toc-backref" href="#id119" role="doc-backlink">Pairing S</a><a class="headerlink" href="#pairing-s" title="Link to this heading"></a></h4>
+<a class="reference internal image-reference" href="_images/pairing_vs_kf.png"><img alt="_images/pairing_vs_kf.png" src="_images/pairing_vs_kf.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="_images/pairing_vs_rho.png"><img alt="_images/pairing_vs_rho.png" src="_images/pairing_vs_rho.png" style="width: 48%;" />
+</a>
+</section>
+<section id="pairing-p">
+<h4><a class="toc-backref" href="#id120" role="doc-backlink">Pairing P</a><a class="headerlink" href="#pairing-p" title="Link to this heading"></a></h4>
+<p>Give some references.</p>
+</section>
+<section id="pasta-phase">
+<h4><a class="toc-backref" href="#id121" role="doc-backlink">Pasta phase</a><a class="headerlink" href="#pasta-phase" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
+<section id="density-functional">
+<h2><a class="toc-backref" href="#id122" role="doc-backlink">Density Functional</a><a class="headerlink" href="#density-functional" title="Link to this heading"></a></h2>
+<section id="skyrme-force">
+<h3><a class="toc-backref" href="#id123" role="doc-backlink">Skyrme force</a><a class="headerlink" href="#skyrme-force" title="Link to this heading"></a></h3>
+<p>The first paper about vortex pinning within fully dynamical approach in neutron
+matter was <span id="id1">[<a class="reference internal" href="#id25" title="Gabriel Wlazłowski, Kazuyuki Sekizawa, Piotr Magierski, Aurel Bulgac, and Michael McNeil Forbes. Vortex pinning and dynamics in the neutron star crust. Physical review letters, 117(23):232701, 2016. URL: https://link.aps.org/doi/10.1103/PhysRevLett.117.232701, doi:10.1103/PhysRevLett.117.232701.">WlazlowskiSM+16</a>]</span>. A standard SLy4 type of functional was
+used (see <span id="id2">[<a class="reference internal" href="#id24" title="Aurel Bulgac, Piotr Magierski, Kenneth J Roche, and Ionel Stetcu. Induced fission of pu 240 within a real-time microscopic framework. Physical review letters, 116(12):122504, 2016. URL: https://link.aps.org/doi/10.1103/PhysRevLett.116.122504, doi:10.1103/PhysRevLett.116.122504.">BMRS16</a>]</span>) of the following form:</p>
+<div class="math">
+\[v_{12}^{(2)}
+= \phantom{\frac{1}{2}}t_0 (1+x_0 \hat P_\sigma) \delta(\bm r)
+
++ \frac{1}{2} t_1 (1+x_1 \hat P_\sigma) (\bm k'^2\delta(\bm r) + \delta(\bm r) \bm k^2)
+
++ \phantom{\frac{1}{2}}t_2 (1+x_2 \hat P_\sigma) \bm k' \cdot \delta(\bm r) \bm k
+
++ \frac{1}{6} t_3 (1+x_3 \hat P_\sigma) \rho^\gamma(\bm r) \delta(\bm r)
+
++ i W_0 (\sigma_1 + \sigma_2) \cdot (\bm k'\times \delta(\bm r) \bm k),\]</div>
+<p>where the consecutive terms have a physical meaning and interpretation (see Sec. 2
+in <span id="id3">[<a class="reference internal" href="#id57" title="E Chabanat, P Bonche, P Haensel, J Meyer, and R Schaeffer. A skyrme parametrization from subnuclear to neutron star densities part ii. nuclei far from stabilities. Nuclear Physics A, 635(1-2):231–256, 1998. URL: https://www.sciencedirect.com/science/article/pii/S0375947498001808, doi:10.1016/S0375-9474(98)00180-8.">CBH+98</a>]</span>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math">\(t_0\)</span>: contact (zero range) interaction</p></li>
+<li><p><span class="math">\(t_1, t_2\)</span>: momentum exchange (finite range term) and effective mass term (which is proportional to the kinetic density <span class="math">\(\tau\)</span>)</p></li>
+<li><p><span class="math">\(t_3\)</span>: for <span class="math">\(\gamma \rightarrow 1\)</span> it is the three body term averaged over the third particle; in general a density-dependent term</p></li>
+<li><p><span class="math">\(W_0\)</span>: spin-orbit coupling</p></li>
+</ul>
+</div></blockquote>
+<p>It turns out, that similarly as for the term <span class="math">\(t_3\)</span> where in general the coefficient
+<span class="math">\(\gamma\neq1\)</span>, the terms <span class="math">\(t_1,t_2\)</span> can be generalized to density
+dependent terms <span class="math">\(t_4,t_5\)</span>, respectively <span id="id4">[<a class="reference internal" href="#id67" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span>. Increasing
+the number of parameters leads to the better fit of very large amount of data.</p>
+</section>
+<section id="why-bsk-functional">
+<h3><a class="toc-backref" href="#id124" role="doc-backlink">Why BSk functional?</a><a class="headerlink" href="#why-bsk-functional" title="Link to this heading"></a></h3>
+<p>BSk density functional has been designed to describe accurately nuclear matter
+in neutron stars. Hence, the fitting was done not only using experimental nuclear
+data (as it is usually done) but also theoretical results for many-body calculations
+(for example pairing gaps <span id="id5">[<a class="reference internal" href="#id62" title="LG Cao, U Lombardo, and P Schuck. Screening effects in superfluid nuclear and neutron matter within brueckner theory. Physical Review C, 74(6):064301, 2006. URL: https://link.aps.org/doi/10.1103/PhysRevC.74.064301, doi:10.1103/PhysRevC.74.064301.">CLS06</a>]</span>).</p>
+<dl class="simple">
+<dt>Experimental data</dt><dd><ul class="simple">
+<li><p>all atomic masses with <span class="math">\(Z,N \ge 8\)</span> from the Atomic Mass Evaluation (2353)</p></li>
+<li><p>nuclear charge radii</p></li>
+<li><p>symmetry energy <span class="math">\(29 \mathrm{MeV} \le J \le 32 \mathrm{MeV}\)</span></p></li>
+<li><p>incompressibility <span class="math">\(K_V = (240 \pm 10) \mathrm{MeV}\)</span></p></li>
+</ul>
+</dd>
+<dt>N-body calculations using realistic forces</dt><dd><ul class="simple">
+<li><p>equation of state of pure neutron matter</p></li>
+<li><p><span class="math">\({}^1S_0\)</span> pairing gaps in nuclear matter</p></li>
+<li><p>effective masses in nuclear matter</p></li>
+<li><p>stability against spin and spin-isospin fluctuations</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="history-of-development-of-bsk">
+<h3><a class="toc-backref" href="#id125" role="doc-backlink">History of development of BSk</a><a class="headerlink" href="#history-of-development-of-bsk" title="Link to this heading"></a></h3>
+<p>There is a wide variety of different BSk functionals. Below the history of updates
+and improvements of the model is shown:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>fit to realistic <span class="math">\({}^1S_0\)</span> pairing gaps (no self-energy)  (BSk16–17)
+<span id="id6">[<a class="reference internal" href="#id69" title="Nicolas Chamel. Effective contact pairing forces from realistic calculations in infinite homogeneous nuclear matter. Physical Review C, 82(1):014313, 2010. URL: https://link.aps.org/doi/10.1103/PhysRevC.82.014313, doi:10.1103/PhysRevC.82.014313.">Cha10</a>, <a class="reference internal" href="#id68" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. Phys. Rev. Lett., 102:152503, Apr 2009. URL: https://link.aps.org/doi/10.1103/PhysRevLett.102.152503, doi:10.1103/PhysRevLett.102.152503.">GCP09</a>]</span></p></li>
+<li><p>removal of spurious spin-isospin instabilities <span id="id7">[<a class="reference internal" href="#id67" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>]</span> (BSk18)</p></li>
+<li><p>fit to realistic neutron-matter equations of state <span id="id8">[<a class="reference internal" href="#id66" title="Stéphane Goriely, Nicolas Chamel, and JM Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xii. stiffness and stability of neutron-star matter. Physical Review C, 82(3):035804, 2010.">GCP10</a>]</span> (BSk19–21)</p></li>
+<li><p>fit to different symmetry energies <span id="id9">[]</span> (BSk22–26)</p></li>
+<li><p>optimal fit of the 2012 AME <span id="id10">[]</span> (BSk27*)</p></li>
+<li><p>genealized spin-orbit coupling <span id="id11">[]</span>  (BSk28–29)</p></li>
+<li><p>fit to realistic <span class="math">\({}^1S_0\)</span> pairing gaps with self-energy <span id="id12">[<a class="reference internal" href="#id72" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xvi. inclusion of self-energy effects in pairing. Physical Review C, 93(3):034337, 2016. URL: https://link.aps.org/doi/10.1103/PhysRevC.93.034337, doi:10.1103/PhysRevC.93.034337.">GCP16</a>]</span> (BSk30–32)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="bsk-functional">
+<h3><a class="toc-backref" href="#id126" role="doc-backlink">BSk functional</a><a class="headerlink" href="#bsk-functional" title="Link to this heading"></a></h3>
+<p>Based on <span id="id13">[<a class="reference internal" href="#id67" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. Physical Review C, 80(6):065804, 2009. URL: https://link.aps.org/doi/10.1103/PhysRevC.80.065804, doi:10.1103/PhysRevC.80.065804.">CGP09</a>, <a class="reference internal" href="#id72" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xvi. inclusion of self-energy effects in pairing. Physical Review C, 93(3):034337, 2016. URL: https://link.aps.org/doi/10.1103/PhysRevC.93.034337, doi:10.1103/PhysRevC.93.034337.">GCP16</a>]</span> the Skyrme-type force reads:</p>
+<div class="math">
+\[v_{12}^{(2)}
+
+= \phantom{\frac{1}{2}}t_0 (1+x_0 \hat P_\sigma) \delta(\bm r)
+
++ \frac{1}{2} t_1 (1+x_1 \hat P_\sigma) (\bm k'^2\delta(\bm r) + \delta(\bm r) \bm k^2)
+
++ \phantom{\frac{1}{2}}t_2 (1+x_2 \hat P_\sigma) \bm k' \cdot \delta(\bm r) \bm k
+
++ \frac{1}{6} t_3 (1+x_3 \hat P_\sigma) \rho^\alpha(\bm r) \delta(\bm r)
+
++ \frac{1}{2} t_4 (1+x_4 \hat P_\sigma) \left[ \bm k'^2 \rho^\beta(\bm r) \delta(\bm r) + \delta(\bm r) \rho^\beta(\bm r) \bm k^2 \right]
+
++ \phantom{\frac{1}{2}}t_5 (1+x_5 \hat P_\sigma) \bm k' \rho^\gamma(\bm r) \delta(\bm r) \bm k
+
++ i W_0 (\sigma_1 + \sigma_2) \cdot (\bm k'\times \delta(\bm r) \bm k)
+
++ \sum_q f^\pm_q  \left(  v^{\pi,q}[\rho_n(\bm r),\rho_p(\bm r)]  + \kappa_q |\nabla\rho(\bm r)|^2  \right) \delta(\bm r).\]</div>
+<p>The core of this BSk functional is the Skyrme functional showed above. Here, in
+addition to <span class="math">\(t_1,t_2\)</span> terms, there are similar expressions that depend
+additionally on the power of density <span class="math">\(\rho\)</span>.</p>
+<section id="energy">
+<h4><a class="toc-backref" href="#id127" role="doc-backlink">Energy</a><a class="headerlink" href="#energy" title="Link to this heading"></a></h4>
+<a class="reference internal image-reference" href="_images/energySM.png"><img alt="_images/energySM.png" src="_images/energySM.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="_images/energySMZoom.png"><img alt="_images/energySMZoom.png" src="_images/energySMZoom.png" style="width: 48%;" />
+</a>
+<section id="pure-neutron-matter">
+<h5><a class="toc-backref" href="#id128" role="doc-backlink">Pure neutron matter</a><a class="headerlink" href="#pure-neutron-matter" title="Link to this heading"></a></h5>
+<p>Neutron stars are built from pure neutron matter - this is very good approximation.</p>
+</section>
+<section id="symmetric-matter">
+<h5><a class="toc-backref" href="#id129" role="doc-backlink">Symmetric matter</a><a class="headerlink" href="#symmetric-matter" title="Link to this heading"></a></h5>
+<p>Atomic nuclei (especially those of lower mass) have similar number protons and neutrons.
+Therefore, it’s convenient to consider symmetric matter. We know that
+for larger number of nucleons, the system tends to be more neutron-rich
+to remove Coulomb interaction. In contrast to pure neutron matter, there is no
+symmetric nuclear matter in the nature. However this concept is very useful
+for theoretical considerations.</p>
+</section>
+</section>
+</section>
+<section id="pairing-models">
+<h3><a class="toc-backref" href="#id130" role="doc-backlink">Pairing models</a><a class="headerlink" href="#pairing-models" title="Link to this heading"></a></h3>
+<p>References for pairing models:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span id="id14">[<a class="reference internal" href="#id68" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. Phys. Rev. Lett., 102:152503, Apr 2009. URL: https://link.aps.org/doi/10.1103/PhysRevLett.102.152503, doi:10.1103/PhysRevLett.102.152503.">GCP09</a>]</span></p></li>
+<li><p><span id="id15">[<a class="reference internal" href="#id69" title="Nicolas Chamel. Effective contact pairing forces from realistic calculations in infinite homogeneous nuclear matter. Physical Review C, 82(1):014313, 2010. URL: https://link.aps.org/doi/10.1103/PhysRevC.82.014313, doi:10.1103/PhysRevC.82.014313.">Cha10</a>]</span></p></li>
+<li><p><span id="id16">[<a class="reference internal" href="#id71" title="Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Pairing: from atomic nuclei to neutron star crusts. In Fifty Years of Nuclear BCS: Pairing in Finite Systems, pages 284–296. World Scientific, 2013. URL: https://doi.org/10.1142/9789814412490_0021, doi:10.1142/9789814412490_0021.">CGP13</a>]</span></p></li>
+<li><p><span id="id17">[<a class="reference internal" href="#id72" title="Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xvi. inclusion of self-energy effects in pairing. Physical Review C, 93(3):034337, 2016. URL: https://link.aps.org/doi/10.1103/PhysRevC.93.034337, doi:10.1103/PhysRevC.93.034337.">GCP16</a>]</span></p></li>
+</ul>
+</div></blockquote>
+<div class="admonition-todo admonition" id="id18">
+<p class="admonition-title">Todo</p>
+<p>Expand this section: Summarize and fill in pairing models, physical meaning
+and papers for reference.</p>
+</div>
+<div class="docutils container" id="id19">
+<div role="list" class="citation-list">
+<div class="citation" id="id24" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">BMRS16</a><span class="fn-bracket">]</span></span>
+<p>Aurel Bulgac, Piotr Magierski, Kenneth J Roche, and Ionel Stetcu. Induced fission of pu 240 within a real-time microscopic framework. <em>Physical review letters</em>, 116(12):122504, 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.116.122504">https://link.aps.org/doi/10.1103/PhysRevLett.116.122504</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.116.122504">doi:10.1103/PhysRevLett.116.122504</a>.</p>
+</div>
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">CLS06</a><span class="fn-bracket">]</span></span>
+<p>LG Cao, U Lombardo, and P Schuck. Screening effects in superfluid nuclear and neutron matter within brueckner theory. <em>Physical Review C</em>, 74(6):064301, 2006. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.74.064301">https://link.aps.org/doi/10.1103/PhysRevC.74.064301</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.74.064301">doi:10.1103/PhysRevC.74.064301</a>.</p>
+</div>
+<div class="citation" id="id57" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">CBH+98</a><span class="fn-bracket">]</span></span>
+<p>E Chabanat, P Bonche, P Haensel, J Meyer, and R Schaeffer. A skyrme parametrization from subnuclear to neutron star densities part ii. nuclei far from stabilities. <em>Nuclear Physics A</em>, 635(1-2):231–256, 1998. URL: <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0375947498001808">https://www.sciencedirect.com/science/article/pii/S0375947498001808</a>, <a class="reference external" href="https://doi.org/10.1016/S0375-9474(98)00180-8">doi:10.1016/S0375-9474(98)00180-8</a>.</p>
+</div>
+<div class="citation" id="id69" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Cha10<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id15">2</a>)</span>
+<p>Nicolas Chamel. Effective contact pairing forces from realistic calculations in infinite homogeneous nuclear matter. <em>Physical Review C</em>, 82(1):014313, 2010. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.82.014313">https://link.aps.org/doi/10.1103/PhysRevC.82.014313</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.82.014313">doi:10.1103/PhysRevC.82.014313</a>.</p>
+</div>
+<div class="citation" id="id67" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CGP09<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id7">2</a>,<a role="doc-backlink" href="#id13">3</a>)</span>
+<p>Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xi. stabilizing neutron stars against a ferromagnetic collapse. <em>Physical Review C</em>, 80(6):065804, 2009. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.80.065804">https://link.aps.org/doi/10.1103/PhysRevC.80.065804</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.80.065804">doi:10.1103/PhysRevC.80.065804</a>.</p>
+</div>
+<div class="citation" id="id71" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">CGP13</a><span class="fn-bracket">]</span></span>
+<p>Nicolas Chamel, Stéphane Goriely, and John Michael Pearson. Pairing: from atomic nuclei to neutron star crusts. In <em>Fifty Years of Nuclear BCS: Pairing in Finite Systems</em>, pages 284–296. World Scientific, 2013. URL: <a class="reference external" href="https://doi.org/10.1142/9789814412490_0021">https://doi.org/10.1142/9789814412490_0021</a>, <a class="reference external" href="https://doi.org/10.1142/9789814412490_0021">doi:10.1142/9789814412490_0021</a>.</p>
+</div>
+<div class="citation" id="id66" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">GCP10</a><span class="fn-bracket">]</span></span>
+<p>Stéphane Goriely, Nicolas Chamel, and JM Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xii. stiffness and stability of neutron-star matter. <em>Physical Review C</em>, 82(3):035804, 2010.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GCP09<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id14">2</a>)</span>
+<p>Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Skyrme-hartree-fock-bogoliubov nuclear mass formulas: crossing the 0.6 mev accuracy threshold with microscopically deduced pairing. <em>Phys. Rev. Lett.</em>, 102:152503, Apr 2009. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.102.152503">https://link.aps.org/doi/10.1103/PhysRevLett.102.152503</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.102.152503">doi:10.1103/PhysRevLett.102.152503</a>.</p>
+</div>
+<div class="citation" id="id72" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GCP16<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id12">1</a>,<a role="doc-backlink" href="#id13">2</a>,<a role="doc-backlink" href="#id17">3</a>)</span>
+<p>Stéphane Goriely, Nikolas Chamel, and John Michael Pearson. Further explorations of skyrme-hartree-fock-bogoliubov mass formulas. xvi. inclusion of self-energy effects in pairing. <em>Physical Review C</em>, 93(3):034337, 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevC.93.034337">https://link.aps.org/doi/10.1103/PhysRevC.93.034337</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevC.93.034337">doi:10.1103/PhysRevC.93.034337</a>.</p>
+</div>
+<div class="citation" id="id25" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">WlazlowskiSM+16</a><span class="fn-bracket">]</span></span>
+<p>Gabriel Wlazłowski, Kazuyuki Sekizawa, Piotr Magierski, Aurel Bulgac, and Michael McNeil Forbes. Vortex pinning and dynamics in the neutron star crust. <em>Physical review letters</em>, 117(23):232701, 2016. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.117.232701">https://link.aps.org/doi/10.1103/PhysRevLett.117.232701</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.117.232701">doi:10.1103/PhysRevLett.117.232701</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="instalation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="help.html" class="btn btn-neutral float-right" title="Other" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
