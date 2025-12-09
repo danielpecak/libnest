@@ -206,7 +206,7 @@ KAPPAP =-45207.2   # [MeV*fm<sup>8</sup>]
 # ================================
 def neutron_pairing_field(rho_n):
     #    Formula (5.12) from NeST.pdf
-    """
+    r"""
     Returns the pairing field for uniform pure neutron nuclear matter. For kF larger
     than 1.38 fm :sup:`-1` it returns (numerical) zero.
 
@@ -225,17 +225,21 @@ def neutron_pairing_field(rho_n):
         :func:`.neutron_ref_pairing_field`
         :func:`.proton_ref_pairing_field`
     """
-    kF = rho2kf(rho_n)
+    kF = np.asarray(rho2kf(rho_n), dtype=float)
     delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
                                               ((kF-1.38236)**2+(0.327517**2)))
     i = np.where(kF>1.38)
-    if (i[0].size != 0):
-        delta[i] = np.float64(1.0*NUMZERO)
+    if delta.shape == ():
+        if kF > 1.38:
+            return float(NUMZERO)
+        else:
+            return float(delta)
+    delta[i] = np.float64(1.0*NUMZERO)
     return delta
 
 def symmetric_pairing_field(rho_n, rho_p):
     #   Formula (5.11) from NeST.pdf
-    """
+    r"""
     Returns the pairing field for uniform symmetric matter. For kF larger than
     1.31 fm :sup:`-1` it returns (numerical) zero.
 
@@ -256,17 +260,23 @@ def symmetric_pairing_field(rho_n, rho_p):
         :func:`.neutron_ref_pairing_field`
         :func:`.proton_ref_pairing_field`
     """
-    kF = rho2kf((rho_n+rho_p))
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    kF = np.asarray(rho2kf((rho_n+rho_p)), dtype=float)
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
- # 11.5586*(x**2)*((x-1.3142)**2)/(((x**2)+(0.489932**2))*(((x-1.3142)**2)+(0.906146**2)))
     i = np.where(kF>1.31)
+    if delta.shape == ():
+        if kF > 1.31:
+            return float(NUMZERO)
+        else:
+            return float(delta)
     delta[i] = NUMZERO
     return delta
 
 def neutron_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
-    """
+    r"""
     Returns the reference pairing field for neutrons in uniform matter.
     This is an extrapolation between :math:`\Delta_{\\mathrm{SM}}` and
     :math:`\Delta_{\\mathrm{NeuM}}`. In limits :math:`\\eta \\rightarrow 0` reproduces
@@ -292,14 +302,16 @@ def neutron_ref_pairing_field(rho_n, rho_p):
         :func:`.symmetric_pairing_field`
         :func:`.proton_ref_pairing_field`
     """
-    rho, eta = rhoEta(rho_n, rho_p)
-    rho = rho + DENSEPSILON
-    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs(eta/rho))
+        rho_n = np.asarray(rho_n, dtype=float)
+        rho_p = np.asarray(rho_p, dtype=float)
+        rho, eta = rhoEta(rho_n, rho_p)
+        rho = np.asarray(rho + DENSEPSILON, dtype=float)
+        return (symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
             +neutron_pairing_field(rho_n)*rho_n/rho*eta/rho)
 
 def proton_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
-    """
+    r"""
     Returns the reference pairing field for protons in uniform matter.
     This is an extrapolation between :math:`\Delta_{\\mathrm{SM}}` and
     :math:`\Delta_{\\mathrm{NeuM}}`. In limits :math:`\\eta \\rightarrow 0` reproduces
@@ -325,9 +337,11 @@ def proton_ref_pairing_field(rho_n, rho_p):
         :func:`.symmetric_pairing_field`
         :func:`.neutron_ref_pairing_field`
     """
-    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-    rho = rho + DENSEPSILON
-    return (symmetric_pairing_field(rho_n, rho_p)*(1-abs(eta/rho))
+        rho_n = np.asarray(rho_n, dtype=float)
+        rho_p = np.asarray(rho_p, dtype=float)
+        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+        rho = np.asarray(rho + DENSEPSILON, dtype=float)
+        return (symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
             -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)
 
 
@@ -895,6 +909,8 @@ def epsilon_rho_np(rho_n, rho_p):
     Returns:
         float: energy functional :math:`\\epsilon_{\\rho}`
     """
+    rho_n = np.asarray(rho_n)
+    rho_p = np.asarray(rho_p)
     rho = rho_n + rho_p + DENSEPSILON
     return C0_rho(rho_n, rho_p) * np.power(rho, 2) + C1_rho(rho_n, rho_p) * np.power(rho_n - rho_p, 2)
 
@@ -923,6 +939,12 @@ def epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2):
     Returns:
         float: energy functional :math:`\\epsilon_{\\tau}`
     """
+    rho_n = np.asarray(rho_n)
+    rho_p = np.asarray(rho_p)
+    tau_n = np.asarray(tau_n)
+    tau_p = np.asarray(tau_p)
+    jsum2 = np.asarray(jsum2)
+    jdiff2 = np.asarray(jdiff2)
     return C0_tau(rho_n, rho_p) * ((rho_n + rho_p) * (tau_n + tau_p) - jsum2) + C1_tau(rho_n, rho_p) * ((rho_n - rho_p) * (tau_n - tau_p) - jdiff2)
 
 
@@ -970,8 +992,13 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
     Returns:
         float: energy functional :math:`\\epsilon_{\\Delta \\rho}`
     """
+    rho_n = np.asarray(rho_n)
+    rho_p = np.asarray(rho_p)
+    rho_grad_n_square = np.asarray(rho_grad_n_square)
+    rho_grad_p_square = np.asarray(rho_grad_p_square)
+    rho_grad_square = np.asarray(rho_grad_square)
     rho = rho_n+rho_p + DENSEPSILON
-    grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
+            grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
 
     return (3./16.*T1*((1.+0.5*X1)*rho_grad_square-(0.5+X1)*(rho_grad_n_square+rho_grad_p_square))
             -1./16.*T2X2*(0.5*rho_grad_square+rho_grad_n_square+rho_grad_p_square)
@@ -1016,6 +1043,18 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
     Returns
         float: nergy functional :math:`\\epsilon`
     """
+    rho_n = np.asarray(rho_n)
+    rho_p = np.asarray(rho_p)
+    rho_grad_n = np.asarray(rho_grad_n)
+    rho_grad_p = np.asarray(rho_grad_p)
+    tau_n = np.asarray(tau_n)
+    tau_p = np.asarray(tau_p)
+    jsum2 = np.asarray(jsum2)
+    jdiff2 = np.asarray(jdiff2)
+    nu_n = np.asarray(nu_n)
+    nu_p = np.asarray(nu_p)
+    kappa_n = np.asarray(kappa_n)
+    kappa_p = np.asarray(kappa_p)
     rho_grad_n_square = (rho_grad_n)**2
     rho_grad_p_square = (rho_grad_p)**2
     rho_grad_square = rho_grad_n_square + rho_grad_p_square

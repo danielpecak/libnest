@@ -382,6 +382,8 @@ def mu_q(rho_n, rho_p, q):
     """
     from libnest.bsk import effMn, effMp
     
+    rho_n = np.asarray(rho_n)
+    rho_p = np.asarray(rho_p)
     if(q=='n'):
         M = effMn(rho_n, rho_p)
         rho = rho_n
@@ -391,10 +393,14 @@ def mu_q(rho_n, rho_p, q):
     else:
         sys.exit('# ERROR: Nucleon q must be either n or p')
     mu_q = HBARC**2*rho2kf(rho)**2/(2.*M)
+    mu_q = np.asarray(mu_q)
     i = np.where(mu_q==0)
     mu_q[i] = NUMZERO
     j = np.where(rho==0)
     mu_q[j] = NUMZERO
+    # If input was scalar, return scalar
+    if mu_q.shape == ():
+        return float(mu_q)
     return mu_q
 
 
