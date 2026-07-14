@@ -1,0 +1,65 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libnest"
+description = "Library for Neutron Star physics: Brussels-Montreal (BSk) energy density functional and nuclear-matter tools."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Daniel Pęcak", email = "daniel.pecak@pw.edu.pl" },
+]
+keywords = [
+    "physics", "nuclear-physics", "neutron-star", "nuclear-matter",
+    "skyrme", "bsk", "equation-of-state", "superfluidity",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "matplotlib>=3.6",
+    "pandas>=2.0",
+]
+dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://github.com/danielpecak/libnest"
+Repository = "https://github.com/danielpecak/libnest"
+Documentation = "https://libnest.readthedocs.io"
+Issues = "https://github.com/danielpecak/libnest/issues"
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+docs = [
+    "sphinx>=7.0",
+    "sphinx_rtd_theme",
+    "sphinxcontrib-bibtex",
+    "sphinxcontrib-katex",
+    "pillow",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "libnest.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["libnest*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]

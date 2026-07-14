@@ -1,5 +1,11 @@
-sphinxcontrib-bibtex
-sphinx_rtd_theme
-matplotlib
-numpy
-pandas
+# Runtime dependencies for libnest.
+# The authoritative source is pyproject.toml ([project.dependencies]); this file
+# mirrors it for `pip install -r requirements.txt` convenience.
+#
+# For development installs prefer:   pip install -e .
+# Docs dependencies:                 pip install -e ".[docs]"   (or docs/requirements.txt)
+# Test dependencies:                 pip install -e ".[test]"
+numpy>=1.23
+scipy>=1.9
+matplotlib>=3.6
+pandas>=2.0
