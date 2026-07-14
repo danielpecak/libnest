@@ -90,6 +90,16 @@ class TestBSk(unittest.TestCase):
         # Should be positive for densities where pairing exists
         self.assertGreaterEqual(delta[0], 0)
 
+    def test_pairing_fields_scalar_input(self):
+        """Scalar input must not crash (regression: np.where was called on a
+        0-d array before the scalar early-return, which numpy 2.x forbids)."""
+        # low density -> below the cutoff, real pairing
+        self.assertGreater(bsk.neutron_pairing_field(0.05), 0)
+        self.assertGreater(bsk.symmetric_pairing_field(0.05, 0.05), 0)
+        # high density -> above the kF cutoff, returns numerical zero, no crash
+        self.assertTrue(np.isfinite(bsk.neutron_pairing_field(0.5)))
+        self.assertTrue(np.isfinite(bsk.symmetric_pairing_field(0.5, 0.5)))
+
 
 class TestBSkArrays(unittest.TestCase):
     """Test that BSk functions work with arrays"""
@@ -137,6 +147,63 @@ class TestPhysicalConsistency(unittest.TestCase):
         E_neut = bsk.energy_per_nucleon(2*rho, 0.0)
         # Pure neutron matter should have higher energy
         self.assertGreater(E_neut, E_sym)
+
+
+class TestReferencePairingFields(unittest.TestCase):
+    """Regression tests for the reference pairing fields and the density-gradient
+    energy term. These three function bodies were previously unreachable due to
+    indentation errors that broke ``import libnest.bsk`` entirely; these tests
+    exercise them so the regression cannot return silently.
+    """
+
+    def test_neutron_ref_symmetric_limit(self):
+        """For rho_n == rho_p (eta = 0) the neutron reference field reduces to
+        the symmetric-matter pairing field."""
+        rho = 0.05
+        ref = bsk.neutron_ref_pairing_field(rho, rho)
+        sym = bsk.symmetric_pairing_field(rho, rho)
+        self.assertAlmostEqual(float(ref), float(sym), places=6)
+
+    def test_proton_ref_symmetric_limit(self):
+        """For rho_n == rho_p (eta = 0) the proton reference field reduces to
+        the symmetric-matter pairing field."""
+        rho = 0.05
+        ref = bsk.proton_ref_pairing_field(rho, rho)
+        sym = bsk.symmetric_pairing_field(rho, rho)
+        self.assertAlmostEqual(float(ref), float(sym), places=6)
+
+    def test_neutron_ref_pure_neutron_limit(self):
+        """For rho_p = 0 the neutron reference field reduces to the pure
+        neutron-matter pairing field."""
+        rho_n = 0.05
+        ref = bsk.neutron_ref_pairing_field(rho_n, 0.0)
+        neum = bsk.neutron_pairing_field(rho_n)
+        self.assertAlmostEqual(float(ref), float(neum), places=6)
+
+    def test_reference_fields_finite_scalar_and_array(self):
+        """Both reference fields return finite values for scalar and array input."""
+        for func in (bsk.neutron_ref_pairing_field, bsk.proton_ref_pairing_field):
+            with self.subTest(func=func.__name__):
+                self.assertTrue(np.isfinite(func(0.05, 0.03)))
+                rho_n = np.array([0.02, 0.05, 0.08])
+                rho_p = np.array([0.01, 0.03, 0.04])
+                out = func(rho_n, rho_p)
+                self.assertEqual(out.shape, rho_n.shape)
+                self.assertTrue(np.all(np.isfinite(out)))
+
+    def test_epsilon_delta_rho_np_runs(self):
+        """The density-gradient energy term evaluates to finite values for
+        scalar and array inputs (guards the fixed line 1001 indentation)."""
+        # scalar
+        val = bsk.epsilon_delta_rho_np(0.08, 0.08, 0.0, 0.0, 0.0)
+        self.assertTrue(np.isfinite(val))
+        # array
+        rho_n = np.array([0.05, 0.08])
+        rho_p = np.array([0.05, 0.08])
+        grad = np.array([1e-3, 2e-3])
+        out = bsk.epsilon_delta_rho_np(rho_n, rho_p, grad, grad, grad)
+        self.assertEqual(out.shape, rho_n.shape)
+        self.assertTrue(np.all(np.isfinite(out)))
 
 
 if __name__ == '__main__':
