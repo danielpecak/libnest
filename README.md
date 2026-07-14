@@ -199,5 +199,5 @@ See `docs/bibliography.rst` for a complete list of references.
 
 ---
 
-**Version**: 0.1.0  
+**Version**: 0.1.1  
 **Last Updated**: July 2026

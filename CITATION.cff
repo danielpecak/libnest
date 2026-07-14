@@ -12,7 +12,7 @@ authors:
     email: daniel.pecak@gmail.com
     affiliation: "Institute of Physics, Polish Academy of Sciences, Warsaw, Poland"
     orcid: "https://orcid.org/0000-0002-2462-2942"  
-version: "0.1.0"
+version: "0.1.1"
 license: MIT
 repository-code: "https://github.com/danielpecak/libnest"
 url: "https://github.com/danielpecak/libnest"
