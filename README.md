@@ -143,8 +143,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Daniel Pęcak**
 - Email: daniel.pecak@gmail.com
-- Affiliation: Warsaw University of Technology, Université Libre de Bruxelles
-- On leave from: Institute of Physics, Polish Academy of Sciences
+- Affiliation: Institute of Physics, Polish Academy of Sciences
 
 ## 🙏 Acknowledgments
 

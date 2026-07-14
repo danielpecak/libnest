@@ -1,8 +1,11 @@
 name: release
 
-# Build the sdist + wheel on every tag, and publish to PyPI.
-# Publishing uses PyPI Trusted Publishing (OIDC) — configure the project on
-# PyPI to trust this repository/workflow, no API token secret required.
+# Build the sdist + wheel, then publish.
+#   * Manual run (workflow_dispatch) -> TestPyPI   (dry run)
+#   * Pushing a v* tag               -> real PyPI  (actual release)
+# Publishing uses Trusted Publishing (OIDC) — each instance needs its own
+# publisher configured: test.pypi.org (env "testpypi") and pypi.org (env "pypi").
+# No API token secret required.
 on:
   push:
     tags:
@@ -30,14 +33,32 @@ jobs:
           name: dist
           path: dist/*
 
-  publish:
+  publish-testpypi:
     needs: build
     runs-on: ubuntu-latest
-    # Only publish from real tags, not manual dispatch.
+    # Manual dry run only — publishes to TestPyPI.
+    if: github.event_name == 'workflow_dispatch'
+    environment: testpypi
+    permissions:
+      id-token: write  # required for Trusted Publishing
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+
+  publish-pypi:
+    needs: build
+    runs-on: ubuntu-latest
+    # Real release only — publishes to PyPI when a v* tag is pushed.
     if: startsWith(github.ref, 'refs/tags/v')
     environment: pypi
     permissions:
-      id-token: write  # required for PyPI Trusted Publishing
+      id-token: write  # required for Trusted Publishing
     steps:
       - uses: actions/download-artifact@v4
         with:
