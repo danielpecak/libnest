@@ -139,8 +139,8 @@ The documentation will be in `docs/_build/html/`.
 
 See the `examples/` directory for more comprehensive examples:
 
+- `examples/analyze_data.py` - Load a density map, compute a physical quantity per grid point, and plot it (the "analyze your own data" starting point)
 - `examples/tools_example.py` - Using utility functions
-- `examples/legacy_tests.py` - Legacy test cases and plotting examples
 
 ## 🧮 Physical Constants
 

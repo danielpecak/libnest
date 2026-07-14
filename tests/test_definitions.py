@@ -116,5 +116,24 @@ class TestPhysicalLimits(unittest.TestCase):
         # In Python 3, this might work differently, so we just check it doesn't crash
 
 
+class TestMeffHydro(unittest.TestCase):
+    """Meff_hydro physical limits (regression: it used to reference an undefined
+    'kF'). Each test compares against an *independently derived* value, so it
+    validates the formula itself — not just that the code transcribes it.
+    """
+
+    def test_vacuum_limit_is_bare_mass(self):
+        """rho_out = 0: with no surrounding medium the hydrodynamic effective mass
+        reduces to the bare mass of the sphere, N * m_n = (4/3) pi R^3 rho_in m_n."""
+        rho_in, R = 0.08, 5.0
+        V = 4.0 / 3.0 * np.pi * R**3
+        bare_mass = V * rho_in * definitions.MN  # independent of the Meff_hydro formula
+        self.assertAlmostEqual(definitions.Meff_hydro(rho_in, 0.0, R), bare_mass, places=6)
+
+    def test_no_contrast_gives_zero(self):
+        """rho_in == rho_out: no density contrast -> no effective mass."""
+        self.assertAlmostEqual(definitions.Meff_hydro(0.06, 0.06, R=5.0), 0.0, places=10)
+
+
 if __name__ == '__main__':
     unittest.main()

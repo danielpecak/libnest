@@ -113,7 +113,7 @@ def plot_pairing_field_n(rho_n, rho_p):
     pairing_field.add_subplot(111)
     plt.title("Pairing Field - neutrons", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel("pairing field $\Delta \: [MeV]$", fontsize=10)
+    plt.ylabel(r"pairing field $\Delta \: [MeV]$", fontsize=10)
     plt.plot(rho, delta, linewidth=2.0, label='Fit')
 
     plt.show()
@@ -142,7 +142,7 @@ def plot_pairing_field_p(rho_n, rho_p):
     pairing_field.add_subplot(111)
     plt.title("Pairing Field - protons", fontsize=15)
     plt.xlabel(r"$\rho \: {[fm]}^{-3}$", fontsize=10)
-    plt.ylabel("pairing field $\Delta \: [MeV]$", fontsize=10)
+    plt.ylabel(r"pairing field $\Delta \: [MeV]$", fontsize=10)
     plt.plot(rho, delta, linewidth=2.0, label='Fit')
 
     plt.show()

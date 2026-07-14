@@ -97,7 +97,7 @@ def condensationEnergy(density, delta,dV=1.0):
 
 
 def flowEnergy(j, density_n, density_p):
-    """
+    r"""
     Returns numpy array of values of flow energy.
 
 

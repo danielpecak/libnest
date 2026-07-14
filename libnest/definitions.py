@@ -290,7 +290,7 @@ def Meff_hydro(rho_in, rho_out, R):
     Returns:
         float: effective mass :math:`M_{\\mathrm{eff}}` in units neutron mass
     """
-    return HBAR2M_n * kF**2
+    return (4./3.)*np.pi*R**3*MN*(rho_in-rho_out)**2/(rho_in+2.*rho_out+DENSEPSILON)
 
 def E_minigap_delta_n(delta, rho_n):
     """

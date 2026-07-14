@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2022-2026 Daniel Pęcak
-"""
+r"""
 Module: Units
 =============
 This module contains physical constants relevant for nuclear matter and neutron star physics. It also provides functions for converting one type of units into another.
