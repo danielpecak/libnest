@@ -1,3 +1,6 @@
+> **📁 Dokument historyczny (zrzut z 1 XI 2025).** Zachowany dla kontekstu. Aktualny
+> stan i plany są w [`TODO.md`](../../TODO.md) — nie edytuj tego pliku.
+
 # Podsumowanie Zmian - Branch: improve/code-quality
 
 ## 📅 Data: 1 listopada 2025

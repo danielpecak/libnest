@@ -37,7 +37,7 @@ def threeSlice(variable):
                          variable[int(nx/2),int(ny/2), :]], dtype="object")
     elif(len(variable.shape)==2):
         [nx,ny] = [variable.shape[i] for i in range(2)]
-        return np.asarray(variable[:,int(ny/2)], variable[int(nx/2),:], dtype="object")
+        return np.asarray([variable[:,int(ny/2)], variable[int(nx/2),:]], dtype="object")
     elif(len(variable.shape)==1):
         nx=variable.shape[0]
         return np.asarray([variable], dtype="object")

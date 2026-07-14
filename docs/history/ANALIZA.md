@@ -1,3 +1,6 @@
+> **📁 Dokument historyczny (zrzut z 1 XI 2025).** Zachowany dla kontekstu „skąd
+> projekt wyszedł". Aktualny stan i plany są w [`TODO.md`](../../TODO.md) — nie edytuj tego pliku.
+
 # 📊 ANALIZA PROJEKTU LIBNEST
 
 **Typ projektu**: Biblioteka naukowa Python do fizyki jądrowej i gwiazd neutronowych  
