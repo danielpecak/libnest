@@ -4,7 +4,7 @@
 
 A Python library for nuclear matter and neutron star physics calculations, implementing the Brussels-Montreal (BSk) energy density functional and related physical models.
 
-[![Python](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## 🔬 Overview
@@ -25,23 +25,51 @@ This library is designed for researchers working on:
 
 ## 📦 Installation
 
-### From source (recommended for development)
+We strongly recommend installing into a **virtual environment (venv)**. It keeps
+`libnest` and its dependencies isolated from your system Python and avoids version
+conflicts — in particular NumPy/Matplotlib ABI mismatches (`numpy.core.multiarray
+failed to import`) that occur when the system packages were built against a
+different NumPy. Do **not** run the code with your system `python3`.
+
+### 1. Create and activate a virtual environment
 
 ```bash
 git clone https://github.com/danielpecak/libnest.git
 cd libnest
-pip install -e .
+
+python3 -m venv .venv
+source .venv/bin/activate        # Linux / macOS
+# .venv\Scripts\activate         # Windows (cmd)
+# .venv\Scripts\Activate.ps1     # Windows (PowerShell)
+```
+
+Your prompt now shows `(.venv)`. Everything below runs inside it; leave later with
+`deactivate`.
+
+### 2. Install libnest
+
+```bash
+pip install libnest              # from PyPI (once released)
+
+pip install -e .                 # or from source, editable (for development)
+pip install -e ".[test]"         # + test tools (pytest)
+pip install -e ".[docs]"         # + documentation tools (Sphinx)
+```
+
+### 3. Check it works
+
+```bash
+python main.py                   # runs the demo
+pytest                           # runs the test suite (needs the [test] extra)
 ```
 
 ### Requirements
 
-- Python ≥ 3.7
-- NumPy
-- Matplotlib
-- Pandas
-- SciPy (optional, for advanced features)
+- Python ≥ 3.9
+- NumPy, SciPy, Matplotlib, Pandas — installed automatically
 
-See `requirements.txt` for specific versions.
+Exact runtime dependencies are declared in `pyproject.toml` (mirrored in
+`requirements.txt`).
 
 ## 🚀 Quick Start
 

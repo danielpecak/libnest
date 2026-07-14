@@ -40,7 +40,8 @@ def readDimTxt(PATH, PREFIX):
     It gets information about the grid size and returns them in a list.
 
     .. note::
-        This works only for 2D!
+        Works for 1D, 2D, and 3D grids. A dimension not listed in the file
+        defaults to 1 (a flat direction).
 
     Args:
         PATH (string): location path
@@ -49,25 +50,18 @@ def readDimTxt(PATH, PREFIX):
     Returns:
         list of ints: a list of points in each direction [NX, NY, NZ].
     """
-    print("# Directory:\t{} \n# Prefix:\t{}\n".format(PATH, PREFIX))
-    file=PATH+PREFIX+'_info.txt'
-    print("# Reading {}".format(PREFIX+'_info.txt'))
+    file = PATH + PREFIX + '_info.txt'
     with open(file) as f:
         lines = f.readlines()
+    NX = NY = NZ = 1  # missing dimensions default to 1 (flat direction)
     for l in lines:
-        if 'NX' in l: NX=int(l.split('=')[-1])
-        if 'NY' in l: NY=int(l.split('=')[-1])
-        if 'NZ' in l: NZ=int(l.split('=')[-1])
-        if 'DX' in l: DX=float(l.split('=')[-1])
-        if 'DY' in l: DY=float(l.split('=')[-1])
-        if 'DZ' in l: DZ=float(l.split('=')[-1])
-    if (dimension(NX,NY,NZ)!=2):
-        sys.exit("# The system is {}D, not 2D!".format(dimension(NX,NY,NZ)))
-    if (NX!=NY) : print("# Warning: NX != NY   !")
-    return([NX,NY,NZ])
+        if 'NX' in l: NX = int(l.split('=')[-1])
+        if 'NY' in l: NY = int(l.split('=')[-1])
+        if 'NZ' in l: NZ = int(l.split('=')[-1])
+    return [NX, NY, NZ]
 
 def txt2df(file,sufix,cols):
-    """Reads \*.txt files to pandas dataframe.
+    r"""Reads \*.txt files to pandas dataframe.
 
     Args:
         file (string): path and prefix to the data
@@ -78,10 +72,9 @@ def txt2df(file,sufix,cols):
         pandas.DataFrame: data about spatial extend of observables
 
     """
-    file=file+'_'+sufix+'.txt'
-    print("# Reading {}".format(file))
-    df = pd.read_csv(file, comment='#', sep='\s+', header=None)
-    df.set_axis(cols, axis=1,inplace=True)
+    file = file + '_' + sufix + '.txt'
+    df = pd.read_csv(file, comment='#', sep=r'\s+', header=None)
+    df = df.set_axis(cols, axis=1)  # pandas >= 2.0: set_axis is not in-place
     return df
 
 

@@ -1,0 +1,7 @@
+# Grid information for the sample dataset
+NX = 8
+NY = 8
+NZ = 1
+DX = 1.0
+DY = 1.0
+DZ = 1.0
