@@ -16,7 +16,7 @@ import math
 # import libnest.units as units
 from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
-from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
+from libnest.units import MN, HBAR2M_n
 
 
 def rho2kf(rho):

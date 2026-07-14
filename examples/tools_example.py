@@ -9,10 +9,9 @@
 # Here we test TOOLS module
 # =========== Usage example
 # $ ./tools_example.py
-import sys
 import numpy as np
 import matplotlib.pyplot as plt
-from wdata.io import WData, Var
+from wdata.io import WData
 
 from libnest import tools
 # print( "test")

@@ -9,7 +9,6 @@ nuclei immersed in the neutron matter.
 ==========
 
 """
-import sys
 import numpy as np
 # from libnest import units
 # from libnest.units import HBARC, DENSEPSILON, NUMZERO

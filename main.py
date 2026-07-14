@@ -15,7 +15,6 @@ import libnest
 import libnest.bsk
 import libnest.definitions
 import libnest.units
-import numpy as np
 
 
 def main():

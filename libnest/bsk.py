@@ -172,10 +172,9 @@ List of functions
 """
 import sys
 import numpy as np
-from libnest import units
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
-from libnest.definitions import rho2kf, rhoEta, rho2tau, mu_q
+from libnest.definitions import rho2kf, rhoEta, mu_q
 
 T0   =-2302.01     # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
 T1   =762.99       # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]

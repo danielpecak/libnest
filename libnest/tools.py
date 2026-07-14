@@ -7,9 +7,7 @@ List of functions
 -----------------
 """
 import numpy as np
-import math
-from libnest import units
-from libnest.units import DENSEPSILON, HBARC, MN, MP
+from libnest.units import HBARC, MN, MP
 from libnest.definitions import rho2kf, eF_n
 
 def threeSlice(variable):

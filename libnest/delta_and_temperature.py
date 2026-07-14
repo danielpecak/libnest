@@ -10,7 +10,6 @@ Originally contributed by Aleksandra Bochenek (2022).
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-import libnest.definitions
 from libnest.real_data_plots import TXT_PATH, TXT_PATH_UNIFORM, file_check, cross_section_distance, files_set_particles, files_set_type, pairing_field
 
 # ================================

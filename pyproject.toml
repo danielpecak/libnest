@@ -53,6 +53,9 @@ docs = [
     "sphinxcontrib-katex",
     "pillow",
 ]
+lint = [
+    "ruff>=0.6",
+]
 
 [tool.setuptools.dynamic]
 version = { attr = "libnest.__version__" }
@@ -63,3 +66,18 @@ include = ["libnest*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+
+[tool.ruff]
+target-version = "py39"
+# The docs/ figure-generation scripts use `from libnest.bsk import *` on purpose
+# (concise one-off plotting); don't lint them like library code.
+extend-exclude = ["docs"]
+
+[tool.ruff.lint]
+# Linter only (no autoformatting). "F" = pyflakes-class real problems: unused
+# imports, star imports, undefined names. Style rules (E7 line-compounding,
+# E741/E743 ambiguous names like the physics function `I`) are intentionally
+# not selected. F841 (unused locals) is ignored — it flags work-in-progress /
+# intentional throwaways (e.g. `V` in nucleus.py) rather than defects.
+select = ["F"]
+ignore = ["F841"]

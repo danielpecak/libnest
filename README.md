@@ -4,6 +4,8 @@
 
 A Python library for nuclear matter and neutron star physics calculations, implementing the Brussels-Montreal (BSk) energy density functional and related physical models.
 
+[![PyPI](https://img.shields.io/pypi/v/libnest.svg)](https://pypi.org/project/libnest/)
+[![Tests](https://github.com/danielpecak/libnest/actions/workflows/tests.yml/badge.svg)](https://github.com/danielpecak/libnest/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -106,7 +108,8 @@ python main.py
 
 ## 📚 Documentation
 
-Full documentation is available at: [https://libnest.readthedocs.io](https://libnest.readthedocs.io) *(coming soon)*
+Full documentation is built with Sphinx and published to GitHub Pages:
+[https://danielpecak.github.io/libnest/](https://danielpecak.github.io/libnest/)
 
 ### Building documentation locally
 
