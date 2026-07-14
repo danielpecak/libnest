@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [
-    { name = "Daniel Pęcak", email = "daniel.pecak@pw.edu.pl" },
+    { name = "Daniel Pęcak", email = "daniel.pecak@gmail.com" },
 ]
 keywords = [
     "physics", "nuclear-physics", "neutron-star", "nuclear-matter",

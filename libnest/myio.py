@@ -1,15 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-# =========== Info: who, where, when
-# @author Daniel Pęcak <Daniel.Pecak@pw.edu.pl>
-# Warsaw Technical University, Université Libre de Bruxelles
-# On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
-# March 2022, Brussels
-# =========== Description
-# Script for converting the density units for nuclear matter
-# in the ranges typical for neutron stars.
-# =========== Usage example
-# $ ./units.py
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
 Module: Myio
 ============

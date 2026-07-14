@@ -1,10 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-# =========== Info: who, where, when
-# @author Daniel Pęcak <Daniel.Pecak@pw.edu.pl>
-# Warsaw Technical University
-# On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
-# October 2022, Brussels
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
 Module: tools
 =============

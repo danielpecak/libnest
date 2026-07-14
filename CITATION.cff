@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: "libnest — Library for Neutron Star physics"
+abstract: >-
+  A Python library for nuclear-matter and neutron-star physics, implementing the
+  Brussels-Montreal (BSk) Skyrme energy density functional and related models
+  (equations of state, effective masses, pairing fields, pasta phases).
+type: software
+authors:
+  - given-names: Daniel
+    family-names: Pęcak
+    email: daniel.pecak@gmail.com
+    affiliation: "Institute of Physics, Polish Academy of Sciences, Warsaw, Poland"
+    orcid: "https://orcid.org/0000-0002-2462-2942"  
+version: "0.1.0"
+license: MIT
+repository-code: "https://github.com/danielpecak/libnest"
+url: "https://github.com/danielpecak/libnest"
+keywords:
+  - nuclear physics
+  - neutron star
+  - nuclear matter
+  - Skyrme functional
+  - equation of state
+  - superfluidity
+# Student contributors (see README / docs) — add here as additional authors if you
+# want them included in the software citation:
+#   - given-names: Aleksandra
+#     family-names: Bochenek
+#   - given-names: Monika
+#     family-names: Marek

@@ -1,18 +1,17 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
-Created on Thu Sep  1 11:57:45 2022
+Module: delta_and_temperature
+=============================
+Temperature-dependent pairing analysis.
 
-@author: aleks
+Originally contributed by Aleksandra Bochenek (2022).
 """
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import libnest.definitions
 from libnest.real_data_plots import TXT_PATH, TXT_PATH_UNIFORM, file_check, cross_section_distance, files_set_particles, files_set_type, pairing_field
-
-# TXT_PATH = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\txt\\"
-# TXT_PATH_UNIFORM = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\uniform-txt\\"
-#depends on the user (path did not work in main)
 
 # ================================
 #      Temperature variation

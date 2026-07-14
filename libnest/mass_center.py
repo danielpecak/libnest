@@ -1,3 +1,10 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
+"""
+Module: mass_center
+===================
+Center-of-mass tracking for simulation data.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 

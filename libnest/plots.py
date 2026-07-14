@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
 Module: Plots
 =============

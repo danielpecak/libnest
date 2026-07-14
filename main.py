@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
 LibNest - Library for Neutron Star Physics
 ===========================================
@@ -6,9 +8,7 @@ LibNest - Library for Neutron Star Physics
 This is a simple example demonstrating basic usage of the libnest library.
 For more comprehensive examples, see the examples/ directory.
 
-Author: Daniel Pęcak <daniel.pecak@pw.edu.pl>
-Warsaw Technical University, Université Libre de Bruxelles
-Institute of Physics, Polish Academy of Sciences, Warsaw
+Author: Daniel Pęcak <daniel.pecak@gmail.com>
 """
 
 import libnest

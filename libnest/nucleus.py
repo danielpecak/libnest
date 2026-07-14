@@ -1,8 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-# =========== Description
-#
-#================================
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
 nucleus.py
 ======

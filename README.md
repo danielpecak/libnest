@@ -142,7 +142,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👥 Authors
 
 **Daniel Pęcak**
-- Email: daniel.pecak@pw.edu.pl
+- Email: daniel.pecak@gmail.com
 - Affiliation: Warsaw University of Technology, Université Libre de Bruxelles
 - On leave from: Institute of Physics, Polish Academy of Sciences
 
@@ -169,5 +169,5 @@ See `docs/bibliography.rst` for a complete list of references.
 
 ---
 
-**Version**: 2024.01  
-**Last Updated**: November 2025
+**Version**: 0.1.0  
+**Last Updated**: July 2026

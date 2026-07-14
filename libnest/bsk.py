@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding:utf-8 -*-
-# =========== Description
-# Original paper with formulas
-# https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
+#
+# Original paper with formulas:
+#   https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804
 # NOTE: Table I is outdated; use the following data:
 # forBSk31
 # According to Goriely, Chamel, Pearson PRC 93 034337 (2016)

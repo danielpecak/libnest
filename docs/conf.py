@@ -25,10 +25,11 @@ current_year = datetime.datetime.now().year
 copyright = '{}, Daniel Pęcak'.format(current_year)
 author = 'Daniel Pęcak'
 
+# Version read from the installed/importable package (single source of truth:
+# libnest/__init__.py). sys.path already includes the project root above.
+from libnest import __version__ as release
 # The short X.Y version
-version = ''
-# The full version, including alpha/beta/rc tags
-release = '0.1'
+version = '.'.join(release.split('.')[:2])
 
 
 # -- General configuration ---------------------------------------------------

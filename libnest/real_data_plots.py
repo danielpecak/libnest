@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022-2026 Daniel Pęcak
 """
 Plotting real data
 ==================
@@ -14,10 +15,13 @@ import matplotlib.pyplot as plt
 import scipy.interpolate
 import libnest.definitions
 
-TXT_PATH = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\txt\\"
-TXT_PATH_UNIFORM = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\uniform-txt\\"
-TXT_PATH_ANDREEV = "C:\\Users\\aleks\\OneDrive\\Dokumenty\\libnest\\andreev\\"
-#depends on the user (path did not work in main)
+# Root directory holding the simulation-data sub-folders (txt/, uniform-txt/,
+# andreev/). Set the LIBNEST_DATA environment variable to point at your data;
+# defaults to the current working directory so the module is portable.
+DATA_ROOT = os.environ.get("LIBNEST_DATA", ".")
+TXT_PATH = os.path.join(DATA_ROOT, "txt") + os.sep
+TXT_PATH_UNIFORM = os.path.join(DATA_ROOT, "uniform-txt") + os.sep
+TXT_PATH_ANDREEV = os.path.join(DATA_ROOT, "andreev") + os.sep
 
 # ================================
 #          Handling Files
