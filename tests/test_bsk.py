@@ -90,6 +90,8 @@ class TestBSk(unittest.TestCase):
         # Should be positive for densities where pairing exists
         self.assertGreaterEqual(delta[0], 0)
 
+    
+
     def test_pairing_fields_scalar_input(self):
         """Scalar input must not crash (regression: np.where was called on a
         0-d array before the scalar early-return, which numpy 2.x forbids)."""
@@ -204,6 +206,42 @@ class TestReferencePairingFields(unittest.TestCase):
         out = bsk.epsilon_delta_rho_np(rho_n, rho_p, grad, grad, grad)
         self.assertEqual(out.shape, rho_n.shape)
         self.assertTrue(np.all(np.isfinite(out)))
+
+
+class TestAlternativePairingSchemes(unittest.TestCase):
+    """Tests for the alternative delta_n/delta_p interpolation schemes
+    (bsk.ref_pairing_field_eq2/eq3/eq6), based on Eq. (2), (3) and (6) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+    TODO(Adarsh): each scheme is currently a stub that raises
+    NotImplementedError (see bsk.py). As you implement a scheme, remove its
+    @unittest.skip decorator and fill in real assertions - e.g. following the
+    pattern in TestReferencePairingFields above:
+      - eta = 0 (rho_n == rho_p) should reduce to symmetric_pairing_field
+      - rho_p = 0 should reduce to neutron_pairing_field
+      - finite output for both scalar and array input
+    """
+
+    @unittest.skip("TODO(Adarsh): implement ref_pairing_field_eq2 (Eq. 2)")
+    def test_ref_pairing_field_eq2(self):
+        rho_n, rho_p = 0.05, 0.05
+        ref = bsk.ref_pairing_field_eq2(rho_n, rho_p)
+        sym = bsk.symmetric_pairing_field(rho_n, rho_p)
+        self.assertAlmostEqual(float(ref), float(sym), places=6)
+
+    @unittest.skip("TODO(Adarsh): implement ref_pairing_field_eq3 (Eq. 3)")
+    def test_ref_pairing_field_eq3(self):
+        rho_n, rho_p = 0.05, 0.05
+        ref = bsk.ref_pairing_field_eq3(rho_n, rho_p)
+        sym = bsk.symmetric_pairing_field(rho_n, rho_p)
+        self.assertAlmostEqual(float(ref), float(sym), places=6)
+
+    @unittest.skip("TODO(Adarsh): implement ref_pairing_field_eq6 (Eq. 6)")
+    def test_ref_pairing_field_eq6(self):
+        rho_n, rho_p = 0.05, 0.05
+        ref = bsk.ref_pairing_field_eq6(rho_n, rho_p)
+        sym = bsk.symmetric_pairing_field(rho_n, rho_p)
+        self.assertAlmostEqual(float(ref), float(sym), places=6)
 
 
 if __name__ == '__main__':

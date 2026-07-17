@@ -211,13 +211,13 @@ def neutron_pairing_field(rho_n):
 
     .. math::
 
-	   \Delta_{\\mathrm{NeuM}}(k_F) = \\frac{3.37968 k_F^2}{k_F^2+0.556092^2} \\frac{(k_F-1.38236)^2}{(k_F-1.38236)^2+0.327517^2},
+	   \Delta_{\mathrm{NeuM}}(k_F) = \frac{3.37968 k_F^2}{k_F^2+0.556092^2} \frac{(k_F-1.38236)^2}{(k_F-1.38236)^2+0.327517^2},
 
     Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: pairing field for neutron matter :math:`\\Delta_{\\mathrm{NeuM}}` [MeV]
+        float: pairing field for neutron matter :math:`\Delta_{\mathrm{NeuM}}` [MeV]
 
     See also:
         :func:`.symmetric_pairing_field`
@@ -243,14 +243,14 @@ def symmetric_pairing_field(rho_n, rho_p):
 
     .. math::
 
-	   \Delta_{\\mathrm{SM}}(k_F) =  \\frac{11.5586 k_F^2}{k_F^2 + 0.489932^2}\\frac{(k_F - 1.3142)^2}{(k_F - 1.3142)^2 + 0.906146^2}.
+	   \Delta_{\mathrm{SM}}(k_F) =  \frac{11.5586 k_F^2}{k_F^2 + 0.489932^2}\frac{(k_F - 1.3142)^2}{(k_F - 1.3142)^2 + 0.906146^2}.
 
     Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: pairing field for symmetric matter :math:`\\Delta_{\\mathrm{SM}}` [MeV]
+        float: pairing field for symmetric matter :math:`\Delta_{\mathrm{SM}}` [MeV]
 
 
     See also:
@@ -275,24 +275,24 @@ def neutron_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
     r"""
     Returns the reference pairing field for neutrons in uniform matter.
-    This is an extrapolation between :math:`\Delta_{\\mathrm{SM}}` and
-    :math:`\Delta_{\\mathrm{NeuM}}`. In limits :math:`\\eta \\rightarrow 0` reproduces
-    symmetric matter and :math:`\\eta \\rightarrow 1`, the neutron matter.
+    This is an extrapolation between :math:`\Delta_{\mathrm{SM}}` and
+    :math:`\Delta_{\mathrm{NeuM}}`. In limits :math:`\eta \rightarrow 0` reproduces
+    symmetric matter and :math:`\eta \rightarrow 1`, the neutron matter.
 
     .. math::
 
-        \\Delta_n(\\rho_n,\\rho_p) =
-        \\Delta_{\\mathrm{SM}}(\\rho_n+\\rho_p)
-        \\left( 1 - |\\eta| \\right)
-        + \Delta_{\\mathrm{NeuM}}(\\rho_n) \\eta \\frac{\\rho_n}{\\rho_n+\\rho_p}
+        \Delta_n(\rho_n,\rho_p) =
+        \Delta_{\mathrm{SM}}(\rho_n+\rho_p)
+        \left( 1 - |\eta| \right)
+        + \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_n}{\rho_n+\rho_p}
 
 
     Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: pairing field for neutrons :math:`\\Delta_n` [MeV]
+        float: pairing field for neutrons :math:`\Delta_n` [MeV]
 
     See also:
         :func:`.neutron_pairing_field`
@@ -310,24 +310,24 @@ def proton_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
     r"""
     Returns the reference pairing field for protons in uniform matter.
-    This is an extrapolation between :math:`\Delta_{\\mathrm{SM}}` and
-    :math:`\Delta_{\\mathrm{NeuM}}`. In limits :math:`\\eta \\rightarrow 0` reproduces
-    symmetric matter and :math:`\\eta \\rightarrow 1`, the neutron matter.
+    This is an extrapolation between :math:`\Delta_{\mathrm{SM}}` and
+    :math:`\Delta_{\mathrm{NeuM}}`. In limits :math:`\eta \rightarrow 0` reproduces
+    symmetric matter and :math:`\eta \rightarrow 1`, the neutron matter.
 
     .. math::
 
-        \\Delta_p(\\rho_n,\\rho_p) =
-        \\Delta_{\\mathrm{SM}}(\\rho_n+\\rho_p)
-        \\left( 1 - |\\eta| \\right)
-        - \Delta_{\\mathrm{NeuM}}(\\rho_n) \\eta \\frac{\\rho_p}{\\rho_n+\\rho_p}
+        \Delta_p(\rho_n,\rho_p) =
+        \Delta_{\mathrm{SM}}(\rho_n+\rho_p)
+        \left( 1 - |\eta| \right)
+        - \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_p}{\rho_n+\rho_p}
 
 
     Args:
-        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
-        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: pairing field for protons :math:`\\Delta_p` [MeV]
+        float: pairing field for protons :math:`\Delta_p` [MeV]
 
     See also:
         :func:`.neutron_pairing_field`

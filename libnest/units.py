@@ -31,8 +31,8 @@ Constant  Value       Unit                Description
 HBARC     197.3269804 [MeV fm]            :math:`\hbar c`
 MN        939.5654205 [MeV]               neutron mass :math:`m_n`
 MP        938.2720882 [MeV]               proton  mass :math:`m_p`
-HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] :math:`\\hbar^2/(2 m_n)`
-HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] :math:`\\hbar^2/(2 m_p)`
+HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] :math:`\hbar^2/(2 m_n)`
+HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] :math:`\hbar^2/(2 m_p)`
 ========  =========== =================== ===========
 
 Nucleon masses
@@ -40,7 +40,7 @@ Nucleon masses
 The masses of proton, neutron and nucleon (which is their averaged mass). The nucleon mass is an average of proton and neutron mass:
 
 .. math::
-    m_N=\\frac{1}{2} (m_n + m_p) \\approx 1.67377585 \\cdot 10^{-27}.
+    m_N=\frac{1}{2} (m_n + m_p) \approx 1.67377585 \cdot 10^{-27}.
 
 
 ..  csv-table::
@@ -55,14 +55,14 @@ The masses of proton, neutron and nucleon (which is their averaged mass). The nu
 Neutron star
 ------------
 Some constants are relevant from the point of view of neutron star's physics.
-One of them is the *neutron drip* density :math:`\\rho_{\\mathrm{ND}}` at which excesive neutrons are not bound to the nuclei anymore and form superfluid sea. This is how the border of outer crust and inner crust are defined.  Then, there is saturation density :math:`\\rho_0` at which the crust-core transition should occure. This is the density of nuclei.
+One of them is the *neutron drip* density :math:`\rho_{\mathrm{ND}}` at which excesive neutrons are not bound to the nuclei anymore and form superfluid sea. This is how the border of outer crust and inner crust are defined.  Then, there is saturation density :math:`\rho_0` at which the crust-core transition should occure. This is the density of nuclei.
 
 ..  csv-table::
     :header: "Variable", "Density", "[g cm :sup:`-3`]", "[fm :sup:`-3`]"
     :widths: 15, 15, 15, 15
 
-    "RHOSAT", ":math:`\\rho_0`", "3 :math:`\\cdot 10^{14}`", 0.18
-    "RHOND", ":math:`\\rho_{\\mathrm{ND}}`", "4 :math:`\\cdot 10^{11}`", 0.00042
+    "RHOSAT", ":math:`\rho_0`", "3 :math:`\cdot 10^{14}`", 0.18
+    "RHOND", ":math:`\rho_{\mathrm{ND}}`", "4 :math:`\cdot 10^{11}`", 0.00042
 
 List of functions
 -----------------
