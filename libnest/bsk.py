@@ -342,6 +342,32 @@ def proton_ref_pairing_field(rho_n, rho_p):
         -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)
 
 
+# ================================
+#   Alternative interpolation schemes (delta_n, delta_p from delta_sm, delta_neu)
+# ================================
+# TODO(Adarsh): neutron_ref_pairing_field() / proton_ref_pairing_field() above
+# implement one interpolation scheme (Formula 5.10 from NeST.pdf) for getting
+# delta_n and delta_p from delta_sm (symmetric_pairing_field) and delta_neu
+# (neutron_pairing_field). Add two more schemes here, following:
+# https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+def ref_pairing_field_eq2(rho_n, rho_p):
+    """TODO(Adarsh): implement the interpolation scheme from Eq. (2) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    """
+    raise NotImplementedError
+
+def ref_pairing_field_eq3(rho_n, rho_p):
+    """TODO(Adarsh): implement the interpolation scheme from Eq. (3) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    """
+    raise NotImplementedError
+
+def ref_pairing_field_eq6(rho_n, rho_p):
+    """TODO(Adarsh): implement the interpolation scheme from Eq. (6) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    """
+    raise NotImplementedError
 
 
 # ================================
@@ -1003,7 +1029,7 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
             +3./16.*T4*np.power(rho,BETA)*((1.+0.5*X4)*rho_grad_square-(0.5+X4)*(rho_grad_n_square+rho_grad_p_square))
             -1./16.*T5*np.power(rho,GAMMA)*((1.+0.5*X5)*rho_grad_square+(0.5+X5)*(rho_grad_n_square+rho_grad_p_square))
             +BETA/8.*T4*np.power(rho,BETA-1.)*((1.+0.5*X4)*rho*rho_grad_square-(0.5+X4)
-                                          *(rho_n*rho_grad_n_square+rho_p*rho_grad_p_square+rho*grad_rho_n_rho_p))
+                                      *(rho_n*rho_grad_n_square+rho_p*rho_grad_p_square+rho*grad_rho_n_rho_p))
             )
 
 
@@ -1174,15 +1200,22 @@ def I(rho_n, rho_p, q):
         sys.exit('# ERROR: Nucleon q must be either n or p')
 
     mu = mu_q(rho_n, rho_p, q)
-    I = mu #getting the correct size
-    x = np.where(delta==NUMZERO) # intended to catch delta values with invalid kF
-    I[x] = NUMZERO
-    I = np.ma.masked_where(delta == 0, I)   # masking I with incorrect delta value
-                                            # (if delta=0, I = inf)
-                                            # if delta(rho=0) is set to NUMZERO, I(rho=0) is too low
-    y = np.where(delta>NUMZERO)
-    I[y] = np.sqrt(mu[y])*(2*np.log(2*mu[y]/np.abs(delta[y]))+Lambda(6.5/mu[y]))
-    return I
+    I = np.asarray(mu)
+    delta = np.asarray(delta)
+    # Handle assignment for both scalar and array
+    if I.shape == ():
+        if delta == NUMZERO:
+            I = NUMZERO
+        elif delta > NUMZERO:
+            I = np.sqrt(mu)*(2*np.log(2*mu/np.abs(delta))+Lambda(6.5/mu))
+        return float(I)
+    else:
+        x = np.where(delta==NUMZERO)
+        I[x] = NUMZERO
+        I = np.ma.masked_where(delta == 0, I)
+        y = np.where(delta>NUMZERO)
+        I[y] = np.sqrt(mu[y])*(2*np.log(2*mu[y]/np.abs(delta[y]))+Lambda(6.5/mu[y]))
+        return I
 
 def Lambda(x):
     # Equation 16 from Phys Rev C 104
@@ -1204,12 +1237,17 @@ def Lambda(x):
     See also:
         :func:`.I`
     """
-    Lambda = x
-    i = np.where(x<=0 ) # intended to catch delta values with invalid kF
-    Lambda[i] = NUMZERO
-    j = np.where(x>0)
-    Lambda[j] = np.log(16. * x) + 2. * np.sqrt(1. + x) - 2. * np.log(1. + np.sqrt(1. + x)) - 4.
-    return Lambda
+    x = np.asarray(x)
+    # Use np.where for vectorized, robust computation
+    result = np.where(
+        x <= 0,
+        NUMZERO,
+        np.log(16. * x) + 2. * np.sqrt(1. + x) - 2. * np.log(1. + np.sqrt(1. + x)) - 4.
+    )
+    # Return scalar if input was scalar
+    if result.shape == ():
+        return float(result)
+    return result
 
 
 
