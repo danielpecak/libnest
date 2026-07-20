@@ -339,7 +339,7 @@ def proton_ref_pairing_field(rho_n, rho_p):
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     return (symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
-        -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)
+        -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)                #Adarsh: should it be rho_p here in neutron_pairing_field()?
 
 
 # ================================
@@ -351,23 +351,261 @@ def proton_ref_pairing_field(rho_n, rho_p):
 # (neutron_pairing_field). Add two more schemes here, following:
 # https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
 
-def ref_pairing_field_eq2(rho_n, rho_p):
-    """TODO(Adarsh): implement the interpolation scheme from Eq. (2) of
+def neutron_ref_pairing_field_eq2(rho_n, rho_p):
+    r"""
+    Returns the reference pairing field for neutrons in uniform matter
+    using the interpolation scheme from Eq. (2) of
     https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
-    """
-    raise NotImplementedError
 
-def ref_pairing_field_eq3(rho_n, rho_p):
-    """TODO(Adarsh): implement the interpolation scheme from Eq. (3) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
-    """
-    raise NotImplementedError
+    This interpolates between symmetric matter and neutron matter,
+    with asymmetry dependence governed by :math:`\delta`.
+    
+    Used in all Bsk parameterizations since Bsk17. Currently in use in WBSK.
 
-def ref_pairing_field_eq6(rho_n, rho_p):
-    """TODO(Adarsh): implement the interpolation scheme from Eq. (6) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    .. math::
+
+        \Delta_n(\rho_n,\rho_p) =
+        \Delta_{\mathrm{SM}}(\rho)
+        \left(1 - |\delta|\right)
+        + \delta \frac{\rho_p}{\rho}
+        \Delta_{\mathrm{NeuM}}(\rho_n)
+
+    where :math:`\rho = \rho_n + \rho_p` and
+    :math:`\delta = (\rho_n - \rho_p)/\rho`.
+
+    Args:
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: pairing field for neutrons :math:`\Delta_n` [MeV]
+
+    See also:
+        :func:`.proton_ref_pairing_field_eq2`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_pairing_field`
     """
-    raise NotImplementedError
+    
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    rho = np.asarray(rho + DENSEPSILON, dtype=float)
+    delta = eta/rho
+    pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) + (delta* (rho_p/rho) * neutron_pairing_field(rho_n))
+    return(pairing)
+
+def proton_ref_pairing_field_eq2(rho_n, rho_p):
+    
+    r"""
+    Returns the reference pairing field for protons in uniform matter
+    using the interpolation scheme from Eq. (2) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+    This interpolates between symmetric matter and neutron matter,
+    with asymmetry dependence governed by :math:`\delta`.
+    
+    Used in all Bsk parameterizations since Bsk17. Currently in use in WBSK.
+
+    .. math::
+
+        \Delta_p(\rho_n,\rho_p) =
+        \Delta_{\mathrm{SM}}(\rho)
+        \left(1 - |\delta|\right)
+        - \delta \frac{\rho_p}{\rho}
+        \Delta_{\mathrm{NeuM}}(\rho_p)
+
+    where :math:`\rho = \rho_n + \rho_p` and
+    :math:`\delta = (\rho_n - \rho_p)/\rho`.
+
+    Args:
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]
+
+    Returns:
+        float: pairing field for protons :math:`\Delta_p` [MeV]
+
+    See also:
+        :func:`.neutron_ref_pairing_field_eq2`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_pairing_field`
+    """
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    rho = np.asarray(rho + DENSEPSILON, dtype=float)
+    delta = eta/rho
+    pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) - (delta* (rho_p/rho) * neutron_pairing_field(rho_p))
+    return(pairing)
+
+def neutron_ref_pairing_field_eq3(rho_n, rho_p):
+    
+    r"""
+    Returns the reference pairing field for neutrons in uniform matter
+    using the interpolation scheme from Eq. (3) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+    This interpolates between symmetric matter and neutron matter,
+    with asymmetry dependence governed by :math:`\delta`.
+    
+    Used in BskG3. 
+
+    .. math::
+
+        \Delta_n(\rho_n,\rho_p) =
+        \Delta_{\mathrm{SM}}(\rho)
+        \left(1 - |\delta|\right)
+        + |\delta| \,
+        \Delta_{\mathrm{NeuM}}(\rho_n)
+
+    where :math:`\delta = (\rho_n - \rho_p)/\rho`.
+
+    Args:
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]
+
+    Returns:
+        float: pairing field for neutrons :math:`\Delta_n` [MeV]
+
+    See also:
+        :func:`.proton_ref_pairing_field_eq3`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_pairing_field`
+    """
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    rho = np.asarray(rho + DENSEPSILON, dtype=float)
+    delta = eta/rho
+    pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) + np.abs(delta) * neutron_pairing_field(rho_n)
+    return(pairing)
+
+def proton_ref_pairing_field_eq3(rho_n, rho_p):
+
+    r"""
+    Returns the reference pairing field for protons in uniform matter
+    using the interpolation scheme from Eq. (3) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+    This interpolates between symmetric matter and neutron matter,
+    with asymmetry dependence governed by :math:`\delta`.
+    
+    Used in BskG3.
+
+    .. math::
+
+        \Delta_p(\rho_n,\rho_p) =
+        \Delta_{\mathrm{SM}}(\rho)
+        \left(1 - |\delta|\right)
+        + |\delta| \,
+        \Delta_{\mathrm{NeuM}}(\rho_p)
+
+    where :math:`\delta = (\rho_n - \rho_p)/\rho`.
+
+    Args:
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]
+
+    Returns:
+        float: pairing field for protons :math:`\Delta_p` [MeV]
+
+    See also:
+        :func:`.neutron_ref_pairing_field_eq3`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_pairing_field`
+    """
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    rho = np.asarray(rho + DENSEPSILON, dtype=float)
+    delta = eta/rho
+    pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) + np.abs(delta) * neutron_pairing_field(rho_p)
+    return(pairing)
+
+def neutron_ref_pairing_field_eq6(rho_n, rho_p):
+
+    r"""
+    Returns the reference pairing field for neutrons in uniform matter
+    using the interpolation scheme from Eq. (6) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+    This interpolates between symmetric matter and neutron matter,
+    with asymmetry dependence governed by :math:`\delta`.
+    
+    Used in BskG4.
+
+    .. math::
+
+        \Delta_n(\rho_n,\rho_p) =
+        \Delta_{\mathrm{NeuM}}(\rho_n)
+        \left[
+        \frac{\Delta_{\mathrm{SM}}(\rho)}
+             {\Delta_{\mathrm{NeuM}}(\rho/2)}
+        \right]^{(1 - \delta)}
+
+    where :math:`\delta = (\rho_n - \rho_p)/\rho`.
+
+    Args:
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]
+
+    Returns:
+        float: pairing field for neutrons :math:`\Delta_n` [MeV]
+
+    See also:
+        :func:`.proton_ref_pairing_field_eq6`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_pairing_field`
+    """
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    rho = np.asarray(rho + DENSEPSILON, dtype=float)
+    delta = eta/rho
+    pairing = neutron_pairing_field(rho_n)* ((symmetric_pairing_field(rho_n,rho_p)/neutron_pairing_field(rho/2))**(1-delta))
+    return(pairing)
+
+def proton_ref_pairing_field_eq6(rho_n, rho_p):
+
+    r"""
+    Returns the reference pairing field for protons in uniform matter
+    using the interpolation scheme from Eq. (6) of
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+
+    This interpolates between symmetric matter and neutron matter,
+    with asymmetry dependence governed by :math:`\delta`.
+    
+    Used in BskG4.
+
+    .. math::
+
+        \Delta_p(\rho_n,\rho_p) =
+        \Delta_{\mathrm{NeuM}}(\rho_p)
+        \left[
+        \frac{\Delta_{\mathrm{SM}}(\rho)}
+             {\Delta_{\mathrm{NeuM}}(\rho/2)}
+        \right]^{(1 + \delta)}
+
+    where :math:`\delta = (\rho_n - \rho_p)/\rho`.
+
+    Args:
+        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]
+        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]
+
+    Returns:
+        float: pairing field for protons :math:`\Delta_p` [MeV]
+
+    See also:
+        :func:`.neutron_ref_pairing_field_eq6`
+        :func:`.symmetric_pairing_field`
+        :func:`.neutron_pairing_field`
+    """
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
+    rho = np.asarray(rho + DENSEPSILON, dtype=float)
+    delta = eta/rho
+    pairing = neutron_pairing_field(rho_p)* ((symmetric_pairing_field(rho_n,rho_p)/neutron_pairing_field(rho/2))**(1+delta))
+    return(pairing)
 
 
 # ================================
