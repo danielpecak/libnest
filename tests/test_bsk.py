@@ -222,9 +222,14 @@ class TestAlternativePairingSchemes(unittest.TestCase):
         self.assertAlmostEqual(float(ref), float(sym), places=6)
         # Pure neutron matter limit
         rho_n, rho_p = 0.05, 0.00
-        ref = bsk.neutron_ref_pairing_field_eq2(rho_n, rho_p)
+        ref  = bsk.neutron_ref_pairing_field_eq2(rho_n, rho_p)
         neum = bsk.neutron_pairing_field(rho_n)
         self.assertAlmostEqual(float(ref), float(neum), places=6)
+        # Pure proton matter limit
+        rho_n, rho_p = 0.00, 0.05
+        ref   = bsk.neutron_ref_pairing_field_eq2(rho_n, rho_p)
+        protm = bsk.neutron_pairing_field(rho_n)
+        self.assertAlmostEqual(float(ref), float(protm), places=6)
         
     def test_proton_ref_pairing_field_eq2(self):
         # Symmetric limit
@@ -232,6 +237,17 @@ class TestAlternativePairingSchemes(unittest.TestCase):
         ref = bsk.proton_ref_pairing_field_eq2(rho_n, rho_p)
         sym = bsk.symmetric_pairing_field(rho_n, rho_p)
         self.assertAlmostEqual(float(ref), float(sym), places=6)
+        # Pure neutron matter limit
+        rho_n, rho_p = 0.05, 0.00
+        ref   = bsk.proton_ref_pairing_field_eq2(rho_n, rho_p)
+        neum = bsk.neutron_pairing_field(rho_p) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(neum), places=6)
+        # Pure proton matter limit
+        rho_n, rho_p = 0.00, 0.05
+        ref   = bsk.proton_ref_pairing_field_eq2(rho_n, rho_p)
+        protm = bsk.neutron_pairing_field(rho_p) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(protm), places=6)
+
 
     def test_neutron_ref_pairing_field_eq3(self):
         # Symmetric limit
@@ -244,6 +260,11 @@ class TestAlternativePairingSchemes(unittest.TestCase):
         ref = bsk.neutron_ref_pairing_field_eq3(rho_n, rho_p)
         neum = bsk.neutron_pairing_field(rho_n)
         self.assertAlmostEqual(float(ref), float(neum), places=6)
+        # Pure proton matter limit
+        rho_n, rho_p = 0.00, 0.05
+        ref = bsk.neutron_ref_pairing_field_eq3(rho_n, rho_p)
+        protm = bsk.neutron_pairing_field(rho_n) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(protm), places=6)
         
     def test_proton_ref_pairing_field_eq3(self):
         # Symmetric limit
@@ -251,6 +272,16 @@ class TestAlternativePairingSchemes(unittest.TestCase):
         ref = bsk.proton_ref_pairing_field_eq3(rho_n, rho_p)
         sym = bsk.symmetric_pairing_field(rho_n, rho_p)
         self.assertAlmostEqual(float(ref), float(sym), places=6)
+        # Pure neutron matter limit
+        rho_n, rho_p = 0.05, 0.00
+        ref = bsk.proton_ref_pairing_field_eq3(rho_n, rho_p)
+        neum = bsk.neutron_pairing_field(rho_p) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(neum), places=6)
+        # Pure proton matter limit
+        rho_n, rho_p = 0.00, 0.05
+        ref = bsk.proton_ref_pairing_field_eq3(rho_n, rho_p)
+        protm = bsk.neutron_pairing_field(rho_p) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(protm), places=6)
 
     def test_neutron_ref_pairing_field_eq6(self):
         # Symmetric limit
@@ -263,6 +294,11 @@ class TestAlternativePairingSchemes(unittest.TestCase):
         ref = bsk.neutron_ref_pairing_field_eq6(rho_n, rho_p)
         neum = bsk.neutron_pairing_field(rho_n)
         self.assertAlmostEqual(float(ref), float(neum), places=6)
+        # Pure proton matter limit
+        rho_n, rho_p = 0.00, 0.05
+        ref = bsk.neutron_ref_pairing_field_eq6(rho_n, rho_p)
+        protm = bsk.neutron_pairing_field(rho_n) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(protm), places=6)
         
     def test_proton_ref_pairing_field_eq6(self):
         # Symmetric limit
@@ -270,6 +306,16 @@ class TestAlternativePairingSchemes(unittest.TestCase):
         ref = bsk.proton_ref_pairing_field_eq6(rho_n, rho_p)
         sym = bsk.symmetric_pairing_field(rho_n, rho_p)
         self.assertAlmostEqual(float(ref), float(sym), places=6)
+        # Pure neutron matter limit
+        rho_n, rho_p = 0.05, 0.00
+        ref = bsk.proton_ref_pairing_field_eq6(rho_n, rho_p)
+        neum = bsk.neutron_pairing_field(rho_p) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(neum), places=6)
+        # Pure proton matter limit
+        rho_n, rho_p = 0.00, 0.05
+        ref = bsk.proton_ref_pairing_field_eq6(rho_n, rho_p)
+        protm = bsk.neutron_pairing_field(rho_p) # Note: this is correct, the symmetry is assumed in this model
+        self.assertAlmostEqual(float(ref), float(protm), places=6)
         
     def test_reference_fields_finite_scalar_and_array(self):
         """All reference fields return finite values for scalar and array input."""
