@@ -339,7 +339,7 @@ def proton_ref_pairing_field(rho_n, rho_p):
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     return (symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
-        -neutron_pairing_field(rho_n)*rho_p/rho*eta/rho)                #Adarsh: should it be rho_p here in neutron_pairing_field()?
+        -neutron_pairing_field(rho_p)*rho_p/rho*eta/rho)
 
 
 # ================================
