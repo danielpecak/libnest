@@ -19,14 +19,18 @@ functionals or data formats.
 Contributors
 ============
 
-- **Monika Marek** (2023)
+- **Monika Marek** (2023) - `mm1707 <https://github.com/mm1707>`_
 
   Developed module :mod:`.tools`.
 
-- **Aleksandra Bochenek** (2022)
+- **Aleksandra Bochenek** (2022) - `pirrx <https://github.com/pirrx>`_
 
   Developed :mod:`.bsk` by implementing and testing equations for the Brussels-Montreal family
   of density functionals.
+
+- **Adarsh Karekkat** (2025) - `O-slyfox-O <https://github.com/O-slyfox-O>`_
+
+  Added pairing interpolation schemes to :mod:`.bsk` for newer Bsk models including BskG4.
 
 Acknowledgments
 ===============
