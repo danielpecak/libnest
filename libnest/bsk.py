@@ -367,7 +367,7 @@ def neutron_ref_pairing_field_eq2(rho_n, rho_p):
         \Delta_n(\rho_n,\rho_p) =
         \Delta_{\mathrm{SM}}(\rho)
         \left(1 - |\delta|\right)
-        + \delta \frac{\rho_p}{\rho}
+        + \delta \frac{\rho_n}{\rho}
         \Delta_{\mathrm{NeuM}}(\rho_n)
 
     where :math:`\rho = \rho_n + \rho_p` and
