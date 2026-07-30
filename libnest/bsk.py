@@ -260,7 +260,12 @@ def symmetric_pairing_field(rho_n, rho_p):
     """
     rho_n = np.asarray(rho_n, dtype=float)
     rho_p = np.asarray(rho_p, dtype=float)
-    kF = np.asarray(rho2kf((rho_n+rho_p)), dtype=float)
+    #   The parametrization is a function of the PER-SPECIES Fermi momentum: in
+    #   symmetric matter rho_n = rho_p = rho/2, hence the 0.5 factor (same
+    #   convention as formula (A14) used in energy_per_nucleon). 
+    #    https://doi.org/10.1103/PhysRevC.80.065804
+    #    Chamel, N., Goriely, S., & Pearson, J. M. (2009). PRC 80, 065804 (2009).
+    kF = np.asarray(rho2kf(0.5*(rho_n+rho_p)), dtype=float)
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
     if delta.shape == ():
@@ -270,6 +275,23 @@ def symmetric_pairing_field(rho_n, rho_p):
             return float(delta)
     delta[np.where(kF>1.31)] = NUMZERO
     return delta
+
+def _clamp_nonnegative(pairing):
+    """Floors an interpolated pairing field at (numerical) zero.
+
+    The SM/NeuM interpolations carry a minus sign in one of the two terms, so
+    for sufficiently asymmetric matter the result can dip below zero.
+
+    Args:
+        pairing (float or np.ndarray): raw interpolated pairing field [MeV]
+
+    Returns:
+        float or np.ndarray: the same, with negative values replaced by NUMZERO
+    """
+    pairing = np.maximum(np.asarray(pairing, dtype=float), NUMZERO)
+    if pairing.shape == ():
+        return float(pairing)
+    return pairing
 
 def neutron_ref_pairing_field(rho_n, rho_p):
     #   Formula (5.10) from NeST.pdf
@@ -303,7 +325,7 @@ def neutron_ref_pairing_field(rho_n, rho_p):
     rho_p = np.asarray(rho_p, dtype=float)
     rho, eta = rhoEta(rho_n, rho_p)
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
-    return (symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
+    return _clamp_nonnegative(symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
         +neutron_pairing_field(rho_n)*rho_n/rho*eta/rho)
 
 def proton_ref_pairing_field(rho_n, rho_p):
@@ -338,7 +360,7 @@ def proton_ref_pairing_field(rho_n, rho_p):
     rho_p = np.asarray(rho_p, dtype=float)
     rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
-    return (symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
+    return _clamp_nonnegative(symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
         -neutron_pairing_field(rho_p)*rho_p/rho*eta/rho)
 
 
@@ -392,7 +414,7 @@ def neutron_ref_pairing_field_eq2(rho_n, rho_p):
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     delta = eta/rho
     pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) + (delta* (rho_n/rho) * neutron_pairing_field(rho_n))
-    return(pairing)
+    return _clamp_nonnegative(pairing)
 
 def proton_ref_pairing_field_eq2(rho_n, rho_p):
     
@@ -435,7 +457,7 @@ def proton_ref_pairing_field_eq2(rho_n, rho_p):
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     delta = eta/rho
     pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) - (delta* (rho_p/rho) * neutron_pairing_field(rho_p))
-    return(pairing)
+    return _clamp_nonnegative(pairing)
 
 def neutron_ref_pairing_field_eq3(rho_n, rho_p):
     
@@ -477,7 +499,7 @@ def neutron_ref_pairing_field_eq3(rho_n, rho_p):
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     delta = eta/rho
     pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) + np.abs(delta) * neutron_pairing_field(rho_n)
-    return(pairing)
+    return _clamp_nonnegative(pairing)
 
 def proton_ref_pairing_field_eq3(rho_n, rho_p):
 
@@ -519,7 +541,7 @@ def proton_ref_pairing_field_eq3(rho_n, rho_p):
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     delta = eta/rho
     pairing = ((1-np.abs(delta))*symmetric_pairing_field(rho_n,rho_p)) + np.abs(delta) * neutron_pairing_field(rho_p)
-    return(pairing)
+    return _clamp_nonnegative(pairing)
 
 def neutron_ref_pairing_field_eq6(rho_n, rho_p):
 
@@ -562,7 +584,7 @@ def neutron_ref_pairing_field_eq6(rho_n, rho_p):
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     delta = eta/rho
     pairing = neutron_pairing_field(rho_n)* ((symmetric_pairing_field(rho_n,rho_p)/neutron_pairing_field(rho/2))**(1-delta))
-    return(pairing)
+    return _clamp_nonnegative(pairing)
 
 def proton_ref_pairing_field_eq6(rho_n, rho_p):
 
@@ -605,7 +627,7 @@ def proton_ref_pairing_field_eq6(rho_n, rho_p):
     rho = np.asarray(rho + DENSEPSILON, dtype=float)
     delta = eta/rho
     pairing = neutron_pairing_field(rho_p)* ((symmetric_pairing_field(rho_n,rho_p)/neutron_pairing_field(rho/2))**(1+delta))
-    return(pairing)
+    return _clamp_nonnegative(pairing)
 
 
 # ================================
