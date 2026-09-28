@@ -260,7 +260,7 @@ def symmetric_pairing_field(rho_n, rho_p):
     """
     rho_n = np.asarray(rho_n, dtype=float)
     rho_p = np.asarray(rho_p, dtype=float)
-    kF = np.asarray(rho2kf((rho_n+rho_p)), dtype=float)
+    kF = np.asarray(rho2kf((rho_n+rho_p)/2), dtype=float)
     delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
                                              (((kF-1.3142)**2)+(0.906146**2)))
     if delta.shape == ():
