@@ -1322,7 +1322,8 @@ class SkyrmeFunctional:
     def v_pi(self, rho_n, rho_p, q):
         """
         Calculates pairing strength :math:`\\upsilon^{\\pi}_q` for neutrons
-        or protons, for energies below 6.5 MeV.
+        or protons, for single-particle energies below the cutoff
+        :math:`\\varepsilon_\\Lambda` (``self.pairing.cutoff``; 6.5 MeV for BSk31).
 
         Based on Equation 14 from Phys Rev C 104.
         Check :cite:`pecak2021properties` and earlier papers of Chamel.
@@ -1343,7 +1344,7 @@ class SkyrmeFunctional:
             q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 
         Returns:
-            float: pairing strength :math:`\\upsilon^{pi}` [fm :sup:`-3`]
+            float: pairing strength :math:`\\upsilon^{\\pi}_q` [MeV fm :sup:`3`]
 
         See also:
             :func:`.I`
@@ -1352,14 +1353,8 @@ class SkyrmeFunctional:
             :func:`.Lambda`
             :func:`.B_q`
         """
-        #rho = rho_n + rho_p
-        if(q=='n'):
-            M = self.effMn(rho_n, rho_p)
-        elif(q=='p'):
-            M = self.effMp(rho_n, rho_p)
-        else:
-            sys.exit('# ERROR: Nucleon q must be either n or p')
-        return -8.*np.pi**2/self.I(rho_n, rho_p, q) * (HBARC**2/2./M)**(3./2.)
+        # B_q = hbar^2 / (2 M*_q); I() rejects any q other than 'n' or 'p'
+        return -8.*np.pi**2/self.I(rho_n, rho_p, q) * self.B_q(rho_n, rho_p, q)**(3./2.)
 
     def I(self, rho_n, rho_p, q):
         # Equation 15 from Phys Rev C 104

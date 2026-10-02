@@ -46,5 +46,23 @@ class TestChemicalPotential(unittest.TestCase):
         self.assertTrue(25. < bsk.mu_q(0.08, 0., "n") < 45.)
 
 
+
+class TestPairingStrength(unittest.TestCase):
+
+    def test_gap_equation_normalization(self):
+        """v_pi = -8 pi^2 / I_q * (hbar^2 / 2M*_q)^(3/2), with hbar^2/2M*_q = B_q."""
+        for rho_n, rho_p, q in [(0.03, 0., "n"), (0.05, 0.02, "n"), (0.05, 0.02, "p")]:
+            with self.subTest(rho_n=rho_n, rho_p=rho_p, q=q):
+                ratio = (-bsk.v_pi(rho_n, rho_p, q) * bsk.I(rho_n, rho_p, q)
+                         / (8. * np.pi**2 * bsk.B_q(rho_n, rho_p, q)**1.5))
+                self.assertAlmostEqual(ratio, 1., places=9)
+
+    def test_attractive_and_of_nuclear_size(self):
+        """Pairing strength in neutron matter: attractive, a few hundred MeV fm^3."""
+        v = bsk.v_pi(np.array([0.005, 0.01, 0.03, 0.05]), 0., "n")
+        self.assertTrue(np.all(v < 0.))
+        self.assertTrue(np.all(np.abs(v) < 2000.), v)
+
+
 if __name__ == "__main__":
     unittest.main()
