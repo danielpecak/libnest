@@ -97,5 +97,25 @@ class TestMeanFields(unittest.TestCase):
                 self.assertAlmostEqual(bsk.B_q(rho_n, rho_p, "p"), p.hbar2m_p + dp, places=6)
 
 
+
+class TestGradientTerms(unittest.TestCase):
+
+    def _eps_np(self, rho_n, rho_p, g_n, g_p):
+        """epsilon_np with uniform tau and no pairing (nu = 0)."""
+        return bsk.epsilon_np(rho_n, rho_p, g_n, g_p, 0.1, 0.05, 0., 0., 0., 0.,
+                              bsk.KAPPAN, bsk.KAPPAP)
+
+    def test_epsilon_np_uses_the_total_density_gradient(self):
+        """The gradient part of epsilon_np is epsilon_delta_rho_np with (grad rho)^2 =
+        (grad rho_n + grad rho_p)^2, so it depends on the relative sign of the gradients."""
+        rho_n, rho_p = 0.06, 0.02
+        for g_n, g_p in [(0.01, 0.004), (0.01, -0.004)]:
+            with self.subTest(g_n=g_n, g_p=g_p):
+                grad_part = (self._eps_np(rho_n, rho_p, g_n, g_p)
+                             - self._eps_np(rho_n, rho_p, 0., 0.))
+                expected = bsk.epsilon_delta_rho_np(rho_n, rho_p, g_n**2, g_p**2, (g_n + g_p)**2)
+                self.assertAlmostEqual(grad_part / expected, 1., places=9)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1260,8 +1260,11 @@ class SkyrmeFunctional:
         Args:
             rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
             rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-            rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
-            rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
+            rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho_n` [fm :sup:`-4`],
+                the component along one direction (e.g. in a 1D problem); the total density
+                gradient is ``rho_grad_n + rho_grad_p``
+            rho_grad_p (float): proton density gradient :math:`\\nabla \\rho_p` [fm :sup:`-4`],
+                the component along the same direction
             tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
             tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
             jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]
@@ -1291,7 +1294,7 @@ class SkyrmeFunctional:
         kappa_p = np.asarray(kappa_p)
         rho_grad_n_square = (rho_grad_n)**2
         rho_grad_p_square = (rho_grad_p)**2
-        rho_grad_square = rho_grad_n_square + rho_grad_p_square
+        rho_grad_square = (rho_grad_n + rho_grad_p)**2  # (grad rho)^2, rho = rho_n + rho_p
         return (HBARC**2/2./MN*tau_n + HBARC**2/2./MP*tau_p
                 + self.epsilon_rho_np(rho_n, rho_p)
                 + self.epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square)
