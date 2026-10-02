@@ -1,0 +1,1905 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libnest.bsk &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">libnest.bsk</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for libnest.bsk</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="c1">#</span>
+<span class="c1"># Original paper with formulas:</span>
+<span class="c1">#   https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</span>
+<span class="c1"># NOTE: Table I is outdated; use the following data:</span>
+<span class="c1"># forBSk31</span>
+<span class="c1"># According to Goriely, Chamel, Pearson PRC 93 034337 (2016)</span>
+<span class="c1">#================================</span>
+<span class="sd">"""</span>
+<span class="sd">Module: BSk</span>
+<span class="sd">===========</span>
+<span class="sd">The module that contains Brussels-Montreal parametrization with formulas</span>
+<span class="sd">for energy density, effective masses, etc.</span>
+<span class="sd">Both for uniform system and general expressions.</span>
+
+
+<span class="sd">BSk31 Skyrme Parameters</span>
+<span class="sd">-----------------------</span>
+
+<span class="sd">The following table lists all Skyrme parameters used in the BSk31 functional:</span>
+
+<span class="sd">.. list-table:: BSk31 Skyrme Parameters</span>
+<span class="sd">   :header-rows: 1</span>
+<span class="sd">   :widths: 15 15 40</span>
+
+<span class="sd">   * - Parameter</span>
+<span class="sd">     - Value</span>
+<span class="sd">     - Unit</span>
+<span class="sd">   * - t₀</span>
+<span class="sd">     - -2302.01</span>
+<span class="sd">     - MeV fm³</span>
+<span class="sd">   * - t₁</span>
+<span class="sd">     - 762.99</span>
+<span class="sd">     - MeV fm⁵</span>
+<span class="sd">   * - t₂</span>
+<span class="sd">     - 0.0</span>
+<span class="sd">     - MeV fm⁵</span>
+<span class="sd">   * - t₃</span>
+<span class="sd">     - 13797.83</span>
+<span class="sd">     - MeV fm⁽³⁺³ᵅ⁾</span>
+<span class="sd">   * - t₄</span>
+<span class="sd">     - -500.0</span>
+<span class="sd">     - MeV fm⁽⁵⁺³ᵝ⁾</span>
+<span class="sd">   * - t₅</span>
+<span class="sd">     - -40.0</span>
+<span class="sd">     - MeV fm⁽⁵⁺³ᵞ⁾</span>
+<span class="sd">   * - x₀</span>
+<span class="sd">     - 0.676655</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - x₁</span>
+<span class="sd">     - 2.658109</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - x₂t₂</span>
+<span class="sd">     - -422.29</span>
+<span class="sd">     - MeV fm⁵</span>
+<span class="sd">   * - x₃</span>
+<span class="sd">     - 0.83982</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - x₄</span>
+<span class="sd">     - 5.0</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - x₅</span>
+<span class="sd">     - -12.0</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - α</span>
+<span class="sd">     - 1/5</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - β</span>
+<span class="sd">     - 1/12</span>
+<span class="sd">     - dimensionless</span>
+<span class="sd">   * - γ</span>
+<span class="sd">     - 1/4</span>
+<span class="sd">     - dimensionless</span>
+
+<span class="sd">Individual Parameters</span>
+<span class="sd">---------------------</span>
+
+<span class="sd">.. data:: T0   =-2302.01</span>
+
+<span class="sd">    Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]</span>
+
+<span class="sd">.. data:: T1   =762.99</span>
+
+<span class="sd">    Skyrme parameter :math:`t_1` [MeV fm :sup:`5`]</span>
+
+<span class="sd">.. data:: T2   =0.0</span>
+
+<span class="sd">    Skyrme parameter :math:`t_2` [MeV fm :sup:`5`]</span>
+
+<span class="sd">.. data:: T3   =13797.83</span>
+
+<span class="sd">    Skyrme parameter :math:`t_3` [MeV fm :sup:`(3+3*ALPHA)`]</span>
+
+<span class="sd">.. data:: T4   =-500.</span>
+
+<span class="sd">    Skyrme parameter :math:`t_4` [MeV fm :sup:`(5+3*BETA)`]</span>
+
+<span class="sd">.. data:: T5   =-40.</span>
+
+<span class="sd">    Skyrme parameter :math:`t_5` [MeV fm :sup:`(5+3*GAMMA)`]</span>
+
+<span class="sd">.. data:: X0   =0.676655</span>
+
+<span class="sd">    Skyrme parameter :math:`x_0` [1]</span>
+
+<span class="sd">.. data:: X1   =2.658109</span>
+
+<span class="sd">    Skyrme parameter :math:`x_1` [1]</span>
+
+<span class="sd">.. data:: T2X2 =-422.29</span>
+
+<span class="sd">    Skyrme parameter :math:`x_2t_2` [1][MeV fm :sup:`5`]</span>
+
+<span class="sd">.. data:: X3   =0.83982</span>
+
+<span class="sd">    Skyrme parameter :math:`x_3` [1]</span>
+
+<span class="sd">.. data:: X4   =5.</span>
+
+<span class="sd">    Skyrme parameter :math:`x_4` [1]</span>
+
+<span class="sd">.. data:: X5   =-12.</span>
+
+<span class="sd">    Skyrme parameter :math:`x_5` [1]</span>
+
+<span class="sd">.. data:: ALPHA =(1./5.)</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: BETA  =(1./12.)</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: GAMMA =(1./4.)</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">Note:</span>
+<span class="sd">    these are not important at the moment</span>
+
+<span class="sd">.. data:: YW   =2.</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: FNP  =1.00</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: FNM  =1.06</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: FPP  =1.00</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: FPM  =1.04</span>
+
+<span class="sd">    [1]</span>
+
+<span class="sd">.. data:: KAPPAN =-36630.4</span>
+
+<span class="sd">    [MeV fm :sup:`8`]</span>
+
+<span class="sd">.. data:: KAPPAP =-45207.2</span>
+
+<span class="sd">    [MeV fm :sup:`8`]</span>
+
+<span class="sd">List of functions</span>
+<span class="sd">-----------------</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">HBARC</span><span class="p">,</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">NUMZERO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">MN</span><span class="p">,</span> <span class="n">MP</span><span class="p">,</span> <span class="n">HBAR2M_n</span><span class="p">,</span> <span class="n">HBAR2M_p</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.definitions</span><span class="w"> </span><span class="kn">import</span> <span class="n">rho2kf</span><span class="p">,</span> <span class="n">rhoEta</span><span class="p">,</span> <span class="n">mu_q</span>
+
+<span class="n">T0</span>   <span class="o">=-</span><span class="mf">2302.01</span>     <span class="c1"># Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]</span>
+<span class="n">T1</span>   <span class="o">=</span><span class="mf">762.99</span>       <span class="c1"># Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]</span>
+<span class="n">T2</span>   <span class="o">=</span><span class="mf">0.0</span>          <span class="c1"># skyrme parameter t2 [MeV*fm&lt;sup&gt;5&lt;/sup&gt;]</span>
+<span class="n">T3</span>   <span class="o">=</span><span class="mf">13797.83</span>     <span class="c1"># skyrme parameter t3 [MeV*fm^(3+3*ALPHA)]</span>
+<span class="n">T4</span>   <span class="o">=-</span><span class="mf">500.</span>        <span class="c1"># skyrme parameter t4 [MeV*fm^(5+3*BETA)]</span>
+<span class="n">T5</span>   <span class="o">=-</span><span class="mf">40.</span>         <span class="c1"># skyrme parameter t5 [MeV*fm^(5+3*GAMMA)]</span>
+<span class="n">X0</span>   <span class="o">=</span><span class="mf">0.676655</span>     <span class="c1"># skyrme parameter x0 [1]</span>
+<span class="n">X1</span>   <span class="o">=</span><span class="mf">2.658109</span>     <span class="c1"># skyrme parameter x1 [1]</span>
+<span class="n">T2X2</span> <span class="o">=-</span><span class="mf">422.29</span>      <span class="c1"># skyrme parameter x2t2 [1][MeV*fm&lt;sup&gt;5&lt;/sup&gt;]</span>
+<span class="n">X3</span>   <span class="o">=</span><span class="mf">0.83982</span>      <span class="c1"># skyrme parameter x3 [1]</span>
+<span class="n">X4</span>   <span class="o">=</span><span class="mf">5.</span>           <span class="c1"># skyrme parameter x4 [1]</span>
+<span class="n">X5</span>   <span class="o">=-</span><span class="mf">12.</span>         <span class="c1"># skyrme parameter x5 [1]</span>
+<span class="n">ALPHA</span> <span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">5.</span><span class="p">)</span>     <span class="c1"># [1]</span>
+<span class="n">BETA</span>  <span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">12.</span><span class="p">)</span>    <span class="c1"># [1]</span>
+<span class="n">GAMMA</span> <span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="p">)</span>     <span class="c1"># [1]</span>
+<span class="c1"># NOTE: these are not important at the moment</span>
+<span class="n">YW</span>   <span class="o">=</span><span class="mf">2.</span>           <span class="c1"># [1]</span>
+<span class="n">FNP</span>  <span class="o">=</span><span class="mf">1.00</span>         <span class="c1"># [1]</span>
+<span class="n">FNM</span>  <span class="o">=</span><span class="mf">1.06</span>         <span class="c1"># [1]</span>
+<span class="n">FPP</span>  <span class="o">=</span><span class="mf">1.00</span>         <span class="c1"># [1]</span>
+<span class="n">FPM</span>  <span class="o">=</span><span class="mf">1.04</span>         <span class="c1"># [1]</span>
+<span class="n">KAPPAN</span> <span class="o">=-</span><span class="mf">36630.4</span>   <span class="c1"># [MeV*fm&lt;sup&gt;8&lt;/sup&gt;]</span>
+<span class="n">KAPPAP</span> <span class="o">=-</span><span class="mf">45207.2</span>   <span class="c1"># [MeV*fm&lt;sup&gt;8&lt;/sup&gt;]</span>
+
+<span class="c1"># ================================</span>
+<span class="c1">#       Pairing fields</span>
+<span class="c1"># ================================</span>
+<div class="viewcode-block" id="neutron_pairing_field">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.neutron_pairing_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+    <span class="c1">#    Formula (5.12) from NeST.pdf</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the pairing field for uniform pure neutron nuclear matter. For kF larger</span>
+<span class="sd">    than 1.38 fm :sup:`-1` it returns (numerical) zero.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">	   \Delta_{\mathrm{NeuM}}(k_F) = \frac{3.37968 k_F^2}{k_F^2+0.556092^2} \frac{(k_F-1.38236)^2}{(k_F-1.38236)^2+0.327517^2},</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for neutron matter :math:`\Delta_{\mathrm{NeuM}}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field`</span>
+<span class="sd">        :func:`.proton_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">kF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho_n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">3.37968</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">kF</span><span class="o">-</span><span class="mf">1.38236</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(((</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">0.556092</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span>
+                                              <span class="p">((</span><span class="n">kF</span><span class="o">-</span><span class="mf">1.38236</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="mf">0.327517</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">delta</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">if</span> <span class="n">kF</span> <span class="o">&gt;</span> <span class="mf">1.38</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">NUMZERO</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+    <span class="n">delta</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">kF</span><span class="o">&gt;</span><span class="mf">1.38</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">NUMZERO</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">delta</span></div>
+
+
+<div class="viewcode-block" id="symmetric_pairing_field">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.symmetric_pairing_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+    <span class="c1">#   Formula (5.11) from NeST.pdf</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the pairing field for uniform symmetric matter. For kF larger than</span>
+<span class="sd">    1.31 fm :sup:`-1` it returns (numerical) zero.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">	   \Delta_{\mathrm{SM}}(k_F) =  \frac{11.5586 k_F^2}{k_F^2 + 0.489932^2}\frac{(k_F - 1.3142)^2}{(k_F - 1.3142)^2 + 0.906146^2}.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for symmetric matter :math:`\Delta_{\mathrm{SM}}` [MeV]</span>
+
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field`</span>
+<span class="sd">        :func:`.proton_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="c1">#   The parametrization is a function of the PER-SPECIES Fermi momentum: in</span>
+    <span class="c1">#   symmetric matter rho_n = rho_p = rho/2, hence the 0.5 factor (same</span>
+    <span class="c1">#   convention as formula (A14) used in energy_per_nucleon). </span>
+    <span class="c1">#    https://doi.org/10.1103/PhysRevC.80.065804</span>
+    <span class="c1">#    Chamel, N., Goriely, S., &amp; Pearson, J. M. (2009). PRC 80, 065804 (2009).</span>
+    <span class="n">kF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho2kf</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">rho_n</span><span class="o">+</span><span class="n">rho_p</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">11.5586</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">kF</span><span class="o">-</span><span class="mf">1.3142</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(((</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">0.489932</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span>
+                                             <span class="p">(((</span><span class="n">kF</span><span class="o">-</span><span class="mf">1.3142</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">0.906146</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="n">delta</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">if</span> <span class="n">kF</span> <span class="o">&gt;</span> <span class="mf">1.31</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">NUMZERO</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+    <span class="n">delta</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">kF</span><span class="o">&gt;</span><span class="mf">1.31</span><span class="p">)]</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+    <span class="k">return</span> <span class="n">delta</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Floors an interpolated pairing field at (numerical) zero.</span>
+
+<span class="sd">    The SM/NeuM interpolations carry a minus sign in one of the two terms, so</span>
+<span class="sd">    for sufficiently asymmetric matter the result can dip below zero.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pairing (float or np.ndarray): raw interpolated pairing field [MeV]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float or np.ndarray: the same, with negative values replaced by NUMZERO</span>
+<span class="sd">    """</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pairing</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span> <span class="n">NUMZERO</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pairing</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pairing</span>
+
+<div class="viewcode-block" id="neutron_ref_pairing_field">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.neutron_ref_pairing_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">neutron_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+    <span class="c1">#   Formula (5.10) from NeST.pdf</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for neutrons in uniform matter.</span>
+<span class="sd">    This is an extrapolation between :math:`\Delta_{\mathrm{SM}}` and</span>
+<span class="sd">    :math:`\Delta_{\mathrm{NeuM}}`. In limits :math:`\eta \rightarrow 0` reproduces</span>
+<span class="sd">    symmetric matter and :math:`\eta \rightarrow 1`, the neutron matter.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_n(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{SM}}(\rho_n+\rho_p)</span>
+<span class="sd">        \left( 1 - |\eta| \right)</span>
+<span class="sd">        + \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_n}{\rho_n+\rho_p}</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for neutrons :math:`\Delta_n` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.proton_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eta</span><span class="o">/</span><span class="n">rho</span><span class="p">))</span>
+        <span class="o">+</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span><span class="o">*</span><span class="n">rho_n</span><span class="o">/</span><span class="n">rho</span><span class="o">*</span><span class="n">eta</span><span class="o">/</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="proton_ref_pairing_field">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.proton_ref_pairing_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">proton_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+    <span class="c1">#   Formula (5.10) from NeST.pdf</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for protons in uniform matter.</span>
+<span class="sd">    This is an extrapolation between :math:`\Delta_{\mathrm{SM}}` and</span>
+<span class="sd">    :math:`\Delta_{\mathrm{NeuM}}`. In limits :math:`\eta \rightarrow 0` reproduces</span>
+<span class="sd">    symmetric matter and :math:`\eta \rightarrow 1`, the neutron matter.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_p(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{SM}}(\rho_n+\rho_p)</span>
+<span class="sd">        \left( 1 - |\eta| \right)</span>
+<span class="sd">        - \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_p}{\rho_n+\rho_p}</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for protons :math:`\Delta_p` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">eta</span><span class="o">/</span><span class="n">rho</span><span class="p">))</span>
+        <span class="o">-</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span><span class="o">*</span><span class="n">rho_p</span><span class="o">/</span><span class="n">rho</span><span class="o">*</span><span class="n">eta</span><span class="o">/</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#   Alternative interpolation schemes (delta_n, delta_p from delta_sm, delta_neu)</span>
+<span class="c1"># ================================</span>
+<span class="c1"># TODO(Adarsh): neutron_ref_pairing_field() / proton_ref_pairing_field() above</span>
+<span class="c1"># implement one interpolation scheme (Formula 5.10 from NeST.pdf) for getting</span>
+<span class="c1"># delta_n and delta_p from delta_sm (symmetric_pairing_field) and delta_neu</span>
+<span class="c1"># (neutron_pairing_field). Add two more schemes here, following:</span>
+<span class="c1"># https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<div class="viewcode-block" id="neutron_ref_pairing_field_eq2">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.neutron_ref_pairing_field_eq2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">neutron_ref_pairing_field_eq2</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for neutrons in uniform matter</span>
+<span class="sd">    using the interpolation scheme from Eq. (2) of</span>
+<span class="sd">    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<span class="sd">    This interpolates between symmetric matter and neutron matter,</span>
+<span class="sd">    with asymmetry dependence governed by :math:`\delta`.</span>
+<span class="sd">    </span>
+<span class="sd">    Used in all Bsk parameterizations since Bsk17. Currently in use in WBSK.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_n(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{SM}}(\rho)</span>
+<span class="sd">        \left(1 - |\delta|\right)</span>
+<span class="sd">        + \delta \frac{\rho_n}{\rho}</span>
+<span class="sd">        \Delta_{\mathrm{NeuM}}(\rho_n)</span>
+
+<span class="sd">    where :math:`\rho = \rho_n + \rho_p` and</span>
+<span class="sd">    :math:`\delta = (\rho_n - \rho_p)/\rho`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for neutrons :math:`\Delta_n` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.proton_ref_pairing_field_eq2`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">    """</span>
+    
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="o">*</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span><span class="n">rho_p</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="n">delta</span><span class="o">*</span> <span class="p">(</span><span class="n">rho_n</span><span class="o">/</span><span class="n">rho</span><span class="p">)</span> <span class="o">*</span> <span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="proton_ref_pairing_field_eq2">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.proton_ref_pairing_field_eq2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">proton_ref_pairing_field_eq2</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for protons in uniform matter</span>
+<span class="sd">    using the interpolation scheme from Eq. (2) of</span>
+<span class="sd">    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<span class="sd">    This interpolates between symmetric matter and neutron matter,</span>
+<span class="sd">    with asymmetry dependence governed by :math:`\delta`.</span>
+<span class="sd">    </span>
+<span class="sd">    Used in all Bsk parameterizations since Bsk17. Currently in use in WBSK.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_p(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{SM}}(\rho)</span>
+<span class="sd">        \left(1 - |\delta|\right)</span>
+<span class="sd">        - \delta \frac{\rho_p}{\rho}</span>
+<span class="sd">        \Delta_{\mathrm{NeuM}}(\rho_p)</span>
+
+<span class="sd">    where :math:`\rho = \rho_n + \rho_p` and</span>
+<span class="sd">    :math:`\delta = (\rho_n - \rho_p)/\rho`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for protons :math:`\Delta_p` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field_eq2`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="o">*</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span><span class="n">rho_p</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="n">delta</span><span class="o">*</span> <span class="p">(</span><span class="n">rho_p</span><span class="o">/</span><span class="n">rho</span><span class="p">)</span> <span class="o">*</span> <span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_p</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="neutron_ref_pairing_field_eq3">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.neutron_ref_pairing_field_eq3">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">neutron_ref_pairing_field_eq3</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for neutrons in uniform matter</span>
+<span class="sd">    using the interpolation scheme from Eq. (3) of</span>
+<span class="sd">    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<span class="sd">    This interpolates between symmetric matter and neutron matter,</span>
+<span class="sd">    with asymmetry dependence governed by :math:`\delta`.</span>
+<span class="sd">    </span>
+<span class="sd">    Used in BskG3. </span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_n(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{SM}}(\rho)</span>
+<span class="sd">        \left(1 - |\delta|\right)</span>
+<span class="sd">        + |\delta| \,</span>
+<span class="sd">        \Delta_{\mathrm{NeuM}}(\rho_n)</span>
+
+<span class="sd">    where :math:`\delta = (\rho_n - \rho_p)/\rho`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for neutrons :math:`\Delta_n` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.proton_ref_pairing_field_eq3`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="o">*</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span><span class="n">rho_p</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="proton_ref_pairing_field_eq3">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.proton_ref_pairing_field_eq3">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">proton_ref_pairing_field_eq3</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for protons in uniform matter</span>
+<span class="sd">    using the interpolation scheme from Eq. (3) of</span>
+<span class="sd">    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<span class="sd">    This interpolates between symmetric matter and neutron matter,</span>
+<span class="sd">    with asymmetry dependence governed by :math:`\delta`.</span>
+<span class="sd">    </span>
+<span class="sd">    Used in BskG3.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_p(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{SM}}(\rho)</span>
+<span class="sd">        \left(1 - |\delta|\right)</span>
+<span class="sd">        + |\delta| \,</span>
+<span class="sd">        \Delta_{\mathrm{NeuM}}(\rho_p)</span>
+
+<span class="sd">    where :math:`\delta = (\rho_n - \rho_p)/\rho`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for protons :math:`\Delta_p` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field_eq3`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="o">*</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span><span class="n">rho_p</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">*</span> <span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="neutron_ref_pairing_field_eq6">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.neutron_ref_pairing_field_eq6">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">neutron_ref_pairing_field_eq6</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for neutrons in uniform matter</span>
+<span class="sd">    using the interpolation scheme from Eq. (6) of</span>
+<span class="sd">    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<span class="sd">    This interpolates between symmetric matter and neutron matter,</span>
+<span class="sd">    with asymmetry dependence governed by :math:`\delta`.</span>
+<span class="sd">    </span>
+<span class="sd">    Used in BskG4.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_n(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{NeuM}}(\rho_n)</span>
+<span class="sd">        \left[</span>
+<span class="sd">        \frac{\Delta_{\mathrm{SM}}(\rho)}</span>
+<span class="sd">             {\Delta_{\mathrm{NeuM}}(\rho/2)}</span>
+<span class="sd">        \right]^{(1 - \delta)}</span>
+
+<span class="sd">    where :math:`\delta = (\rho_n - \rho_p)/\rho`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for neutrons :math:`\Delta_n` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.proton_ref_pairing_field_eq6`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span><span class="o">*</span> <span class="p">((</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span><span class="n">rho_p</span><span class="p">)</span><span class="o">/</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">delta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="proton_ref_pairing_field_eq6">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.proton_ref_pairing_field_eq6">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">proton_ref_pairing_field_eq6</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns the reference pairing field for protons in uniform matter</span>
+<span class="sd">    using the interpolation scheme from Eq. (6) of</span>
+<span class="sd">    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x</span>
+
+<span class="sd">    This interpolates between symmetric matter and neutron matter,</span>
+<span class="sd">    with asymmetry dependence governed by :math:`\delta`.</span>
+<span class="sd">    </span>
+<span class="sd">    Used in BskG4.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Delta_p(\rho_n,\rho_p) =</span>
+<span class="sd">        \Delta_{\mathrm{NeuM}}(\rho_p)</span>
+<span class="sd">        \left[</span>
+<span class="sd">        \frac{\Delta_{\mathrm{SM}}(\rho)}</span>
+<span class="sd">             {\Delta_{\mathrm{NeuM}}(\rho/2)}</span>
+<span class="sd">        \right]^{(1 + \delta)}</span>
+
+<span class="sd">    where :math:`\delta = (\rho_n - \rho_p)/\rho`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field for protons :math:`\Delta_p` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field_eq6`</span>
+<span class="sd">        :func:`.symmetric_pairing_field`</span>
+<span class="sd">        :func:`.neutron_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">rho</span><span class="p">,</span> <span class="n">eta</span> <span class="o">=</span> <span class="n">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="c1">#eta = rho_n - rho_p</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span> <span class="o">+</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">eta</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">pairing</span> <span class="o">=</span> <span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span><span class="o">*</span> <span class="p">((</span><span class="n">symmetric_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span><span class="n">rho_p</span><span class="p">)</span><span class="o">/</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">delta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">_clamp_nonnegative</span><span class="p">(</span><span class="n">pairing</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#        Thermodynamics</span>
+<span class="c1"># ================================</span>
+<span class="c1"># Formulas from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804:</span>
+<span class="c1"># Code formulas: A13, and dependent (A14, A15)</span>
+<div class="viewcode-block" id="energy_per_nucleon">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.energy_per_nucleon">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the energy per nucleon on infinite nuclear matter of given</span>
+<span class="sd">    density of protons and neutrons, rho_p and rho_n, respectively, in MeV.</span>
+<span class="sd">    Formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</span>
+<span class="sd">    :cite:p:`chamel2009further`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy per nucleon :math:`e_n` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span><span class="o">+</span><span class="n">rho_p</span><span class="o">+</span><span class="n">DENSEPSILON</span>
+    <span class="n">kF</span> <span class="o">=</span> <span class="n">rho2kf</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span> <span class="c1"># Formula (A14) from the paper is using rho/2</span>
+    <span class="n">eta</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_n</span><span class="o">-</span><span class="n">rho_p</span><span class="p">)</span><span class="o">/</span><span class="n">rho</span>
+    <span class="n">F_x_5</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">eta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">eta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">))</span> <span class="c1"># Formula (A15)</span>
+    <span class="n">F_x_8</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">eta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">8.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">eta</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">8.</span><span class="o">/</span><span class="mf">3.</span><span class="p">))</span> <span class="c1"># Formula (A15)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">20</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">eta</span><span class="p">),</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="n">MN</span>
+                                                <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">eta</span><span class="p">),</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="n">MP</span><span class="p">))</span>
+            <span class="o">+</span> <span class="n">T0</span><span class="o">/</span><span class="mf">8.</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">X0</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">eta</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="o">+</span> <span class="mf">3.</span><span class="o">*</span><span class="n">T1</span><span class="o">/</span><span class="mi">40</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mi">2</span><span class="o">+</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_5</span> <span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_8</span><span class="p">)</span>
+            <span class="o">+</span> <span class="mf">3.</span><span class="o">/</span><span class="mi">40</span><span class="o">*</span><span class="p">((</span><span class="mf">2.</span><span class="o">*</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_5</span> <span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_8</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">T3</span><span class="o">/</span><span class="mi">48</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,(</span><span class="n">ALPHA</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">X3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">eta</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+            <span class="o">+</span> <span class="mf">3.</span><span class="o">*</span><span class="n">T4</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">BETA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mi">2</span><span class="o">+</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_5</span><span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_8</span><span class="p">)</span>
+            <span class="o">+</span> <span class="mf">3.</span><span class="o">*</span><span class="n">T5</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="p">(</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">GAMMA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mi">2</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_5</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">F_x_8</span><span class="p">))</span></div>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">testMe</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho</span><span class="o">+</span><span class="n">DENSEPSILON</span>
+    <span class="n">kF</span> <span class="o">=</span> <span class="n">rho2kf</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span> <span class="c1"># Formula (A14) from the paper is using rho/2</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">HBAR2M_n</span><span class="o">/</span><span class="mi">5</span><span class="o">*</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">r</span> <span class="o">=</span><span class="n">r</span><span class="o">+</span> <span class="mf">3.</span><span class="o">/</span><span class="mi">8</span><span class="o">*</span><span class="n">T0</span><span class="o">*</span><span class="n">rho</span>
+    <span class="n">r</span> <span class="o">=</span><span class="n">r</span><span class="o">+</span> <span class="mf">3.</span><span class="o">/</span><span class="mi">80</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">T1</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">T2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">T2X2</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">kF</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">r</span> <span class="o">=</span><span class="n">r</span><span class="o">+</span> <span class="mf">1.</span><span class="o">/</span><span class="mi">16</span><span class="o">*</span><span class="n">T3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">ALPHA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span><span class="n">r</span><span class="o">+</span> <span class="mf">9.</span><span class="o">/</span><span class="mi">80</span><span class="o">*</span><span class="n">T4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">BETA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">r</span> <span class="o">=</span><span class="n">r</span><span class="o">+</span> <span class="mf">3.</span><span class="o">/</span><span class="mi">80</span><span class="o">*</span><span class="n">T5</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">GAMMA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">kF</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">r</span>
+
+<div class="viewcode-block" id="numerical_derivative_energy_per_nucleon_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.numerical_derivative_energy_per_nucleon_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    First derivative of energy per nucleon, calculated numerically using</span>
+<span class="sd">    :func:`numpy.gradient`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        float: derivative of energy per neutron, :math:`\\frac{\\delta e_n}{\\delta \\rho}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+
+<span class="sd">    """</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">rho_n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="numerical_second_derivative_energy_per_nucleon_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.numerical_second_derivative_energy_per_nucleon_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_second_derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Second derivative of energy per nucleon, calculated numerically using</span>
+<span class="sd">    :func:`numpy.gradient`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        float: second derivative of energy per neutron, :math:`\\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+
+<span class="sd">    """</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">numerical_derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">rho_n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="numerical_derivative_epsilon_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.numerical_derivative_epsilon_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_derivative_epsilon_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Derivative of energy density :math:`\\epsilon` with respect to density, calculated numerically using</span>
+<span class="sd">    :func:`numpy.gradient` for neutron matter and using the :func:`.energy_per_nucleon` function, setting proton</span>
+<span class="sd">    density :math:`\\rho_p` to 0.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Derivative of :math:`\\epsilon`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+<span class="sd">    """</span>
+    <span class="n">epsilon_neum</span> <span class="o">=</span> <span class="n">rho_n</span><span class="o">*</span><span class="p">(</span><span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span><span class="o">+</span><span class="n">MN</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">epsilon_neum</span><span class="p">,</span> <span class="n">rho_n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="numerical_pressure_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.numerical_pressure_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_pressure_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pressure :math:`P` in neutron matter, calculated using the :func:`numpy.gradient`</span>
+<span class="sd">    function to calculate the derivative of data calculated by :func:`.energy_per_nucleon`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Pressure :math:`P`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+<span class="sd">    """</span>
+    <span class="n">derivative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mf">0.</span><span class="p">),</span> <span class="n">rho_n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rho_n</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">derivative</span></div>
+
+
+<div class="viewcode-block" id="numerical_derivative_pressure_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.numerical_derivative_pressure_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_derivative_pressure_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Derivative of pressure :math:`P` with respect to density for neutron matter,</span>
+<span class="sd">    calculated numerically using :func:`numpy.gradient`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Derivative of :math:`P`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.numerical_pressure_n`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">pressure_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">),</span> <span class="n">rho_n</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="numerical_speed_of_sound_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.numerical_speed_of_sound_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">numerical_speed_of_sound_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Velocity of sound in neutron matter dependent on total matter density equal</span>
+<span class="sd">    to neutron density :math:`\\rho_n`, given as a percentage of speed of light.</span>
+<span class="sd">    Calculated based on numerical data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: velocity of sound :math:`v_s`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.numerical_derivative_pressure_n`</span>
+<span class="sd">        :func:`.numerical_derivative_epsilon_n`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">numerical_derivative_pressure_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span><span class="o">/</span><span class="n">numerical_derivative_epsilon_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span></div>
+
+
+<span class="c1">#ALGEBRAIC ATTEMPT</span>
+<div class="viewcode-block" id="energy_per_nucleon_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.energy_per_nucleon_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Energy per nucleon on infinite neutron matter of density :math:`\\rho_n`.</span>
+<span class="sd">    Derived from formula (A13) from https://journals.aps.org/prc/pdf/10.1103/PhysRevC.80.065804</span>
+<span class="sd">    :cite:p:`chamel2009further`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy per neutron :math:`e_n` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">3.</span><span class="o">/</span><span class="mf">5.</span><span class="o">*</span><span class="n">HBAR2M_n</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="n">T0</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X0</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span>
+            <span class="o">+</span><span class="mf">3.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">9.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="p">(</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">24.</span><span class="o">*</span><span class="n">T3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X3</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">ALPHA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">3.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T4</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">BETA</span><span class="o">+</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">9.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">GAMMA</span><span class="o">+</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="derivative_energy_per_nucleon_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.derivative_energy_per_nucleon_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    First derivative of energy per nucleon (for neutrons only).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: derivative of energy per neutron, :math:`\\frac{\\delta e_n}{\\delta \\rho}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon_n`</span>
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">5.</span><span class="o">*</span><span class="n">HBAR2M_n</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="n">T0</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X0</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">8.</span><span class="o">*</span><span class="n">T1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">3.</span><span class="o">/</span><span class="mf">8.</span><span class="o">*</span><span class="p">(</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">24.</span><span class="o">*</span><span class="n">T3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">ALPHA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">ALPHA</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">3.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T4</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="n">BETA</span><span class="o">+</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">BETA</span><span class="o">+</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">9.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="n">GAMMA</span><span class="o">+</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">GAMMA</span><span class="o">+</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="second_derivative_energy_per_nucleon_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.second_derivative_energy_per_nucleon_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">second_derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Second derivative of energy per nucleon (for neutrons only).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: second derivative of energy per neutron, :math:`\\frac{\\delta^2 e_n}{\\delta \\rho^2}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon_n`</span>
+<span class="sd">        :func:`.derivative_energy_per_nucleon_n`</span>
+<span class="sd">    """</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="o">/</span><span class="mf">15.</span><span class="o">*</span><span class="n">HBAR2M_n</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">4.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">12.</span><span class="o">*</span><span class="n">T1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">(</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">24.</span><span class="o">*</span><span class="n">T3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">ALPHA</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ALPHA</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">ALPHA</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">3.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T4</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="n">BETA</span><span class="o">+</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">BETA</span><span class="o">+</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">BETA</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">9.</span><span class="o">/</span><span class="mf">40.</span><span class="o">*</span><span class="n">T5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="n">GAMMA</span><span class="o">+</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">GAMMA</span><span class="o">+</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="n">GAMMA</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pressure_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.pressure_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pressure_n</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Pressure :math:`P` in neutron matter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Pressure :math:`P`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.derivative_energy_per_nucleon_n`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pressure_derivative_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.pressure_derivative_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pressure_derivative_n</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the derivative of pressure :math:`\\frac{\\delta P}{\\delta \\rho}` in neutron matter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: derivative of pressure :math:`\\frac{\\delta P}{\\delta \\rho}`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.derivative_energy_per_nucleon_n`</span>
+<span class="sd">        :func:`.second_derivative_energy_per_nucleon_n`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="n">derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span> <span class="o">+</span> <span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">second_derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="epsilon_derivative_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.epsilon_derivative_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_derivative_n</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the derivative of energy density :math:`\\frac{\\delta \\epsilon}{\\delta \\rho}` in neutron matter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: derivative of energy density :math:`\\frac{\\delta \\epsilon}{\\delta \\rho}`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.derivative_energy_per_nucleon_n`</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">MN</span> <span class="o">+</span> <span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span> <span class="o">+</span> <span class="n">rho</span><span class="o">*</span><span class="n">derivative_energy_per_nucleon_n</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="speed_of_sound_n">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.speed_of_sound_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">speed_of_sound_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Velocity of sound in neutron matter, dependent on total matter density equal</span>
+<span class="sd">    to neutron density :math:`\\rho_n`, given as a percentage of speed of light.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: velocity of sound :math:`v_s`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.pressure_derivative_n`</span>
+<span class="sd">        :func:`.epsilon_derivative_n`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pressure_derivative_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span><span class="o">/</span><span class="n">epsilon_derivative_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#       Effective masses</span>
+<span class="c1"># ================================</span>
+<span class="c1"># Implementation based on:</span>
+<span class="c1"># https://journals.aps.org/prc/pdf/10.1103/PhysRevC.82.035804</span>
+<span class="c1"># Equation 10, plotted as function of rho (see Fig 5, inset)</span>
+<span class="c1"># </span>
+<span class="c1"># NOTE: Functions calculate effective masses for both species (q=n or p)</span>
+<span class="c1"># where total density rho = rho_n + rho_p</span>
+<span class="c1">#</span>
+<span class="c1"># Common use cases:</span>
+<span class="c1"># - Neutron matter (NeuM): rho = rho_n, rho_p = 0</span>
+<span class="c1"># - Symmetric matter (SM): rho = 2*rho_n, rho_p = rho_n</span>
+<span class="c1">#</span>
+<span class="c1"># TODO: Add plotting functions to visualize M* vs rho for different asymmetries</span>
+
+<div class="viewcode-block" id="isoscalarM">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.isoscalarM">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">isoscalarM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates effective isoscalar mass M_s for a given uniform system</span>
+<span class="sd">    with neutron and proton densities rho_n and rho_p respectively.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\frac{M^*_s}{M} = 2 \\left( \\frac{M}{M_n^*} + \\frac{M}{M_p^*} \\right)^{-1}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: effective isoscalar mass in units of the bare mass, :math:`M_{s}^{*}/M` [1]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.effMn`</span>
+<span class="sd">        :func:`.effMp`</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">/</span><span class="p">((</span><span class="mf">1.</span><span class="o">/</span><span class="n">effMn</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">))</span><span class="o">+</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">effMp</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)))</span></div>
+
+
+<div class="viewcode-block" id="isovectorM">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.isovectorM">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">isovectorM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates effective isovector mass :math:`M_v` for a given uniform system</span>
+<span class="sd">    with neutron and proton densities rho_n, rho_p respectively.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        M^{*}_v = M^{*}_s M_p^{*} \\frac{ 2 \\rho_p-\\rho}{2 M_p^*\\rho_p-\\rho}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: effective isovector mass in units of the bare mass, :math:`M_{v}^{*}/M` [1]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.effMn`</span>
+<span class="sd">        :func:`.effMp`</span>
+<span class="sd">        :func:`.isoscalarM`</span>
+<span class="sd">    """</span>
+    <span class="n">Mp</span> <span class="o">=</span> <span class="n">effMp</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+    <span class="k">return</span> <span class="n">isoscalarM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span><span class="o">*</span><span class="n">Mp</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rho_p</span><span class="o">-</span><span class="n">rho</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Mp</span><span class="o">*</span><span class="n">rho_p</span><span class="o">-</span><span class="n">rho</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="effMn">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.effMn">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">effMn</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the effective mass of a neutron in nuclear medium.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\frac{M_n^*}{M_n} = \\frac{\\hbar^2}{2 M_n} \\frac{1}{B_n(\\rho_n,\\rho_p)}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: neutron effective mass in units of the bare neutron mass, :math:`M_{n}^{*}/M_n` [1]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.B_q`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">HBAR2M_n</span><span class="o">/</span><span class="n">B_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span><span class="s1">'n'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="effMp">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.effMp">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">effMp</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the effective mass of a proton in nuclear medium.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\frac{M_p^*}{M_p} = \\frac{\\hbar^2}{2 M_p} \\frac{1}{B_p(\\rho_n,\\rho_p)}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: proton effective mass in units of the bare proton mass, :math:`M_{p}^{*}/M_p` [1]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.B_q`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">HBAR2M_p</span><span class="o">/</span><span class="n">B_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span><span class="s1">'p'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="U_q">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.U_q">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">U_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span><span class="n">q</span><span class="p">):</span>
+    <span class="c1">#     Formula (5.14) from NeST.pdf</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the mean field potential from density :math:`\\rho` variation.</span>
+
+<span class="sd">    rho_q is either rho_n or rho_p.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Mean field potential :math:`U_q` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'n'</span><span class="p">):</span>
+        <span class="n">rho_q</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+        <span class="n">rho_q_prime</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'p'</span><span class="p">):</span>
+        <span class="n">rho_q</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+        <span class="n">rho_q_prime</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Nucleon q must be either n or p'</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+    <span class="k">return</span> <span class="n">T0</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X0</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X0</span><span class="p">)</span><span class="o">*</span><span class="n">rho_q</span><span class="p">)</span><span class="o">+</span><span class="n">T3</span><span class="o">/</span><span class="mf">12.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,(</span><span class="n">ALPHA</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span>
+        <span class="p">((</span><span class="mf">0.5</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X3</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">ALPHA</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="n">rho_q</span><span class="o">*</span><span class="n">ALPHA</span><span class="o">*</span>
+                                                  <span class="p">(</span><span class="n">rho_q_prime</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="B_q">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.B_q">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">B_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="c1">#    Formula (5.13) from NeST.pdf</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the mean field potential B_q (coming from variation over kinetic</span>
+<span class="sd">    density, or effective mass).</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	B_q  = \\frac{\\hbar^2}{2 M^*_q}</span>
+<span class="sd">    	 = \\frac{\\hbar^2}{2 M_q}  + C^\\tau_0\\rho  + C^\\tau_1 (\\rho_{q} - \\rho_{q'})</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: :math:`B_q = \\hbar^2/(2 M^*_q)` [MeV fm :sup:`2`]</span>
+<span class="sd">    """</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'n'</span><span class="p">):</span>
+        <span class="n">rho_q</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+        <span class="n">HBAR2M_q</span> <span class="o">=</span> <span class="n">HBAR2M_n</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'p'</span><span class="p">):</span>
+        <span class="n">rho_q</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+        <span class="n">HBAR2M_q</span> <span class="o">=</span> <span class="n">HBAR2M_p</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Nucleon q must be either n or p'</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">HBAR2M_q</span>
+             <span class="o">+</span> <span class="n">T1</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="n">X1</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">2.</span><span class="o">+</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">rho_q</span><span class="p">)</span>
+             <span class="o">+</span> <span class="n">T4</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="n">X4</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">2.</span><span class="o">+</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">rho_q</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">BETA</span><span class="p">)</span>
+             <span class="o">+</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">((</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">+</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">2.</span><span class="o">*</span><span class="n">T2</span><span class="o">+</span><span class="n">T2X2</span><span class="p">)</span><span class="o">*</span><span class="n">rho_q</span><span class="p">)</span>
+             <span class="o">+</span> <span class="n">T5</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="n">X5</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">2.</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">rho_q</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">GAMMA</span><span class="p">)</span>
+             <span class="p">)</span></div>
+
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#        Energy functional</span>
+<span class="c1"># ================================</span>
+<span class="c1"># Implementation based on:</span>
+<span class="c1"># PHYSICAL REVIEW C 104, 055801 (2021)</span>
+<span class="c1"># Formulas: 9-14, 23, A8-A10</span>
+<span class="c1"># </span>
+<span class="c1"># NOTE: Current implementation uses uniform matter approximation.</span>
+<span class="c1"># Future extensions will include:</span>
+<span class="c1"># - Non-uniform densities (TAU, MU, J) from simulation data</span>
+<span class="c1"># - Gradient corrections</span>
+<span class="c1"># - Spin-orbit and tensor terms</span>
+<span class="c1">#</span>
+<span class="c1"># TODO: Extend to non-uniform matter with kinetic densities from data files</span>
+
+
+
+<div class="viewcode-block" id="C0_rho">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.C0_rho">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">C0_rho</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the energy functional :math:`C^{\\rho}_0` coefficient :cite:`bender2002gamow`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	 C^0_\\rho(\\rho) = \\frac{3}{8} t_0 + \\frac{3}{48} t_3 \\rho^\\alpha</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: :math:`C^{\\rho}_0` coefficient</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="mf">3.</span> <span class="o">/</span> <span class="mf">8.</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">+</span> <span class="mf">3.</span> <span class="o">/</span> <span class="mf">48.</span> <span class="o">*</span> <span class="n">T3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">ALPHA</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="C1_rho">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.C1_rho">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">C1_rho</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the energy functional :math:`C^{\\rho}_1` coefficient :cite:`bender2002gamow`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        C^1_\\rho(\\rho) = -\\frac{1}{4} t_0 \\left(\\frac{1}{2} + x_0\\right) - \\frac{1}{24} t_3 \\left(\\frac{1}{2} + x_3 \\right) \\rho^\\alpha</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: :math:`C^{\\rho}_1` coefficient</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">T0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">2.</span> <span class="o">+</span> <span class="n">X0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">24.</span> <span class="o">*</span> <span class="n">T3</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">2.</span> <span class="o">+</span> <span class="n">X3</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">ALPHA</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="C0_tau">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.C0_tau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">C0_tau</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the energy functional :math:`C^{\\tau}_0` coefficient :cite:`bender2002gamow`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	 C^0_\\tau(\\rho) =  \\frac{3}{16} t_1 + \\frac{1}{4} t_2 \\left(\\frac{5}{4} + x_2\\right) + \\frac{3}{16} t_4 \\rho^\\beta + \\frac{1}{4} t_5 \\left(\\frac{5}{4} + x_5 \\right) \\rho^\\gamma</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: :math:`C^{\\tau}_0` coefficient</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">3.</span> <span class="o">/</span> <span class="mf">16.</span><span class="p">)</span> <span class="o">*</span> <span class="n">T1</span> <span class="o">+</span> <span class="mf">5.</span> <span class="o">/</span> <span class="mf">16.</span> <span class="o">*</span> <span class="n">T2</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">T2X2</span> <span class="o">+</span> <span class="mf">3.</span> <span class="o">/</span> <span class="mf">16.</span> <span class="o">*</span> <span class="n">T4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">BETA</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">4.</span> <span class="o">*</span> <span class="n">T5</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.25</span> <span class="o">+</span> <span class="n">X5</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">GAMMA</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="C1_tau">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.C1_tau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">C1_tau</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the energy functional :math:`C^{\\tau}_1` coefficient :cite:`bender2002gamow`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	 C^1_\\tau(\\rho) = -\\frac{1}{8} t_1 \\left( \\frac{1}{2} + x_1 \\right) + \\frac{1}{8} t_2 \\left(\\frac{1}{2} + x_2\\right) - \\frac{1}{8} t_4 \\rho^\\beta \\left( \\frac{1}{2} + x_4 \\right)  + \\frac{1}{8} t_5 \\left(\\frac{1}{2} + x_5 \\right) \\rho^\\gamma</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: :math:`C^{\\tau}_1` coefficient</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+    <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">8.</span><span class="p">)</span> <span class="o">*</span> <span class="n">T1</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">2.</span> <span class="o">+</span> <span class="n">X1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">16.</span> <span class="o">*</span> <span class="n">T2</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">8.</span> <span class="o">*</span> <span class="n">T2X2</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">8.</span> <span class="o">*</span> <span class="n">T4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">BETA</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">2.</span> <span class="o">+</span> <span class="n">X4</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">8.</span> <span class="o">*</span> <span class="n">T5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">GAMMA</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="mf">2.</span> <span class="o">+</span> <span class="n">X5</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="epsilon_rho_np">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.epsilon_rho_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Energy functional :math:`\\epsilon_{\\rho}` for particle matter, related to</span>
+<span class="sd">    the interaction of the nucleons with the background matter density.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	\\varepsilon_\\rho(\\rho_n,\\rho_p)</span>
+<span class="sd">    	= C^\\rho_0(\\rho_n+\\rho_p) \\left( \\rho_n + \\rho_p \\right)^2</span>
+<span class="sd">    	 + C^\\rho_1(\\rho_n+\\rho_p) \\left( \\rho_n - \\rho_p \\right)^2</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy functional :math:`\\epsilon_{\\rho}`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+    <span class="k">return</span> <span class="n">C0_rho</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">C1_rho</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho_n</span> <span class="o">-</span> <span class="n">rho_p</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="epsilon_tau_np">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.epsilon_tau_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_tau_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Energy functional :math:`\\epsilon_{\\tau}` for particle matter,</span>
+<span class="sd">    related to the density-dependent effective mass. It gives rise to current couplings.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	\\varepsilon_\\tau(\\rho_n,\\tau_n,{ j}_n,\\rho_p,\\tau_p,{ j}_p)</span>
+
+<span class="sd">        = C^\\tau_0(\\rho_n+\\rho_p) \\left[ (\\rho_n + \\rho_p)(\\tau_n + \\tau_p) - ({ j}_n + { j}_p)^2 \\right]</span>
+
+<span class="sd">        + C^\\tau_1(\\rho_n+\\rho_p) \\left[ (\\rho_n - \\rho_p)(\\tau_n - \\tau_p) - ({ j}_n - { j}_p)^2 \\right].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy functional :math:`\\epsilon_{\\tau}`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">tau_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tau_n</span><span class="p">)</span>
+    <span class="n">tau_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tau_p</span><span class="p">)</span>
+    <span class="n">jsum2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jsum2</span><span class="p">)</span>
+    <span class="n">jdiff2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jdiff2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">C0_tau</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">tau_n</span> <span class="o">+</span> <span class="n">tau_p</span><span class="p">)</span> <span class="o">-</span> <span class="n">jsum2</span><span class="p">)</span> <span class="o">+</span> <span class="n">C1_tau</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">rho_n</span> <span class="o">-</span> <span class="n">rho_p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">tau_n</span> <span class="o">-</span> <span class="n">tau_p</span><span class="p">)</span> <span class="o">-</span> <span class="n">jdiff2</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="epsilon_delta_rho_np">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.epsilon_delta_rho_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_delta_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n_square</span><span class="p">,</span> <span class="n">rho_grad_p_square</span><span class="p">,</span> <span class="n">rho_grad_square</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Energy functional :math:`\\epsilon_{\\Delta \\rho}` for particle matter,</span>
+<span class="sd">    related to the interaction of the nucleons with the background fluctuations.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">       \\begin{equation*}</span>
+<span class="sd">       \\begin{split}</span>
+<span class="sd">    	\\varepsilon_{\\Delta\\rho}&amp;(\\rho_n,\\vec\\nabla\\rho_n,\\rho_p,\\vec\\nabla\\rho_p)	=</span>
+<span class="sd">    	 +\\frac{3}{16} t_1 \\left[</span>
+<span class="sd">    	  \\left(          1 + \\frac{1}{2}x_1\\right)         \\left( \\nabla(\\rho_n+\\rho_p)   \\right)^2</span>
+<span class="sd">    	 -\\left(\\frac{1}{2} +           x_1 \\right)  \\sum_q \\left( \\nabla\\rho_q \\right)^2</span>
+<span class="sd">    	 \\right] \\\\</span>
+<span class="sd">    	  &amp;- \\frac{1}{16}t_2 \\left[</span>
+<span class="sd">    	     \\left(           1 + \\frac{1}{2} x_2\\right)          \\left( \\nabla(\\rho_n+\\rho_p)  \\right)^2</span>
+<span class="sd">    	   + \\left( \\frac{1}{2} +             x_2\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2  \\right] \\\\</span>
+<span class="sd">    	  &amp;+\\frac{3}{16} t_4  (\\rho_n+\\rho_p)^\\beta \\left[</span>
+<span class="sd">    	  \\left(1 + \\frac{1}{2}x_4\\right)           \\left( \\nabla(\\rho_n+\\rho_p)   \\right)^2</span>
+<span class="sd">    	 - \\left(\\frac{1}{2} + x_4 \\right)  \\sum_q  \\left( \\nabla\\rho_q \\right)^2</span>
+<span class="sd">    	 \\right] \\\\</span>
+<span class="sd">    	 &amp;+ \\frac{\\beta}{8}t_4 (\\rho_n+\\rho_p)^{\\beta-1} \\left[</span>
+<span class="sd">    	 \\left(1 + \\frac{1}{2}x_4\\right) (\\rho_n+\\rho_p)\\left(\\nabla(\\rho_n+\\rho_p)\\right)^2</span>
+<span class="sd">    	 - \\left(\\frac{1}{2} + x_4 \\right)</span>
+<span class="sd">    	 \\nabla(\\rho_n+\\rho_p)\\cdot\\left(\\sum_q \\rho_q\\nabla\\rho_q\\right)</span>
+<span class="sd">    	 \\right] \\\\</span>
+<span class="sd">    	 &amp;- \\frac{1}{16}t_5 (\\rho_n+\\rho_p)^\\gamma \\left[</span>
+<span class="sd">    	   \\left(          1 + \\frac{1}{2} x_5\\right) \\left( \\nabla(\\rho_n+\\rho_p)\\right)^2</span>
+<span class="sd">    	  +\\left(\\frac{1}{2} +             x_5\\right) \\sum_{q} \\left( \\nabla\\rho_q\\right)^2</span>
+<span class="sd">    	 \\right].</span>
+<span class="sd">       \\end{split}</span>
+<span class="sd">       \\end{equation*}</span>
+
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_grad_n_square (float): neutron density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]</span>
+<span class="sd">        rho_grad_p_square (float): proton density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]</span>
+<span class="sd">        rho_grad_square (float): total density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy functional :math:`\\epsilon_{\\Delta \\rho}`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">rho_grad_n_square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_grad_n_square</span><span class="p">)</span>
+    <span class="n">rho_grad_p_square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_grad_p_square</span><span class="p">)</span>
+    <span class="n">rho_grad_square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_grad_square</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span><span class="o">+</span><span class="n">rho_p</span> <span class="o">+</span> <span class="n">DENSEPSILON</span>
+    <span class="n">grad_rho_n_rho_p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">rho_grad_p_square</span><span class="o">-</span><span class="n">rho_grad_n_square</span><span class="o">-</span><span class="n">rho_grad_p_square</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="mf">3.</span><span class="o">/</span><span class="mf">16.</span><span class="o">*</span><span class="n">T1</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="n">rho_grad_square</span><span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">rho_grad_n_square</span><span class="o">+</span><span class="n">rho_grad_p_square</span><span class="p">))</span>
+            <span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">16.</span><span class="o">*</span><span class="n">T2X2</span><span class="o">*</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">rho_grad_square</span><span class="o">+</span><span class="n">rho_grad_n_square</span><span class="o">+</span><span class="n">rho_grad_p_square</span><span class="p">)</span>
+            <span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">16.</span><span class="o">*</span><span class="n">T2</span><span class="o">*</span><span class="p">(</span><span class="n">rho_grad_square</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">rho_grad_n_square</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">rho_grad_p_square</span><span class="p">)</span>
+            <span class="o">+</span><span class="mf">3.</span><span class="o">/</span><span class="mf">16.</span><span class="o">*</span><span class="n">T4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">BETA</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">rho_grad_square</span><span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">rho_grad_n_square</span><span class="o">+</span><span class="n">rho_grad_p_square</span><span class="p">))</span>
+            <span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="mf">16.</span><span class="o">*</span><span class="n">T5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">GAMMA</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="n">rho_grad_square</span><span class="o">+</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X5</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">rho_grad_n_square</span><span class="o">+</span><span class="n">rho_grad_p_square</span><span class="p">))</span>
+            <span class="o">+</span><span class="n">BETA</span><span class="o">/</span><span class="mf">8.</span><span class="o">*</span><span class="n">T4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="n">BETA</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="mf">1.</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X4</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">*</span><span class="n">rho_grad_square</span><span class="o">-</span><span class="p">(</span><span class="mf">0.5</span><span class="o">+</span><span class="n">X4</span><span class="p">)</span>
+                                      <span class="o">*</span><span class="p">(</span><span class="n">rho_n</span><span class="o">*</span><span class="n">rho_grad_n_square</span><span class="o">+</span><span class="n">rho_p</span><span class="o">*</span><span class="n">rho_grad_p_square</span><span class="o">+</span><span class="n">rho</span><span class="o">*</span><span class="n">grad_rho_n_rho_p</span><span class="p">))</span>
+            <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="epsilon_np">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.epsilon_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">,</span> <span class="n">nu_n</span><span class="p">,</span> <span class="n">nu_p</span><span class="p">,</span> <span class="n">kappa_n</span><span class="p">,</span> <span class="n">kappa_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the total energy functional :math:`\\epsilon`, with a limit for</span>
+<span class="sd">    single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \\varepsilon(\\rho_n,\\vec\\nabla\\rho_n, \\tilde{\\rho}_n,\\tau_n,{ j}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p,\\tau_p,{ j}_p) = \\nonumber \\\\</span>
+<span class="sd">     = \\frac{\\hbar^2}{2 M_n} \\tau_n + \\frac{\\hbar^2}{2 M_p} \\tau_p</span>
+<span class="sd">      + \\varepsilon_\\rho(\\rho_n,\\rho_p)</span>
+<span class="sd">      + \\varepsilon_\\tau(\\rho_n,\\tau_n,{ j}_n,\\rho_p,\\tau_p,{ j}_p) \\nonumber \\\\</span>
+<span class="sd">     + \\varepsilon_{\\Delta\\rho}(\\rho_n,\\vec\\nabla\\rho_n,\\rho_p,\\vec\\nabla\\rho_p)</span>
+<span class="sd">     + \\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p),</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="sd">        nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="sd">        kappa_n (float):</span>
+<span class="sd">        kappa_p (float):</span>
+<span class="sd">            what is kappa? (no Eq.9 in Ref.41)</span>
+
+<span class="sd">    TO DO: write eq for jsum2 and jdiff2</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        float: energy functional :math:`\\epsilon`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">rho_grad_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_grad_n</span><span class="p">)</span>
+    <span class="n">rho_grad_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_grad_p</span><span class="p">)</span>
+    <span class="n">tau_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tau_n</span><span class="p">)</span>
+    <span class="n">tau_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tau_p</span><span class="p">)</span>
+    <span class="n">jsum2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jsum2</span><span class="p">)</span>
+    <span class="n">jdiff2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">jdiff2</span><span class="p">)</span>
+    <span class="n">nu_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_n</span><span class="p">)</span>
+    <span class="n">nu_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_p</span><span class="p">)</span>
+    <span class="n">kappa_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">kappa_n</span><span class="p">)</span>
+    <span class="n">kappa_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">kappa_p</span><span class="p">)</span>
+    <span class="n">rho_grad_n_square</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_grad_n</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho_grad_p_square</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_grad_p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho_grad_square</span> <span class="o">=</span> <span class="n">rho_grad_n_square</span> <span class="o">+</span> <span class="n">rho_grad_p_square</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="o">/</span><span class="n">MN</span><span class="o">*</span><span class="n">tau_n</span> <span class="o">+</span> <span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="o">/</span><span class="n">MP</span><span class="o">*</span><span class="n">tau_p</span>
+            <span class="o">+</span> <span class="n">epsilon_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">epsilon_delta_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n_square</span><span class="p">,</span> <span class="n">rho_grad_p_square</span><span class="p">,</span> <span class="n">rho_grad_square</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">epsilon_tau_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">epsilon_pi_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span> <span class="n">nu_n</span><span class="p">,</span> <span class="n">nu_p</span><span class="p">,</span> <span class="n">kappa_n</span><span class="p">,</span> <span class="n">kappa_p</span><span class="p">)</span>
+            <span class="p">)</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="epsilon_pi_np">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.epsilon_pi_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_pi_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span> <span class="n">nu_n</span><span class="p">,</span> <span class="n">nu_p</span><span class="p">,</span> <span class="n">kappa_n</span><span class="p">,</span>
+                    <span class="n">kappa_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Energy functional :math:`\\epsilon_{\\pi}` for particle matter,</span>
+<span class="sd">    related to pairing energy density.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">    	\\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p)</span>
+
+<span class="sd">        =\\frac{1}{4} f^\\pm_n \\left( v^{\\pi n}(\\rho_n,\\rho_p) + \\kappa_n|\\nabla\\rho_n|^2 \\right) \\tilde{\\rho_n}^2</span>
+
+<span class="sd">        +\\frac{1}{4} f^\\pm_p \\left( v^{\\pi p}(\\rho_n,\\rho_p) + \\kappa_p|\\nabla\\rho_p|^2 \\right) \\tilde{\\rho_p}^2,</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho_n` [fm :sup:`-4`]</span>
+<span class="sd">        rho_grad_p (float): proton  density gradient :math:`\\nabla \\rho_p` [fm :sup:`-4`]</span>
+<span class="sd">        nu_n (float): neutron anomalous density :math:`\\nu_n` [fm :sup:`-3`]</span>
+<span class="sd">        nu_p (float): proton anomalous density :math:`\\nu_p` [fm :sup:`-3`]</span>
+<span class="sd">        kappa_n: :math:`\\kappa_n` (float)</span>
+<span class="sd">        kappa_p: :math:`\\kappa_p` (float)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy functional :math:`\\epsilon_{\\pi}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.v_pi`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">(</span><span class="n">v_pi</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span> <span class="o">+</span> <span class="n">kappa_n</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rho_grad_n</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">nu_n</span><span class="o">**</span><span class="mi">2</span>
+            <span class="o">+</span><span class="mf">1.</span><span class="o">/</span><span class="mf">4.</span><span class="o">*</span><span class="p">(</span><span class="n">v_pi</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">)</span> <span class="o">+</span> <span class="n">kappa_p</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rho_grad_p</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span><span class="o">*</span> <span class="n">nu_p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="v_pi">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.v_pi">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">v_pi</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates pairing strength :math:`\\upsilon^{\\pi}_q` for neutrons</span>
+<span class="sd">    or protons, for energies below 6.5 MeV.</span>
+<span class="sd">    </span>
+<span class="sd">    Based on Equation 14 from Phys Rev C 104.</span>
+<span class="sd">    Check :cite:`pecak2021properties` and earlier papers of Chamel.</span>
+<span class="sd">    </span>
+<span class="sd">    .. note::</span>
+<span class="sd">        This function handles both neutron (q='n') and proton (q='p') cases</span>
+<span class="sd">        with the same implementation. Consider splitting into separate functions</span>
+<span class="sd">        for better code organization if species-specific modifications are needed.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v^{\\pi q}(\\rho_n,\\rho_p)</span>
+<span class="sd">        = - \\frac{8 \\pi^2}{I_q(\\rho_n,\\rho_p) } B_q(\\rho_n,\\rho_p)^{3/2}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing strength :math:`\\upsilon^{pi}` [fm :sup:`-3`]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.I`</span>
+<span class="sd">        :func:`.effMn`</span>
+<span class="sd">        :func:`.effMp`</span>
+<span class="sd">        :func:`.Lambda`</span>
+<span class="sd">        :func:`.B_q`</span>
+<span class="sd">    """</span>
+    <span class="c1">#rho = rho_n + rho_p</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'n'</span><span class="p">):</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">effMn</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'p'</span><span class="p">):</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">effMp</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Nucleon q must be either n or p'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">8.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">I</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="o">/</span><span class="n">M</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">3.</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="I">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.I">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">I</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+    <span class="c1"># Equation 15 from Phys Rev C 104</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Approximates the solution to the integral present in the original</span>
+<span class="sd">    :math:`\\nu^{\\pi}` formula for single-particle energies below 6.5 MeV.</span>
+<span class="sd">    Check :cite:`pecak2021properties` and earlier papers of Chamel.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        I_q(\\rho_n,\\rho_p)</span>
+<span class="sd">        = \\sqrt{\\mu_q(\\rho_n,\\rho_p) } \\left( 2 \\ln{\\frac{2 \\mu_q(\\rho_n,\\rho_p) }{\\Delta_q(\\rho_n,\\rho_p) }} + \\Lambda\\left( \\frac{\\varepsilon_\\Lambda}{\\mu_q(\\rho_n,\\rho_p) } \\right) \\right)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: analytic integral solution</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.Lambda`</span>
+<span class="sd">        :func:`.mu_q`</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field`</span>
+<span class="sd">        :func:`.proton_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'n'</span><span class="p">):</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">neutron_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'p'</span><span class="p">):</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">proton_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Nucleon q must be either n or p'</span><span class="p">)</span>
+
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">mu_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+    <span class="c1"># Handle assignment for both scalar and array</span>
+    <span class="k">if</span> <span class="n">I</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">==</span> <span class="n">NUMZERO</span><span class="p">:</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+        <span class="k">elif</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="n">NUMZERO</span><span class="p">:</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">mu</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">))</span><span class="o">+</span><span class="n">Lambda</span><span class="p">(</span><span class="mf">6.5</span><span class="o">/</span><span class="n">mu</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">delta</span><span class="o">==</span><span class="n">NUMZERO</span><span class="p">)</span>
+        <span class="n">I</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+        <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">delta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">delta</span><span class="o">&gt;</span><span class="n">NUMZERO</span><span class="p">)</span>
+        <span class="n">I</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="n">y</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">mu</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">[</span><span class="n">y</span><span class="p">]))</span><span class="o">+</span><span class="n">Lambda</span><span class="p">(</span><span class="mf">6.5</span><span class="o">/</span><span class="n">mu</span><span class="p">[</span><span class="n">y</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">I</span></div>
+
+
+<div class="viewcode-block" id="Lambda">
+<a class="viewcode-back" href="../../bsk.html#libnest.bsk.Lambda">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Lambda</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># Equation 16 from Phys Rev C 104</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Function :math:`\\Lambda` used in :func:`.I`.</span>
+<span class="sd">    Check :cite:`pecak2021properties` and earlier papers of Chamel.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\Lambda(x)</span>
+<span class="sd">        = \\ln(16x) + 2\\sqrt{1+x} - 2 \\ln\\left({1+\\sqrt{1+x}}\\right) - 4.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (float): variable</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: `\\Lambda`</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.I`</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># Use np.where for vectorized, robust computation</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">NUMZERO</span><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">16.</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">x</span><span class="p">))</span> <span class="o">-</span> <span class="mf">4.</span>
+    <span class="p">)</span>
+    <span class="c1"># Return scalar if input was scalar</span>
+    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+
+
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#       Pure neutron matter</span>
+<span class="c1"># ================================</span>
+<span class="c1"># def C_rho(rho):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Calculates the energy functional :math:`C^{\\rho}` coefficient for NeuM</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: C coefficient :math:`C^{\\rho}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return -1./4.*T0*(X0-1)-T3/24.*(X3-1)*rho**ALPHA</span>
+<span class="c1">#</span>
+<span class="c1"># def C_tau(rho):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Calculates the energy functional :math:`C^{\\tau}` coefficient for NeuM</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: C coefficient :math:`C^{\\tau}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return (-T1/8.*(X1-1.)+3./8.*T2X2 +3./8.*T2-T4/8.*(X4-1.)*rho**BETA+3./8.*</span>
+<span class="c1">#             T5*(X5+1.)*rho**GAMMA)</span>
+<span class="c1">#</span>
+<span class="c1"># def C_delta_rho(rho):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Calculates the energy functional :math:`C^{\\Delta * \\rho}` coefficient</span>
+<span class="c1">#     for NeuM</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: C coefficient :math:`C^{\\Delta * \\rho}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return (3./32.*T1*(X1-1.)+(3./32.*T2X2+3./32.*T2)+3./32.*T4*(X4-1.)*rho**BETA</span>
+<span class="c1">#              +3./32.*T5*(X5+1.)*rho**GAMMA)</span>
+
+<span class="c1"># def epsilon_rho(rho):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Energy functional :math:`\\epsilon_{\\rho}` for particle matter, related to</span>
+<span class="c1">#     the interaction of the nucleons with the background matter density.</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: energy functional :math:`\\epsilon_{\\rho}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return C_rho(rho)*rho**2</span>
+<span class="c1">#</span>
+<span class="c1"># def epsilon_delta_rho(rho, rho_grad):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Energy functional :math:`\\epsilon_{\\Delta \\rho}` for particle matter,</span>
+<span class="c1">#     related to the interaction of the nucleons with the background fluctuations.</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="c1">#         rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: energy functional :math:`\\epsilon_{\\Delta \\rho}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return (-(rho_grad)**2)*C_delta_rho(rho)</span>
+<span class="c1">#</span>
+<span class="c1"># def epsilon_tau(rho, tau, j):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Energy functional :math:`\\epsilon_{\\tau}` for particle matter,</span>
+<span class="c1">#     related to the density-dependent effective mass. It gives rise to current couplings.</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho (float): particle density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="c1">#         tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="c1">#         j (float): momentum density/current :math:`j` [fm :sup:`-3`]</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: energy functional :math:`\\epsilon_{\\tau}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return (rho*tau-j**2)*C_tau(rho)</span>
+<span class="c1"># def epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Calculates the total energy functional :math:`\\epsilon`, with a limit for</span>
+<span class="c1">#     single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="c1">#         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="c1">#         rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="c1">#         tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="c1">#         j (float): momentum density/current :math:`j` [fm :sup:`-3`]</span>
+<span class="c1">#         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="c1">#         q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+<span class="c1">#         kappa (float):</span>
+<span class="c1">#             what is kappa? (no Eq.9 in Ref.41)</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns</span>
+<span class="c1">#         float: energy functional :math:`\\epsilon`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     rho = rho_n + rho_p + DENSEPSILON</span>
+<span class="c1">#     if(q=='n'):</span>
+<span class="c1">#         M = MN</span>
+<span class="c1">#     elif(q=='p'):</span>
+<span class="c1">#         M = MP</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         sys.exit('# ERROR: Nucleon q must be either n or p')</span>
+<span class="c1">#     return HBARC**2/2./M*tau + epsilon_rho(rho)+epsilon_delta_rho(rho, rho_grad)+epsilon_tau(rho, tau, j)+epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa)</span>
+<span class="c1">#</span>
+<span class="c1"># def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):</span>
+<span class="c1">#     """</span>
+<span class="c1">#     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,</span>
+<span class="c1">#     related to pairing energy density.</span>
+<span class="c1">#</span>
+<span class="c1">#     Args:</span>
+<span class="c1">#         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="c1">#         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="c1">#         rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="c1">#         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="c1">#         q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+<span class="c1">#         kappa (float):</span>
+<span class="c1">#            - is this tern supposed to be included?</span>
+<span class="c1">#</span>
+<span class="c1">#     Returns:</span>
+<span class="c1">#         float: energy functional :math:`\\epsilon_{\\pi}`</span>
+<span class="c1">#     """</span>
+<span class="c1">#     return 1./4.*v_pi(rho_n, rho_p, q)*nu*(1-nu)+kappa*(np.abs(rho_grad))**2</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="_static/katex-math.css?v=05624691" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Inner Crust" href="inner-crust.html" />
+    <link rel="prev" title="Module: Tools" href="tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analyze-your-own-data">Analyze your own data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial">
+<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading"></a></h1>
+<section id="first-steps">
+<h2>First steps<a class="headerlink" href="#first-steps" title="Link to this heading"></a></h2>
+<p>Densities are in fm <sup>-3</sup>, energies in MeV, wavevectors in fm <sup>-1</sup>.
+Functions accept both Python scalars and NumPy arrays.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span><span class="p">,</span> <span class="n">definitions</span><span class="p">,</span> <span class="n">bsk</span>
+
+<span class="c1"># 1. Unit conversion: fm^-3 -&gt; g/cm^3</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="mf">0.16</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">rho</span><span class="si">}</span><span class="s2"> fm^-3 = </span><span class="si">{</span><span class="n">units</span><span class="o">.</span><span class="n">fm3togcm3</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> g/cm^3"</span><span class="p">)</span>
+
+<span class="c1"># 2. Fermi wavevector and Fermi energy of neutrons.</span>
+<span class="c1">#    rho2kf takes the density of ONE nucleon species (both spin components).</span>
+<span class="n">rho_n</span> <span class="o">=</span> <span class="mf">0.08</span>
+<span class="n">kF</span> <span class="o">=</span> <span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"kF = </span><span class="si">{</span><span class="n">kF</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> fm^-1, eF = </span><span class="si">{</span><span class="n">definitions</span><span class="o">.</span><span class="n">eF_n</span><span class="p">(</span><span class="n">kF</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> MeV"</span><span class="p">)</span>
+
+<span class="c1"># 3. Energy per nucleon of symmetric matter (BSk31); arrays work as well.</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>               <span class="c1"># total density [fm^-3]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bsk</span><span class="o">.</span><span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">rho</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>    <span class="c1"># [MeV]</span>
+
+<span class="c1"># 4. Neutron 1S0 pairing gap in pure neutron matter</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Delta_n = </span><span class="si">{</span><span class="n">bsk</span><span class="o">.</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> MeV"</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="analyze-your-own-data">
+<h2>Analyze your own data<a class="headerlink" href="#analyze-your-own-data" title="Link to this heading"></a></h2>
+<p>The script below loads a 2D neutron-density map, computes the Fermi wavevector
+and the neutron pairing gap at every grid point, and saves a figure. It
+generates a small sample dataset itself, so it runs as-is:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python<span class="w"> </span>examples/analyze_data.py
+</pre></div>
+</div>
+<p>To use your own data, write files in the same format and point the
+<code class="docutils literal notranslate"><span class="pre">LIBNEST_DATA</span></code> environment variable at their directory.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="sd">"""</span>
+<span class="sd">Example: analyze your own simulation data with libnest</span>
+<span class="sd">======================================================</span>
+
+<span class="sd">A minimal, end-to-end workflow of the kind a student would run on real data:</span>
+
+<span class="sd">  1. load a 2D neutron-density map from text files (libnest.myio),</span>
+<span class="sd">  2. compute a physical quantity at every grid point with the BSk31 functional</span>
+<span class="sd">     (here the neutron 1S0 pairing gap Delta(rho_n) and Fermi momentum kF),</span>
+<span class="sd">  3. summarize the result and save a figure.</span>
+
+<span class="sd">The sample dataset is *generated on the fly* (see generate_sample_dataset)</span>
+<span class="sd">rather than stored in the repository, so nothing needs to be kept in git.</span>
+<span class="sd">Run it as-is:</span>
+
+<span class="sd">    python examples/analyze_data.py</span>
+
+<span class="sd">To use your own data, drop files in the same format (an ``&lt;prefix&gt;_info.txt``</span>
+<span class="sd">grid file and an ``&lt;prefix&gt;_density.txt`` "x y rho" table) somewhere and point</span>
+<span class="sd">the LIBNEST_DATA environment variable at that directory.</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"Agg"</span><span class="p">)</span>  <span class="c1"># headless-safe: render to a file without a display</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest</span><span class="w"> </span><span class="kn">import</span> <span class="n">myio</span><span class="p">,</span> <span class="n">bsk</span><span class="p">,</span> <span class="n">definitions</span>
+
+<span class="n">PREFIX</span> <span class="o">=</span> <span class="s2">"sample"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_sample_dataset</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">PREFIX</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Write a small 2D neutron-density map (a Gaussian blob on an 8x8 grid)</span>
+<span class="sd">    into ``data_dir`` as ``&lt;prefix&gt;_info.txt`` and ``&lt;prefix&gt;_density.txt``.</span>
+
+<span class="sd">    This stands in for a real WSLDA/WBSK simulation slice; it is cheap to make,</span>
+<span class="sd">    so we generate it at runtime instead of committing data files.</span>
+<span class="sd">    """</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+    <span class="n">data_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">NX</span> <span class="o">=</span> <span class="n">NY</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">NZ</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">DX</span> <span class="o">=</span> <span class="n">DY</span> <span class="o">=</span> <span class="n">DZ</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">rho0</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.085</span><span class="p">,</span> <span class="mf">2.5</span>          <span class="c1"># peak density [fm^-3], blob width [fm]</span>
+    <span class="n">cx</span> <span class="o">=</span> <span class="n">cy</span> <span class="o">=</span> <span class="p">(</span><span class="n">NX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_info.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"# Grid information for the sample dataset</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">"NX"</span><span class="p">,</span> <span class="n">NX</span><span class="p">),</span> <span class="p">(</span><span class="s2">"NY"</span><span class="p">,</span> <span class="n">NY</span><span class="p">),</span> <span class="p">(</span><span class="s2">"NZ"</span><span class="p">,</span> <span class="n">NZ</span><span class="p">),</span>
+                     <span class="p">(</span><span class="s2">"DX"</span><span class="p">,</span> <span class="n">DX</span><span class="p">),</span> <span class="p">(</span><span class="s2">"DY"</span><span class="p">,</span> <span class="n">DY</span><span class="p">),</span> <span class="p">(</span><span class="s2">"DZ"</span><span class="p">,</span> <span class="n">DZ</span><span class="p">)]:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">_density.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"# x [fm]   y [fm]   rho_n [fm^-3]</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NX</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NY</span><span class="p">):</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">DX</span><span class="p">,</span> <span class="n">j</span> <span class="o">*</span> <span class="n">DY</span>
+                <span class="n">rho</span> <span class="o">=</span> <span class="n">rho0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cx</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">cy</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">y</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">rho</span><span class="si">:</span><span class="s2">12.6e</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data_dir</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Data location: LIBNEST_DATA if the user set it, else a generated sample.</span>
+    <span class="k">if</span> <span class="s2">"LIBNEST_DATA"</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="n">data_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"LIBNEST_DATA"</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data_dir</span> <span class="o">=</span> <span class="n">generate_sample_dataset</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"data"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"generated sample dataset in </span><span class="si">{</span><span class="n">data_dir</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># 1. Load grid info and the density map.</span>
+    <span class="n">dims</span> <span class="o">=</span> <span class="n">myio</span><span class="o">.</span><span class="n">readDimTxt</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="n">PREFIX</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"grid [NX, NY, NZ] = </span><span class="si">{</span><span class="n">dims</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">myio</span><span class="o">.</span><span class="n">txt2df</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">/</span> <span class="n">PREFIX</span><span class="p">),</span> <span class="s2">"density"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"x"</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">,</span> <span class="s2">"rho"</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> grid points; "</span>
+          <span class="sa">f</span><span class="s2">"rho_n in [</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'rho'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s1">'rho'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2">] fm^-3"</span><span class="p">)</span>
+
+    <span class="c1"># 2. Compute libnest quantities per grid point.</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"rho"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"kF"</span><span class="p">]</span> <span class="o">=</span> <span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]</span> <span class="o">=</span> <span class="n">bsk</span><span class="o">.</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">peak</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"neutron pairing gap: peak </span><span class="si">{</span><span class="n">peak</span><span class="p">[</span><span class="s1">'gap'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> MeV "</span>
+          <span class="sa">f</span><span class="s2">"at rho_n = </span><span class="si">{</span><span class="n">peak</span><span class="p">[</span><span class="s1">'rho'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> fm^-3 (kF = </span><span class="si">{</span><span class="n">peak</span><span class="p">[</span><span class="s1">'kF'</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> fm^-1)"</span><span class="p">)</span>
+
+    <span class="c1"># 3. Plot the pairing-gap map and save it.</span>
+    <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">dims</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dims</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">gap_map</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"gap"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Neutron pairing gap $\Delta$ from a density map"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"x [fm]"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"y [fm]"</span><span class="p">)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gap_map</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">"lower"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$\Delta$ [MeV]"</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"analyze_data_gap.png"</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"saved figure: </span><span class="si">{</span><span class="n">out</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tools.html" class="btn btn-neutral float-left" title="Module: Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="inner-crust.html" class="btn btn-neutral float-right" title="Inner Crust" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

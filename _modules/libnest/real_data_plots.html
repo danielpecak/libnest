@@ -1,0 +1,1490 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libnest.real_data_plots &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">libnest.real_data_plots</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for libnest.real_data_plots</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="sd">"""</span>
+<span class="sd">Plotting real data</span>
+<span class="sd">==================</span>
+<span class="sd">This module...</span>
+
+<span class="sd">List of functions</span>
+<span class="sd">-----------------</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.interpolate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libnest.definitions</span>
+
+<span class="c1"># Root directory holding the simulation-data sub-folders (txt/, uniform-txt/,</span>
+<span class="c1"># andreev/). Set the LIBNEST_DATA environment variable to point at your data;</span>
+<span class="c1"># defaults to the current working directory so the module is portable.</span>
+<span class="n">DATA_ROOT</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"LIBNEST_DATA"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">)</span>
+<span class="n">TXT_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_ROOT</span><span class="p">,</span> <span class="s2">"txt"</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+<span class="n">TXT_PATH_UNIFORM</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_ROOT</span><span class="p">,</span> <span class="s2">"uniform-txt"</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+<span class="n">TXT_PATH_ANDREEV</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DATA_ROOT</span><span class="p">,</span> <span class="s2">"andreev"</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+
+<span class="c1"># ================================</span>
+<span class="c1">#          Handling Files</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="file_check">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.file_check">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Checks if all files are present in the directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        FileNotFoundError</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool</span>
+<span class="sd">    """</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">" not found. Check the directory and the file."</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="files_set_particles">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.files_set_particles">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">directory_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns an array with files containing data sets only for a specified</span>
+<span class="sd">    number of particles.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    particles_nr (str): number of particles of the data set</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        array: list of filenames</span>
+<span class="sd">    """</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">directory_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory_path</span><span class="p">,</span> <span class="n">path</span><span class="p">)):</span>
+            <span class="n">filenames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="n">p216</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p4160</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p8000</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p13600</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p16640</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p24000</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">p216</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'216'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p4160</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'4160'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p8000</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'8000'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p13600</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'13600'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p16640</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'16640'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p24000</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'24000'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">particles_nr</span> <span class="o">==</span> <span class="s1">'216'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p216</span>
+    <span class="k">elif</span> <span class="n">particles_nr</span> <span class="o">==</span> <span class="s1">'4160'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p4160</span>
+    <span class="k">elif</span> <span class="n">particles_nr</span> <span class="o">==</span> <span class="s1">'8000'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p8000</span>
+    <span class="k">elif</span> <span class="n">particles_nr</span> <span class="o">==</span> <span class="s1">'13600'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p13600</span>
+    <span class="k">elif</span> <span class="n">particles_nr</span> <span class="o">==</span> <span class="s1">'16640'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p16640</span>
+    <span class="k">elif</span> <span class="n">particles_nr</span> <span class="o">==</span> <span class="s1">'24000'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p24000</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Incorrect value'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="files_set_type">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.files_set_type">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">files_set_type</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">filenames</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Takes an array of files and returns an array with files containing data sets of</span>
+<span class="sd">    a specified kind: rho (matter density), current, delta (pairing field),</span>
+<span class="sd">    or A (mean field potential)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    data_type (str): choice of type of files</span>
+<span class="sd">    filenames (array): list of filenames to sort through</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        array: list of filenames of a specified kind</span>
+<span class="sd">    """</span>
+    <span class="n">p_density</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p_current</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p_delta</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">p_A</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">p_density</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'density'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p_current</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'current'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p_delta</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'delta'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+    <span class="n">p_A</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s1">'A'</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+
+
+    <span class="k">if</span> <span class="n">data_type</span> <span class="o">==</span> <span class="s1">'density'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p_density</span>
+    <span class="k">elif</span> <span class="n">data_type</span> <span class="o">==</span> <span class="s1">'current'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p_current</span>
+    <span class="k">elif</span> <span class="n">data_type</span> <span class="o">==</span> <span class="s1">'delta'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p_delta</span>
+    <span class="k">elif</span> <span class="n">data_type</span> <span class="o">==</span> <span class="s1">'A'</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p_A</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Incorrect data type input'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="file_andreev">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.file_andreev">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">file_andreev</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the name of the file with Andreev states that matches a data set.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filenames (list of str): names of the data-set files; characters 1-3 of</span>
+<span class="sd">            the first name encode the density</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: name of the Andreev-states file, or None for an unknown density</span>
+<span class="sd">    """</span>
+    <span class="n">density</span> <span class="o">=</span> <span class="n">filenames</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">density</span> <span class="o">==</span> <span class="s2">"216"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"N135i.2_states.all.txt"</span>
+    <span class="k">if</span> <span class="n">density</span> <span class="o">==</span> <span class="s2">"416"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"N2600i_states.0000.txt"</span>
+    <span class="k">if</span> <span class="n">density</span> <span class="o">==</span> <span class="s2">"800"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"N5000i_states.0000.txt"</span>
+    <span class="k">if</span> <span class="n">density</span> <span class="o">==</span> <span class="s2">"136"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"N8500i_states.0000.txt"</span>
+    <span class="k">if</span> <span class="n">density</span> <span class="o">==</span> <span class="s2">"166"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"N10400i_states.0000.txt"</span>
+    <span class="k">if</span> <span class="n">density</span> <span class="o">==</span> <span class="s2">"240"</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"N15000i_states.0000.txt"</span></div>
+
+
+<div class="viewcode-block" id="andreev_e_minimum">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.andreev_e_minimum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">andreev_e_minimum</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the minigap energy read from a file with Andreev states: the lowest</span>
+<span class="sd">    energy of the states whose angular momenta :math:`L_z` of the u and v</span>
+<span class="sd">    components differ by one.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the Andreev-states file in ``TXT_PATH_ANDREEV``</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: minigap energy :math:`E_{\\mathrm{mg}}` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH_ANDREEV</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="c1"># data[:,4] = Lz_u</span>
+        <span class="c1"># data[:,5] = Lz_v</span>
+
+        <span class="c1">#index of data where Lz_u and Lz_v are close to 1 or 0, and the difference between them is ~0.</span>
+        <span class="n">j</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span><span class="o">&lt;=</span><span class="mf">0.01</span><span class="p">,</span>
+                                                   <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span><span class="o">&lt;=</span><span class="mf">1.01</span><span class="p">,</span>
+                                                                  <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span><span class="o">&gt;=</span><span class="mf">0.99</span><span class="p">)),</span>
+                      <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">5</span><span class="p">])</span><span class="o">&lt;=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">5</span><span class="p">])</span><span class="o">&lt;=</span><span class="mf">1.01</span><span class="p">,</span>
+                                                                             <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">5</span><span class="p">])</span><span class="o">&gt;=</span><span class="mf">0.99</span><span class="p">)))))</span>
+
+        <span class="n">sub</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">i</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span><span class="o">&gt;=</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span><span class="o">&lt;=</span><span class="mf">1.01</span><span class="p">))</span>
+        <span class="n">e_minigap</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'E_mg: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">e_minigap</span><span class="p">)))</span>
+        <span class="n">e_minigap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">e_minigap</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e_minigap</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">e_minigap</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#           Coordinates</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="cross_section_distance">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.cross_section_distance">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cross_section_distance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the distance to the centre of the 90x90 fm box as cross-section,</span>
+<span class="sd">    changing it from a coordinate system with origin at one corner of the box.</span>
+
+<span class="sd">     Args:</span>
+<span class="sd">        x (float): x-coordinate of :math:`r` [fm]</span>
+<span class="sd">        y (float): y=coordinate of :math:`r` [fm]</span>
+<span class="sd">        size (float): full size of one axis of the square/box [fm]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: cross section distance :math:`r` [fm]</span>
+
+<span class="sd">    """</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">r</span></div>
+
+
+<div class="viewcode-block" id="phi">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.phi">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">phi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span> <span class="c1">#just in case</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the angle of the line connecting the coordinates to the centre</span>
+<span class="sd">    of the 90x90 "box", for a coordinate system with origin at a corner of the</span>
+<span class="sd">    box.</span>
+
+<span class="sd">     Args:</span>
+<span class="sd">        x (float): x-coordinate :math:`r` [fm]</span>
+<span class="sd">        y (float): y=coordinate :math:`r` [fm]</span>
+<span class="sd">        size (float): full size of one axis of the square/box [fm]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: angle :math:`\\phi` [rad]</span>
+<span class="sd">    """</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">n</span><span class="p">,</span><span class="n">x</span><span class="o">-</span><span class="n">n</span><span class="p">)</span></div>
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#      Real data definitions</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="pairing_field">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.pairing_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pairing_field</span><span class="p">(</span><span class="n">rel</span><span class="p">,</span> <span class="n">im</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the absolute value/modulus and the argument of the field</span>
+<span class="sd">    potential from its imaginary and real parts.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rel (float): real part of field potential :math:`\\Delta_{rel}` [MeV]</span>
+<span class="sd">        im (float): imaginary part of field potential :math:`\\Delta_{im}` [MeV]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pairing field :math:`\\Delta` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">im</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">rel</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">rel</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vector_magnitude">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.vector_magnitude">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vector_magnitude</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the magnitude of a vector with its vector x, y, and z components.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (float): :math:`\\vec x` component [fm :sup:`-4`]</span>
+<span class="sd">        y (float): :math:`\\vec y` component [fm :sup:`-4`]</span>
+<span class="sd">        z (float): :math:`\\vec z` component [fm :sup:`-4`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: magnitude of a vector [fm :sup:`-4`]</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="jsum2">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.jsum2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">jsum2</span><span class="p">(</span><span class="n">i_x</span><span class="p">,</span> <span class="n">i_y</span><span class="p">,</span> <span class="n">i_z</span><span class="p">,</span> <span class="n">j_x</span><span class="p">,</span> <span class="n">j_y</span><span class="p">,</span> <span class="n">j_z</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Sum of of currents :math:`\\vec i` and :math:`\\vec j`, squared.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        i_x (float): x component of :math:`\\vec i`</span>
+<span class="sd">        i_y (float): y component of :math:`\\vec i`</span>
+<span class="sd">        i_z (float): z component of :math:`\\vec i`</span>
+<span class="sd">        j_x (float): x component of :math:`\\vec j`</span>
+<span class="sd">        j_y (float): y component of :math:`\\vec j`</span>
+<span class="sd">        j_z (float): z component of :math:`\\vec j`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        float: squared sum of currents, :math:`(\\vec i + \\vec j)^2`</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">i_x</span> <span class="o">+</span> <span class="n">j_x</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">i_y</span> <span class="o">+</span> <span class="n">j_y</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">i_z</span> <span class="o">+</span> <span class="n">j_z</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="jdiff2">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.jdiff2">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">jdiff2</span><span class="p">(</span><span class="n">i_x</span><span class="p">,</span> <span class="n">i_y</span><span class="p">,</span> <span class="n">i_z</span><span class="p">,</span> <span class="n">j_x</span><span class="p">,</span> <span class="n">j_y</span><span class="p">,</span> <span class="n">j_z</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Difference of currents :math:`\\vec i` and :math:`\\vec j`, squared.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        i_x (float): x component of :math:`\\vec i`</span>
+<span class="sd">        i_y (float): y component of :math:`\\vec i`</span>
+<span class="sd">        i_z (float): z component of :math:`\\vec i`</span>
+<span class="sd">        j_x (float): x component of :math:`\\vec j`</span>
+<span class="sd">        j_y (float): y component of :math:`\\vec j`</span>
+<span class="sd">        j_z (float): z component of :math:`\\vec j`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        float: squared difference of currents :math:`(\\vec j - \\vec j)^2`</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">i_x</span> <span class="o">-</span> <span class="n">j_x</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">i_y</span> <span class="o">-</span> <span class="n">j_y</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">i_z</span> <span class="o">-</span> <span class="n">j_z</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#       Plotting functions</span>
+<span class="c1"># ================================</span>
+<div class="viewcode-block" id="plot_density">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_density">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_density</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the density :math:`\\rho` [fm :sup:`-3`].</span>
+
+<span class="sd">    Cross section distance is calculated and the density is divided by bulk</span>
+<span class="sd">    density. The ratio is plotted against the cross section distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - rho_q</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="n">rho_bulk</span> <span class="o">=</span> <span class="mf">0.00590448</span>
+        <span class="n">rho_ratio</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">rho_bulk</span>
+
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">rho</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Density vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r \: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ \rho / \rho_{\infty}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#\: {[fm}^{-3}]$</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rho_ratio</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1">#plotting</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_density_contour">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_density_contour">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_density_contour</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the density :math:`\\rho` [fm :sup:`-3`].</span>
+
+<span class="sd">    //A grid is created and populated using triangulation ("scipy.interpolate.triangulate").</span>
+<span class="sd">    A contour plot of density as a vertical cross section is created.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - rho_q</span>
+        <span class="c1"># x in one direction, y in another??</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">rho_bulk</span> <span class="o">=</span> <span class="mf">0.00590448</span>
+        <span class="n">rho_ratio</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">rho_bulk</span>
+
+        <span class="c1">#interpolation by triangulation</span>
+        <span class="n">zi</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">interpolate</span><span class="o">.</span><span class="n">griddata</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">rho_ratio</span><span class="p">,</span> <span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">'linear'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">zi</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">rho_ratio</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">rho_ratio</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">origin</span><span class="o">=</span><span class="s1">'lower'</span><span class="p">,</span>
+                   <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="c1">#interpolation by radial basis function</span>
+        <span class="c1"># inefficient for larger arrays</span>
+
+        <span class="c1"># rbf = scipy.interpolate.Rbf(x, y, rho_ratio, function='linear')</span>
+        <span class="c1"># zi = rbf(xx, yy)</span>
+        <span class="c1"># plt.imshow(zi, vmin=rho_ratio.min(), vmax=rho_ratio.max(), origin='lower',</span>
+        <span class="c1">#    extent=[x.min(), x.max(), y.min(), y.max()])</span>
+        <span class="c1"># plt.colorbar()</span>
+        <span class="c1"># plt.show()</span>
+
+        <span class="c1">#rho = plt.figure()</span>
+        <span class="c1">#rho_contour = rho.add_subplot(111)</span>
+        <span class="c1"># plt.title("Density vs radius", fontsize=15)</span>
+        <span class="c1"># plt.xlabel(r"$ r \: [fm]$", fontsize=10)</span>
+        <span class="c1"># plt.ylabel(r"$ r \: [fm]$", fontsize=10) #\: {[fm}^{-3}]$</span>
+        <span class="c1"># cp = rho_contour.contour(xx, yy, rho_ratio, 1)</span>
+        <span class="c1"># cp.colotbar()</span>
+        <span class="c1"># cp.clabel()</span>
+        <span class="c1"># plt.xticks(fontsize=10)</span>
+        <span class="c1"># plt.legend()</span>
+        <span class="c1"># plt.show()</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_pairing_field">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_pairing_field">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pairing_field</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the real part of the pairing field :math:`\\Delta_{rel}` [MeV] and</span>
+<span class="sd">    the fourth is the imaginary part of the pairing field :math:`\\Delta_{im}` [MeV].</span>
+
+<span class="sd">    Cross section distance and the total pairing field are calculated. The total</span>
+<span class="sd">    pairing field is divided by the bulk pairing field, and the ratio is plotted</span>
+<span class="sd">    against the cross section distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">        :func:`.pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - delta_rel</span>
+        <span class="c1">#data[:,3] - delta_im</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="n">delta</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">pairing_field</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">delta_bulk</span> <span class="o">=</span> <span class="mf">1.33394659</span>
+        <span class="n">delta_ratio</span> <span class="o">=</span> <span class="n">delta</span><span class="o">/</span><span class="n">delta_bulk</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Pairing field vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\Delta / \Delta_{\infty}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">delta_ratio</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_current">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_current">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_current</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third,</span>
+<span class="sd">    fourth, and fifth columns are :math:`\\vec x`, :math:`\\vec y`, :math:`\\vec z`</span>
+<span class="sd">    current components [fm :sup:`-4`]</span>
+
+<span class="sd">    Cross section distance and the total current vector :math:`\\vec j` are</span>
+<span class="sd">    calculated. The current is then plotted against the cross section distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - x current component</span>
+        <span class="c1">#data[:,3] - y current component</span>
+        <span class="c1">#data[:,4] - z current component</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">240</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">vector_magnitude</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="c1">#NOTE: treats some files as empty? to double check</span>
+        <span class="c1"># plots #N960i.3_current.txt but its size is 240, not 90</span>
+        <span class="c1"># add size to function arguments?</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Current vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"j(r)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#        All data plots</span>
+<span class="c1"># ================================</span>
+<div class="viewcode-block" id="plot_density_slice">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_density_slice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_density_slice</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the density :math:`\\rho` [fm :sup:`-3`].</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - rho_q</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">rho_q</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">rho</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Density vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r \: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ \rho_</span><span class="si">{q}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1">#\: {[fm}^{-3}]$</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rho_q</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1">#plotting</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">rho_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">rho_total</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">24000</span><span class="o">/</span><span class="mi">180</span><span class="o">**</span><span class="mi">3</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="plot_current_slice">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_current_slice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_current_slice</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third,</span>
+<span class="sd">    fourth, and fifth columns are :math:`\\vec x`, :math:`\\vec y`, :math:`\\vec z`</span>
+<span class="sd">    current components [fm :sup:`-4`]</span>
+
+<span class="sd">    Cross section distance and the total current vector :math:`\\vec j` are</span>
+<span class="sd">    calculated. The current is then plotted against the cross section distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - x current component</span>
+        <span class="c1">#data[:,3] - y current component</span>
+        <span class="c1">#data[:,4] - z current component</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">vector_magnitude</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span>
+        <span class="c1"># current too low - not visible on graphs</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Current A vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r \: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ j_</span><span class="si">{q}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1">#plotting</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_pairing_field_slice">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_pairing_field_slice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pairing_field_slice</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the real part of the pairing field :math:`\\Delta_{rel}` [MeV]</span>
+<span class="sd">    and the fourth is the imaginary part of the pairing field</span>
+<span class="sd">    :math:`\\Delta_{im}` [MeV].</span>
+
+<span class="sd">    Cross section distance and the total pairing field :math:`\\Delta` are</span>
+<span class="sd">    calculated and plotted against each other.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">        :func:`.pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - delta_real</span>
+        <span class="c1">#data[:,3] - delta_imaginary</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">delta</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">pairing_field</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Pairing field vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\Delta / \Delta_{\infty}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_B_q_slice">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_B_q_slice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_B_q_slice</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the density :math:`\\rho` [fm :sup:`-3`].</span>
+
+<span class="sd">    Cross section distance and the mean field potential B_q, coming from the</span>
+<span class="sd">    variation over kinetic density, :math:`B_q`, are calculated. :math:`B_q` is</span>
+<span class="sd">    then plotted against the cross section distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">        :func:`.pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - B_q_x</span>
+        <span class="c1">#data[:,3] - B_q_y</span>
+        <span class="c1">#data[:,4] - B_q_z</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">rho_n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">B_q</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">B_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span> <span class="c1"># assuming only NeuM</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$B_q$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$B_</span><span class="si">{q}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">B_q</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_U_q_slice">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_U_q_slice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_U_q_slice</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third</span>
+<span class="sd">    column is the real part of the pairing field :math:`\\Delta_{rel}` [MeV] and</span>
+<span class="sd">    the fourth is the imaginary part of the pairing field :math:`\\Delta_{im}` [MeV].</span>
+
+<span class="sd">    Cross section distance and the  mean field potential from density</span>
+<span class="sd">    :math:`\\rho` variation, :math:`U_q`, are calculated. :math:`U_q` is</span>
+<span class="sd">    plotted against the cross section distance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">        :func:`.pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - U_q_x</span>
+        <span class="c1">#data[:,3] - U_q_y</span>
+        <span class="c1">#data[:,4] - U_q_z</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">rho_n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">B_q</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">U_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span> <span class="c1"># assuming only NeuM</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$U_q$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ U_</span><span class="si">{q}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">B_q</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_A_slice">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_A_slice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_A_slice</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first and second columns are x- and y-coordinates. The third,</span>
+<span class="sd">    fourth, and fifth columns are the x, y, and z components of the mean-field</span>
+<span class="sd">    potential vector :math:`A`. The field is defined as the variation over thee</span>
+<span class="sd">    components of the current j.</span>
+
+<span class="sd">    Cross section distance is calculated and the resulting :math:`A` is plotted</span>
+<span class="sd">    against it.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.cross_section_distance`</span>
+<span class="sd">        :func:`.pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - A_x</span>
+        <span class="c1">#data[:,3] - A_y</span>
+        <span class="c1">#data[:,4] - A_z</span>
+        <span class="c1">#data[:,5] - ?</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">vector_magnitude</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$A$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ A$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#           Velocities</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="plot_v_sf_real">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_v_sf_real">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_v_sf_real</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified file, checks its validity, and creates a 2D array from</span>
+<span class="sd">    its data. The first two columns are the x and y coordinates, which are then used</span>
+<span class="sd">    to calculate the superfluid velocity :math:`v_{sf}` [c]  based on the gradient</span>
+<span class="sd">    of the pairing field gradient.</span>
+
+<span class="sd">    It is then plotted as a cross section through the 'box' containing</span>
+<span class="sd">    the vortex/uniform matter data.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): name of the data set file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vsf`</span>
+<span class="sd">    """</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - rho</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">vsf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vsf</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_</span><span class="si">{sf}</span><span class="s2">$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{sf}</span><span class="s2"> $ [c]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">vsf</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1">#plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_vsf_nv">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_vsf_nv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_vsf_nv</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">filename_A</span><span class="p">,</span> <span class="n">filename_current</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified files containing density, mean field potential from current</span>
+<span class="sd">    variation, and current data. The code checks their validity, and creates</span>
+<span class="sd">    three 2D data arrays. It calculates superfluid velocity :math:`v_{sf}_{NV}`</span>
+<span class="sd">    [c] based on the gradient of the pairing field phase. It is adjusted to the</span>
+<span class="sd">    entrainment effects (definition by Nicolas Chamel Valentin Allard).</span>
+<span class="sd">    It also calculates the velocity (mass velocity) :math:`v_{NV}` [c],</span>
+<span class="sd">    also adjusted to the entrainment effects.</span>
+
+<span class="sd">    Both velocities are plotted as a cross section through the 'box' containing</span>
+<span class="sd">    the vortex/uniform matter data.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v^{\\mathrm{NV}} = \\hbar c \\frac{\\hbar^2}{2 M B} \\frac{{ j}}{\\rho}  + \\frac{{ A}}{M}</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{{ A}}{M}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename_density (str): name of the file containing density data</span>
+<span class="sd">        filename_A (str): name of the file containing the mean field potential from the current variation data</span>
+<span class="sd">        filename_current (str): name of the file containing density data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vsf_NV`</span>
+<span class="sd">        :func:`.v_NV`</span>
+<span class="sd">    """</span>
+    <span class="n">filename_density</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_density</span>
+    <span class="n">filename_A</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_A</span>
+    <span class="n">filename_current</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_current</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_density</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_A</span><span class="p">):</span>
+        <span class="n">data_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_A</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_A</span> <span class="o">=</span> <span class="n">data_A</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_A</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - rho</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">data_j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_current</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_j</span> <span class="o">=</span> <span class="n">data_j</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_j</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">B_q</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">B_q</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="mf">0.</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span>
+        <span class="n">vsf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vsf</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">vector_magnitude</span><span class="p">(</span><span class="n">data_A</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_A</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span> <span class="n">data_A</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">vector_magnitude</span><span class="p">(</span><span class="n">data_j</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_j</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span> <span class="n">data_j</span><span class="p">[:,</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="n">vsf_nv</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vsf_NV</span><span class="p">(</span><span class="n">B_q</span><span class="p">,</span> <span class="n">vsf</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+        <span class="n">v_nv</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">v_NV</span><span class="p">(</span><span class="n">B_q</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">A</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_{sf \: NV}$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_{sf \: NV}$ [c]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">vsf_nv</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"v_</span><span class="si">{sf}</span><span class="s2">_</span><span class="si">{nv}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v_nv</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"v_</span><span class="si">{nv}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">markerscale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_landau_velocity">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_landau_velocity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_landau_velocity</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">filename_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified files containing density and reference field data.</span>
+<span class="sd">    The code checks their validity, and creates 2D data arrays. It calculates</span>
+<span class="sd">    the Landau velocity :math:`v_{Landau}` [c], which shows at which velocity the</span>
+<span class="sd">    superfluid medium starts to be excited.</span>
+
+<span class="sd">    It is plotted as a cross section through the 'box' containing</span>
+<span class="sd">    the vortex/uniform matter data.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_L = \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename_density (str): name of the file containing density data</span>
+<span class="sd">        filename_delta (str): name of the file containing the reference pairing field data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vLandau`</span>
+<span class="sd">    """</span>
+    <span class="n">filename_density</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_density</span>
+    <span class="n">filename_delta</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_delta</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_density</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_delta</span><span class="p">):</span>
+        <span class="n">data_delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_delta</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span>  <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="c1">#data[:,0] - x</span>
+        <span class="c1">#data[:,1] - y</span>
+        <span class="c1">#data[:,2] - rho</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">delta</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">pairing_field</span><span class="p">(</span><span class="n">data_delta</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_delta</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">kf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">v_landau</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vLandau</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_</span><span class="si">{Landau}</span><span class="s2">$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{Landau}</span><span class="s2"> $ [c]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v_landau</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="c1"># plt.legend()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="plot_landau_velocity_temperature">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_landau_velocity_temperature">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_landau_velocity_temperature</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the mean value of Landau velocity :math:`v_{Landau}` [c] against</span>
+<span class="sd">    temperature T [MeV/k:sub:`B`].The code uses :func:`.files_set_type` and</span>
+<span class="sd">    :func:`.files_set_particles` functions to parse through the data and chose</span>
+<span class="sd">    only files with pairing field, and density data sets for the chosen number</span>
+<span class="sd">    of particles (respectively). It does so for vortex data and for uniform</span>
+<span class="sd">    matter data for comparison.</span>
+
+<span class="sd">    The function creates an array of temperatures (taken from filenames)</span>
+<span class="sd">    and goes through the files to find the mean :math:`v_{Landau} [c]` in the range</span>
+<span class="sd">    of 40-60 fm (which is assumed to be the flattest part of the curve). The speed</span>
+<span class="sd">    of sound :math:`v_s` [c] is also calculated analytically from the vortex data.</span>
+
+<span class="sd">    A plot of :math:`v_{s}`, and :math:`v_{Landau}` for vortex and uniform matter</span>
+<span class="sd">    against temperature is created.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        particles_nr (str): choice of files with a specified number of particles</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vLandau`</span>
+<span class="sd">        :func:`.vcritical`</span>
+<span class="sd">        :func:`.speed_of_sound_n`</span>
+<span class="sd">    """</span>
+    <span class="n">filenames_delta</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'delta'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH</span><span class="p">))</span>
+    <span class="n">path_filenames_delta</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_delta</span><span class="p">]</span>
+    <span class="n">filenames_density</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'density'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH</span><span class="p">))</span>
+    <span class="n">path_filenames_density</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_density</span><span class="p">]</span>
+    <span class="n">v_max</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">v_sound_mean</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">file_delta</span><span class="p">,</span> <span class="n">file_density</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">path_filenames_delta</span><span class="p">,</span> <span class="n">path_filenames_density</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_delta</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_density</span><span class="p">):</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_delta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">data_delta</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_delta</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="c1">#data[:,0] - x</span>
+            <span class="c1">#data[:,1] - y</span>
+            <span class="c1">#data[:,2] - rho</span>
+            <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_density</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">r</span><span class="o">&gt;=</span><span class="mi">40</span><span class="p">,</span> <span class="n">r</span><span class="o">&lt;=</span><span class="mi">60</span><span class="p">))</span>
+            <span class="n">delta</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">pairing_field</span><span class="p">(</span><span class="n">data_delta</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_delta</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">kf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">v_landau</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vLandau</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+            <span class="n">v_sound</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">speed_of_sound_n</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">v_sound_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">v_sound</span><span class="p">))</span>
+
+            <span class="n">v_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">v_landau</span><span class="p">))</span>
+            <span class="n">temperature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">file_delta</span><span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">:</span><span class="o">-</span><span class="mi">12</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span>
+
+
+    <span class="n">filenames_delta_uniform</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'delta'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH_UNIFORM</span><span class="p">))</span>
+    <span class="n">path_filenames_delta_uniform</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH_UNIFORM</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_delta_uniform</span><span class="p">]</span>
+    <span class="n">filenames_density_uniform</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'density'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH_UNIFORM</span><span class="p">))</span>
+    <span class="n">path_filenames_density_uniform</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH_UNIFORM</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_density_uniform</span><span class="p">]</span>
+    <span class="n">v_max_uniform</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">temperature_uniform</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># v_sound_uniform = []</span>
+
+    <span class="k">for</span> <span class="n">file_delta</span><span class="p">,</span> <span class="n">file_density</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">path_filenames_delta_uniform</span><span class="p">,</span> <span class="n">path_filenames_density_uniform</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_delta</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_density</span><span class="p">):</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_delta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">data_delta</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_delta</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="c1">#data[:,0] - x</span>
+            <span class="c1">#data[:,1] - y</span>
+            <span class="c1">#data[:,2] - rho</span>
+            <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_density</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">r</span><span class="o">&gt;=</span><span class="mi">40</span><span class="p">,</span> <span class="n">r</span><span class="o">&lt;=</span><span class="mi">60</span><span class="p">))</span>
+            <span class="n">delta</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">pairing_field</span><span class="p">(</span><span class="n">data_delta</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_delta</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+            <span class="n">kf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">v_landau</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vLandau</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+
+            <span class="n">v_max_uniform</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">v_landau</span><span class="p">))</span>
+            <span class="n">temperature_uniform</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">file_delta</span><span class="p">[</span><span class="o">-</span><span class="mi">16</span><span class="p">:</span><span class="o">-</span><span class="mi">12</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_</span><span class="si">{Landau}</span><span class="s2">$ for "</span><span class="o">+</span><span class="n">particles_nr</span><span class="o">+</span><span class="s2">" particles"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ T \: [MeV/k_B]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_</span><span class="si">{Landau}</span><span class="s2">$ [c]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="s1">'-o'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"vortex"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature_uniform</span><span class="p">,</span> <span class="n">v_max_uniform</span><span class="p">,</span> <span class="s1">'-o'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"uniform"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">v_sound_mean</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">'dashed'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"speed of sound"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_landau_critical_velocity">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_landau_critical_velocity">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_landau_critical_velocity</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">filename_delta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified files containing density and reference field data.</span>
+<span class="sd">    The code checks their validity, and creates 2D data arrays. It calculates</span>
+<span class="sd">    the Landau velocity :math:`v_{Landau}` [c], which shows at which velocity the</span>
+<span class="sd">    superfluid medium starts to be excited, and the critical velocity,</span>
+<span class="sd">    :math:`v_{Critical}` [c] (at this velocity the system is no longer superfluid).</span>
+<span class="sd">    Both velocities are plotted as a cross section through the 'box' containing</span>
+<span class="sd">    the vortex/uniform matter data.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_L = \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        v_L = e \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename_density (str): name of the file containing density data</span>
+<span class="sd">        filename_delta (str): name of the file containing the reference pairing field data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vLandau`</span>
+<span class="sd">        :func:`.vcritical`</span>
+<span class="sd">    """</span>
+    <span class="n">filename_density</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_density</span>
+    <span class="n">filename_delta</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_delta</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_density</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_delta</span><span class="p">):</span>
+        <span class="n">data_delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_delta</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_delta</span> <span class="o">=</span> <span class="n">data_delta</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_delta</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">delta</span><span class="p">,</span> <span class="n">arg</span> <span class="o">=</span> <span class="n">pairing_field</span><span class="p">(</span><span class="n">data_delta</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_delta</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+        <span class="n">kf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">v_landau</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vLandau</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+        <span class="n">v_critical</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vcritical</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+        <span class="c1"># v_sound = libnest.bsk.speed_of_sound_n(data_rho[:,2])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="c1"># plt.xlim(-90, 90)</span>
+        <span class="c1"># plt.ylim(0., 3.)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Various velocities vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"</span><span class="si">% s</span><span class="s2">peed of light [c]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v_landau</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Landau"</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v_critical</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"Critical"</span><span class="p">)</span>
+        <span class="c1"># plt.scatter(r, v_sound, 0.5, label='speed of sound')</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper right"</span><span class="p">,</span> <span class="n">markerscale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_speed_of_sound">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_speed_of_sound">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_speed_of_sound</span><span class="p">(</span><span class="n">filename_density</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified files containing the density data for NeuM. The code</span>
+<span class="sd">    checks its validity, and creates a 2D data array. It calculates the speed of</span>
+<span class="sd">    sound :math:`v_{s}` [c], and plots it against a cross section through the</span>
+<span class="sd">    'box' containing the vortex/uniform matter data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename_density (str): name of the file containing density data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.speed_of_sound_n`</span>
+<span class="sd">    """</span>
+    <span class="n">filename_density</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_density</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_density</span><span class="p">):</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">v_sound</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">speed_of_sound_n</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="c1"># plt.ylim(0., 3.)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_</span><span class="si">{s}</span><span class="s2">$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{s}</span><span class="s2"> $ [c]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v_sound</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"upper right"</span><span class="p">,</span> <span class="n">markerscale</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#        Energy of minigap</span>
+<span class="c1"># ================================</span>
+<div class="viewcode-block" id="plot_e_minigap">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_e_minigap">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_e_minigap</span><span class="p">(</span><span class="n">filename_density</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Opens the specified files containing the density data for NeuM. The code</span>
+<span class="sd">    checks its validity, and creates a 2D data array. It calculates the energy</span>
+<span class="sd">    of minigap :math:`E_{minigap}`, and plots it against a cross section through</span>
+<span class="sd">    the 'box' containing the vortex/uniform matter data.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename_density (str): name of the file containing density data</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.E_minigap_delta_n`</span>
+<span class="sd">    """</span>
+    <span class="n">filename_density</span> <span class="o">=</span> <span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">filename_density</span>
+    <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">filename_density</span><span class="p">):</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">filename_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+        <span class="n">data_rho</span> <span class="o">=</span> <span class="n">data_rho</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_rho</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_rho</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="n">e_mg</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">E_minigap_n</span><span class="p">(</span><span class="n">data_rho</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Energy of minigap"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ r\: [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$E_</span><span class="si">{mg}</span><span class="s2"> \: [MeV]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">e_mg</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_e_minigap_temperature">
+<a class="viewcode-back" href="../../plots.html#libnest.real_data_plots.plot_e_minigap_temperature">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_e_minigap_temperature</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the maximum value the energy of minigap :math:`E_{minigap}` [MeV] against</span>
+<span class="sd">    temperature T [MeV/k:sub:`B`].The code uses :func:`.files_set_type` and</span>
+<span class="sd">    :func:`.files_set_particles` functions to parse through the data and chose</span>
+<span class="sd">    only files with, (respectively), pairing field, and density data sets for</span>
+<span class="sd">    the chosen number of particles. It does so for vortex data and for uniform</span>
+<span class="sd">    matter data for comparison.</span>
+
+<span class="sd">    The function creates an array of temperatures (taken from filenames)</span>
+<span class="sd">    and goes through the files to find the mean :math:`v_{Landau} [c]` in the range</span>
+<span class="sd">    of 40-60 fm (which is assumed to be the flattest part of the curve).</span>
+
+<span class="sd">    The function accesses also data with Andreev states simulation for the</span>
+<span class="sd">    specified number of particles and finds their minimum :math:`E_{minigap}` data point.</span>
+<span class="sd">    It is then plotted as a striaght line for comparison.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        particles_nr (str): choice of files with a specified number of particles</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.E_minigap_delta_n`</span>
+<span class="sd">        :func:`.file_andreev`</span>
+<span class="sd">        :func:`.andreev_e_minimum`</span>
+<span class="sd">    """</span>
+    <span class="n">filenames_density</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'density'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH</span><span class="p">))</span>
+    <span class="n">path_filenames_density</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_density</span><span class="p">]</span>
+    <span class="n">filenames_delta</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'delta'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH</span><span class="p">))</span>
+    <span class="n">path_filenames_delta</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_delta</span><span class="p">]</span>
+    <span class="n">e_max</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">filenames_density_uniform</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'density'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH_UNIFORM</span><span class="p">))</span>
+    <span class="n">path_filenames_density_uniform</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH_UNIFORM</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_density_uniform</span><span class="p">]</span>
+    <span class="n">filenames_delta_uniform</span> <span class="o">=</span> <span class="n">files_set_type</span><span class="p">(</span><span class="s1">'delta'</span><span class="p">,</span> <span class="n">files_set_particles</span><span class="p">(</span><span class="n">particles_nr</span><span class="p">,</span> <span class="n">TXT_PATH_UNIFORM</span><span class="p">))</span>
+    <span class="n">path_filenames_delta_uniform</span> <span class="o">=</span> <span class="p">[</span><span class="n">TXT_PATH_UNIFORM</span> <span class="o">+</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filenames_delta_uniform</span><span class="p">]</span>
+    <span class="n">e_max_uniform</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">temperature_uniform</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">file_delta</span><span class="p">,</span> <span class="n">file_density</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">path_filenames_delta</span><span class="p">,</span> <span class="n">path_filenames_density</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_delta</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_density</span><span class="p">):</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_delta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">data_delta</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_delta</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="n">data_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_density</span> <span class="o">=</span> <span class="n">data_density</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_density</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_density</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_density</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">r</span><span class="o">&gt;=</span><span class="mi">40</span><span class="p">,</span> <span class="n">r</span><span class="o">&lt;=</span><span class="mi">60</span><span class="p">))</span>
+            <span class="n">e_mg</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">E_minigap_delta_n</span><span class="p">(</span><span class="n">data_delta</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_density</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+
+            <span class="n">e_max</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">e_mg</span><span class="p">))</span>
+            <span class="n">temperature</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">file_density</span><span class="p">[</span><span class="o">-</span><span class="mi">18</span><span class="p">:</span><span class="o">-</span><span class="mi">14</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">file_delta</span><span class="p">,</span> <span class="n">file_density</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">path_filenames_delta_uniform</span><span class="p">,</span> <span class="n">path_filenames_density_uniform</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_delta</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">file_check</span><span class="p">(</span><span class="n">file_density</span><span class="p">):</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_delta</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_delta</span> <span class="o">=</span> <span class="n">data_delta</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_delta</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="n">data_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">file_density</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">' '</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">'#'</span><span class="p">)</span>
+            <span class="n">data_density</span> <span class="o">=</span> <span class="n">data_density</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data_density</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="n">cross_section_distance</span><span class="p">(</span><span class="n">data_density</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">data_density</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="mi">180</span><span class="p">)</span>
+            <span class="n">i</span><span class="p">,</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">r</span><span class="o">&gt;=</span><span class="mi">40</span><span class="p">,</span> <span class="n">r</span><span class="o">&lt;=</span><span class="mi">60</span><span class="p">))</span>
+            <span class="n">e_mg</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">E_minigap_delta_n</span><span class="p">(</span><span class="n">data_delta</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">data_density</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+
+            <span class="n">e_max_uniform</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">e_mg</span><span class="p">))</span>
+            <span class="n">temperature_uniform</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">file_density</span><span class="p">[</span><span class="o">-</span><span class="mi">18</span><span class="p">:</span><span class="o">-</span><span class="mi">14</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Cannot access file'</span><span class="p">)</span>
+
+    <span class="n">e_min</span> <span class="o">=</span> <span class="n">andreev_e_minimum</span><span class="p">(</span><span class="n">file_andreev</span><span class="p">(</span><span class="n">filenames_density</span><span class="p">))</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="c1"># plt.ylim(0., 0.3)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Energy of minigap for "</span><span class="o">+</span><span class="n">particles_nr</span><span class="o">+</span><span class="s2">" particles"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ T \: [MeV/k_B]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$E_</span><span class="si">{mg}</span><span class="s2"> \: [MeV]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">e_max</span><span class="p">,</span> <span class="s1">'-o'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'vortex'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">temperature_uniform</span><span class="p">,</span> <span class="n">e_max_uniform</span><span class="p">,</span> <span class="s1">'-o'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'uniform'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">e_min</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">'dashed'</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"numerical"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

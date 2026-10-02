@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libnest.plots &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">libnest.plots</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for libnest.plots</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="sd">"""</span>
+<span class="sd">Module: Plots</span>
+<span class="sd">=============</span>
+<span class="sd">This module provides ready-to-go functions for plotting. Probably should be</span>
+<span class="sd">moved and work as a script.</span>
+
+<span class="sd">List of functions</span>
+<span class="sd">-----------------</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libnest.bsk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">libnest.units</span>
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#         Energy/nucleon</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="plot_energy_per_nucleon">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_energy_per_nucleon">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the energy per nucleon for uniform matter of density :math:`\\rho`,</span>
+<span class="sd">    the sum of proton and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`</span>
+<span class="sd">    respectively.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">rho_n</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">rho_p</span>
+    <span class="n">En</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">energy_per_nucleon</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">energy_per_nucleon</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Energy per nucleon"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"E/A [MeV]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">En</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_energy_per_nucleon_both">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_energy_per_nucleon_both">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_energy_per_nucleon_both</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the energy per nucleon for symmetric uniform matter and neutron</span>
+<span class="sd">    uniform matter of density :math:`\\rho`, which is the sum of proton and</span>
+<span class="sd">    neutron densities, :math:`\\rho_p` and :math:`\\rho_n` respectively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.energy_per_nucleon`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_neum</span> <span class="o">=</span> <span class="n">rho</span> <span class="c1">#NeuM</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_sym</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span> <span class="c1">#Symmetric</span>
+
+    <span class="n">En_neum</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">En_sym</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">energy_per_nucleon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">energy_per_nucleon</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">energy_per_nucleon</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Energy per nucleon"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"E/A [MeV]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_neum</span><span class="p">,</span> <span class="n">En_neum</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'e (NeuM)'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_sym</span><span class="p">,</span> <span class="n">En_sym</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'e (sym)'</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#         Pairing fields</span>
+<span class="c1"># ================================</span>
+<div class="viewcode-block" id="plot_pairing_field_n">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_pairing_field_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pairing_field_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the pairing field :math:`\\Delta` [MeV] for neutrons in matter of</span>
+<span class="sd">    density :math:`\\rho`, the sum of proton and neutron densities,</span>
+<span class="sd">    :math:`\\rho_p` and :math:`\\rho_n` respectively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">rho_n</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">rho_p</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">neutron_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">pairing_field</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">pairing_field</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Pairing Field - neutrons"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"pairing field $\Delta \: [MeV]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_pairing_field_p">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_pairing_field_p">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pairing_field_p</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the pairing field :math:`\\Delta` [MeV] for protons in matter of</span>
+<span class="sd">    density :math:`\\rho`, the sum of proton and neutron densities,</span>
+<span class="sd">    :math:`\\rho_p` and :math:`\\rho_n` respectively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.proton_ref_pairing_field`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">rho_n</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">rho_p</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">proton_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">pairing_field</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">pairing_field</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Pairing Field - protons"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"pairing field $\Delta \: [MeV]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#        Effective masses</span>
+<span class="c1"># ================================</span>
+
+
+<div class="viewcode-block" id="plot_effective_mass_n">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_effective_mass_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_effective_mass_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the effective mass of neutron, :math:`M_{n}^{*} / M` [MeV] in matter of</span>
+<span class="sd">    density :math:`\\rho`. :math:`\\rho` is the sum of proton and neutron densities,</span>
+<span class="sd">    :math:`\\rho_p` and :math:`\\rho_n` respectively, and :math:`M` is the sum</span>
+<span class="sd">    of neutron and proton masses.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.effMn`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">effMn</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Neutron efective mass"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"M$^{*}_</span><span class="si">{n}</span><span class="s2">$/M"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_effective_mass_p">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_effective_mass_p">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_effective_mass_p</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the effective mass of proton, :math:`M_{p}^{*}/ M` [MeV] in matter of</span>
+<span class="sd">    density :math:`\\rho`. :math:`\\rho` is the sum of proton and neutron densities,</span>
+<span class="sd">    :math:`\\rho_p` and :math:`\\rho_n` respectively, and :math:`M` is the sum</span>
+<span class="sd">    of neutron and proton masses.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.effMp`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">effMp</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Proton efective mass"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"M$^{*}_</span><span class="si">{p}</span><span class="s2">$/M"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_B_q">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_B_q">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_B_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the mean field potential (from variation over kinetic density,</span>
+<span class="sd">    or effective mass), :math:`B_{q}` [MeV fm :sup:`2`], in matter of</span>
+<span class="sd">    density :math:`\\rho`, where :math:`\\rho` is the sum of proton and neutron</span>
+<span class="sd">    densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+<span class="sd">        q (str): nucleon type choice (neutron 'n' or proton 'p')</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.B_q`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">B_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Mean potential field B$_q$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"B$_</span><span class="si">{q}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_U_q">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_U_q">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_U_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the mean field potential (from variation over density :math:`\\rho`),</span>
+<span class="sd">    :math:`U_{q}` [MeV] in matter of density :math:`\\rho`, where :math:`\\rho`</span>
+<span class="sd">    is the sum of proton and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+<span class="sd">        q (str): nucleon type choice (neutron 'n' or proton 'p')</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.U_q`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">U_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Mean potential field $U_q$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"U$_</span><span class="si">{q}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_isoscalarM">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_isoscalarM">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_isoscalarM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the isoscalar effective mass, :math:`M_s^*` [MeV]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.isoscalarM`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">isoscalarM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Effective isoscalar mass $M^*_s$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"M$^*_</span><span class="si">{s}</span><span class="s2">/M$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_isovectorM">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_isovectorM">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_isovectorM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the isovector effective mass, :math:`M_v^*`` [MeV]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.isovectorM`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">isovectorM</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Effective isovector mass $M^*_v$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"M$^*_</span><span class="si">{v}</span><span class="s2">/M$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#      Velocities &amp; pressure</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="plot_pressure_n">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_pressure_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pressure_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots pressure :math:`P` inside NeuM of density :math:`rho_n` in units of</span>
+<span class="sd">    percentage of speed of sound.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.pressure_n`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">pressure_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Pressure inside NeuM $P_</span><span class="si">{NeuM}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$P_</span><span class="si">{NeuM}</span><span class="s2"> [MeV </span><span class="si">{fm}</span><span class="s2">^{-3}]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_speed_of_sound_n">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_speed_of_sound_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_speed_of_sound_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the speed of sound for NeuM of density :math:`rho_n` in units of</span>
+<span class="sd">    percentage of speed of sound.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.speed_of_sound_n`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">speed_of_sound_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Speed of sound $v_</span><span class="si">{s}</span><span class="s2">$ inside NeuM"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="c1"># plt.xlim(0., 0.08)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{s}</span><span class="s2"> $ [</span><span class="si">% c</span><span class="s2">]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_v_landau">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_v_landau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_v_landau</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the Landau velocity, which shows at which velocity the superfluid medium starts to become excited,</span>
+<span class="sd">    for neutron matter of density :math:`\\rho_n`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_L = \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vLandau`</span>
+<span class="sd">        :func:`.rho2kf`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho_n</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">neutron_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vLandau</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Landau velocity $v_</span><span class="si">{Landau}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{Landau}</span><span class="s2"> $ [</span><span class="si">% c</span><span class="s2">]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_v_critical">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_v_critical">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_v_critical</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the critical velocity for a superfluid.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        v_L = e \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vcritical`</span>
+<span class="sd">        :func:`.rho2kf`</span>
+<span class="sd">    """</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho_n</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">neutron_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vcritical</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Critical velocity $v_</span><span class="si">{c}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{c}</span><span class="s2"> $ [</span><span class="si">% c</span><span class="s2">]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_v_sf">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_v_sf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_v_sf</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the superfluid velocity :math:`v_{sf}` based on the gradient of the</span>
+<span class="sd">    pairing field gradient.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r (float): distance from the center of a vortex :math:`r` [fm]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.vsf`</span>
+<span class="sd">    """</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">definitions</span><span class="o">.</span><span class="n">vsf</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$v_</span><span class="si">{sf}</span><span class="s2">$ vs radius"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$r [fm]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$ v_</span><span class="si">{sf}</span><span class="s2"> $ [</span><span class="si">% c</span><span class="s2">]"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<span class="c1"># ================================</span>
+<span class="c1">#        Energy densities</span>
+<span class="c1"># ================================</span>
+
+<div class="viewcode-block" id="plot_epsilon">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the energy density :math:`\\epsilon` [MeV fm :sup:`-3`]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        j (float): momentum density/current :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="sd">        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+<span class="sd">        kappa (float):</span>
+<span class="sd">            what is kappa? (no Eq.9 in Ref.41)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.epsilon_np`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.000</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.000</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_grad</span> <span class="o">=</span> <span class="n">rho_grad</span> <span class="o">*</span> <span class="n">grad</span>
+
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">epsilon</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">nu</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">kappa</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"EDF $\mathcal</span><span class="si">{E}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2"> \:\: [MeV fm^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">eps</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+
+<div class="viewcode-block" id="plot_epsilon_tau">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon_tau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon_tau</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the energy density :math:`\\epsilon` [MeV fm :sup:`-3`] in neutron matter,</span>
+<span class="sd">    related to the density-dependent effective mass.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">epsilon_tau</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"E "</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2">_{</span><span class="se">\\</span><span class="s2">tau} [MeV fm^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_epsilon_delta">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon_delta">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon_delta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the isovector effective mass, :math:`M_v^*`` [MeV]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_grad</span> <span class="o">=</span> <span class="n">rho_grad</span> <span class="o">*</span> <span class="n">grad</span>
+
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">epsilon_delta_rho</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">rho_grad</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"E"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2">_{</span><span class="se">\\</span><span class="s2">Delta </span><span class="se">\\</span><span class="s2">rho} [MeV fm^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_epsilon_rho_np">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon_rho_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the isovector effective mass, :math:`M_v^*`` [MeV]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">g_e_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"E"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2">_{</span><span class="se">\\</span><span class="s2">rho} [MeV fm^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_epsilon_tau_np">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon_tau_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon_tau_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the isovector effective mass, :math:`M_v^*`` [MeV]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">g_e_tau_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"E"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2">_{</span><span class="se">\\</span><span class="s2">tau} [MeV fm^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_epsilon_delta_rho_np">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon_delta_rho_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon_delta_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span> <span class="n">rho_grad</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the isovector effective mass, :math:`M_v^*`` [MeV]</span>
+<span class="sd">    in matter of density :math:`\\rho`, where :math:`\\rho` is the sum of proton</span>
+<span class="sd">    and neutron densities, :math:`\\rho_p` and :math:`\\rho_n`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">+</span> <span class="n">rho_n</span>
+
+    <span class="c1">#for testing the plot</span>
+    <span class="n">rho_grad</span> <span class="o">=</span> <span class="n">rho_grad</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_grad_n_square</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho_grad_n</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho_grad_p_square</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho_grad_p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho_grad_square</span> <span class="o">=</span> <span class="n">rho_grad</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">Mn</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">g_e_LaplaceRho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n_square</span><span class="p">,</span> <span class="n">rho_grad_p_square</span><span class="p">,</span> <span class="n">rho_grad_square</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"E $\mathcal</span><span class="si">{E}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2">_{</span><span class="se">\\</span><span class="s2">Delta </span><span class="se">\\</span><span class="s2">rho} [MeV fm^{-3}]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">Mn</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+    <span class="c1">#to delete later</span>
+<div class="viewcode-block" id="epsilon_test">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.epsilon_test">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">epsilon_test</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span>  <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the energy density functional from bsk_functional_full code (for testing).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">rho_grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_grad_n_square</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_grad</span> <span class="o">*</span> <span class="n">rho_grad_n</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho_grad_p_square</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_grad</span> <span class="o">*</span> <span class="n">rho_grad_p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho_grad_square</span> <span class="o">=</span> <span class="n">rho_grad_n_square</span> <span class="o">+</span> <span class="n">rho_grad_p_square</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">libnest</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">MN</span><span class="o">*</span><span class="n">tau_n</span> <span class="o">+</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">g_e_LaplaceRho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n_square</span><span class="p">,</span> <span class="n">rho_grad_p_square</span><span class="p">,</span> <span class="n">rho_grad_square</span><span class="p">)</span> <span class="o">+</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">g_e_tau_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">)</span> <span class="o">+</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">g_e_rho_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"EDF$\mathcal</span><span class="si">{E}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \:\: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$$\mathcal</span><span class="si">{E}</span><span class="s2"> [MeV fm^{-3}]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="plot_epsilon_np">
+<a class="viewcode-back" href="../../plots.html#libnest.plots.plot_epsilon_np">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_epsilon_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">,</span> <span class="n">nu_n</span><span class="p">,</span> <span class="n">nu_p</span><span class="p">,</span> <span class="n">kappa_n</span><span class="p">,</span> <span class="n">kappa_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Plots the energy functional :math:`\\epsilon` [MeV fm :sup:`-3`] against</span>
+<span class="sd">    :math`\\rho`, the sum of proton and neutron of densities, :math:`\\rho_p`</span>
+<span class="sd">    and :math:`\\rho_n` respectively.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        rho_grad_p (float): proton density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        tau_n (float): kinetic density :math:`\\tau` [fm :sup:`-5`]</span>
+<span class="sd">        jsum2 (float): sum of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]</span>
+<span class="sd">        nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="sd">        nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]</span>
+<span class="sd">        kappa_n (float):</span>
+<span class="sd">        kappa_p (float):</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">        """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">rho_p</span> <span class="o">*</span> <span class="n">rho</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span> <span class="o">+</span> <span class="n">rho_p</span>
+
+    <span class="n">rho_grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">rho_grad_n</span> <span class="o">=</span> <span class="n">rho_grad_n</span> <span class="o">*</span> <span class="n">rho_grad</span>
+    <span class="n">rho_grad_p</span> <span class="o">=</span> <span class="n">rho_grad_p</span> <span class="o">*</span> <span class="n">rho_grad</span>
+
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">libnest</span><span class="o">.</span><span class="n">bsk</span><span class="o">.</span><span class="n">epsilon_np</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_grad_n</span><span class="p">,</span> <span class="n">rho_grad_p</span><span class="p">,</span> <span class="n">tau_n</span><span class="p">,</span> <span class="n">tau_p</span><span class="p">,</span> <span class="n">jsum2</span><span class="p">,</span> <span class="n">jdiff2</span><span class="p">,</span> <span class="n">nu_n</span><span class="p">,</span> <span class="n">nu_p</span><span class="p">,</span> <span class="n">kappa_n</span><span class="p">,</span> <span class="n">kappa_p</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">"EDF $\mathcal</span><span class="si">{E}</span><span class="s2">$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\rho \:\: {[fm]}^{-3}$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\mathcal</span><span class="si">{E}</span><span class="s2"> \:\: [MeV fm^{-3}]$"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'Fit'</span><span class="p">)</span>
+    <span class="c1">#plt.legend()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

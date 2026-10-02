@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libnest.tools &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">libnest.tools</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for libnest.tools</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="sd">"""</span>
+<span class="sd">Module: tools</span>
+<span class="sd">=============</span>
+<span class="sd">List of functions</span>
+<span class="sd">-----------------</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">HBARC</span><span class="p">,</span> <span class="n">MN</span><span class="p">,</span> <span class="n">MP</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.definitions</span><span class="w"> </span><span class="kn">import</span> <span class="n">rho2kf</span><span class="p">,</span> <span class="n">eF_n</span>
+
+<div class="viewcode-block" id="threeSlice">
+<a class="viewcode-back" href="../../tools.html#libnest.tools.threeSlice">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">threeSlice</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns 1, 2 or 3 dimensional numpy array with slices through given variable.</span>
+
+<span class="sd">    It works for 1D, 2D, 3D.</span>
+
+<span class="sd">    By default it cuts through the center.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        variable (numpy.ndarray): 1D, 2D or 3D array</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: slices through the centre along each axis</span>
+<span class="sd">    """</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">3</span><span class="p">):</span>
+        <span class="p">[</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">variable</span><span class="p">[:,</span> <span class="nb">int</span><span class="p">(</span><span class="n">ny</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">nz</span><span class="o">/</span><span class="mi">2</span><span class="p">)],</span>
+                         <span class="n">variable</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">nx</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">:,</span> <span class="nb">int</span><span class="p">(</span><span class="n">nz</span><span class="o">/</span><span class="mi">2</span><span class="p">)],</span>
+                         <span class="n">variable</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">nx</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">ny</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">:]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"object"</span><span class="p">)</span>
+    <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span>
+        <span class="p">[</span><span class="n">nx</span><span class="p">,</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">variable</span><span class="p">[:,</span><span class="nb">int</span><span class="p">(</span><span class="n">ny</span><span class="o">/</span><span class="mi">2</span><span class="p">)],</span> <span class="n">variable</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">nx</span><span class="o">/</span><span class="mi">2</span><span class="p">),:]],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"object"</span><span class="p">)</span>
+    <span class="k">elif</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">nx</span><span class="o">=</span><span class="n">variable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">variable</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"object"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="centerOfMass">
+<a class="viewcode-back" href="../../tools.html#libnest.tools.centerOfMass">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">centerOfMass</span><span class="p">(</span><span class="n">density</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns numpy array of center of masses coordinates.</span>
+
+<span class="sd">    It works for 1D, 2D, 3D.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        The center of mass unit here is unitless (units of grid)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        density (numpy.ndarray): :math:`\\rho_n` [fm :sup:`-3`] at subsequent time steps, shape (nt, nx, ny, nz)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        2 dimensional numpy array of center of mass coordinates</span>
+<span class="sd">        at subsequent time steps [[x0,y0,z0], [x1,y1,z1],...]</span>
+<span class="sd">    """</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="n">density</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">total_mass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">density</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">density</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="n">density</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">density</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">,</span> <span class="n">y</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">,</span> <span class="n">z</span> <span class="o">/</span> <span class="n">total_mass</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">position</span></div>
+
+
+<div class="viewcode-block" id="condensationEnergy">
+<a class="viewcode-back" href="../../tools.html#libnest.tools.condensationEnergy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">condensationEnergy</span><span class="p">(</span><span class="n">density</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span><span class="n">dV</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the condensation energy by calculating proper function of system density :math:`\\rho`, and pairing field :math:`\\Delta`. The Fermi energy :math:`\\epsilon^*_{F}` is calculated under the assumption that the effective mass is taken into account.</span>
+<span class="sd">    It works for 1D, 2D, 3D.</span>
+<span class="sd">    Returns numpy array of values of condensation energy.</span>
+<span class="sd">    1 dimensional numpy array of condensation energy</span>
+
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">	   E_{\\mathrm{cond}} = \\int_V \\frac{3}{8} \\frac{|\\Delta(\\bm r)|^2}{\\epsilon^*_{F}(\\bm r)}\\rho(\\bm r)d{\\bm r}</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        density (float): :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="sd">        delta (float): :math:`\\Delta` [MeV]</span>
+<span class="sd">        dV (float): infinitesimal element of volume (by default set to 1.0)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: condensation energy :math:`E_{\\mathrm{cond}}` at subsequent time steps [e0, e1,...]</span>
+
+<span class="sd">    """</span>
+    <span class="n">e</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mf">3.</span><span class="o">/</span><span class="mf">8.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">eF_n</span><span class="p">(</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">density</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">density</span><span class="p">)</span><span class="o">+</span><span class="mi">10</span><span class="o">**-</span><span class="mi">12</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">e</span></div>
+
+
+
+<div class="viewcode-block" id="flowEnergy">
+<a class="viewcode-back" href="../../tools.html#libnest.tools.flowEnergy">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">flowEnergy</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">density_n</span><span class="p">,</span> <span class="n">density_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">    Returns numpy array of values of flow energy.</span>
+
+
+<span class="sd">    It works for 1D, 2D, 3D.</span>
+
+<span class="sd">    Formula: \integral hbar*c*j^2/(2mc^2 density) dr</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        j (numpy.ndarray): current, shape (nt, 3, nx, ny, nz)</span>
+<span class="sd">        density_n (numpy.ndarray): neutron density [fm :sup:`-3`], shape (nt, nx, ny, nz)</span>
+<span class="sd">        density_p (numpy.ndarray): proton density [fm :sup:`-3`], shape (nt, nx, ny, nz)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        1 dimensional numpy array of flow energy</span>
+<span class="sd">        at subsequent time steps [e0, e1,...]</span>
+
+<span class="sd">    """</span>
+    <span class="n">density</span><span class="o">=</span><span class="n">density_n</span><span class="o">+</span><span class="n">density_p</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="n">density</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">e</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">j</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">j</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">density</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">energy</span><span class="o">=</span><span class="n">e</span><span class="o">*</span><span class="n">HBARC</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">MN</span><span class="o">*</span><span class="n">particleN</span><span class="p">(</span><span class="n">density_n</span><span class="p">)</span><span class="o">+</span><span class="n">MP</span><span class="o">*</span><span class="n">particleN</span><span class="p">(</span><span class="n">density_p</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">particleN</span><span class="p">(</span><span class="n">density</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="particleN">
+<a class="viewcode-back" href="../../tools.html#libnest.tools.particleN">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">particleN</span><span class="p">(</span><span class="n">density</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+
+
+<span class="sd">    Returns number of particles.</span>
+
+<span class="sd">    It works for 1D, 2D, 3D.</span>
+<span class="sd">    For static nucleus it is constant, however there are some system</span>
+<span class="sd">    scenarios where the number of particles might change.</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        density (numpy.ndarray): density [fm :sup:`-3`], shape (nt, nx, ny, nz)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        1 dimensional numpy array of number of particles</span>
+<span class="sd">        at subsequent time steps [N0, N1,...]</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">density</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libnest.units &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">libnest.units</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for libnest.units</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">Module: Units</span>
+<span class="sd">=============</span>
+<span class="sd">This module contains physical constants relevant for nuclear matter and neutron star physics. It also provides functions for converting one type of units into another.</span>
+
+<span class="sd">Numerical</span>
+<span class="sd">---------</span>
+<span class="sd">Constants for dealing with extreme numerics:</span>
+<span class="sd"> * ``NUMZERO`` = 1e-12 (the lowest numerical value allowed)</span>
+<span class="sd"> * ``NUMINF``  = 1e30  (the largest numerical value allowed)</span>
+<span class="sd"> * ``DENSEPSILON`` = 1e-12 this value is used to renormalize division and avoid dividing but extremely small numbers that cause numerical instabilities</span>
+
+<span class="sd">.. note::</span>
+<span class="sd">    ``DENSEPSILON`` is used whenever division by density has to be applied.</span>
+<span class="sd">    Those cases usually will give zero in proper analytical limit.</span>
+
+<span class="sd">Physical</span>
+<span class="sd">--------</span>
+<span class="sd">.. note::</span>
+<span class="sd">    Physical constants are from NIST website:</span>
+<span class="sd">     * https://physics.nist.gov/cgi-bin/cuu/Value?hbcmevf</span>
+<span class="sd">     * https://physics.nist.gov/cgi-bin/cuu/Value?mnc2mev</span>
+<span class="sd">     * https://physics.nist.gov/cgi-bin/cuu/Value?mpc2mev</span>
+
+
+<span class="sd">========  =========== =================== ===========</span>
+<span class="sd">Constant  Value       Unit                Description</span>
+<span class="sd">========  =========== =================== ===========</span>
+<span class="sd">HBARC     197.3269804 [MeV fm]            :math:`\hbar c`</span>
+<span class="sd">MN        939.5654205 [MeV]               neutron mass :math:`m_n`</span>
+<span class="sd">MP        938.2720882 [MeV]               proton  mass :math:`m_p`</span>
+<span class="sd">HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] :math:`\hbar^2/(2 m_n)`</span>
+<span class="sd">HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] :math:`\hbar^2/(2 m_p)`</span>
+<span class="sd">hbar22M0  20.72       [MeV*fm :math:`^2`] rounded :math:`\hbar^2/(2 m_n)`, used by :func:`.vsf_NV` and :func:`.v_NV`</span>
+<span class="sd">========  =========== =================== ===========</span>
+
+<span class="sd">Nucleon masses</span>
+<span class="sd">--------------</span>
+<span class="sd">The masses of proton, neutron and nucleon (which is their averaged mass). The nucleon mass is an average of proton and neutron mass:</span>
+
+<span class="sd">.. math::</span>
+<span class="sd">    m_N=\frac{1}{2} (m_n + m_p) \approx 1.67377585 \cdot 10^{-27}\,\mathrm{kg}.</span>
+
+
+<span class="sd">..  csv-table::</span>
+<span class="sd">    :header: "Mass", "Value"</span>
+<span class="sd">    :widths: 10, 15</span>
+
+<span class="sd">    neutron :math:`m_n`,    1.6749286 :math:`\cdot 10^{-27}` kg</span>
+<span class="sd">    proton  :math:`m_p`,    1.6726231 :math:`\cdot 10^{-27}` kg</span>
+<span class="sd">    nucleon :math:`m_N`,    1.6737759 :math:`\cdot 10^{-27}` kg</span>
+
+
+<span class="sd">Neutron star</span>
+<span class="sd">------------</span>
+<span class="sd">Some constants are relevant from the point of view of neutron star's physics.</span>
+<span class="sd">One of them is the *neutron drip* density :math:`\rho_{\mathrm{ND}}` at which excess neutrons are no longer bound to the nuclei and form a superfluid sea. This is how the border between the outer crust and the inner crust is defined.</span>
+<span class="sd">``RHOSAT`` is a rounded value of the nuclear saturation density :math:`\rho_0`, the density of matter inside heavy nuclei: :math:`3 \cdot 10^{14}` g cm :sup:`-3` :math:`\approx` 0.179 fm :sup:`-3`. The saturation density of a particular functional is somewhat lower (about 0.159 fm :sup:`-3` for BSk31). The crust-core transition takes place at roughly half of :math:`\rho_0`.</span>
+
+<span class="sd">..  csv-table::</span>
+<span class="sd">    :header: "Variable", "Density", "[g cm :sup:`-3`]", "[fm :sup:`-3`]"</span>
+<span class="sd">    :widths: 15, 15, 15, 15</span>
+
+<span class="sd">    "RHOSAT", ":math:`\rho_0`", "3 :math:`\cdot 10^{14}`", 0.179</span>
+<span class="sd">    "RHOND", ":math:`\rho_{\mathrm{ND}}`", "4 :math:`\cdot 10^{11}`", 0.00024</span>
+
+<span class="sd">List of functions</span>
+<span class="sd">-----------------</span>
+<span class="sd">"""</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">DENSEPSILON</span> <span class="o">=</span> <span class="mf">1e-12</span>
+<span class="n">NUMZERO</span> <span class="o">=</span> <span class="mf">1e-12</span>
+<span class="n">NUMINF</span>  <span class="o">=</span> <span class="mf">1e30</span>
+
+<span class="c1"># EXACT:</span>
+<span class="n">E</span>  <span class="o">=</span> <span class="mf">1.602176634e-19</span> <span class="c1"># elementary charge [C]</span>
+<span class="n">kB</span> <span class="o">=</span> <span class="mf">1.380649e-23</span> <span class="c1"># Boltzmann constant [J/K]</span>
+<span class="n">ALPHA</span><span class="o">=</span><span class="mf">7.2973525693e-3</span> <span class="c1"># fine-structure constants</span>
+<span class="n">HBARC</span><span class="o">=</span><span class="mf">197.3269804</span>  <span class="c1"># \hbar c [MeV fm]</span>
+<span class="n">hbar22M0</span>   <span class="o">=</span><span class="mf">20.72</span>  <span class="c1"># rounded hbar^2/(2 m_n) [MeV*fm^2]</span>
+<span class="n">MN</span>   <span class="o">=</span><span class="mf">939.56542052</span> <span class="c1"># neutron mass [MeV]</span>
+<span class="n">MP</span>   <span class="o">=</span><span class="mf">938.27208816</span> <span class="c1"># proton  mass [MeV]</span>
+<span class="n">HBAR2M_n</span> <span class="o">=</span> <span class="mf">20.721248369006936</span> <span class="c1"># [MeV*fm&lt;sup&gt;2&lt;/sup&gt;] 0.5*hbar^2/neutron mass</span>
+<span class="n">HBAR2M_p</span> <span class="o">=</span> <span class="mf">20.749810921501915</span> <span class="c1"># [MeV*fm&lt;sup&gt;2&lt;/sup&gt;] 0.5*hbar^2/proton mass</span>
+
+
+<div class="viewcode-block" id="KtoMev">
+<a class="viewcode-back" href="../../units.html#libnest.units.KtoMev">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">KtoMev</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Converts temperature :math:`T` units from Kelvins to energy :math:`E` units in MeVs by setting the Boltzmann constant to 1.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        E = \\frac{k_B}{1\\,\\mathrm{eV}} 10^{-6} T \\approx \\frac{T}{11604525006.1598}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        temp (float): temperature :math:`T` [K]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy :math:`E` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`MeVtoK`</span>
+<span class="sd">    """</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">temp</span><span class="o">/</span><span class="mf">11604525006.1598</span></div>
+
+
+<div class="viewcode-block" id="MeVtoK">
+<a class="viewcode-back" href="../../units.html#libnest.units.MeVtoK">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">MeVtoK</span><span class="p">(</span><span class="n">energy</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Converts energy :math:`E` units in MeVs to temperature :math:`T` units from Kelvins by setting the Boltzmann constant to 1.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        T = \\frac{1\\,\\mathrm{eV}}{k_B} 10^6 E \\approx 11604525006.1598 \\cdot E</span>
+
+
+<span class="sd">    Args:</span>
+<span class="sd">        energy (float): energy :math:`E` [MeV]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: temperature :math:`T` [K]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`KtoMev`</span>
+<span class="sd">    """</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">energy</span><span class="o">*</span><span class="mf">11604525006.1598</span></div>
+
+
+<div class="viewcode-block" id="fm3togcm3">
+<a class="viewcode-back" href="../../units.html#libnest.units.fm3togcm3">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fm3togcm3</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Function converts density units: fm :sup:`-3` into g cm :sup:`-3`. See more `here &lt;#nucleon-masses&gt;`_. The numerical factor</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \\frac{m_N}{\\mathrm{fm}^3} = 1.67377585 \\cdot  10^{15}\\frac{\\mathrm{g}}{\\mathrm{cm}^3}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): density :math:`\\rho` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: rho :math:`\\rho` [g cm :sup:`-3`]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`gcm3tofm3`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rho</span><span class="o">*</span><span class="mf">1.67377585e15</span></div>
+
+
+<div class="viewcode-block" id="gcm3tofm3">
+<a class="viewcode-back" href="../../units.html#libnest.units.gcm3tofm3">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">gcm3tofm3</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Function converts density units: g cm :sup:`-3` into fm :sup:`-3`. See more `here &lt;#nucleon-masses&gt;`_. The numerical factor</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \\frac{\\mathrm{g}}{\\mathrm{cm}^3} =</span>
+<span class="sd">        \\frac{10^{-15}}{1.67377585}</span>
+<span class="sd">        \\frac{m_N}{\\mathrm{fm}^3}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): density :math:`\\rho` [g cm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: rho :math:`\\rho` [fm :sup:`-3`]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`fm3togcm3`</span>
+<span class="sd">    """</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rho</span><span class="o">/</span><span class="mf">1.67377585e15</span></div>
+
+
+<span class="n">RHOSAT</span> <span class="o">=</span> <span class="n">gcm3tofm3</span><span class="p">(</span><span class="mf">3.e14</span><span class="p">)</span>
+<span class="n">RHOND</span>  <span class="o">=</span> <span class="n">gcm3tofm3</span><span class="p">(</span><span class="mf">4.e11</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"# Unit conversion: 1/fm^3 into g/cm^3"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"# 1/fm^3 = 1.67 * 10^15 g/cm^3"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dens</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{:f}</span><span class="s2"> [1/fm^3] ==  </span><span class="si">{:.2E}</span><span class="s2"> [g/cm^3]"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dens</span><span class="p">,</span><span class="n">fm3togcm3</span><span class="p">(</span><span class="n">dens</span><span class="p">)))</span>
+
+    <span class="c1"># print("{0:.2E}".format(fm3togcm3(.08)))</span>
+    <span class="c1"># print("{0:.2E}".format(fm3togcm3(.05)))</span>
+    <span class="c1"># print("{0:.2E}".format(fm3togcm3(.03)))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"# Unit conversion: g/cm^3 into 1/fm^3."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"# g/cm^3 = 0.59 * 10^-15 1/fm^3"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"# Nuclear saturation: </span><span class="si">{0:.2E}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gcm3tofm3</span><span class="p">(</span><span class="mf">3.e14</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"# Neutron drip: </span><span class="si">{0:.2E}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gcm3tofm3</span><span class="p">(</span><span class="mf">4.e11</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{:.6f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">gcm3tofm3</span><span class="p">(</span><span class="mf">4.e11</span><span class="p">)))</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

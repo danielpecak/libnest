@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libnest.definitions &mdash; libNeST 0.1.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/katex-math.css?v=05624691" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/katex.min.js?v=5cc8ed51"></script>
+      <script src="../../_static/auto-render.min.js?v=af98beb9"></script>
+      <script src="../../_static/katex_autorenderer.js?v=bebc588a"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            libNeST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../physics.html">Physics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help.html">Citing and Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html">Module: Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.KtoMev"><code class="docutils literal notranslate"><span class="pre">KtoMev()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.MeVtoK"><code class="docutils literal notranslate"><span class="pre">MeVtoK()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.fm3togcm3"><code class="docutils literal notranslate"><span class="pre">fm3togcm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../units.html#libnest.units.gcm3tofm3"><code class="docutils literal notranslate"><span class="pre">gcm3tofm3()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../definitions.html">Module: Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bsk.html">Module: BSk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io.html">Module: IO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pasta.html">Module: Pasta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plots.html">Module: Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Module: Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../inner-crust.html">Inner Crust</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">libNeST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">libnest.definitions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for libnest.definitions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># SPDX-License-Identifier: MIT</span>
+<span class="c1"># Copyright (c) 2022-2026 Daniel Pęcak</span>
+<span class="sd">"""</span>
+<span class="sd">Module: Definitions</span>
+<span class="sd">===================</span>
+<span class="sd">Handy functions from different fields of physics</span>
+
+<span class="sd">List of functions</span>
+<span class="sd">-----------------</span>
+<span class="sd">"""</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="c1"># import libnest.bsk</span>
+<span class="c1"># import libnest.units as units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">HBARC</span><span class="p">,</span> <span class="n">DENSEPSILON</span><span class="p">,</span> <span class="n">NUMZERO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">libnest.units</span><span class="w"> </span><span class="kn">import</span> <span class="n">MN</span><span class="p">,</span> <span class="n">HBAR2M_n</span>
+
+
+<div class="viewcode-block" id="rho2kf">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.rho2kf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rho2kf</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns wavevector kF based on density rho.</span>
+
+<span class="sd">    It uses the relation for a uniform Fermi system and yields:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k_F = (3 \\pi^2 \\rho )^{1/3}.</span>
+
+<span class="sd">    Here :math:`\\rho` is the density of a single nucleon species (neutrons</span>
+<span class="sd">    or protons), summed over both spin components. For symmetric nuclear</span>
+<span class="sd">    matter of total density :math:`\\rho` pass :math:`\\rho/2`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): density :math:`\\rho_q` of one nucleon species, both spin</span>
+<span class="sd">            components [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: wavevector :math:`k_F` [fm :sup:`-1`]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`kf2rho`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">3.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">rho</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="kf2rho">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.kf2rho">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">kf2rho</span><span class="p">(</span><span class="n">kF</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns rho based on wavevector kF.</span>
+
+<span class="sd">    It uses the relation for a uniform Fermi system and yields:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\rho = \\frac{k_F^3}{3 \\pi^2}.</span>
+
+<span class="sd">    The result is the density of a single nucleon species (neutrons or</span>
+<span class="sd">    protons), summed over both spin components.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kF (float): Fermi wavevector :math:`k_F` [fm :sup:`-1`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: density :math:`\\rho_q` of one nucleon species, both spin</span>
+<span class="sd">        components [fm :sup:`-3`]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.rho2kf`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">kF</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="p">(</span><span class="mf">3.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rho2tau">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.rho2tau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rho2tau</span><span class="p">(</span><span class="n">rho</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns kinetic density :math:`\\tau` for uniform Fermi system of density</span>
+<span class="sd">    :math:`\\rho`.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \\tau = \\frac{3}{5} k_F^2 \\rho = \\frac{3}{5} \\left(3 \\pi^2\\right)^{2/3} \\rho^{5/3}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): density :math:`\\rho_q` of one nucleon species, both spin</span>
+<span class="sd">            components [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: kinetic density :math:`\\tau_q` [fm :sup:`-5`]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="mf">0.6</span><span class="o">*</span><span class="p">(</span><span class="mf">3.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">2.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">rho</span><span class="o">**</span><span class="p">(</span><span class="mf">5.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="rhoEta">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.rhoEta">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">rhoEta</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns total density :math:`\\rho` and difference :math:`\\eta` of</span>
+<span class="sd">    densities from neutron and proton densities.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\rho = \\rho_n + \\rho_p</span>
+
+<span class="sd">        \\eta = \\rho_n - \\rho_p</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        The function returns the absolute difference :math:`\\eta = \\rho_n - \\rho_p`,</span>
+<span class="sd">        not the relative asymmetry :math:`\\eta/(\\rho_n + \\rho_p)`.</span>
+<span class="sd">        This is consistent with usage in :func:`.neutron_ref_pairing_field` and</span>
+<span class="sd">        :func:`.proton_ref_pairing_field` where the ratio :math:`\\eta/\\rho` is</span>
+<span class="sd">        computed explicitly.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: pair of total density :math:`\\rho` [fm :sup:`-3`], and density difference</span>
+<span class="sd">        :math:`\\eta` [fm :sup:`-3`]</span>
+<span class="sd">    """</span>
+    <span class="c1">#return rho_n+rho_p, rho_n-rho_p/(rho_n+rho_p + DENSEPSILON)</span>
+    <span class="k">return</span> <span class="n">rho_n</span><span class="o">+</span><span class="n">rho_p</span><span class="p">,</span> <span class="n">rho_n</span><span class="o">-</span><span class="n">rho_p</span></div>
+
+
+
+
+<div class="viewcode-block" id="xiBCS">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.xiBCS">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">xiBCS</span><span class="p">(</span><span class="n">kF</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the coherence length from BCS theory. If no delta argument is provided,</span>
+<span class="sd">    it is assumed that we consider pure neutron matter.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\xi_\\mathrm{BCS} = \\frac{(\\hbar c)^2 k_F}{\\pi \\Delta Mc^2}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        k_F (float): Fermi momentum [fm :sup:`-1`]</span>
+<span class="sd">        delta (float): pairing field [MeV]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: coherence length [fm]</span>
+<span class="sd">    """</span>
+    <span class="c1"># ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">libnest</span><span class="w"> </span><span class="kn">import</span> <span class="n">bsk</span>
+    <span class="n">kF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">kF</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">delta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rho</span>   <span class="o">=</span> <span class="n">kf2rho</span><span class="p">(</span><span class="n">kF</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">bsk</span><span class="o">.</span><span class="n">neutron_pairing_field</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">kF</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">delta</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">MN</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="vsf">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.vsf">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vsf</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the velocity based on gradient of the pairing field gradient.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r (float): distance from the center of a vortex in femtometers [fm]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: velocity in units of percentage of speed of light [c]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">ALPHA</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">MN</span><span class="o">*</span><span class="mf">0.5</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vLandau">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.vLandau">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vLandau</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="n">kF</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns Landau velocity.</span>
+
+<span class="sd">    Landau velocity shows at which velocity the superfluid medium starts to be</span>
+<span class="sd">    excited: phonons appear.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_L = \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        delta (float): :math:`\\Delta` [MeV]</span>
+<span class="sd">        kF (float):  :math:`k_F` [MeV]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Landau velocity :math:`v_L` in units of speed of light [c]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">delta</span><span class="o">/</span><span class="n">kF</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">HBARC</span></div>
+
+
+<div class="viewcode-block" id="vcritical">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.vcritical">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vcritical</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span><span class="n">kF</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns critical velocity for superfluid.</span>
+
+<span class="sd">    At this velocity the system is no longer superfluid: the Cooper pairs break.</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        v_L = \\frac{e}{2} \\frac{\\Delta}{\\hbar k_F} c</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        delta (float): :math:`\\Delta` [MeV]</span>
+<span class="sd">        kF (float):  :math:`k_F` [MeV]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Landau velocity :math:`v_c` in units of speed of light [c]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">delta</span><span class="o">/</span><span class="n">kF</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">HBARC</span></div>
+
+
+<div class="viewcode-block" id="superfluidFraction">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.superfluidFraction">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">superfluidFraction</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">rho</span><span class="p">,</span><span class="n">vsf</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns superfluid fraction: how much of the matter is superfluid.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\eta_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{{ j}}{\\rho} \\frac{1}{v_\\mathrm{sf}}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho (float): density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="sd">        j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]</span>
+<span class="sd">        vsf (float):  :math:`v_{\\mathrm{sf}}` [c]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: superfluid fraction: a number between 0 and 1 [1]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">ALPHA</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">MN</span><span class="o">*</span><span class="n">j</span><span class="o">/</span><span class="p">(</span><span class="n">rho</span><span class="o">*</span><span class="n">vsf</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="vsf_NV">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.vsf_NV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">vsf_NV</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">vsf</span><span class="p">,</span><span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the velocity based on the gradient of the pairing field phase.</span>
+<span class="sd">    However it is adjusted to the entrainment effects (definition by Nicolas Chamel</span>
+<span class="sd">    Valentin Allard).</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{{ A}}{M}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]</span>
+<span class="sd">        vsf (float):  :math:`v_{\\mathrm{sf}}` [c]</span>
+<span class="sd">        A (float): mean field potential coming from current variation A [MeV fm]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: velocity :math:`v_\\mathrm{SF}^{NV}` in units of percentage of speed of light [c]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">hbar22M0</span><span class="o">/</span><span class="n">B</span><span class="o">*</span><span class="n">vsf</span> <span class="o">+</span> <span class="n">units</span><span class="o">.</span><span class="n">ALPHA</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">MN</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">HBARC</span></div>
+
+
+<div class="viewcode-block" id="v_NV">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.v_NV">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">v_NV</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">rho</span><span class="p">,</span><span class="n">A</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the velocity (mass velocity). It is adjusted to the entrainment</span>
+<span class="sd">    effects (definition by Nicolas Chamel Valentin Allard).</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        v^{\\mathrm{NV}} = \\hbar c \\frac{\\hbar^2}{2 M B} \\frac{{ j}}{\\rho}  + \\frac{{ A}}{M}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        B (float): mean field potential coming from kinetic energy variation B [MeV fm :sup:`2`]</span>
+<span class="sd">        j (float): a three-component current vector :math:`\\vec j` [fm :sup:`-4`]</span>
+<span class="sd">        rho (float): density :math:`\\rho` [fm :sup:`-3`]</span>
+<span class="sd">        A (float): mean field potential coming from current variation A [MeV fm]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: mass velocity :math:`v_{\\mathrm{NV}}` in units of percentage of speed of light [c]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">ALPHA</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">MN</span><span class="o">*</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">hbar22M0</span><span class="o">/</span><span class="n">B</span><span class="o">*</span><span class="n">j</span><span class="o">/</span><span class="n">rho</span> <span class="o">+</span> <span class="n">A</span><span class="o">/</span><span class="n">units</span><span class="o">.</span><span class="n">HBARC</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="eF_n">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.eF_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">eF_n</span><span class="p">(</span><span class="n">kF</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns Fermi energy for neutrons based on wavevector kF:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\epsilon_F = \\frac{\\hbar^2 k_F^2}{2 M_n},</span>
+
+<span class="sd">    where :math:`M_n` is mass of a neutron.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        kF (float):  wavevector :math:`k_F`</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Fermi energy :math:`\\epsilon_F` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">HBAR2M_n</span> <span class="o">*</span> <span class="n">kF</span><span class="o">**</span><span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="Meff_hydro">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.Meff_hydro">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">Meff_hydro</span><span class="p">(</span><span class="n">rho_in</span><span class="p">,</span> <span class="n">rho_out</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns effective mass of a spherical nucleus of radius :math:`R` of density :math:`\\rho_{\\mathrm{in}}` immersed in superfluid neutrons of density :math:`\\rho_{\\mathrm{out}}`.</span>
+<span class="sd">    The formula is from: :cite:`magierski2004medium`</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        M_{\\mathrm{eff}} = \\frac{4}{3} \\pi R^3 m_n \\frac{(\\rho_{\\mathrm{in}}-\\rho_{\\mathrm{out}})^2}{\\rho_{\\mathrm{in}}+2\\rho_{\\mathrm{out}}},</span>
+
+<span class="sd">    where :math:`m_n` is mass of a neutron.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_in (float):  density of nucleus :math:`\\rho_{\\mathrm{in}}` [fm :sup:`-3`]</span>
+<span class="sd">        rho_out (float):  density of superfluid neutrons :math:`\\rho_{\\mathrm{out}}` [fm :sup:`-3`]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: effective mass :math:`M_{\\mathrm{eff}}` in units neutron mass</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">4.</span><span class="o">/</span><span class="mf">3.</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">MN</span><span class="o">*</span><span class="p">(</span><span class="n">rho_in</span><span class="o">-</span><span class="n">rho_out</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">rho_in</span><span class="o">+</span><span class="mf">2.</span><span class="o">*</span><span class="n">rho_out</span><span class="o">+</span><span class="n">DENSEPSILON</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="E_minigap_delta_n">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.E_minigap_delta_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">E_minigap_delta_n</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter</span>
+<span class="sd">    given the pairing field and density.</span>
+
+<span class="sd">    The minigap energy can be approximated:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        E_\\mathrm{mg} = \\frac{4}{3} \\frac{|\\Delta|^2}{\\varepsilon_F},</span>
+
+<span class="sd">    where :math:`\\Delta` is the pairing gap in the system, and :math:`\\varepsilon_F`</span>
+<span class="sd">    is the Fermi energy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        delta (float): pairing field for neutrons :math:`\\Delta_n` [MeV]</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both</span>
+<span class="sd">            spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy of minigap :math:`E_{mg}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.E_minigap_rho_n`</span>
+<span class="sd">        :func:`.eF_n`</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="mf">4.</span><span class="o">/</span><span class="mf">3.</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">eF_n</span><span class="p">(</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho_n</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="E_minigap_rho_n">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.E_minigap_rho_n">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">E_minigap_rho_n</span><span class="p">(</span><span class="n">rho_n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter,</span>
+<span class="sd">    calculating the pairing field automatically from density.</span>
+
+<span class="sd">    This is a convenience wrapper around :func:`.E_minigap_delta_n` that</span>
+<span class="sd">    computes the neutron pairing field using the BSk functional.</span>
+
+<span class="sd">    The minigap energy can be approximated:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        E_\\mathrm{mg} = \\frac{4}{3} \\frac{|\\Delta|^2}{\\varepsilon_F},</span>
+
+<span class="sd">    where :math:`\\Delta` is the pairing gap in the system, and :math:`\\varepsilon_F`</span>
+<span class="sd">    is the Fermi energy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both</span>
+<span class="sd">            spin components</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: energy of minigap :math:`E_{mg}` [MeV]</span>
+
+<span class="sd">    See also:</span>
+<span class="sd">        :func:`.E_minigap_delta_n`</span>
+<span class="sd">        :func:`.neutron_ref_pairing_field`</span>
+<span class="sd">        :func:`.rho2kf`</span>
+<span class="sd">        :func:`.eF_n`</span>
+
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">libnest.bsk</span><span class="w"> </span><span class="kn">import</span> <span class="n">neutron_ref_pairing_field</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">neutron_ref_pairing_field</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">E_minigap_delta_n</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">rho_n</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="mu_q">
+<a class="viewcode-back" href="../../definitions.html#libnest.definitions.mu_q">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">mu_q</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+<span class="c1"># Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Calculates the chemical potential :math:`\\mu` defined with the wavevector</span>
+<span class="sd">    :math:`k_F` :cite:`chamel2009pairing`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \\mu_q = \\frac{\\hbar^2 k_F^2}{2M_q}</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components</span>
+<span class="sd">        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">         float: chemical potential :math:`\\mu` [MeV]</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">libnest.bsk</span><span class="w"> </span><span class="kn">import</span> <span class="n">effMn</span><span class="p">,</span> <span class="n">effMp</span>
+    
+    <span class="n">rho_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_n</span><span class="p">)</span>
+    <span class="n">rho_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rho_p</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'n'</span><span class="p">):</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">effMn</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_n</span>
+    <span class="k">elif</span><span class="p">(</span><span class="n">q</span><span class="o">==</span><span class="s1">'p'</span><span class="p">):</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">effMp</span><span class="p">(</span><span class="n">rho_n</span><span class="p">,</span> <span class="n">rho_p</span><span class="p">)</span>
+        <span class="n">rho</span> <span class="o">=</span> <span class="n">rho_p</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">'# ERROR: Nucleon q must be either n or p'</span><span class="p">)</span>
+    <span class="n">mu_q</span> <span class="o">=</span> <span class="n">HBARC</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">rho2kf</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mf">2.</span><span class="o">*</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">mu_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mu_q</span><span class="p">)</span>
+    <span class="c1"># Handle assignment for both scalar and array</span>
+    <span class="k">if</span> <span class="n">mu_q</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">if</span> <span class="n">mu_q</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mu_q</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+        <span class="k">if</span> <span class="n">rho</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">mu_q</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu_q</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mu_q</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">mu_q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">rho</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">mu_q</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">NUMZERO</span>
+        <span class="k">return</span> <span class="n">mu_q</span></div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Daniel Pęcak.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
