@@ -242,16 +242,42 @@ sign-off.
       and of the three `definitions` helpers, values of `T0 … KAPPAP`. The test accepts new
       parameters only when appended with defaults.
 
-### E1 — Parameters become data (no behavior change)
-- [ ] `edf/parameters.py` + a `BSK31` instance; `bsk.py` globals become `T0 = BSK31.t0`, ….
-      Golden test passes.
+### E1 — Parameters become data (no behavior change)  ✅ DONE (2026-10-02)
+- [x] `libnest/edf/parameters.py`: frozen dataclasses `SkyrmeParameters` (t0…t5, x0…x5,
+      t2x2, α/β/γ, ħ²/2m per species, `yw`, reference/doi/notes) and `PairingParameters`
+      (cutoff ε_Λ, κ_n/κ_p, f^±). Fields not used before E4 (`scheme`, `gap_model`,
+      `kappa_convention`) are deliberately **not** added yet, so nothing can be set and
+      silently ignored.
+- [x] The BSk31 values live in `bsk.py` (`BSK31 = register(SkyrmeParameters(...),
+      PairingParameters(...))`); the old constants `T0 … KAPPAP` are read from it.
 
-### E2 — One implementation (no behavior change)
-- [ ] `edf/skyrme.py`: `SkyrmeFunctional` with all formulas (mechanical `T0` → `p.t0`);
-      internal calls through `self`.
-- [ ] `bsk.py` becomes the compatibility layer (BSk31 instance, old names, old constants).
-- [ ] Functional-dependent `definitions` functions → methods + wrappers (cycle removed).
-- [ ] Golden test passes at `rtol=1e-12`; `test_imports`, `main.py` unchanged.
+### E2 — One implementation (no behavior change)  ✅ DONE (2026-10-02)
+- [x] `libnest/edf/skyrme.py`: `SkyrmeFunctional` with all 42 functional-dependent
+      functions as methods, plus `mu_q` moved from `definitions`. Generated mechanically
+      from the old `bsk.py` (AST-based: `T0` → `p.t0` and internal calls → `self.` in code
+      lines only, docstrings untouched); every transformed line was reviewed. `Lambda` and
+      `_clamp_nonnegative` stay plain functions. `HBAR2M_n/p` now come from the parameter
+      set (same values); the pairing cutoff 6.5 MeV in `I()` is `self.pairing.cutoff`.
+      Bare masses (`HBARC**2/MN` in `energy_per_nucleon`, `epsilon_np`) unchanged → E3.
+- [x] `libnest/edf/parametrizations.py`: `register`, `get_functional` (case-insensitive),
+      `available_functionals`; family modules (`libnest.bsk`, `libnest.bskg`) are imported
+      lazily on first lookup. `libnest/edf/__init__.py` re-exports the public API.
+- [x] `bsk.py` = BSk family module: `BSK31`, the old constants, module-level functions =
+      bound methods of `BSK31`, `__all__` (so the docs still list them as `bsk` functions),
+      old re-exports (`bsk.MN`, `bsk.rho2kf`, `bsk.mu_q`, …) kept.
+- [x] `definitions.mu_q`, `xiBCS`, `E_minigap_rho_n` take an optional `functional=` (object
+      or name, default BSk31) and import `edf` lazily → no module-level import cycle.
+      _Deviation from the plan:_ `xiBCS` and `E_minigap_rho_n` stay in `definitions` (they
+      only need a pairing field); only `mu_q` became a method.
+- [x] **Verified:** golden master bit-identical in all 51 cases and every field (array,
+      scalar, masks, scalar exceptions) — `bsk31.json` untouched; API snapshot compatible
+      (only the appended `functional=None`); 88 tests green (new `tests/test_edf.py`:
+      registry, immutability, independence of functionals, `functional=` wrappers, cutoff
+      wiring, scalar/array); `test_imports` now walks subpackages; ruff clean; strict docs
+      build (`-W -n`) green with a new `docs/edf.rst` page.
+- [x] The commented-out legacy NeuM block at the end of the old `bsk.py` (`C_rho`,
+      `epsilon_rho`, … — dead code) was dropped; it remains in git history.
+- `libnest/bskg.py` untouched (still the old copy); it imports fine and registers nothing.
 
 ### E3 — Fix the physics bugs from §5 (numbers change on purpose)
 - [ ] One commit per bug: new invariant test → fix → `python -m tests.golden.make_golden`
@@ -330,10 +356,9 @@ formula fixes go to `bsk.py` (the one implementation). After E2, `bskg.py` is fi
    implement that convention properly, or keep it disabled as in C?
 3. **f^± factors:** if, as I understand, they distinguish even/odd nucleon numbers in finite
    nuclei, they're metadata in uniform matter (f⁺ = 1). Confirm, or tell me where they enter.
-4. **Package name:** `libnest.edf` (recommended — leaves room for non-Skyrme functionals,
-   e.g. SeaLL1 used in WSLDA) or `libnest.skyrme`?
-5. **Future of `libnest.bsk`:** keep it permanently as the BSk31 shortcut (recommended — it's
-   what all existing scripts use), or deprecate it later?
+4. ✅ **Package name:** `libnest.edf` (default applied in E1–E2, 2026-10-02).
+5. ✅ **Future of `libnest.bsk`:** stays permanently as the BSk family module / BSk31 shortcut
+   (default applied in E2, 2026-10-02).
 6. **Single source of truth with hpc-engine:** later, both `bsk_constants.h` and
    `parametrizations.py` could be generated from one data file (e.g. TOML). Worth it, or are
    parity tests enough?

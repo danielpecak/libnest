@@ -9,14 +9,22 @@ List of functions
 -----------------
 """
 
-import sys
 import numpy as np
 import math
 # import libnest.bsk
 # import libnest.units as units
 from libnest import units
-from libnest.units import HBARC, DENSEPSILON, NUMZERO
+from libnest.units import DENSEPSILON
 from libnest.units import MN, HBAR2M_n
+
+
+def _functional(functional):
+    """Returns the functional to use: BSk31 by default, or one given by name or object."""
+    if functional is None or isinstance(functional, str):
+        # imported here: libnest.edf imports this module
+        from libnest.edf import get_functional
+        return get_functional(functional or "BSk31")
+    return functional
 
 
 def rho2kf(rho):
@@ -119,10 +127,11 @@ def rhoEta(rho_n, rho_p):
 
 
 
-def xiBCS(kF, delta=None):
+def xiBCS(kF, delta=None, functional=None):
     """
     Calculates the coherence length from BCS theory. If no delta argument is provided,
-    it is assumed that we consider pure neutron matter.
+    it is assumed that we consider pure neutron matter, with the neutron pairing field
+    of the functional.
 
     .. math::
 
@@ -131,16 +140,17 @@ def xiBCS(kF, delta=None):
     Args:
         k_F (float): Fermi momentum [fm :sup:`-1`]
         delta (float): pairing field [MeV]
+        functional (SkyrmeFunctional or str): functional for the default pairing
+            field; BSk31 if not given
 
     Returns:
         float: coherence length [fm]
     """
     # ValueError: The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
-    from libnest import bsk
     kF = np.asarray(kF, dtype=float)
     if delta is None:
         rho   = kf2rho(kF)
-        delta = bsk.neutron_pairing_field(rho)
+        delta = _functional(functional).neutron_pairing_field(rho)
     return units.HBARC**2*kF/(np.pi*delta*units.MN)
 
 
@@ -322,13 +332,13 @@ def E_minigap_delta_n(delta, rho_n):
     """
     return 4./3. * np.abs(delta)**2/eF_n(rho2kf(rho_n))
 
-def E_minigap_rho_n(rho_n):
+def E_minigap_rho_n(rho_n, functional=None):
     """
     Returns the energy of minigap :math:`E_{mg}` [MeV] for neutron matter,
     calculating the pairing field automatically from density.
 
     This is a convenience wrapper around :func:`.E_minigap_delta_n` that
-    computes the neutron pairing field using the BSk functional.
+    computes the neutron pairing field from the functional (BSk31 by default).
 
     The minigap energy can be approximated:
 
@@ -353,14 +363,13 @@ def E_minigap_rho_n(rho_n):
         :func:`.eF_n`
 
     """
-    from libnest.bsk import neutron_ref_pairing_field
-    delta = neutron_ref_pairing_field(rho_n, 0.)
+    delta = _functional(functional).neutron_ref_pairing_field(rho_n, 0.)
     return E_minigap_delta_n(delta, rho_n)
 
 
 
-def mu_q(rho_n, rho_p, q):
-# Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
+def mu_q(rho_n, rho_p, q, functional=None):
+    # Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
     """
     Calculates the chemical potential :math:`\\mu` defined with the wavevector
     :math:`k_F` :cite:`chamel2009pairing`.
@@ -373,38 +382,13 @@ def mu_q(rho_n, rho_p, q):
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
+        functional (SkyrmeFunctional or str): functional that provides the
+            effective mass; BSk31 if not given
 
     Returns:
          float: chemical potential :math:`\\mu` [MeV]
     """
-    from libnest.bsk import effMn, effMp
-    
-    rho_n = np.asarray(rho_n)
-    rho_p = np.asarray(rho_p)
-    if(q=='n'):
-        M = effMn(rho_n, rho_p)
-        rho = rho_n
-    elif(q=='p'):
-        M = effMp(rho_n, rho_p)
-        rho = rho_p
-    else:
-        sys.exit('# ERROR: Nucleon q must be either n or p')
-    mu_q = HBARC**2*rho2kf(rho)**2/(2.*M)
-    mu_q = np.asarray(mu_q)
-    # Handle assignment for both scalar and array
-    if mu_q.shape == ():
-        if mu_q == 0:
-            mu_q = NUMZERO
-        if rho == 0:
-            mu_q = NUMZERO
-        return float(mu_q)
-    else:
-        i = np.where(mu_q==0)
-        mu_q[i] = NUMZERO
-        j = np.where(rho==0)
-        mu_q[j] = NUMZERO
-        return mu_q
-
+    return _functional(functional).mu_q(rho_n, rho_p, q)
 
 
 if __name__ == '__main__':

@@ -165,7 +165,9 @@ def public_functions(module_name):
     """Returns {name: parameter names} of the public functions defined in a module."""
     module = resolve_module(module_name)
     names = API_FUNCTIONS[module_name]
-    if names is None:
+    if names is None and hasattr(module, "__all__"):
+        names = [n for n in module.__all__ if inspect.isroutine(getattr(module, n))]
+    elif names is None:
         names = [n for n, f in inspect.getmembers(module, inspect.isfunction)
                  if f.__module__ == module.__name__ and not n.startswith("_")]
     return {n: list(inspect.signature(getattr(module, n)).parameters) for n in sorted(names)}

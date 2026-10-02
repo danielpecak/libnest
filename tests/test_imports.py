@@ -16,11 +16,10 @@ import unittest
 import libnest
 
 
-# Discover every submodule of the libnest package so new modules are covered
-# automatically without editing this test.
+# Discover every submodule of the libnest package, including subpackages such as
+# libnest.edf, so new modules are covered automatically without editing this test.
 LIBNEST_MODULES = [
-    f"libnest.{name}"
-    for _, name, _ in pkgutil.iter_modules(libnest.__path__)
+    name for _, name, _ in pkgutil.walk_packages(libnest.__path__, prefix="libnest.")
 ]
 
 
