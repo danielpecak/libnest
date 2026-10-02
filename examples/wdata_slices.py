@@ -8,34 +8,33 @@
 # =========== Description
 # Plotting the cross-sections for different files to check by eye if
 # everything is correct and according to the plan.
+# =========== Usage (requires py-WDATA: pip install wdata)
+# $ python examples/wdata_slices.py run_a.wtxt run_b.wtxt ...
+# For every WDATA file it prints the neutron and proton numbers and saves
+# start_<name>.png with cross-sections of the fields along z.
 # -------------------
-import numpy as np
-import matplotlib.pyplot as plt
+import os
 import sys
-from wdata.io import WData, Var
+import matplotlib.pyplot as plt
+from wdata.io import WData
 
-filenames = ["no_Coulomb_long_06.wtxt"]
-filenames = ["no_Coulomb_long_02.wtxt", "no_Coulomb_long_06.wtxt",
-"no_Coulomb_long_10.wtxt", "no_Coulomb_long_15.wtxt", "no_Coulomb_long_19.wtxt",
-"no_Coulomb_long_24.wtxt", "no_Coulomb_long_27.wtxt",
-"no_Coulomb_long_30.wtxt", "no_Coulomb_long_34.wtxt"]
-
-
-# PATH2   ='/media/data/supercomputing/meff/crust-interaction/wbox/'
-PATH2   ="/home/pecak/sshfs/dwarf-scratch/marek/lumi/no_coulomb/init/"
+filenames = sys.argv[1:]
+if not filenames:
+    sys.exit("Usage: wdata_slices.py FILE.wtxt [FILE.wtxt ...]")
 
 print("# prefix\tN\tP")
-for filename in filenames:
-    prefix="n=0.0"+filename[16:-5]
+for path in filenames:
+    prefix = os.path.splitext(os.path.basename(path))[0]
     # WBSK data
-    data    = WData.load(PATH2+filename, check_data=False)
+    data    = WData.load(path, check_data=False)
     [nx,ny,nz] = [data.xyz[i].size for i in range(3)]
     datax = data.xyz[0].reshape(-1,)
     datay = data.xyz[1].reshape(-1,)
     dataz = data.xyz[2].reshape(-1,)
 
-    data.variables[0].filename=PATH2+filename[:-5]+'_'+data.variables[0].name+'.wdat'
-    data.variables[1].filename=PATH2+filename[:-5]+'_'+data.variables[1].name+'.wdat'
+    base = os.path.splitext(path)[0]
+    data.variables[0].filename=base+'_'+data.variables[0].name+'.wdat'
+    data.variables[1].filename=base+'_'+data.variables[1].name+'.wdat'
 
     dx = datax[1]-datax[0]
     dy = datay[1]-datay[0]

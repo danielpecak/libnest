@@ -14,14 +14,14 @@ if len(sys.argv) == 2:
 else:
     sys.exit("Specify the path for the image!")
 
-rho = np.linspace(0., 0.05, 10000)
+rho = np.linspace(1e-6, 0.1, 10000)
 
 rho_n = rho #only for pure neutron matter
 rho_p = 0
 
 delta_n = libnest.bsk.neutron_ref_pairing_field(rho_n, rho_p)
 
-v_landau = libnest.definitions.vLandau(delta_n, libnest.definitions.rho2kf(rho))
+v_landau = 100*libnest.definitions.vLandau(delta_n, libnest.definitions.rho2kf(rho)) # in % of c
 
 plt.figure()
 plt.title("Landau velocity", fontsize=15)

@@ -69,7 +69,6 @@ def main():
     
     print("=" * 60)
     print("For more examples, see the examples/ directory")
-    print("For legacy test cases, see examples/legacy_tests.py")
     print("=" * 60)
 
 

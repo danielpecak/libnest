@@ -1,0 +1,285 @@
+# TODO_edf — Multiple energy-density-functional parametrizations
+
+Goal: libnest computes uniform-matter quantities (E/A, pressure, effective masses, mean
+fields, pairing) for **any** Skyrme-type parametrization — BSk16/22/24/25/31, BSkG3, BSkG4,
+SLy4, SkM*, … — with one implementation of the formulas, an explicit choice of functional
+at the call site, and every parametrization validated against published numbers.
+
+This file replaces/expands `TODO.md` → P4. Companion plan: [`TODO_doc.md`](TODO_doc.md).
+
+---
+
+## 1. Current state — what blocks it
+
+- **Parameters are module globals** in `libnest/bsk.py` (`T0..T5`, `X0..X5`, `T2X2`,
+  `ALPHA/BETA/GAMMA`, …) and all 44 functions read them directly.
+- **`libnest/bskg.py` is a byte-identical copy of `bsk.py`** (commit `44c1807`, "Template for
+  bskg module") — the "one module per parametrization" approach has been started.
+- **Functional-specific values hard-coded outside the parameter block:**
+  - kinetic term of `energy_per_nucleon` uses `HBARC**2/MN`, `HBARC**2/MP` (bare masses),
+    whereas BSkG3/BSkG4/SLy4/SkM* use one common ħ²/2m (20.7355…, see `bsk_constants.h`);
+  - pairing cutoff ε_Λ = **6.5 MeV hard-coded** in `I()` (`bsk.py` ~1470); the C header lists
+    E_cut = 7.961 MeV (BSkG3) and 7.919 MeV (BSkG4);
+  - reference-gap fits Δ_NeuM(k_F), Δ_SM(k_F) (coefficients 3.37968…, 11.5586…, cutoffs
+    k_F > 1.38 / 1.31) hard-coded in `neutron_pairing_field` / `symmetric_pairing_field`;
+  - asymmetric-matter interpolation: `I()`/`v_pi` always use `neutron_ref_pairing_field`
+    (Chamel 2009); `*_eq2` is a duplicate of it; `*_eq3` (BSkG3) and `*_eq6` (BSkG4) exist
+    but cannot be selected.
+- **Defined but unused:** `FNP, FNM, FPP, FPM, KAPPAN, KAPPAP, YW` — no function reads them
+  (`epsilon_pi_np` takes κ as an argument).
+- **Import cycle `definitions` ↔ `bsk`:** `definitions.mu_q`, `xiBCS`, `E_minigap_rho_n`
+  import `bsk` lazily, and `bsk` imports `mu_q` from `definitions`. `mu_q` depends on the
+  effective mass, i.e. on the functional, so it belongs to the functional layer.
+- **Name clash:** `units.ALPHA` (fine-structure constant) vs `bsk.ALPHA` (Skyrme exponent).
+- **Consumers to migrate:** `plots.py` (~20 calls), `real_data_plots.py` (~10),
+  `definitions.py` (3), docs figure scripts (8), `tests/`, `main.py`, `examples/`.
+
+Reference design already exists: `~/projects/bsk/hpc-engine/bsk/bsk_constants.h` holds
+**10 parametrizations** (BSk16, BSk22, BSk24, BSk25, BSk31, BSkG3, BSkG4, SLy4, SkM*, t0t3)
+behind **one** `bsk_functional.c`, with a per-force pairing-interpolation switch. Mirror that.
+
+---
+
+## 2. Decision: separate modules, or something else?
+
+**Recommendation: one implementation + parametrizations as data + a functional object.**
+A parametrization is *data*, not code: BSk16…BSkG4…SLy4 differ only in numbers and a few
+switches (pairing scheme, cutoff, ħ²/2m convention). Separate modules are right for
+*code organization* (`skyrme.py`, `pairing.py`, `parametrizations.py`), wrong for
+*parametrizations*.
+
+| Option | For | Against |
+|---|---|---|
+| **A. One module per parametrization** (`bsk31.py`, `bsk24.py`, `bskg3.py`, … — what `bskg.py` started) | Trivial to start | 10 × ~1000 lines of copies; every bug fix N times (see §5 — there are several); copies drift; can't loop over functionals |
+| **B. Global switch** `set_functional("BSk24")` (old `TODO.md` P4 suggestion) | Minimal diff; old calls keep working | Hidden global state: comparing two functionals in one script means toggling; results depend on call order; tests can leak state into each other; not thread-safe |
+| **C. `functional=` keyword on every function** | Explicit | ~50 signatures; must be threaded through internal chains (`v_pi → I → mu_q → effMn → B_q`) — forget one and BSk31 silently leaks into a BSk24 result |
+| **D. ✅ Functional object** — immutable parameters + one class holding the formulas | Explicit; internal calls go through `self`, so functionals cannot mix; comparing is a loop; user-defined sets are easy; old `bsk` API kept as a BSk31 instance | One-time refactor (mechanical: `T0` → `p.t0`) |
+
+What it looks like for a user:
+
+```python
+from libnest.edf import get_functional, available_functionals
+
+for name in ["BSk24", "BSk31", "BSkG4"]:
+    f = get_functional(name)                 # case-insensitive: "bsk24" works
+    print(name, f.energy_per_nucleon(0.08, 0.08), f.effMn(0.08, 0.0))
+
+f = get_functional("BSkG4")
+f.neutron_ref_pairing_field(0.05, 0.01)       # uses BSkG4's own scheme (Eq. 6)
+f.with_pairing(scheme="chamel2009")           # new object, same Skyrme part
+f.params.t0, f.params.reference
+
+import libnest.bsk as bsk                     # unchanged: BSk31, module-level functions
+bsk.energy_per_nucleon(0.08, 0.08); bsk.T0
+```
+
+---
+
+## 3. Target design
+
+```
+libnest/
+  edf/
+    __init__.py          get_functional, available_functionals, register, SkyrmeFunctional
+    parameters.py        SkyrmeParameters, PairingParameters (frozen dataclasses)
+    parametrizations.py  registry: one entry per force, with reference/DOI/notes
+    skyrme.py            SkyrmeFunctional: E/A, pressure, c_s, B_q, U_q, M*, C^ρ, C^τ, ε_*, v_π, I
+    pairing.py           gap models (Δ_NeuM, Δ_SM fits) + interpolation schemes registry
+  bsk.py                 compatibility layer = get_functional("BSk31"), old names & constants
+  definitions.py         functional-independent only (rho2kf, eF_n, vLandau, …)
+```
+
+```python
+@dataclass(frozen=True)
+class SkyrmeParameters:
+    name: str
+    t0: float; t1: float; t2: float; t3: float
+    x0: float; x1: float; t2x2: float; x3: float      # t2*x2 stored directly (BSk: t2 = 0)
+    alpha: float
+    t4: float = 0.0; t5: float = 0.0; x4: float = 0.0; x5: float = 0.0
+    beta: float = 0.0; gamma: float = 0.0              # standard Skyrme: t4 = t5 = 0
+    hbar2m_n: float = HBAR2M_n; hbar2m_p: float = HBAR2M_p
+    # metadata (not used in uniform matter): spin-orbit, Wigner, odd/even pairing factors
+    w0: Optional[float] = None; w0_prime: Optional[float] = None
+    reference: str = ""; doi: str = ""; notes: str = ""
+
+@dataclass(frozen=True)
+class PairingParameters:
+    scheme: str = "chamel2009"        # | "bskg3_eq3" | "bskg4_eq6"
+    gap_model: str = "cao2006"        # which Δ_NeuM / Δ_SM fit (today's hard-coded one)
+    cutoff: float = 6.5               # ε_Λ [MeV]
+    kappa_n: float = 0.0; kappa_p: float = 0.0
+    kappa_convention: str = "absolute"   # BSkG uses "relative" (see §6)
+    f_np: float = 1.0; f_nm: float = 1.0; f_pp: float = 1.0; f_pm: float = 1.0
+```
+
+Rules:
+- **Move first, rename later.** Methods keep today's names (`effMn`, `B_q`, `U_q`, …) so the
+  refactor is mechanical and reviewable; nicer names can come later, with aliases.
+- Keep the established numerics: `np.asarray` in, scalar out for scalar input, `DENSEPSILON`
+  before every division by ρ, the scalar early-return pattern of the pairing fields.
+- Functional-independent pieces stay plain functions: `Lambda(x)`, generic numerical
+  derivatives (take a callable), everything in `definitions`.
+- `definitions.mu_q / xiBCS / E_minigap_rho_n` become methods; `definitions` keeps thin
+  wrappers with an optional `functional=` argument (default BSk31) → the import cycle is gone
+  (`edf` imports `definitions`, never the reverse).
+- `plots.py` functions get `functional="BSk31"` (name or object) — and comparison plots that
+  take a list of functionals.
+
+---
+
+## 4. Parametrizations to port
+
+Source of the numbers: `bsk_constants.h` (each block cites its paper; re-check every value
+against the paper table when porting). "bask24" in the request = **BSk24**.
+
+| Name | Family | Reference | Structural notes (from `bsk_constants.h`) | Pairing scheme | ħ²/2m |
+|---|---|---|---|---|---|
+| BSk16 | BSk | Chamel+ NPA 812 72 (2008) | t4 = t5 = 0, β = γ = 0, t2 ≠ 0, α = 0.3 | Chamel 2009 | per species |
+| BSk22 | BSk | Goriely+ PRC 88 024308 (2013) | α = γ = 1/12, β = 1/2; t2x2 recovered from MOCCa decomposition; κ = 0 | Chamel 2009 | per species |
+| **BSk24** | BSk | Goriely+ PRC 88 024308 (2013) | same as BSk22 | Chamel 2009 | per species |
+| BSk25 | BSk | Goriely+ PRC 88 024308 (2013) | same as BSk22 | Chamel 2009 | per species |
+| BSk31 | BSk | Goriely+ PRC 93 034337 (2016) | existing; α = 1/5, β = 1/12, γ = 1/4; κ_n, κ_p absolute | Chamel 2009 | per species |
+| **BSkG3** | BSkG | Grams+ EPJA 59 270 (2023) | exponents as BSk31; t2 = 0.01; κ relative (disabled in C); E_cut 7.961 MeV | **Eq. 3** | common 20.73553 |
+| **BSkG4** | BSkG | Grams+ arXiv:2411.08007 (2024) | as BSkG3; E_cut 7.919 MeV | **Eq. 6** | common 20.73553 |
+| SLy4 | Skyrme | Chabanat+ NPA 635 231 (1998) | standard Skyrme: t4 = t5 = 0, α = 1/6 | Chamel 2009 (gap model only) | common |
+| SkM* | Skyrme | Bartel+ NPA 386 79 (1982) | standard Skyrme, α = 1/6 | Chamel 2009 (gap model only) | common |
+| t0t3 | toy | Saclay validation package | only t0, t3; α = 1 → closed-form E/A, ideal test case | — | common |
+
+Note: the C BSk16 block carries BSk31's κ and f^± values (looks copy-pasted) — check
+against Chamel 2008 before porting.
+
+---
+
+## 5. Physics bugs found during this analysis — fix once, in the new class
+
+These must be fixed **before** porting new parametrizations (phase E3), otherwise the new
+functionals get validated against buggy code. Each fix: own commit, invariant test, your
+sign-off.
+
+- [ ] **`mu_q` treats M*/M as a mass in MeV.** `HBARC**2*kF**2/(2*M)` with `M = effMn(...)`,
+      which is the dimensionless ratio (`HBAR2M_n / B_q`). Result:
+      `mu_q(0.08, 0, 'n') = 31096 MeV`; expected ħ²k_F²/2M* ≈ 33 MeV. Feeds `I()` and `v_pi`.
+- [ ] **`v_pi` has the same unit error:** `(HBARC**2/2/M)**1.5` with dimensionless `M`
+      → `v_pi(0.03, 0, 'n') = -1.27e5`. Should be `B_q**1.5` (ħ²/2M*), giving a few hundred
+      MeV fm³.
+- [ ] **`U_q` t3 term is dimensionally inconsistent:** it adds a ρ² term to
+      `2*rho*rho_q*ALPHA*rho_q_prime**2` (ρ⁴), and uses `(0.5 + 0.5*x3)` where the standard
+      expression has `(1 + x3/2)`. Re-derive (or port from the C `U_q`). Also: `U_q` has no
+      τ-dependent t1/t2/t4/t5 contributions — fine for a "ρ-part only" function, but say so.
+- [ ] **Gradient terms in `epsilon_np` / `epsilon_delta_rho_np`:**
+      `rho_grad_square = |∇ρ_n|² + |∇ρ_p|²` drops the cross term (should be |∇ρ_n + ∇ρ_p|²);
+      `grad_rho_n_rho_p = 0.5*(p² − n² − p²)` is a typo (= −n²/2).
+- [ ] **`rho2tau` factor π^(2/3)** (also in `TODO_doc.md` D0).
+- [ ] **Kinetic term** of `energy_per_nucleon` must use the parameter set's ħ²/2m (identical
+      numbers for BSk31 today, different for BSkG/SLy4).
+- [ ] **BSkG4 Eq. 6 edge case:** C floors Δ_SM and Δ_NeuM(ρ/2) at 1e-8 before taking the
+      ratio; Python doesn't. Align and test k_F(ρ/2) > 1.31.
+- [ ] Remove `testMe` (debug helper in the public API) and the `plots.py` functions that call
+      non-existent `bsk` functions (`epsilon`, `epsilon_tau`, `g_e_*`).
+
+---
+
+## 6. Migration plan (each phase = one PR, full test suite green after each)
+
+### E0 — Safety net (no code changes yet)
+- [ ] Delete `libnest/bskg.py` (identical copy of the abandoned option A; it's picked up by
+      `test_imports` and would end up in the docs).
+- [ ] **Golden-master test for BSk31:** `tests/data/make_golden.py` evaluates every public
+      `bsk` function on a fixed grid of (ρ_n, ρ_p) — scalar and array input — and writes
+      `tests/data/golden_bsk31.npz`; `tests/test_golden_bsk31.py` compares at `rtol=1e-12`.
+      This proves E1–E2 change no number.
+- [ ] Record the public `bsk` API (names + signatures) as the compatibility checklist.
+
+### E1 — Parameters become data (no behavior change)
+- [ ] `edf/parameters.py` + a `BSK31` instance; `bsk.py` globals become `T0 = BSK31.t0`, ….
+      Golden test passes.
+
+### E2 — One implementation (no behavior change)
+- [ ] `edf/skyrme.py`: `SkyrmeFunctional` with all formulas (mechanical `T0` → `p.t0`);
+      internal calls through `self`.
+- [ ] `bsk.py` becomes the compatibility layer (BSk31 instance, old names, old constants).
+- [ ] Functional-dependent `definitions` functions → methods + wrappers (cycle removed).
+- [ ] Golden test passes at `rtol=1e-12`; `test_imports`, `main.py` unchanged.
+
+### E3 — Fix the physics bugs from §5 (numbers change on purpose)
+- [ ] One commit per bug: new invariant test → fix → regenerate only the affected golden
+      arrays, with the reason in the commit message.
+
+### E4 — Pairing as a component
+- [ ] `edf/pairing.py`: gap model (Δ_NeuM, Δ_SM fits + k_F cutoffs) and a scheme registry
+      {`chamel2009` (= today's `_ref` and `_eq2`), `bskg3_eq3`, `bskg4_eq6`}; each functional
+      has a default scheme, overridable with `with_pairing(scheme=...)`.
+- [ ] ε_Λ from `PairingParameters.cutoff` instead of the hard-coded 6.5 MeV.
+- [ ] Old function names (`neutron_ref_pairing_field_eq3`, …) stay in `bsk` as wrappers.
+- [ ] Parity test against the C `g_Delta_n_ref` / `g_Delta_p_ref` for all three schemes.
+
+### E5 — Port the parametrizations (§4)
+- [ ] One registry entry per force with reference, DOI and the notes from `bsk_constants.h`.
+- [ ] Case-insensitive lookup + aliases (`"bsk24"`, `"SkMstar"`); `register()` for
+      user-defined sets (`dataclasses.replace(BSK31, t0=...)` for sensitivity studies).
+
+### E6 — Validation for every functional
+- [ ] **Universal invariants**, parametrized over the registry: E/A → 0 for ρ → 0; SNM bound
+      at saturation; NeuM above SNM; M* > 0; scalar result == array result; no NaN at ρ = 0
+      (watch `ρ^(β−1)` with β = 0 — fine only because of `DENSEPSILON`).
+- [ ] **Published saturation properties** per force — n₀, a_v, J, L, K_v, M*_s/M — stored as
+      `reference_values` in the registry entry with table/page cited; tests read them from
+      there, so adding a functional is self-validating. (Don't type them from memory —
+      copy from the paper tables.)
+- [ ] **t0t3:** closed-form E/A check.
+- [ ] **Cross-code parity with hpc-engine:** generate reference tables (E/A, B_q, Δ_n, Δ_p on
+      a grid) with the C uniform-matter tools for every `BSK` id and compare. Note
+      `HBARC` differs (libnest 197.3269804 vs C 197.32697881, ~1e-8 relative) — align or set
+      the tolerance accordingly.
+
+### E7 — Consumers and docs
+- [ ] `plots.py`: `functional=` argument + comparison plots; `real_data_plots.py`: same
+      argument, default BSk31.
+- [ ] `main.py`, README Quick Start, `examples/`: show `get_functional`.
+- [ ] Docs: parameter table **generated from the registry** (script in `docs/source/`, same
+      rule as figures — replaces the hand-written BSk31 table in the `bsk` docstring);
+      comparison figures; a "Choosing a functional" page (see `TODO_doc.md` D4).
+
+### E8 — Release
+- [ ] `CHANGELOG.md`, version 0.2.0 (new API added, old API intact).
+- [ ] Point `TODO.md` P4 to this file; update `CLAUDE.md` architecture (`edf` layer between
+      `definitions` and `bsk`).
+
+---
+
+## 7. Open questions (physics decisions — yours)
+
+1. **Reference gaps per functional?** The C code uses the same Δ_NeuM/Δ_SM fit for every
+   force. `physics.rst` says BSk16–17 were fitted to gaps *without* self-energy and BSk30–32
+   *with* it. Which curve is the current fit (NeST.pdf Eqs. 5.11–5.12), and should BSk22–25
+   use a different one? Proposal: start with the C behavior (parity) and keep `gap_model`
+   as the switch for later.
+2. **BSkG relative κ** (κ_n = 123.20, κ_p = 129.07 fm⁸ with g_q = V_q[1 + κ_q(∇ρ)²]):
+   implement that convention properly, or keep it disabled as in C?
+3. **f^± factors:** if, as I understand, they distinguish even/odd nucleon numbers in finite
+   nuclei, they're metadata in uniform matter (f⁺ = 1). Confirm, or tell me where they enter.
+4. **Package name:** `libnest.edf` (recommended — leaves room for non-Skyrme functionals,
+   e.g. SeaLL1 used in WSLDA) or `libnest.skyrme`?
+5. **Future of `libnest.bsk`:** keep it permanently as the BSk31 shortcut (recommended — it's
+   what all existing scripts use), or deprecate it later?
+6. **Single source of truth with hpc-engine:** later, both `bsk_constants.h` and
+   `parametrizations.py` could be generated from one data file (e.g. TOML). Worth it, or are
+   parity tests enough?
+
+## 8. Effort estimate
+
+| Phase | Effort |
+|---|---|
+| E0 safety net | 0.5 day |
+| E1 parameters as data | 0.5 day |
+| E2 one implementation + compat layer | 1–2 days |
+| E3 physics bug fixes | 1–2 days (+ checking derivations) |
+| E4 pairing component | 1 day |
+| E5 port 9 parametrizations | 1 day |
+| E6 validation | 1–2 days |
+| E7 consumers + docs | 1–2 days |
+| E8 release | 0.5 day |
+
+Out of scope: finite nuclei, spin-orbit, Wigner and Coulomb terms (uniform matter only —
+W0/W0' are stored as metadata).

@@ -33,6 +33,7 @@ MN        939.5654205 [MeV]               neutron mass :math:`m_n`
 MP        938.2720882 [MeV]               proton  mass :math:`m_p`
 HBAR2M_n  20.72124837 [MeV*fm :math:`^2`] :math:`\hbar^2/(2 m_n)`
 HBAR2M_p  20.74981092 [MeV*fm :math:`^2`] :math:`\hbar^2/(2 m_p)`
+hbar22M0  20.72       [MeV*fm :math:`^2`] rounded :math:`\hbar^2/(2 m_n)`, used by :func:`.vsf_NV` and :func:`.v_NV`
 ========  =========== =================== ===========
 
 Nucleon masses
@@ -40,29 +41,30 @@ Nucleon masses
 The masses of proton, neutron and nucleon (which is their averaged mass). The nucleon mass is an average of proton and neutron mass:
 
 .. math::
-    m_N=\frac{1}{2} (m_n + m_p) \approx 1.67377585 \cdot 10^{-27}.
+    m_N=\frac{1}{2} (m_n + m_p) \approx 1.67377585 \cdot 10^{-27}\,\mathrm{kg}.
 
 
 ..  csv-table::
     :header: "Mass", "Value"
     :widths: 10, 15
 
-    neutron :math:`m_n`,    1.6749286 :math:`\cdot 10^{27}` kg
-    proton  :math:`m_p`,    1.6726231 :math:`\cdot 10^{27}` kg
-    nucleon :math:`m_N`,    1.6737759 :math:`\cdot 10^{27}` kg
+    neutron :math:`m_n`,    1.6749286 :math:`\cdot 10^{-27}` kg
+    proton  :math:`m_p`,    1.6726231 :math:`\cdot 10^{-27}` kg
+    nucleon :math:`m_N`,    1.6737759 :math:`\cdot 10^{-27}` kg
 
 
 Neutron star
 ------------
 Some constants are relevant from the point of view of neutron star's physics.
-One of them is the *neutron drip* density :math:`\rho_{\mathrm{ND}}` at which excesive neutrons are not bound to the nuclei anymore and form superfluid sea. This is how the border of outer crust and inner crust are defined.  Then, there is saturation density :math:`\rho_0` at which the crust-core transition should occure. This is the density of nuclei.
+One of them is the *neutron drip* density :math:`\rho_{\mathrm{ND}}` at which excess neutrons are no longer bound to the nuclei and form a superfluid sea. This is how the border between the outer crust and the inner crust is defined.
+``RHOSAT`` is a rounded value of the nuclear saturation density :math:`\rho_0`, the density of matter inside heavy nuclei: :math:`3 \cdot 10^{14}` g cm :sup:`-3` :math:`\approx` 0.179 fm :sup:`-3`. The saturation density of a particular functional is somewhat lower (about 0.159 fm :sup:`-3` for BSk31). The crust-core transition takes place at roughly half of :math:`\rho_0`.
 
 ..  csv-table::
     :header: "Variable", "Density", "[g cm :sup:`-3`]", "[fm :sup:`-3`]"
     :widths: 15, 15, 15, 15
 
-    "RHOSAT", ":math:`\rho_0`", "3 :math:`\cdot 10^{14}`", 0.18
-    "RHOND", ":math:`\rho_{\mathrm{ND}}`", "4 :math:`\cdot 10^{11}`", 0.00042
+    "RHOSAT", ":math:`\rho_0`", "3 :math:`\cdot 10^{14}`", 0.179
+    "RHOND", ":math:`\rho_{\mathrm{ND}}`", "4 :math:`\cdot 10^{11}`", 0.00024
 
 List of functions
 -----------------
@@ -78,7 +80,7 @@ E  = 1.602176634e-19 # elementary charge [C]
 kB = 1.380649e-23 # Boltzmann constant [J/K]
 ALPHA=7.2973525693e-3 # fine-structure constants
 HBARC=197.3269804  # \hbar c [MeV fm]
-hbar22M0   =20.72  # neutron bare mass
+hbar22M0   =20.72  # rounded hbar^2/(2 m_n) [MeV*fm^2]
 MN   =939.56542052 # neutron mass [MeV]
 MP   =938.27208816 # proton  mass [MeV]
 HBAR2M_n = 20.721248369006936 # [MeV*fm<sup>2</sup>] 0.5*hbar^2/neutron mass
@@ -90,7 +92,7 @@ def KtoMev(temp):
     Converts temperature :math:`T` units from Kelvins to energy :math:`E` units in MeVs by setting the Boltzmann constant to 1.
 
     .. math::
-        E = \\frac{k_B}{1eV} 10^{-6} T \\approx 11604525006.1598 \\cdot T
+        E = \\frac{k_B}{1\\,\\mathrm{eV}} 10^{-6} T \\approx \\frac{T}{11604525006.1598}
 
     Args:
         temp (float): temperature :math:`T` [K]
@@ -109,7 +111,7 @@ def MeVtoK(energy):
     Converts energy :math:`E` units in MeVs to temperature :math:`T` units from Kelvins by setting the Boltzmann constant to 1.
 
     .. math::
-        T = \\frac{e V}{k_B} 10^6 E \\approx 11604525006.1598 \\cdot E
+        T = \\frac{1\\,\\mathrm{eV}}{k_B} 10^6 E \\approx 11604525006.1598 \\cdot E
 
 
     Args:
@@ -126,7 +128,7 @@ def MeVtoK(energy):
 
 def fm3togcm3(rho):
     """
-    Function converts desnity units: fm :sup:`-3` into g cm :sup:`-3`. See more `here <#nucleon-masses>`_. The numerical factor
+    Function converts density units: fm :sup:`-3` into g cm :sup:`-3`. See more `here <#nucleon-masses>`_. The numerical factor
 
     .. math::
         \\frac{m_N}{\\mathrm{fm}^3} = 1.67377585 \\cdot  10^{15}\\frac{\\mathrm{g}}{\\mathrm{cm}^3}
@@ -145,7 +147,7 @@ def fm3togcm3(rho):
 
 def gcm3tofm3(rho):
     """
-    Function converts desnity units: fm :sup:`-3` into g cm :sup:`-3`. See more `here <#nucleon-masses>`_. The numerical factor
+    Function converts density units: g cm :sup:`-3` into fm :sup:`-3`. See more `here <#nucleon-masses>`_. The numerical factor
 
     .. math::
         \\frac{\\mathrm{g}}{\\mathrm{cm}^3} =

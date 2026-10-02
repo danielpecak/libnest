@@ -11,7 +11,7 @@ List of functions
 
 def volume(nx,ny,nz):
     """
-    Calculates the voume of the pasta.
+    Calculates the volume of the pasta.
 
     Args:
         nx (int): number of grid points along x-axis

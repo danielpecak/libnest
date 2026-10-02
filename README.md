@@ -143,7 +143,8 @@ The documentation will be in `docs/_build/html/`.
 See the `examples/` directory for more comprehensive examples:
 
 - `examples/analyze_data.py` - Load a density map, compute a physical quantity per grid point, and plot it (the "analyze your own data" starting point)
-- `examples/tools_example.py` - Using utility functions
+- `examples/tools_example.py` - Using utility functions on a WDATA file (needs `pip install wdata`)
+- `examples/wdata_slices.py` - Cross-sections of the fields in WDATA files (needs `pip install wdata`)
 
 ## 🧮 Physical Constants
 
@@ -154,7 +155,7 @@ The library uses natural units with ℏ = c = 1 where convenient. Key constants:
 | `HBARC` | 197.327 | MeV·fm | ℏc |
 | `MN` | 939.565 | MeV | Neutron mass |
 | `MP` | 938.272 | MeV | Proton mass |
-| `RHOSAT` | 0.16 | fm⁻³ | Nuclear saturation density |
+| `RHOSAT` | 0.179 | fm⁻³ | Nuclear saturation density, rounded (3·10¹⁴ g/cm³) |
 
 ## 🤝 Contributing
 

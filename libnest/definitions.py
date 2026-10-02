@@ -29,12 +29,13 @@ def rho2kf(rho):
 
         k_F = (3 \\pi^2 \\rho )^{1/3}.
 
-    If we have a two-component mixture of protons and neutrons, both
-    having two spin components (up and down), then :math:`\\rho` states
-    for the density of one isospin, and one spin component only.
+    Here :math:`\\rho` is the density of a single nucleon species (neutrons
+    or protons), summed over both spin components. For symmetric nuclear
+    matter of total density :math:`\\rho` pass :math:`\\rho/2`.
 
     Args:
-        rho (float):  density :math:`\\rho` for a single component
+        rho (float): density :math:`\\rho_q` of one nucleon species, both spin
+            components [fm :sup:`-3`]
 
     Returns:
         float: wavevector :math:`k_F` [fm :sup:`-1`]
@@ -55,15 +56,15 @@ def kf2rho(kF):
 
         \\rho = \\frac{k_F^3}{3 \\pi^2}.
 
-    If we have a two-component mixture of protons and neutrons, both
-    having two spin components (up and down), then :math:`\\rho` states
-    for the density of one isospin, and one spin component only.
+    The result is the density of a single nucleon species (neutrons or
+    protons), summed over both spin components.
 
     Args:
-        kF (float):  density :math:`\\rho` for a single component
+        kF (float): Fermi wavevector :math:`k_F` [fm :sup:`-1`]
 
     Returns:
-        float: wavevector :math:`k_F` [fm :sup:`-1`]
+        float: density :math:`\\rho_q` of one nucleon species, both spin
+        components [fm :sup:`-3`]
 
     See also:
         :func:`.rho2kf`
@@ -76,15 +77,16 @@ def rho2tau(rho):
     :math:`\\rho`.
 
     .. math::
-        \\tau = \\frac{3}{5} \\left(3 \\pi\\right)^{2/3} \\rho^{5/3}
+        \\tau = \\frac{3}{5} k_F^2 \\rho = \\frac{3}{5} \\left(3 \\pi^2\\right)^{2/3} \\rho^{5/3}
 
     Args:
-        rho (float):  density :math:`\\rho` [fm :sup:`-3`] for a single component
+        rho (float): density :math:`\\rho_q` of one nucleon species, both spin
+            components [fm :sup:`-3`]
 
     Returns:
-        float: kinetic density :math:`\\tau` [fm :sup:`-3`]
+        float: kinetic density :math:`\\tau_q` [fm :sup:`-5`]
     """
-    return 0.6*(3.*np.pi)**(2./3.)*rho**(5./3.)
+    return 0.6*(3.*np.pi*np.pi)**(2./3.)*rho**(5./3.)
 
 def rhoEta(rho_n, rho_p):
     """
@@ -285,7 +287,7 @@ def Meff_hydro(rho_in, rho_out, R):
 
     Args:
         rho_in (float):  density of nucleus :math:`\\rho_{\\mathrm{in}}` [fm :sup:`-3`]
-        rho_out (float):  density of superlufid neutrons :math:`\\rho_{\\mathrm{out}}` [fm :sup:`-3`]
+        rho_out (float):  density of superfluid neutrons :math:`\\rho_{\\mathrm{out}}` [fm :sup:`-3`]
 
     Returns:
         float: effective mass :math:`M_{\\mathrm{eff}}` in units neutron mass

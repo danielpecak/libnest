@@ -22,20 +22,13 @@ Pairing S
 .. image:: _static/pairing_vs_rho.png
   :width: 48 %
 
-Pairing P
----------
-Give some references.
-
-Pasta phase
------------
-
 ******************
 Density Functional
 ******************
 
 Skyrme force
 ============
-The first paper about vortex pinning within fully dynamical approach in neutron
+The first paper about vortex pinning within a fully dynamical approach in neutron
 matter was :cite:`wlazlowski2016vortex`. A standard SLy4 type of functional was
 used (see :cite:`bulgac2016induced`) of the following form:
 
@@ -99,7 +92,7 @@ and improvements of the model is shown:
  * fit to realistic neutron-matter equations of state :cite:`goriely2010further` (BSk19--21)
  * fit to different symmetry energies :cite:`goriely2013further` (BSk22--26)
  * optimal fit of the 2012 AME :cite:`goriely2013hartree` (BSk27*)
- * genealized spin-orbit coupling :cite:`goriely2015further`  (BSk28--29)
+ * generalized spin-orbit coupling :cite:`goriely2015further`  (BSk28--29)
  * fit to realistic :math:`{}^1S_0` pairing gaps with self-energy :cite:`chamel2016further` (BSk30--32)
 
 
@@ -165,16 +158,3 @@ References for pairing models:
  * :cite:`chamel2010effective`
  * :cite:`chamel2013pairing`
  * :cite:`chamel2016further`
-
-
-
-.. todo::
-  Expand this section: Summarize and fill in pairing models, physical meaning
-  and papers for reference.
-
-
-
-
-
-.. bibliography::
-   :filter: docname in docnames

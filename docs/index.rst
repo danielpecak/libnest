@@ -30,7 +30,7 @@ Contributors
 
 - **Adarsh Karekkat** (2025) - `O-slyfox-O <https://github.com/O-slyfox-O>`_
 
-  Added pairing interpolation schemes to :mod:`.bsk` for newer Bsk models including BskG4.
+  Added pairing interpolation schemes to :mod:`.bsk` for newer BSk models including BSkG4.
 
 Acknowledgments
 ===============
@@ -76,7 +76,7 @@ and PLL/2023/04/016476.
    :maxdepth: 1
    :hidden:
 
-   instalation
+   installation
    physics
    help
    bibliography
@@ -98,7 +98,6 @@ and PLL/2023/04/016476.
    :maxdepth: 1
 
    tutorial
-   plotting
    inner-crust
 
 

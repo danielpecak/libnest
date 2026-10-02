@@ -765,7 +765,7 @@ def numerical_derivative_pressure_n(rho_n):
 def numerical_speed_of_sound_n(rho_n):
     """
     Velocity of sound in neutron matter dependent on total matter density equal
-    to neuton density :math:`\\rho_n`, given as a percentage of speed of light.
+    to neutron density :math:`\\rho_n`, given as a percentage of speed of light.
     Calculated based on numerical data.
 
     Args:
@@ -899,7 +899,7 @@ def epsilon_derivative_n(rho):
 def speed_of_sound_n(rho_n):
     """
     Velocity of sound in neutron matter, dependent on total matter density equal
-    to neuton density :math:`\\rho_n`, given as a percentage of speed of light.
+    to neutron density :math:`\\rho_n`, given as a percentage of speed of light.
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -937,14 +937,14 @@ def isoscalarM(rho_n, rho_p):
 
     .. math::
 
-        M^*_s = 2 \\left( 1/M_n^* +  1/M_p^*  \\right)^{-1}
+        \\frac{M^*_s}{M} = 2 \\left( \\frac{M}{M_n^*} + \\frac{M}{M_p^*} \\right)^{-1}
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: effective isoscalar mass :math:`M_{s}^{*}` [MeV]
+        float: effective isoscalar mass in units of the bare mass, :math:`M_{s}^{*}/M` [1]
 
     See also:
         :func:`.effMn`
@@ -955,7 +955,7 @@ def isoscalarM(rho_n, rho_p):
 
 def isovectorM(rho_n, rho_p):
     """
-    Calculated effective isovector mass :math:`M_v` for a given uniform system
+    Calculates effective isovector mass :math:`M_v` for a given uniform system
     with neutron and proton densities rho_n, rho_p respectively.
 
     .. math::
@@ -967,7 +967,7 @@ def isovectorM(rho_n, rho_p):
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: effective isovector mass :math:`M_{v}^{*}` [MeV]
+        float: effective isovector mass in units of the bare mass, :math:`M_{v}^{*}/M` [1]
 
     See also:
         :func:`.effMn`
@@ -984,14 +984,14 @@ def effMn(rho_n, rho_p):
 
     .. math::
 
-        M_n^* = \\frac{\\hbar^2}{2 M_n} \\frac{1}{B_n(\\rho_n,\\rho_p)}
+        \\frac{M_n^*}{M_n} = \\frac{\\hbar^2}{2 M_n} \\frac{1}{B_n(\\rho_n,\\rho_p)}
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: effective mass of a neutron :math:`M_{n}^{*}` [MeV]
+        float: neutron effective mass in units of the bare neutron mass, :math:`M_{n}^{*}/M_n` [1]
 
     See also:
         :func:`.B_q`
@@ -1004,14 +1004,14 @@ def effMp(rho_n, rho_p):
 
     .. math::
 
-        M_p^* = \\frac{\\hbar^2}{2 M_p} \\frac{1}{B_p(\\rho_n,\\rho_p)}
+        \\frac{M_p^*}{M_p} = \\frac{\\hbar^2}{2 M_p} \\frac{1}{B_p(\\rho_n,\\rho_p)}
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        float: effective mass of a proton :math:`M_{p}^{*}` [MeV]
+        float: proton effective mass in units of the bare proton mass, :math:`M_{p}^{*}/M_p` [1]
 
     See also:
         :func:`.B_q`
@@ -1064,7 +1064,7 @@ def B_q(rho_n, rho_p, q):
         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
 
     Returns:
-        float: effective mass of a proton :math:`M_{p}^{*}` [MeV fm :sup:`2`]
+        float: :math:`B_q = \\hbar^2/(2 M^*_q)` [MeV fm :sup:`2`]
     """
     if(q=='n'):
         rho_q = rho_n + DENSEPSILON
@@ -1324,7 +1324,7 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
     TO DO: write eq for jsum2 and jdiff2
 
     Returns
-        float: nergy functional :math:`\\epsilon`
+        float: energy functional :math:`\\epsilon`
     """
     rho_n = np.asarray(rho_n)
     rho_p = np.asarray(rho_p)
@@ -1355,7 +1355,7 @@ def epsilon_pi_np(rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
                     kappa_p):
     """
     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
-    related to pairng energy density.
+    related to pairing energy density.
 
     .. math::
 
@@ -1615,7 +1615,7 @@ def Lambda(x):
 #             what is kappa? (no Eq.9 in Ref.41)
 #
 #     Returns
-#         float: nergy functional :math:`\\epsilon`
+#         float: energy functional :math:`\\epsilon`
 #     """
 #     rho = rho_n + rho_p + DENSEPSILON
 #     if(q=='n'):
@@ -1629,7 +1629,7 @@ def Lambda(x):
 # def epsilon_pi(rho_n, rho_p, rho_grad, nu, q, kappa):
 #     """
 #     Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
-#     related to pairng energy density.
+#     related to pairing energy density.
 #
 #     Args:
 #         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components

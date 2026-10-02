@@ -77,16 +77,5 @@ Auxiliary
 
 
 
-.. todo::
-   Describe properties
-
-.. todo::
-   Give references
-
 .. automodule:: libnest.bsk
     :members:
-
-References
-----------
-.. bibliography::
-   :filter: docname in docnames

@@ -6,9 +6,11 @@
 # On leave: Institute of Physics, Polish Academy of Sciences, Warsaw
 # January 2024, Warsaw
 # =========== Description
-# Here we test TOOLS module
-# =========== Usage example
-# $ ./tools_example.py
+# Here we test TOOLS module: centre of mass of the neutron density in time,
+# saved to crossectionNEW.png.
+# =========== Usage example (requires py-WDATA: pip install wdata)
+# $ ./tools_example.py path/to/run.wtxt
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from wdata.io import WData
@@ -17,10 +19,9 @@ from libnest import tools
 # print( "test")
 # print(dir(tools))
 
-path = "/media/data/cernbox/kolo-crust/2024_01_11_nocoulomb/" # NOTE add path here
-# path="/media/data/supercomputing/meff/Z40/td/"
-file = path+"n0.006F2.0r1.wtxt" # NOTE add filename
-# print(file)
+if len(sys.argv) != 2:
+    sys.exit("Usage: tools_example.py FILE.wtxt")
+file = sys.argv[1]
 data = WData.load(file, check_data=False)
 [nx,ny,nz] = [data.xyz[i].size for i in range(3)]
 datax = data.xyz[0].reshape(-1,)  # Array of x coordinates

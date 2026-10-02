@@ -55,14 +55,18 @@ class TestDefinitions(unittest.TestCase):
         self.assertAlmostEqual(eta, 0.08, places=10)
 
     def test_rho2tau_basic(self):
-        """Test kinetic density calculation"""
+        """Uniform Fermi gas: tau = 3/5 kF^2 rho, with kF from rho2kf"""
         rho = 0.16
         tau = definitions.rho2tau(rho)
-        # Tau should be positive for positive density
-        self.assertGreater(tau, 0)
-        # For uniform matter, tau ∝ rho^(5/3)
-        expected = 0.6 * (3 * np.pi)**(2/3) * rho**(5/3)
-        self.assertAlmostEqual(tau, expected, places=10)
+        kF = definitions.rho2kf(rho)
+        self.assertAlmostEqual(tau, 0.6 * kF**2 * rho, places=10)
+
+    def test_rho2tau_array(self):
+        """rho2tau accepts arrays and agrees with tau = 3/5 kF^2 rho"""
+        rho = np.array([0.01, 0.08, 0.16])
+        tau = definitions.rho2tau(rho)
+        kF = definitions.rho2kf(rho)
+        np.testing.assert_allclose(tau, 0.6 * kF**2 * rho, rtol=1e-12)
 
     def test_eF_n_basic(self):
         """Test Fermi energy calculation for neutrons"""

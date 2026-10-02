@@ -4,7 +4,7 @@
 Module: Plots
 =============
 This module provides ready-to-go functions for plotting. Probably should be
-moved and work as a scirpt.
+moved and work as a script.
 
 List of functions
 -----------------
