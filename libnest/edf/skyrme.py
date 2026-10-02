@@ -1232,7 +1232,8 @@ class SkyrmeFunctional:
         rho_grad_p_square = np.asarray(rho_grad_p_square)
         rho_grad_square = np.asarray(rho_grad_square)
         rho = rho_n+rho_p + DENSEPSILON
-        grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
+        # grad rho_n . grad rho_p from |grad rho|^2 = |grad rho_n|^2 + |grad rho_p|^2 + 2 grad rho_n . grad rho_p
+        grad_rho_n_rho_p = 0.5*(rho_grad_square-rho_grad_n_square-rho_grad_p_square)
 
         return (3./16.*p.t1*((1.+0.5*p.x1)*rho_grad_square-(0.5+p.x1)*(rho_grad_n_square+rho_grad_p_square))
                 -1./16.*p.t2x2*(0.5*rho_grad_square+rho_grad_n_square+rho_grad_p_square)

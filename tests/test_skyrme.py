@@ -117,5 +117,15 @@ class TestGradientTerms(unittest.TestCase):
                 self.assertAlmostEqual(grad_part / expected, 1., places=9)
 
 
+    def test_epsilon_delta_rho_is_symmetric_under_n_p_exchange(self):
+        """The gradient energy is isospin symmetric: swapping n and p changes nothing."""
+        for rho_n, rho_p, g_n, g_p in [(0.06, 0.02, 0.01, 0.004), (0.05, 0.03, 0.02, -0.01)]:
+            with self.subTest(rho_n=rho_n, rho_p=rho_p, g_n=g_n, g_p=g_p):
+                g = (g_n + g_p)**2
+                np_order = bsk.epsilon_delta_rho_np(rho_n, rho_p, g_n**2, g_p**2, g)
+                pn_order = bsk.epsilon_delta_rho_np(rho_p, rho_n, g_p**2, g_n**2, g)
+                self.assertAlmostEqual(np_order / pn_order, 1., places=12)
+
+
 if __name__ == "__main__":
     unittest.main()
