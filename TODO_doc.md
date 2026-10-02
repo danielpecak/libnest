@@ -212,7 +212,7 @@ class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thi
 - [ ] **Remove the duplicate page titles:** module docstrings start with
       `Module: X\n=====` and the `.rst` files repeat the same title, so it appears twice in the
       sidebar/TOC. Keep the title in the `.rst` only.
-- [ ] **Don't document what doesn't work:** `bsk.testMe` (debug helper), and in `plots.py`
+- [x] _(done in TODO_edf.md E3)_ **Don't document what doesn't work:** `bsk.testMe` (debug helper), and in `plots.py`
       `plot_epsilon`, `plot_epsilon_tau`, `plot_epsilon_delta`, `plot_epsilon_rho_np`,
       `plot_epsilon_tau_np`, `plot_epsilon_delta_rho_np`, `epsilon_test` call functions that
       no longer exist in `bsk` (`epsilon`, `epsilon_tau`, `epsilon_delta_rho`, `g_e_*`) and

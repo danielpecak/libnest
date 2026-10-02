@@ -190,28 +190,28 @@ against Chamel 2008 before porting.
 
 These must be fixed **before** porting new parametrizations (phase E3), otherwise the new
 functionals get validated against buggy code. Each fix: own commit, invariant test, your
-sign-off.
+sign-off. **Status: all done in E3 (2026-10-02)** — see the commits listed under E3.
 
-- [ ] **`mu_q` treats M*/M as a mass in MeV.** `HBARC**2*kF**2/(2*M)` with `M = effMn(...)`,
-      which is the dimensionless ratio (`HBAR2M_n / B_q`). Result:
-      `mu_q(0.08, 0, 'n') = 31096 MeV`; expected ħ²k_F²/2M* ≈ 33 MeV. Feeds `I()` and `v_pi`.
-- [ ] **`v_pi` has the same unit error:** `(HBARC**2/2/M)**1.5` with dimensionless `M`
-      → `v_pi(0.03, 0, 'n') = -1.27e5`. Should be `B_q**1.5` (ħ²/2M*), giving a few hundred
-      MeV fm³.
-- [ ] **`U_q` t3 term is dimensionally inconsistent:** it adds a ρ² term to
-      `2*rho*rho_q*ALPHA*rho_q_prime**2` (ρ⁴), and uses `(0.5 + 0.5*x3)` where the standard
-      expression has `(1 + x3/2)`. Re-derive (or port from the C `U_q`). Also: `U_q` has no
-      τ-dependent t1/t2/t4/t5 contributions — fine for a "ρ-part only" function, but say so.
-- [ ] **Gradient terms in `epsilon_np` / `epsilon_delta_rho_np`:**
-      `rho_grad_square = |∇ρ_n|² + |∇ρ_p|²` drops the cross term (should be |∇ρ_n + ∇ρ_p|²);
-      `grad_rho_n_rho_p = 0.5*(p² − n² − p²)` is a typo (= −n²/2).
-- [ ] **`rho2tau` factor π^(2/3)** (also in `TODO_doc.md` D0).
-- [ ] **Kinetic term** of `energy_per_nucleon` must use the parameter set's ħ²/2m (identical
-      numbers for BSk31 today, different for BSkG/SLy4).
-- [ ] **BSkG4 Eq. 6 edge case:** C floors Δ_SM and Δ_NeuM(ρ/2) at 1e-8 before taking the
-      ratio; Python doesn't. Align and test k_F(ρ/2) > 1.31.
-- [ ] Remove `testMe` (debug helper in the public API) and the `plots.py` functions that call
-      non-existent `bsk` functions (`epsilon`, `epsilon_tau`, `g_e_*`).
+- [x] **`mu_q` treated M*/M as a mass in MeV** (31096 MeV at ρ_n = 0.08) → now
+      μ_q = ħ²k_F²/2M*_q = B_q k_F² = 33.1 MeV. Also fixed: `mu_q(array, 0.0, 'p')` raised
+      `ValueError` (`np.where` on a 0-d array, NumPy 2).
+- [x] **`v_pi` had the same unit error** (−1.3e5 MeV fm³) → B_q^{3/2}; BSk31 neutron matter
+      now −714 … −213 MeV fm³ for ρ_n = 0.005 … 0.05 fm⁻³.
+- [x] **`U_q` t3 term** → exact derivative of `epsilon_rho_np` (as hpc-engine `g_U_rho_n`
+      computes; its doc comment has the same garbled formula, its code is right). Docstring
+      states that τ- and gradient-dependent parts are not included.
+- [x] **Gradient terms:** `epsilon_np` uses (∇ρ_n + ∇ρ_p)²; the cross term in
+      `epsilon_delta_rho_np` is (|∇ρ|² − |∇ρ_n|² − |∇ρ_p|²)/2.
+- [x] **`rho2tau` factor π^(2/3)** — fixed in `TODO_doc.md` D0.
+- [x] **Kinetic term** of `energy_per_nucleon` and `epsilon_np` uses the parameter set's
+      ħ²/2m (BSk31 changes ≤ 2e-7 relative).
+- [x] **BSkG4 Eq. 6 floor — analysed, deliberately not changed.** Over a 641 × 201 grid
+      (ρ ≤ 0.32 fm⁻³, all proton fractions) the C-style 1e-8 floor changes Δ_n, Δ_p by at most
+      9e-7 MeV, and only where the gap is closed anyway (no point with a gap > 1 keV differs).
+      The E4 parity tests against C therefore use `atol ≈ 1e-6 MeV` instead.
+- [x] **`testMe`** removed; its closed-form symmetric-matter E/A (PRC 80 065804 Eq. A13, with
+      the n/p-averaged ħ²/2m) is now a test of the general formula. **`plots.py`:** three
+      energy-density plots rewired to the renamed `bsk` functions, four dead ones removed.
 
 ---
 
@@ -279,10 +279,24 @@ sign-off.
       `epsilon_rho`, … — dead code) was dropped; it remains in git history.
 - `libnest/bskg.py` untouched (still the old copy); it imports fine and registers nothing.
 
-### E3 — Fix the physics bugs from §5 (numbers change on purpose)
-- [ ] One commit per bug: new invariant test → fix → `python -m tests.golden.make_golden`
-      (lists the affected cases) → `--write`; the reason goes in the commit message and the
-      git diff of `bsk31.json` shows exactly which numbers moved.
+### E3 — Fix the physics bugs from §5 (numbers change on purpose)  ✅ DONE (2026-10-02)
+One commit per fix: invariant test first (checked to fail on the old code) → fix →
+`make_golden` (lists the affected cases) → `--write`; the reason is in each commit message
+and the git diff of `bsk31.json` shows exactly which numbers moved.
+
+| Commit | Fix | Golden cases changed | Invariant test (`tests/test_skyrme.py`) |
+|---|---|---|---|
+| `aa35294` | `mu_q` units | mu_q, I, v_pi, ε_π, ε | free gas: μ = e_F; μ/e_F = M/M* |
+| `68eaf58` | `mu_q` mixed scalar/array input | — | array ρ_n with scalar ρ_p, both q |
+| `7749e9c` | `v_pi` = −8π²/I · B_q^{3/2} | v_pi, ε_π, ε | gap-equation normalization; attractive, < 2000 MeV fm³ |
+| `f41feba` | `U_q` t3 term | U_q | U_q = ∂ε_ρ/∂ρ_q; B_q = ħ²/2m + ∂ε_τ/∂τ_q |
+| `bee7e0e` | ε: (∇ρ_n + ∇ρ_p)² | ε | gradient part of ε = ε_Δρ with the total gradient |
+| `f081c5e` | ε_Δρ cross term | ε_Δρ, ε | n ↔ p exchange symmetry |
+| `12b41f5` | kinetic term from ħ²/2m | E/A and everything built on it, ε | free gas with custom ħ²/2m; general vs analytic NeuM E/A |
+| `ae738b6` | remove `testMe` | testMe case + API entry | closed-form SNM limit of Eq. (A13) |
+| `6c40b4a` | `plots.py` dead functions | — | `tests/test_plots.py`: every plot runs and renders |
+
+Suite after E3: 104 tests + 181 subtests, ruff clean, strict docs build green.
 
 ### E4 — Pairing as a component
 - [ ] `edf/pairing.py`: gap model (Δ_NeuM, Δ_SM fits + k_F cutoffs) and a scheme registry
