@@ -38,7 +38,7 @@ dynamic = ["version"]
 [project.urls]
 Homepage = "https://github.com/danielpecak/libnest"
 Repository = "https://github.com/danielpecak/libnest"
-Documentation = "https://libnest.readthedocs.io"
+Documentation = "https://danielpecak.github.io/libnest/"
 Issues = "https://github.com/danielpecak/libnest/issues"
 
 [project.optional-dependencies]

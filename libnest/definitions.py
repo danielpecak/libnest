@@ -372,7 +372,7 @@ def mu_q(rho_n, rho_p, q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 
     Returns:
          float: chemical potential :math:`\\mu` [MeV]

@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys
-import os
-sys.path.insert(0, os.path.abspath('../../'))
-import libnest
 import numpy as np
 import matplotlib.pyplot as plt
-from libnest.bsk import *
+from _common import output_path, savefig
+from libnest.bsk import C0_rho, C1_rho, C0_tau, C1_tau
 
-import sys
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    sys.exit("Specify the path for the image!")
+
+filename = output_path()
 
 rho = np.linspace(0., 0.1, 1000)
 
@@ -32,4 +26,4 @@ plt.plot(rho, C0tau, linewidth=2.0, label=r'$C^0_\tau$')
 plt.plot(rho, C1tau, linewidth=2.0, label=r'$C^1_\tau$')
 plt.xlim([0,0.1])
 plt.legend()
-plt.savefig(filename)
+savefig(filename)

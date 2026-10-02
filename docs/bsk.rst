@@ -1,7 +1,7 @@
 Module: BSk
 ===========
-The functions are listed below in alphabetical order. Here, please find those functions
-regrouped by topic:
+The full reference below follows the order of the source code. Here, please find
+the functions grouped by topic:
 
 
 
@@ -20,10 +20,11 @@ Pairing
 * :func:`.proton_ref_pairing_field`
 
 
-Move
-~~~~~~~~~~~~~~
+Fermi energy, minigap, chemical potential (in :mod:`.definitions`)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   * :func:`.eF_n`
-  * :func:`.E_minigap_n`
+  * :func:`.E_minigap_rho_n`
+  * :func:`.E_minigap_delta_n`
   * :func:`.mu_q`
 
 
@@ -31,8 +32,8 @@ Statistics
 ~~~~~~~~~~
   * :func:`.energy_per_nucleon`
   * :func:`.pressure_n`
-  * :func:`.derivative_epsilon_rho_n`
-  * :func:`.derivative_pressure_rho_n`
+  * :func:`.epsilon_derivative_n`
+  * :func:`.pressure_derivative_n`
   * :func:`.speed_of_sound_n`
 
 

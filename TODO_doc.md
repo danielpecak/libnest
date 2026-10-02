@@ -115,48 +115,44 @@ Done in this pass, beyond the items' original wording:
 
 ---
 
-## D1 — Build & deploy infrastructure (make breakage visible)
+## D1 — Build & deploy infrastructure (make breakage visible)  ✅ DONE (2026-10-02)
 
-- [ ] **CI installs the wrong things.** In `documentation.yml`,
-      `pip install sphinx>=7.0 sphinx_rtd_theme ...` is unquoted: the shell treats `>=7.0` as
-      an output redirect (creates a file named `=7.0`) and the version floor is ignored.
-      Replace both `pip install` lines with `pip install -e ".[docs]"` — this also installs
-      libnest itself, so autodoc and the figure scripts import the installed package.
-- [ ] **Fail the build on warnings.** After D0, switch to
-      `sphinx-build -W --keep-going -n` (warnings are errors, nitpicky cross-refs). This is
-      the single change that stops the site from rotting again.
-- [ ] **`conf.py` cleanup:**
-      - add `intersphinx_mapping` for python/numpy/scipy/matplotlib/pandas (the extension is
-        loaded but has no mapping — `np.gradient` refs are unresolved);
-      - add `sphinx.ext.viewcode` (source links) and `sphinx.ext.doctest` (see D3);
-      - `autodoc_member_order = "bysource"` (functions currently appear alphabetically, which
-        scatters related functions);
-      - remove `templates_path = ['_templates']` (directory doesn't exist) or create it;
-      - replace the Texinfo placeholder `'One line description of project.'`;
-      - align `needs_sphinx` with the `>=7.0` floor.
-- [ ] **Figure pipeline (`docs/source/Makefile`):**
-      - figures depend only on their `plot_*.py`, not on `libnest/*.py`, so after a physics fix
-        `make` keeps the stale PNGs → add the library sources as prerequisites;
-      - `clean` uses `rm` without `-f` (fails if a figure is missing); `mkdir -p` runs *after*
-        the figures are written;
-      - drop `sys.path.insert(0, '../../')` and `from libnest.bsk import *` from the scripts
-        once CI installs the package;
-      - add a tiny shared style helper (`plots/_style.py`: figure size, dpi, axis labels with
-        units, `plt.close()`), so all figures look like one set.
-      - _Option to evaluate:_ matplotlib's built-in `.. plot::` directive
-        (`matplotlib.sphinxext.plot_directive`) keeps the "figures come from code" rule, puts
-        the code next to the figure in the `.rst`, and removes the Makefile layer entirely.
-- [ ] **Repo hygiene:** delete the stray `_sources/physics.rst.txt` at the repo root (left
-      over from a 2024 `sphinx`↔`main` merge), the empty `docs/_static/workaround.txt` and
-      `docs/source/plots/TODO.txt` (`slices.py` already moved to `examples/` in D0);
-      move `docs/DOCUMENTATION_REVIEW_2025-11-19.md` to `docs/history/` (its open items
-      are absorbed here); update `docs/README_DOCS.md` (install via `.[docs]`, figure pipeline,
-      `-W`).
-- [ ] **One docs URL everywhere.** `pyproject.toml` points `Documentation` to
-      `libnest.readthedocs.io` (dead); README uses GitHub Pages. Pick GitHub Pages and confirm
-      Settings → Pages serves the `sphinx` branch.
-- [ ] **Link check:** add `make linkcheck` as a non-blocking CI step (or scheduled). README's
-      "Related projects → SkyNET" link looks unrelated/wrong.
+CI now runs `pip install -e ".[docs]"` and `make -C docs html SPHINXOPTS="-W --keep-going -n"`:
+**any Sphinx warning or unresolved cross-reference fails the build.** Verified by reproducing
+the CI job in a fresh venv (0 warnings) and with `pytest` (72 passed), `ruff`, `main.py`.
+
+- [x] **CI installs the right things.** The unquoted `pip install sphinx>=7.0 ...` (shell
+      redirect) is replaced by `pip install -e ".[docs]"`.
+- [x] **Build fails on warnings** (`-W --keep-going -n`). Getting nitpicky mode to zero also
+      required the mechanical cross-reference part of D3: ~50 `:func:` refs in
+      `plots.py`/`real_data_plots.py` given a leading dot, `np.gradient` → `numpy.gradient`,
+      type names `string`→`str` etc. (~40), proper Args/Returns in `tools.py`, a docstring for
+      `real_data_plots.andreev_e_minimum` and `file_andreev`, and the three non-existent
+      functions in `bsk.rst` (the "Move" heading is now "Fermi energy, minigap, chemical
+      potential").
+- [x] **`conf.py`:** `intersphinx_mapping` (python/numpy/scipy/matplotlib/pandas), `viewcode`
+      ([source] links), `doctest` (enabled, no doctests yet — D3), `autodoc_member_order =
+      "bysource"` (bsk.rst text updated), removed `templates_path`, Texinfo description,
+      `needs_sphinx = '7.0'`, `linkcheck_ignore` for publishers that return HTTP 403 to bots
+      (APS, ScienceDirect, World Scientific).
+- [x] **Figure pipeline:** figures now depend on `libnest/*.py` too (verified: touching the
+      library rebuilds all 12, touching one script rebuilds one); `PYTHONPATH` in the Makefile
+      pins the scripts to this checkout (an older installed libnest can't sneak in); `rm -f`;
+      output dir as an order-only prerequisite; `$(MAKE)` for recursion. Scripts lost their
+      `sys.path` hacks, star import and copy-pasted argv parsing — shared
+      `plots/_common.py` (`output_path`, `savefig`). The build no longer prints runtime warnings.
+      _Deferred (decision 3):_ the `.. plot::` directive.
+- [x] **Repo hygiene:** deleted `_sources/physics.rst.txt`, `docs/_static/workaround.txt`,
+      `docs/source/plots/TODO.txt`; moved the 2025 review to `docs/history/` with a
+      "historical document" header; rewrote `docs/README_DOCS.md`; updated the docs section of
+      `CLAUDE.md`.
+- [x] **One docs URL:** `pyproject.toml` → `https://danielpecak.github.io/libnest/` (the site
+      answers 200; readthedocs was 404).
+- [x] **Link check:** non-blocking `make linkcheck` step after deploy. README's SkyNET link
+      (404) now points to `bitbucket.org/jlippuner/skynet`; `#citeas` anchors removed from the
+      Springer links in `bsk.py`.
+      ⚠️ _Still reported:_ `wslda.fizyka.pw.edu.pl` and `wbsk.fizyka.pw.edu.pl` (index page)
+      do not respond from this machine — check in a browser whether they are down or moved.
 
 ---
 
@@ -208,11 +204,9 @@ Docstrings are the bulk of the site. Do this pass **once**, on the new `SkyrmeFu
 class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thin wrappers.
 
 - [ ] **Topic-grouped API pages generated with `autosummary`** instead of the hand-maintained
-      lists in `bsk.rst`, which already went stale: they reference non-existent
-      `E_minigap_n`, `derivative_pressure_rho_n`, `derivative_epsilon_rho_n`, list
-      `definitions` functions (`eF_n`, `mu_q`) under a heading called "Move", and omit the
-      `_eq2/_eq3/_eq6` pairing schemes.
-- [ ] **Fix ~20 broken cross-references in `plots.py`** (`:func:\`energy_per_nucleon\`` needs a
+      lists in `bsk.rst`, which go stale (they referenced three non-existent functions —
+      fixed in D1 — and still omit the `_eq2/_eq3/_eq6` pairing schemes).
+- [x] **Fix ~20 broken cross-references in `plots.py`** _(done in D1)_ (`:func:\`energy_per_nucleon\`` needs a
       leading dot or the full path) and in `real_data_plots.py`; replace type names `string`
       → `str`, `numpy` → `numpy.ndarray`.
 - [ ] **Remove the duplicate page titles:** module docstrings start with

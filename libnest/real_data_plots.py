@@ -32,7 +32,7 @@ def file_check(filename):
     Checks if all files are present in the directory.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Raises:
         FileNotFoundError
@@ -54,7 +54,7 @@ def files_set_particles(particles_nr, directory_path):
     number of particles.
 
     Args:
-    particles_nr (string): number of particles of the data set
+    particles_nr (str): number of particles of the data set
 
     Returns
         array: list of filenames
@@ -101,7 +101,7 @@ def files_set_type(data_type, filenames):
     or A (mean field potential)
 
     Args:
-    data_type (string): choice of type of files
+    data_type (str): choice of type of files
     filenames (array): list of filenames to sort through
 
     Returns
@@ -131,14 +131,14 @@ def files_set_type(data_type, filenames):
 
 def file_andreev(filenames):
     """
-    Parameters
-    ----------
-    filenames : TYPE
-        DESCRIPTION.
+    Returns the name of the file with Andreev states that matches a data set.
 
-    Returns
-    -------
-    None.
+    Args:
+        filenames (list of str): names of the data-set files; characters 1-3 of
+            the first name encode the density
+
+    Returns:
+        str: name of the Andreev-states file, or None for an unknown density
     """
     density = filenames[0][1:4]
     if density == "216":
@@ -155,6 +155,17 @@ def file_andreev(filenames):
         return "N15000i_states.0000.txt"
 
 def andreev_e_minimum(filename):
+    """
+    Returns the minigap energy read from a file with Andreev states: the lowest
+    energy of the states whose angular momenta :math:`L_z` of the u and v
+    components differ by one.
+
+    Args:
+        filename (str): name of the Andreev-states file in ``TXT_PATH_ANDREEV``
+
+    Returns:
+        float: minigap energy :math:`E_{\\mathrm{mg}}` [MeV]
+    """
     filename = TXT_PATH_ANDREEV + filename
     if file_check(filename):
         data = np.genfromtxt(filename, comments='#')
@@ -304,13 +315,13 @@ def plot_density(filename):
     density. The ratio is plotted against the cross section distance.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
+        :func:`.cross_section_distance`
     """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
@@ -345,7 +356,7 @@ def plot_density_contour(filename):
     A contour plot of density as a vertical cross section is created.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
@@ -409,14 +420,14 @@ def plot_pairing_field(filename):
     against the cross section distance.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`pairing_field`
+        :func:`.cross_section_distance`
+        :func:`.pairing_field`
     """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
@@ -454,14 +465,13 @@ def plot_current(filename):
     calculated. The current is then plotted against the cross section distance.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`current`
+        :func:`.cross_section_distance`
     """
     if file_check(filename):
         data = np.genfromtxt(filename, delimiter=' ', comments='#')
@@ -506,13 +516,13 @@ def plot_density_slice(filename):
     column is the density :math:`\\rho` [fm :sup:`-3`].
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
+        :func:`.cross_section_distance`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -556,14 +566,13 @@ def plot_current_slice(filename):
     calculated. The current is then plotted against the cross section distance.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`current()`
+        :func:`.cross_section_distance`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -602,14 +611,14 @@ def plot_pairing_field_slice(filename):
     calculated and plotted against each other.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`pairing_field`
+        :func:`.cross_section_distance`
+        :func:`.pairing_field`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -646,14 +655,14 @@ def plot_B_q_slice(filename):
     then plotted against the cross section distance.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`pairing_field`
+        :func:`.cross_section_distance`
+        :func:`.pairing_field`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -693,14 +702,14 @@ def plot_U_q_slice(filename):
     plotted against the cross section distance.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`pairing_field`
+        :func:`.cross_section_distance`
+        :func:`.pairing_field`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -740,14 +749,14 @@ def plot_A_slice(filename):
     against it.
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`cross_section_distance`
-        :func:`pairing_field`
+        :func:`.cross_section_distance`
+        :func:`.pairing_field`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -795,13 +804,13 @@ def plot_v_sf_real(filename):
         v_\\mathrm{sf} = \\frac{\\hbar c}{M} \\frac{1}{2r}
 
     Args:
-        filename (string): name of the data set file
+        filename (str): name of the data set file
 
     Returns:
         None
 
     See also:
-        :func:`vsf`
+        :func:`.vsf`
     """
     filename = TXT_PATH + filename
     if file_check(filename):
@@ -847,16 +856,16 @@ def plot_vsf_nv(filename_density, filename_A, filename_current):
         v_\\mathrm{sf}^{NV} = \\frac{\\hbar^2}{2 M B}v_\\mathrm{sf} + \\frac{{ A}}{M}
 
     Args:
-        filename_density (string): name of the file containing density data
-        filename_A (string): name of the file containing the mean field potential from the current variation data
-        filename_current (string): name of the file containing density data
+        filename_density (str): name of the file containing density data
+        filename_A (str): name of the file containing the mean field potential from the current variation data
+        filename_current (str): name of the file containing density data
 
     Returns:
         None
 
     See also:
-        :func:`vsf_NV`
-        :func:`v_NV`
+        :func:`.vsf_NV`
+        :func:`.v_NV`
     """
     filename_density = TXT_PATH + filename_density
     filename_A = TXT_PATH + filename_A
@@ -909,14 +918,14 @@ def plot_landau_velocity(filename_density, filename_delta):
         v_L = \\frac{\\Delta}{\\hbar k_F} c
 
     Args:
-        filename_density (string): name of the file containing density data
-        filename_delta (string): name of the file containing the reference pairing field data
+        filename_density (str): name of the file containing density data
+        filename_delta (str): name of the file containing the reference pairing field data
 
     Returns:
         None
 
     See also:
-        :func:`vLandau`
+        :func:`.vLandau`
     """
     filename_density = TXT_PATH + filename_density
     filename_delta = TXT_PATH + filename_delta
@@ -948,8 +957,8 @@ def plot_landau_velocity(filename_density, filename_delta):
 def plot_landau_velocity_temperature(particles_nr):
     """
     Plots the mean value of Landau velocity :math:`v_{Landau}` [c] against
-    temperature T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and
-    :func:`files_set_particles` functions to parse through the data and chose
+    temperature T [MeV/k:sub:`B`].The code uses :func:`.files_set_type` and
+    :func:`.files_set_particles` functions to parse through the data and chose
     only files with pairing field, and density data sets for the chosen number
     of particles (respectively). It does so for vortex data and for uniform
     matter data for comparison.
@@ -963,15 +972,15 @@ def plot_landau_velocity_temperature(particles_nr):
     against temperature is created.
 
     Args:
-        particles_nr (string): choice of files with a specified number of particles
+        particles_nr (str): choice of files with a specified number of particles
 
     Returns
         None
 
     See also:
-        :func:`vLandau`
-        :func:`vcritical`
-        :func:`speed_of_sound_n`
+        :func:`.vLandau`
+        :func:`.vcritical`
+        :func:`.speed_of_sound_n`
     """
     filenames_delta = files_set_type('delta', files_set_particles(particles_nr, TXT_PATH))
     path_filenames_delta = [TXT_PATH + x for x in filenames_delta]
@@ -1062,15 +1071,15 @@ def plot_landau_critical_velocity(filename_density, filename_delta):
         v_L = e \\frac{\\Delta}{\\hbar k_F} c
 
     Args:
-        filename_density (string): name of the file containing density data
-        filename_delta (string): name of the file containing the reference pairing field data
+        filename_density (str): name of the file containing density data
+        filename_delta (str): name of the file containing the reference pairing field data
 
     Returns:
         None
 
     See also:
-        :func:`vLandau`
-        :func:`vcritical`
+        :func:`.vLandau`
+        :func:`.vcritical`
     """
     filename_density = TXT_PATH + filename_density
     filename_delta = TXT_PATH + filename_delta
@@ -1110,13 +1119,13 @@ def plot_speed_of_sound(filename_density):
     'box' containing the vortex/uniform matter data.
 
     Args:
-        filename_density (string): name of the file containing density data
+        filename_density (str): name of the file containing density data
 
     Returns:
         None
 
     See also:
-        :func:`speed_of_sound_n`
+        :func:`.speed_of_sound_n`
     """
     filename_density = TXT_PATH + filename_density
     if file_check(filename_density):
@@ -1149,13 +1158,13 @@ def plot_e_minigap(filename_density):
     the 'box' containing the vortex/uniform matter data.
 
     Args:
-        filename_density (string): name of the file containing density data
+        filename_density (str): name of the file containing density data
 
     Returns:
         None
 
     See also:
-        :func:`E_minigap_delta_n`
+        :func:`.E_minigap_delta_n`
     """
     filename_density = TXT_PATH + filename_density
     if file_check(filename_density):
@@ -1178,8 +1187,8 @@ def plot_e_minigap(filename_density):
 def plot_e_minigap_temperature(particles_nr):
     """
     Plots the maximum value the energy of minigap :math:`E_{minigap}` [MeV] against
-    temperature T [MeV/k:sub:`B`].The code uses :func:`files_set_type` and
-    :func:`files_set_particles` functions to parse through the data and chose
+    temperature T [MeV/k:sub:`B`].The code uses :func:`.files_set_type` and
+    :func:`.files_set_particles` functions to parse through the data and chose
     only files with, (respectively), pairing field, and density data sets for
     the chosen number of particles. It does so for vortex data and for uniform
     matter data for comparison.
@@ -1193,15 +1202,15 @@ def plot_e_minigap_temperature(particles_nr):
     It is then plotted as a striaght line for comparison.
 
     Args:
-        particles_nr (string): choice of files with a specified number of particles
+        particles_nr (str): choice of files with a specified number of particles
 
     Returns
         None
 
     See also:
-        :func:`E_minigap_delta_n`
-        :func:`file_andreev`
-        :func:`andreev_e_minimum`
+        :func:`.E_minigap_delta_n`
+        :func:`.file_andreev`
+        :func:`.andreev_e_minimum`
     """
     filenames_density = files_set_type('density', files_set_particles(particles_nr, TXT_PATH))
     path_filenames_density = [TXT_PATH + x for x in filenames_density]

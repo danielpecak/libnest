@@ -35,7 +35,7 @@ def plot_energy_per_nucleon(rho_n, rho_p):
         None
 
     See also:
-        :func:`energy_per_nucleon`
+        :func:`.energy_per_nucleon`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho * rho_n
@@ -64,7 +64,7 @@ def plot_energy_per_nucleon_both():
         None
 
     See also:
-        :func:`energy_per_nucleon`
+        :func:`.energy_per_nucleon`
     """
     rho = np.linspace(0, 0.2, 100)
     rho_neum = rho #NeuM
@@ -103,7 +103,7 @@ def plot_pairing_field_n(rho_n, rho_p):
         None
 
     See also:
-        :func:`neutron_ref_pairing_field`
+        :func:`.neutron_ref_pairing_field`
     """
     rho = np.linspace(0., 0.09, 100)
     rho_n = rho * rho_n
@@ -132,7 +132,7 @@ def plot_pairing_field_p(rho_n, rho_p):
         None
 
     See also:
-        :func:`proton_ref_pairing_field`
+        :func:`.proton_ref_pairing_field`
     """
     rho = np.linspace(0., 0.2, 100)
     rho_n = rho * rho_n
@@ -167,7 +167,7 @@ def plot_effective_mass_n(rho_n, rho_p):
         None
 
     See also:
-        :func:`effMn`
+        :func:`.effMn`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -197,7 +197,7 @@ def plot_effective_mass_p(rho_n, rho_p):
         None
 
     See also:
-        :func:`effMp`
+        :func:`.effMp`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -222,13 +222,13 @@ def plot_B_q(rho_n, rho_p, q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
-        q (string): nucleon type choice (neutron 'n' or proton 'p')
+        q (str): nucleon type choice (neutron 'n' or proton 'p')
 
     Returns:
         None
 
     See also:
-        :func:`B_q`
+        :func:`.B_q`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -251,13 +251,13 @@ def plot_U_q(rho_n, rho_p, q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]
-        q (string): nucleon type choice (neutron 'n' or proton 'p')
+        q (str): nucleon type choice (neutron 'n' or proton 'p')
 
     Returns:
         None
 
     See also:
-        :func:`U_q`
+        :func:`.U_q`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -285,7 +285,7 @@ def plot_isoscalarM(rho_n, rho_p):
         None
 
     See also:
-        :func:`isoscalarM`
+        :func:`.isoscalarM`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -313,7 +313,7 @@ def plot_isovectorM(rho_n, rho_p):
         None
 
     See also:
-        :func:`isovectorM`
+        :func:`.isovectorM`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -343,7 +343,7 @@ def plot_pressure_n(rho_n):
         None
 
     See also:
-        :func:`pressure_n`
+        :func:`.pressure_n`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -367,7 +367,7 @@ def plot_speed_of_sound_n(rho_n):
         None
 
     See also:
-        :func:`speed_of_sound_n`
+        :func:`.speed_of_sound_n`
     """
     rho = np.linspace(0., 1., 100)
     rho_n = rho_n * rho
@@ -393,11 +393,11 @@ def plot_v_landau(rho_n):
         rho_n (float): maximum neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
 
     Returns:
-        None.
+        None
 
     See also:
-        :func:`vLandau`
-        :func:`rho2kf`
+        :func:`.vLandau`
+        :func:`.rho2kf`
     """
     rho_n = np.linspace(0., 1., 100) * rho_n
     delta = libnest.bsk.neutron_ref_pairing_field(rho_n, 0.)
@@ -424,8 +424,8 @@ def plot_v_critical(rho_n):
         None
 
     See also:
-        :func:`vcritical`
-        :func:`rho2kf`
+        :func:`.vcritical`
+        :func:`.rho2kf`
     """
     rho_n = np.linspace(0., 1., 100) * rho_n
     delta = libnest.bsk.neutron_ref_pairing_field(rho_n, 0.)
@@ -454,7 +454,7 @@ def plot_v_sf(r):
         None
 
     See also:
-        :func:`vsf`
+        :func:`.vsf`
     """
     r = np.linspace(0., 1., 100) * r
     v = libnest.definitions.vsf(r)
@@ -483,7 +483,7 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
         tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
         j (float): momentum density/current :math:`j` [fm :sup:`-3`]
         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
         kappa (float):
             what is kappa? (no Eq.9 in Ref.41)
 
@@ -491,7 +491,7 @@ def plot_epsilon(rho_n, rho_p, rho_grad, tau, j, nu, q, kappa):
         None
 
     See also:
-        :func:`epsilon`
+        :func:`.epsilon_np`
     """
     rho = np.linspace(0.000, 1., 100)
     rho_n = rho_n * rho

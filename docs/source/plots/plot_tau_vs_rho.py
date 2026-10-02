@@ -5,20 +5,14 @@ Created on Tue Aug 30 14:20:50 2022
 
 @author: aleks
 """
-import sys
-import os
-sys.path.insert(0, os.path.abspath('../../'))
 
-import libnest
 import numpy as np
 import matplotlib.pyplot as plt
+from _common import output_path, savefig
 import libnest.definitions
 
-import sys
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    sys.exit("Specify the path for the image!")
+
+filename = output_path()
 
 rho = np.linspace(0., 0.2, 100)
 
@@ -32,4 +26,4 @@ plt.plot(rho, tau, linewidth=2.0)
 plt.xlim([0,.2])
 plt.ylim([0,.4])
 # plt.legend()
-plt.savefig(filename)
+savefig(filename)

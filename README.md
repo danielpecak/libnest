@@ -195,7 +195,7 @@ See `docs/bibliography.rst` for a complete list of references.
 
 ## 🔗 Related Projects
 
-- [SkyNET](https://github.com/nuclear-physics/skynet) - Nuclear reaction network
+- [SkyNet](https://bitbucket.org/jlippuner/skynet) - Nuclear reaction network
 - [CompOSE](https://compose.obspm.fr/) - Equations of state database
 
 ---

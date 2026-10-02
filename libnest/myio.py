@@ -44,11 +44,11 @@ def readDimTxt(PATH, PREFIX):
         defaults to 1 (a flat direction).
 
     Args:
-        PATH (string): location path
-        PREFIX (string): prefix of the file
+        PATH (str): location path
+        PREFIX (str): prefix of the file
 
     Returns:
-        list of ints: a list of points in each direction [NX, NY, NZ].
+        list of int: a list of points in each direction [NX, NY, NZ].
     """
     file = PATH + PREFIX + '_info.txt'
     with open(file) as f:
@@ -64,9 +64,9 @@ def txt2df(file,sufix,cols):
     r"""Reads \*.txt files to pandas dataframe.
 
     Args:
-        file (string): path and prefix to the data
-        sufix (string): sufix pointing to the type of data e. g. 'density', 'delta' etc.
-        cols (list of strings): names of columns in the file
+        file (str): path and prefix to the data
+        sufix (str): sufix pointing to the type of data e. g. 'density', 'delta' etc.
+        cols (list of str): names of columns in the file
 
     Returns:
         pandas.DataFrame: data about spatial extend of observables

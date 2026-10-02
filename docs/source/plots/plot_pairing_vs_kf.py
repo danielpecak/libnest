@@ -1,19 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-import sys
-import os
-sys.path.insert(0, os.path.abspath('../../'))
-import libnest
 import numpy as np
 import matplotlib.pyplot as plt
+from _common import output_path, savefig
 import libnest.definitions
 import libnest.bsk
 
-import sys
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    sys.exit("Specify the path for the image!")
+
+filename = output_path()
 
 kf = np.linspace(0., 1.4, 1000)
 rho = libnest.definitions.kf2rho(kf)
@@ -29,4 +23,4 @@ plt.plot(kf, delta_n, linewidth=2.0, label="NeuM")
 plt.plot(kf, delta_sym, linewidth=2.0, label="SM")
 plt.xlim([0,1.4])
 plt.legend()
-plt.savefig(filename)
+savefig(filename)

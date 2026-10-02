@@ -20,13 +20,10 @@ def threeSlice(variable):
 
 
     Args:
-        numpy array
+        variable (numpy.ndarray): 1D, 2D or 3D array
 
     Returns:
-        n dimensional numpy array with slices
-
-    See also:
-        :func:`.kf2rho`
+        numpy.ndarray: slices through the centre along each axis
     """
     if(len(variable.shape)==3):
         [nx, ny, nz] = [variable.shape[i] for i in range(3)]
@@ -54,7 +51,7 @@ def centerOfMass(density):
         The center of mass unit here is unitless (units of grid)
 
     Args:
-        density(float): :math:`\\rho_n` [fm :sup:`-3`]
+        density (numpy.ndarray): :math:`\\rho_n` [fm :sup:`-3`] at subsequent time steps, shape (nt, nx, ny, nz)
 
     Returns:
         2 dimensional numpy array of center of mass coordinates
@@ -104,7 +101,9 @@ def flowEnergy(j, density_n, density_p):
     Formula: \integral hbar*c*j^2/(2mc^2 density) dr
 
     Args:
-        current numpy array, density of neutrons numpy array, density of protons numpy array
+        j (numpy.ndarray): current, shape (nt, 3, nx, ny, nz)
+        density_n (numpy.ndarray): neutron density [fm :sup:`-3`], shape (nt, nx, ny, nz)
+        density_p (numpy.ndarray): proton density [fm :sup:`-3`], shape (nt, nx, ny, nz)
 
     Returns:
         1 dimensional numpy array of flow energy
@@ -131,7 +130,7 @@ def particleN(density):
 
 
     Args:
-        density numpy array
+        density (numpy.ndarray): density [fm :sup:`-3`], shape (nt, nx, ny, nz)
 
     Returns:
         1 dimensional numpy array of number of particles

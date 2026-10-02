@@ -371,13 +371,13 @@ def proton_ref_pairing_field(rho_n, rho_p):
 # implement one interpolation scheme (Formula 5.10 from NeST.pdf) for getting
 # delta_n and delta_p from delta_sm (symmetric_pairing_field) and delta_neu
 # (neutron_pairing_field). Add two more schemes here, following:
-# https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+# https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
 def neutron_ref_pairing_field_eq2(rho_n, rho_p):
     r"""
     Returns the reference pairing field for neutrons in uniform matter
     using the interpolation scheme from Eq. (2) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
     This interpolates between symmetric matter and neutron matter,
     with asymmetry dependence governed by :math:`\delta`.
@@ -421,7 +421,7 @@ def proton_ref_pairing_field_eq2(rho_n, rho_p):
     r"""
     Returns the reference pairing field for protons in uniform matter
     using the interpolation scheme from Eq. (2) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
     This interpolates between symmetric matter and neutron matter,
     with asymmetry dependence governed by :math:`\delta`.
@@ -464,7 +464,7 @@ def neutron_ref_pairing_field_eq3(rho_n, rho_p):
     r"""
     Returns the reference pairing field for neutrons in uniform matter
     using the interpolation scheme from Eq. (3) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
     This interpolates between symmetric matter and neutron matter,
     with asymmetry dependence governed by :math:`\delta`.
@@ -506,7 +506,7 @@ def proton_ref_pairing_field_eq3(rho_n, rho_p):
     r"""
     Returns the reference pairing field for protons in uniform matter
     using the interpolation scheme from Eq. (3) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
     This interpolates between symmetric matter and neutron matter,
     with asymmetry dependence governed by :math:`\delta`.
@@ -548,7 +548,7 @@ def neutron_ref_pairing_field_eq6(rho_n, rho_p):
     r"""
     Returns the reference pairing field for neutrons in uniform matter
     using the interpolation scheme from Eq. (6) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
     This interpolates between symmetric matter and neutron matter,
     with asymmetry dependence governed by :math:`\delta`.
@@ -591,7 +591,7 @@ def proton_ref_pairing_field_eq6(rho_n, rho_p):
     r"""
     Returns the reference pairing field for protons in uniform matter
     using the interpolation scheme from Eq. (6) of
-    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x#citeas
+    https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
 
     This interpolates between symmetric matter and neutron matter,
     with asymmetry dependence governed by :math:`\delta`.
@@ -678,7 +678,7 @@ def testMe(rho):
 def numerical_derivative_energy_per_nucleon_n(rho_n):
     """
     First derivative of energy per nucleon, calculated numerically using
-    :func:`np.gradient`.
+    :func:`numpy.gradient`.
 
     Args:
     rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -696,7 +696,7 @@ def numerical_derivative_energy_per_nucleon_n(rho_n):
 def numerical_second_derivative_energy_per_nucleon_n(rho_n):
     """
     Second derivative of energy per nucleon, calculated numerically using
-    :func:`np.gradient`.
+    :func:`numpy.gradient`.
 
     Args:
     rho_n (float): rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -714,7 +714,7 @@ def numerical_second_derivative_energy_per_nucleon_n(rho_n):
 def numerical_derivative_epsilon_n(rho_n):
     """
     Derivative of energy density :math:`\\epsilon` with respect to density, calculated numerically using
-    :func:`np.gradient` for neutron matter and using the :func:`.energy_per_nucleon` function, setting proton
+    :func:`numpy.gradient` for neutron matter and using the :func:`.energy_per_nucleon` function, setting proton
     density :math:`\\rho_p` to 0.
 
     Args:
@@ -731,7 +731,7 @@ def numerical_derivative_epsilon_n(rho_n):
 
 def numerical_pressure_n(rho_n):
     """
-    Pressure :math:`P` in neutron matter, calculated using the :func:`np.gradient`
+    Pressure :math:`P` in neutron matter, calculated using the :func:`numpy.gradient`
     function to calculate the derivative of data calculated by :func:`.energy_per_nucleon`.
 
     Args:
@@ -749,7 +749,7 @@ def numerical_pressure_n(rho_n):
 def numerical_derivative_pressure_n(rho_n):
     """
     Derivative of pressure :math:`P` with respect to density for neutron matter,
-    calculated numerically using :func:`np.gradient`.
+    calculated numerically using :func:`numpy.gradient`.
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -1028,7 +1028,7 @@ def U_q(rho_n, rho_p,q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 
     Returns:
         float: Mean field potential :math:`U_q` [MeV]
@@ -1061,7 +1061,7 @@ def B_q(rho_n, rho_p, q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 
     Returns:
         float: :math:`B_q = \\hbar^2/(2 M^*_q)` [MeV fm :sup:`2`]
@@ -1405,7 +1405,7 @@ def v_pi(rho_n, rho_p, q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 
     Returns:
         float: pairing strength :math:`\\upsilon^{pi}` [fm :sup:`-3`]
@@ -1441,7 +1441,7 @@ def I(rho_n, rho_p, q):
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 
     Returns:
         float: analytic integral solution
@@ -1610,7 +1610,7 @@ def Lambda(x):
 #         tau (float): kinetic density :math:`\\tau` [fm :sup:`-5`]
 #         j (float): momentum density/current :math:`j` [fm :sup:`-3`]
 #         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-#         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+#         q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 #         kappa (float):
 #             what is kappa? (no Eq.9 in Ref.41)
 #
@@ -1636,7 +1636,7 @@ def Lambda(x):
 #         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
 #         rho_grad (float): particle density gradient :math:`\\nabla \\rho` [fm :sup:`-4`]
 #         nu (float): anomalous density :math:`\\nu` [fm :sup:`-3`]
-#         q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+#         q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
 #         kappa (float):
 #            - is this tern supposed to be included?
 #

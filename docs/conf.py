@@ -35,7 +35,7 @@ version = '.'.join(release.split('.')[:2])
 # -- General configuration ---------------------------------------------------
 
 # Minimum Sphinx version
-needs_sphinx = '4.0'
+needs_sphinx = '7.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -45,9 +45,33 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
+    'sphinx.ext.doctest',
     'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
     'sphinxcontrib.katex',
     'sphinxcontrib.bibtex',
+]
+
+# Cross-links to external API docs, e.g. :func:`numpy.gradient`.
+# Fetched at build time (needs network access).
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'numpy': ('https://numpy.org/doc/stable', None),
+    'scipy': ('https://docs.scipy.org/doc/scipy', None),
+    'matplotlib': ('https://matplotlib.org/stable', None),
+    'pandas': ('https://pandas.pydata.org/docs', None),
+}
+
+# Document functions in source order, so related functions stay together.
+autodoc_member_order = 'bysource'
+
+# `make linkcheck`: these publishers answer automated requests with HTTP 403,
+# although the links work in a browser.
+linkcheck_ignore = [
+    r'https://(link|journals)\.aps\.org/',
+    r'https://doi\.org/10\.1103/',          # APS DOIs redirect to link.aps.org
+    r'https://www\.sciencedirect\.com/',
+    r'https://doi\.org/10\.1142/',          # World Scientific
 ]
 # 'sphinx.ext.imgmath',
 bibtex_bibfiles = ['bibtexNS.bib']
@@ -60,9 +84,6 @@ suppress_warnings = ['epub.unknown_project_files']
 # imgmath_embed = True
 # imgmath_latex = 'pdflatex'
 # mathjax_path = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
-
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -172,7 +193,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'libNeST', 'libNeST Documentation',
-     author, 'libNeST', 'One line description of project.',
+     author, 'libNeST', 'Library for neutron-star and nuclear-matter physics.',
      'Miscellaneous'),
 ]
 
