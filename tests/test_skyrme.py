@@ -5,6 +5,7 @@ Physics invariants of libnest.edf.SkyrmeFunctional (TODO_edf.md, phase E3).
 These tests check relations that must hold for any parameter set — limits, derivatives
 and symmetries — rather than re-implementing the formulas.
 """
+import dataclasses
 import unittest
 
 import numpy as np
@@ -125,6 +126,38 @@ class TestGradientTerms(unittest.TestCase):
                 np_order = bsk.epsilon_delta_rho_np(rho_n, rho_p, g_n**2, g_p**2, g)
                 pn_order = bsk.epsilon_delta_rho_np(rho_p, rho_n, g_p**2, g_n**2, g)
                 self.assertAlmostEqual(np_order / pn_order, 1., places=12)
+
+
+
+class TestKineticTerm(unittest.TestCase):
+    """The kinetic energy uses the hbar^2/2m of the parameter set."""
+
+    def setUp(self):
+        params = dataclasses.replace(FREE.params, hbar2m_n=20.0, hbar2m_p=21.0)
+        self.gas = SkyrmeFunctional(params)
+
+    def test_free_gas_energy_per_nucleon(self):
+        """Free Fermi gas: E/A = 3/5 hbar^2 kF^2 / 2m, averaged over the species."""
+        rho = np.array([0.02, 0.08, 0.16])
+        kF_neum = definitions.rho2kf(rho)
+        np.testing.assert_allclose(self.gas.energy_per_nucleon(rho, 0.),
+                                   0.6*20.0*kF_neum**2, rtol=1e-9)
+        kF_snm = definitions.rho2kf(rho/2)
+        np.testing.assert_allclose(self.gas.energy_per_nucleon(rho/2, rho/2),
+                                   0.6*0.5*(20.0 + 21.0)*kF_snm**2, rtol=1e-9)
+
+    def test_free_gas_energy_density(self):
+        """Free Fermi gas without gradients and pairing: epsilon = sum_q hbar^2/2m_q tau_q."""
+        eps = self.gas.epsilon_np(0.06, 0.02, 0., 0., 0.1, 0.05, 0., 0., 0., 0., 0., 0.)
+        self.assertAlmostEqual(eps, 20.0*0.1 + 21.0*0.05, places=12)
+
+    def test_general_and_neutron_matter_formulas_agree(self):
+        """energy_per_nucleon(rho, 0) and the analytic energy_per_nucleon_n(rho)."""
+        rho = np.array([0.01, 0.05, 0.1, 0.2])
+        # rtol: the general formula adds DENSEPSILON = 1e-12 fm^-3 to rho (1e-10 relative
+        # at 0.01 fm^-3); a bare-mass kinetic term instead of hbar2m would differ by ~1e-8
+        np.testing.assert_allclose(bsk.energy_per_nucleon(rho, 0.),
+                                   bsk.energy_per_nucleon_n(rho), rtol=1e-9)
 
 
 if __name__ == "__main__":

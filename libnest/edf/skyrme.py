@@ -14,8 +14,8 @@ are both accepted.
 """
 import sys
 import numpy as np
-from libnest.units import HBARC, DENSEPSILON, NUMZERO
-from libnest.units import MN, MP
+from libnest.units import DENSEPSILON, NUMZERO
+from libnest.units import MN
 from libnest.definitions import rho2kf, rhoEta
 from libnest.edf.parameters import PairingParameters
 
@@ -540,8 +540,8 @@ class SkyrmeFunctional:
         F_x_5 = 0.5*((1+eta)**(5./3.)+(1-eta)**(5./3.)) # Formula (A15)
         F_x_8 = 0.5*((1+eta)**(8./3.)+(1-eta)**(8./3.)) # Formula (A15)
 
-        return (3*(HBARC**2)/20*(kF**2)*((np.power((1+eta),5/3)/MN
-                                                    +np.power((1-eta),5/3)/MP))
+        return (3./10.*(kF**2)*(p.hbar2m_n*np.power((1+eta),5/3)
+                                +p.hbar2m_p*np.power((1-eta),5/3))
                 + p.t0/8.*rho*(3-(2*p.x0 + 1)*eta**2)
                 + 3.*p.t1/40*rho*(kF**2)*((2+p.x1)*F_x_5 -(0.5+p.x1)*F_x_8)
                 + 3./40*((2.*p.t2+p.t2x2)*F_x_5 +(0.5*p.t2+p.t2x2)*F_x_8)*rho*(kF**2)
@@ -1296,7 +1296,8 @@ class SkyrmeFunctional:
         rho_grad_n_square = (rho_grad_n)**2
         rho_grad_p_square = (rho_grad_p)**2
         rho_grad_square = (rho_grad_n + rho_grad_p)**2  # (grad rho)^2, rho = rho_n + rho_p
-        return (HBARC**2/2./MN*tau_n + HBARC**2/2./MP*tau_p
+        p = self.params
+        return (p.hbar2m_n*tau_n + p.hbar2m_p*tau_p
                 + self.epsilon_rho_np(rho_n, rho_p)
                 + self.epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square)
                 + self.epsilon_tau_np(rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2)
