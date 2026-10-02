@@ -946,10 +946,9 @@ class SkyrmeFunctional:
                 mu_q = NUMZERO
             return float(mu_q)
         else:
-            i = np.where(mu_q==0)
-            mu_q[i] = NUMZERO
-            j = np.where(rho==0)
-            mu_q[j] = NUMZERO
+            # boolean masks, broadcast: rho may be a scalar when the other density is an array
+            mu_q[mu_q == 0] = NUMZERO
+            mu_q[np.broadcast_to(rho == 0, mu_q.shape)] = NUMZERO
             return mu_q
 
     def U_q(self, rho_n, rho_p,q):

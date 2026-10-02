@@ -32,6 +32,15 @@ class TestChemicalPotential(unittest.TestCase):
         self.assertAlmostEqual(bsk.mu_q(rho_n, rho_p, "n") / eF,
                                1. / bsk.effMn(rho_n, rho_p), places=9)
 
+    def test_mixed_scalar_and_array_input(self):
+        """An array for one density and a scalar for the other must work for both q."""
+        rho_n = np.array([0.05, 0.08])
+        mu_p = bsk.mu_q(rho_n, 0., "p")          # no protons: numerical zero
+        np.testing.assert_array_equal(mu_p, [1e-12, 1e-12])
+        mu_n = bsk.mu_q(rho_n, 0.01, "n")
+        self.assertEqual(mu_n[1], bsk.mu_q(0.08, 0.01, "n"))
+        self.assertEqual(bsk.I(rho_n, 0., "p").shape, (2,))
+
     def test_mu_magnitude_bsk31(self):
         """Neutron matter at 0.08 fm^-3: eF = 36.8 MeV and M*/M ~ 1, so mu = O(30-45) MeV."""
         self.assertTrue(25. < bsk.mu_q(0.08, 0., "n") < 45.)
