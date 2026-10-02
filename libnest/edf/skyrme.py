@@ -912,12 +912,12 @@ class SkyrmeFunctional:
     def mu_q(self, rho_n, rho_p, q):
         # Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
         """
-        Calculates the chemical potential :math:`\\mu` defined with the wavevector
-        :math:`k_F` :cite:`chamel2009pairing`.
+        Calculates the chemical potential :math:`\\mu_q` defined with the wavevector
+        :math:`k_{F,q}` and the effective mass :math:`M^*_q` :cite:`chamel2009pairing`.
 
         .. math::
 
-            \\mu_q = \\frac{\\hbar^2 k_F^2}{2M_q}
+            \\mu_q = \\frac{\\hbar^2 k_{F,q}^2}{2M^*_q} = B_q k_{F,q}^2
 
         Args:
             rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -931,14 +931,12 @@ class SkyrmeFunctional:
         rho_n = np.asarray(rho_n)
         rho_p = np.asarray(rho_p)
         if(q=='n'):
-            M = self.effMn(rho_n, rho_p)
             rho = rho_n
         elif(q=='p'):
-            M = self.effMp(rho_n, rho_p)
             rho = rho_p
         else:
             sys.exit('# ERROR: Nucleon q must be either n or p')
-        mu_q = HBARC**2*rho2kf(rho)**2/(2.*M)
+        mu_q = self.B_q(rho_n, rho_p, q)*rho2kf(rho)**2
         mu_q = np.asarray(mu_q)
         # Handle assignment for both scalar and array
         if mu_q.shape == ():

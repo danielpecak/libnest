@@ -371,12 +371,12 @@ def E_minigap_rho_n(rho_n, functional=None):
 def mu_q(rho_n, rho_p, q, functional=None):
     # Eq. taken from S. Goriely, N. Chamel, and J. M. Pearson, Phys. Rev. Lett. 102, 152503 (2009)
     """
-    Calculates the chemical potential :math:`\\mu` defined with the wavevector
-    :math:`k_F` :cite:`chamel2009pairing`.
+    Calculates the chemical potential :math:`\\mu_q` defined with the wavevector
+    :math:`k_{F,q}` and the effective mass :math:`M^*_q` :cite:`chamel2009pairing`.
 
     .. math::
 
-        \\mu_q = \\frac{\\hbar^2 k_F^2}{2M_q}
+        \\mu_q = \\frac{\\hbar^2 k_{F,q}^2}{2M^*_q} = B_q k_{F,q}^2
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
