@@ -13,8 +13,10 @@ This file replaces/expands `TODO.md` → P4. Companion plan: [`TODO_doc.md`](TOD
 
 - **Parameters are module globals** in `libnest/bsk.py` (`T0..T5`, `X0..X5`, `T2X2`,
   `ALPHA/BETA/GAMMA`, …) and all 44 functions read them directly.
-- **`libnest/bskg.py` is a byte-identical copy of `bsk.py`** (commit `44c1807`, "Template for
-  bskg module") — the "one module per parametrization" approach has been started.
+- **`libnest/bskg.py` is a placeholder for a contributor** to fill with other functionals
+  (the BSkG family). Today it is a byte-identical copy of `bsk.py` (commit `44c1807`), so
+  filling it by editing the copied formulas would fork the implementation — §2a shows how it
+  fits the new design instead.
 - **Functional-specific values hard-coded outside the parameter block:**
   - kinetic term of `energy_per_nucleon` uses `HBARC**2/MN`, `HBARC**2/MP` (bare masses),
     whereas BSkG3/BSkG4/SLy4/SkM* use one common ħ²/2m (20.7355…, see `bsk_constants.h`);
@@ -50,7 +52,7 @@ switches (pairing scheme, cutoff, ħ²/2m convention). Separate modules are righ
 
 | Option | For | Against |
 |---|---|---|
-| **A. One module per parametrization** (`bsk31.py`, `bsk24.py`, `bskg3.py`, … — what `bskg.py` started) | Trivial to start | 10 × ~1000 lines of copies; every bug fix N times (see §5 — there are several); copies drift; can't loop over functionals |
+| **A. One module per parametrization** (`bsk31.py`, `bsk24.py`, `bskg3.py`, … each with its own copy of the formulas) | Trivial to start | 10 × ~1000 lines of copies; every bug fix N times (see §5 — there are several); copies drift; can't loop over functionals |
 | **B. Global switch** `set_functional("BSk24")` (old `TODO.md` P4 suggestion) | Minimal diff; old calls keep working | Hidden global state: comparing two functionals in one script means toggling; results depend on call order; tests can leak state into each other; not thread-safe |
 | **C. `functional=` keyword on every function** | Explicit | ~50 signatures; must be threaded through internal chains (`v_pi → I → mu_q → effMn → B_q`) — forget one and BSk31 silently leaks into a BSk24 result |
 | **D. ✅ Functional object** — immutable parameters + one class holding the formulas | Explicit; internal calls go through `self`, so functionals cannot mix; comparing is a loop; user-defined sets are easy; old `bsk` API kept as a BSk31 instance | One-time refactor (mechanical: `T0` → `p.t0`) |
@@ -73,6 +75,36 @@ import libnest.bsk as bsk                     # unchanged: BSk31, module-level f
 bsk.energy_per_nucleon(0.08, 0.08); bsk.T0
 ```
 
+### 2a. Family modules: `bsk.py` and `bskg.py` (decided 2026-10-02)
+
+Both stay as the user-facing entry points of their family; **neither holds formulas** — those
+live once in `edf/skyrme.py`. A family module holds the family's parameter sets (data) and a
+module-level API bound to a default functional.
+
+- `bsk.py` — BSk family: module-level functions = BSk31 (today's API, unchanged); parameter
+  sets `BSK16, BSK22, BSK24, BSK25, BSK31`.
+- `bskg.py` — BSkG family, **the contributor's module**: parameter sets `BSKG3, BSKG4`
+  (Skyrme part + pairing part: Eq. 3 / Eq. 6 scheme, common ħ²/2m, E_cut, κ convention) with
+  references; module-level functions bound to a default BSkG functional, like `bsk.py`.
+
+```python
+# libnest/bskg.py after E2 — adding a functional is one parameter block, not 1600 lines
+from libnest.edf import SkyrmeParameters, PairingParameters, register
+
+BSKG3 = register(
+    SkyrmeParameters(name="BSkG3", t0=..., t1=..., ..., hbar2m_n=20.73553, hbar2m_p=20.73553,
+                     reference="Grams et al., EPJA 59, 270 (2023)"),
+    PairingParameters(scheme="bskg3_eq3", cutoff=7.961, ...))
+BSKG4 = register(..., PairingParameters(scheme="bskg4_eq6", cutoff=7.919, ...))
+
+_default = BSKG4                              # see open question 7
+energy_per_nucleon = _default.energy_per_nucleon
+...
+```
+
+`get_functional("BSkG4")` and `libnest.bskg.BSKG4` are the same object (the registry imports
+the family modules lazily on first lookup).
+
 ---
 
 ## 3. Target design
@@ -82,10 +114,13 @@ libnest/
   edf/
     __init__.py          get_functional, available_functionals, register, SkyrmeFunctional
     parameters.py        SkyrmeParameters, PairingParameters (frozen dataclasses)
-    parametrizations.py  registry: one entry per force, with reference/DOI/notes
+    parametrizations.py  registry (get_functional, register); standard Skyrme sets SLy4,
+                         SkM*, t0t3 — family sets live in their family modules
     skyrme.py            SkyrmeFunctional: E/A, pressure, c_s, B_q, U_q, M*, C^ρ, C^τ, ε_*, v_π, I
     pairing.py           gap models (Δ_NeuM, Δ_SM fits) + interpolation schemes registry
-  bsk.py                 compatibility layer = get_functional("BSk31"), old names & constants
+  bsk.py                 BSk family: BSk16/22/24/25/31 sets; module-level API = BSk31
+                         (compatibility: old names & constants)
+  bskg.py                BSkG family (contributor): BSkG3/BSkG4 sets; module-level API
   definitions.py         functional-independent only (rho2kf, eF_n, vLandau, …)
 ```
 
@@ -182,14 +217,30 @@ sign-off.
 
 ## 6. Migration plan (each phase = one PR, full test suite green after each)
 
-### E0 — Safety net (no code changes yet)
-- [ ] Delete `libnest/bskg.py` (identical copy of the abandoned option A; it's picked up by
-      `test_imports` and would end up in the docs).
-- [ ] **Golden-master test for BSk31:** `tests/data/make_golden.py` evaluates every public
-      `bsk` function on a fixed grid of (ρ_n, ρ_p) — scalar and array input — and writes
-      `tests/data/golden_bsk31.npz`; `tests/test_golden_bsk31.py` compares at `rtol=1e-12`.
-      This proves E1–E2 change no number.
-- [ ] Record the public `bsk` API (names + signatures) as the compatibility checklist.
+### E0 — Safety net (no code changes yet)  ✅ DONE (branch `edf-refactor`, 2026-10-02)
+- [x] **Keep `libnest/bskg.py` untouched** — it is the contributor's placeholder; E2 turns it
+      into the BSkG family module (§2a).
+- [x] **Golden-master test for BSk31.** `tests/golden/spec.py` (cases + input grid),
+      `tests/golden/make_golden.py` (generator; without `--write` it only reports which
+      cases would change), `tests/golden/bsk31.json` (inputs, results, API snapshot — JSON,
+      one value per line, so a git diff shows every changed number),
+      `tests/test_golden_bsk31.py`.
+      - 51 cases: all 43 public `bsk` functions (`U_q`, `B_q`, `v_pi`, `I` for both q) plus
+        `definitions.mu_q`, `xiBCS`, `E_minigap_rho_n`, which move in E2;
+      - grid: 20 total densities × 5 proton fractions (0 … 0.7: NeuM, SNM, proton-rich),
+        including ρ = 0 and points on both sides of every pairing cutoff; array input and
+        point-by-point Python-float input;
+      - current edge behaviour is recorded, so the refactor must keep it (or change it on
+        purpose): scalar ρ = 0 raises `ZeroDivisionError` in the 6 analytic neutron-matter
+        functions (array input gives `inf`); `I`, `v_pi`, `epsilon_pi_np`, `epsilon_np` return
+        masked arrays;
+      - tolerance `rtol=1e-12`, `atol=1e-15`;
+      - mutation-checked: T5 changed by 1e-4 % → 34 cases fail; a pairing cutoff moved by
+        0.005 fm⁻¹ (scalar or array branch) → 12 fail; Λ(x) constant changed by 1e-7 → 7 fail;
+        `testMe` renamed → API test fails.
+- [x] **Public API snapshot** in the same file: parameter lists of all public `bsk` functions
+      and of the three `definitions` helpers, values of `T0 … KAPPAP`. The test accepts new
+      parameters only when appended with defaults.
 
 ### E1 — Parameters become data (no behavior change)
 - [ ] `edf/parameters.py` + a `BSK31` instance; `bsk.py` globals become `T0 = BSK31.t0`, ….
@@ -203,8 +254,9 @@ sign-off.
 - [ ] Golden test passes at `rtol=1e-12`; `test_imports`, `main.py` unchanged.
 
 ### E3 — Fix the physics bugs from §5 (numbers change on purpose)
-- [ ] One commit per bug: new invariant test → fix → regenerate only the affected golden
-      arrays, with the reason in the commit message.
+- [ ] One commit per bug: new invariant test → fix → `python -m tests.golden.make_golden`
+      (lists the affected cases) → `--write`; the reason goes in the commit message and the
+      git diff of `bsk31.json` shows exactly which numbers moved.
 
 ### E4 — Pairing as a component
 - [ ] `edf/pairing.py`: gap model (Δ_NeuM, Δ_SM fits + k_F cutoffs) and a scheme registry
@@ -248,6 +300,25 @@ sign-off.
 
 ---
 
+## 6a. Contributor track — `bskg.py`
+
+Work that does not depend on the refactor and can start now (it feeds E5/E6):
+- [ ] BSkG3 / BSkG4 parameter tables from the papers (Grams+ EPJA 59 270 (2023);
+      Grams+ arXiv:2411.08007), cross-checked against `bsk_constants.h`, including ħ²/2m,
+      W0, W0′.
+- [ ] Published infinite-matter properties of both forces (n₀, a_v, J, L, K_v, M*_s/M,
+      M*_v/M) with table/page — they become the E6 reference values.
+- [ ] Pairing: confirm the Eq. 3 (BSkG3) / Eq. 6 (BSkG4) schemes already implemented in
+      `bsk.py` (`*_eq3`, `*_eq6`), the cutoff E_cut and the relative-κ convention (question 2).
+- [ ] Reference curves from the papers (E/A in SNM and NeuM, gaps) for later comparison
+      figures.
+
+Please **don't edit the copied formulas in `bskg.py`** before E2 — they will be replaced;
+formula fixes go to `bsk.py` (the one implementation). After E2, `bskg.py` is filled as in
+§2a: one parameter block per functional.
+
+---
+
 ## 7. Open questions (physics decisions — yours)
 
 1. **Reference gaps per functional?** The C code uses the same Δ_NeuM/Δ_SM fit for every
@@ -266,6 +337,7 @@ sign-off.
 6. **Single source of truth with hpc-engine:** later, both `bsk_constants.h` and
    `parametrizations.py` could be generated from one data file (e.g. TOML). Worth it, or are
    parity tests enough?
+7. **Default of `libnest.bskg`'s module-level functions:** BSkG4 (newest, proposed) or BSkG3?
 
 ## 8. Effort estimate
 
