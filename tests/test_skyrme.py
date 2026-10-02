@@ -64,5 +64,38 @@ class TestPairingStrength(unittest.TestCase):
         self.assertTrue(np.all(np.abs(v) < 2000.), v)
 
 
+
+POINTS = [(0.08, 0.08), (0.06, 0.02), (0.02, 0.06), (0.1, 0.), (0.03, 0.01)]
+
+
+def _d(f, x, h=1e-6):
+    """Central finite difference df/dx."""
+    return (f(x + h) - f(x - h)) / (2. * h)
+
+
+class TestMeanFields(unittest.TestCase):
+    """Mean fields are derivatives of the energy density."""
+
+    def test_U_q_is_density_derivative_of_epsilon_rho(self):
+        """U_q = d epsilon_rho / d rho_q (the t0 and t3 terms)."""
+        for rho_n, rho_p in POINTS:
+            with self.subTest(rho_n=rho_n, rho_p=rho_p):
+                dn = _d(lambda x: bsk.epsilon_rho_np(x, rho_p), rho_n)
+                dp = _d(lambda x: bsk.epsilon_rho_np(rho_n, x), rho_p)
+                self.assertAlmostEqual(bsk.U_q(rho_n, rho_p, "n") / dn, 1., places=6)
+                self.assertAlmostEqual(bsk.U_q(rho_n, rho_p, "p") / dp, 1., places=6)
+
+    def test_B_q_is_tau_derivative_of_epsilon(self):
+        """B_q = hbar^2/2m_q + d epsilon_tau / d tau_q."""
+        p = bsk.BSK31.params
+        tau_n, tau_p = 0.1, 0.05
+        for rho_n, rho_p in POINTS:
+            with self.subTest(rho_n=rho_n, rho_p=rho_p):
+                dn = _d(lambda t: bsk.epsilon_tau_np(rho_n, rho_p, t, tau_p, 0., 0.), tau_n)
+                dp = _d(lambda t: bsk.epsilon_tau_np(rho_n, rho_p, tau_n, t, 0., 0.), tau_p)
+                self.assertAlmostEqual(bsk.B_q(rho_n, rho_p, "n"), p.hbar2m_n + dn, places=6)
+                self.assertAlmostEqual(bsk.B_q(rho_n, rho_p, "p"), p.hbar2m_p + dp, places=6)
+
+
 if __name__ == "__main__":
     unittest.main()

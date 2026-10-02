@@ -954,9 +954,20 @@ class SkyrmeFunctional:
     def U_q(self, rho_n, rho_p,q):
         #     Formula (5.14) from NeST.pdf
         """
-        Returns the mean field potential from density :math:`\\rho` variation.
+        Returns the mean field potential from density :math:`\\rho` variation:
+        the derivative of :func:`.epsilon_rho_np` (the :math:`t_0` and :math:`t_3`
+        terms) with respect to :math:`\\rho_q`. Contributions that depend on the
+        kinetic density :math:`\\tau` or on density gradients are not included.
 
-        rho_q is either rho_n or rho_p.
+        .. math::
+
+            U_q = t_0 \\left[ \\left(1+\\frac{x_0}{2}\\right)\\rho
+                  - \\left(\\frac{1}{2}+x_0\\right)\\rho_q \\right]
+                + \\frac{t_3}{12} \\rho^{\\alpha-1} \\left[
+                  \\left(1+\\frac{x_3}{2}\\right)(\\alpha+2)\\rho^2
+                - \\left(\\frac{1}{2}+x_3\\right)
+                  \\left( 2\\rho\\rho_q + \\alpha \\left(\\rho_n^2+\\rho_p^2\\right) \\right)
+                \\right]
 
         Args:
             rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -965,6 +976,9 @@ class SkyrmeFunctional:
 
         Returns:
             float: Mean field potential :math:`U_q` [MeV]
+
+        See also:
+            :func:`.epsilon_rho_np`
         """
         p = self.params
         if(q=='n'):
@@ -977,8 +991,8 @@ class SkyrmeFunctional:
             sys.exit('# ERROR: Nucleon q must be either n or p')
         rho = rho_n + rho_p + DENSEPSILON
         return p.t0*((1+0.5*p.x0)*rho-(0.5+p.x0)*rho_q)+p.t3/12.*np.power(rho,(p.alpha-1))*(
-            ((0.5+0.5*p.x3)*rho**2*(p.alpha+2))-(0.5+p.x3)*(2*rho*rho_q*p.alpha*
-                                                      (rho_q_prime)**2))
+            (1+0.5*p.x3)*(p.alpha+2)*rho**2
+            -(0.5+p.x3)*(2*rho*rho_q + p.alpha*(rho_q**2 + rho_q_prime**2)))
 
     def B_q(self, rho_n, rho_p, q):
         #    Formula (5.13) from NeST.pdf
