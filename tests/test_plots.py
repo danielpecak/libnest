@@ -10,6 +10,7 @@ from unittest import mock
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 
 from libnest import plots
 
@@ -53,8 +54,10 @@ class TestPlots(unittest.TestCase):
     def test_functions_run_and_render(self):
         for name, args in CALLS.items():
             with self.subTest(function=name):
+                # the plotted ranges start at rho = 0, where several quantities divide by zero
                 try:
-                    with mock.patch.object(plt, "show", _draw_open_figures):
+                    with mock.patch.object(plt, "show", _draw_open_figures), \
+                            np.errstate(divide="ignore", invalid="ignore"):
                         getattr(plots, name)(*args)
                 finally:
                     plt.close("all")
