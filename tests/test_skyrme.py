@@ -160,5 +160,21 @@ class TestKineticTerm(unittest.TestCase):
                                    bsk.energy_per_nucleon_n(rho), rtol=1e-9)
 
 
+    def test_general_formula_reduces_to_symmetric_matter_limit(self):
+        """energy_per_nucleon(rho/2, rho/2) equals the closed-form symmetric-matter limit
+        of PRC 80, 065804 Eq. (A13) (kept from the former bsk.testMe)."""
+        p = bsk.BSK31.params
+        rho = np.array([0.01, 0.05, 0.1, 0.16, 0.3])
+        kF = definitions.rho2kf(rho/2)
+        hbar2m = 0.5*(p.hbar2m_n + p.hbar2m_p)
+        snm = (3./5.*hbar2m*kF**2
+               + 3./8.*p.t0*rho
+               + 3./80.*(3.*p.t1 + 5.*p.t2 + 4.*p.t2x2)*rho*kF**2
+               + 1./16.*p.t3*rho**(p.alpha + 1.)
+               + 9./80.*p.t4*rho**(p.beta + 1.)*kF**2
+               + 3./80.*p.t5*(5. + 4.*p.x5)*rho**(p.gamma + 1.)*kF**2)
+        np.testing.assert_allclose(bsk.energy_per_nucleon(rho/2, rho/2), snm, rtol=1e-9)
+
+
 if __name__ == "__main__":
     unittest.main()

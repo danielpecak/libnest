@@ -549,18 +549,6 @@ class SkyrmeFunctional:
                 + 3.*p.t4/40.*(kF**2)*np.power(rho,p.beta+1)*((2+p.x4)*F_x_5-(0.5+p.x4)*F_x_8)
                 + 3.*p.t5/40.*(kF**2)*np.power(rho,p.gamma+1)*((2+p.x5)*F_x_5+(0.5+p.x5)*F_x_8))
 
-    def testMe(self, rho):
-        p = self.params
-        rho = rho+DENSEPSILON
-        kF = rho2kf(0.5*rho) # Formula (A14) from the paper is using rho/2
-        r = 3*p.hbar2m_n/5*kF**2
-        r =r+ 3./8*p.t0*rho
-        r =r+ 3./80*(3*p.t1 + 5*p.t2 + 4*p.t2x2) * rho * kF**2
-        r =r+ 1./16*p.t3*np.power(rho, p.alpha+1)
-        r =r+ 9./80*p.t4*np.power(rho,p.beta+1)*kF**2
-        r =r+ 3./80*p.t5*(5+4*p.x5)*np.power(rho,p.gamma+1)*kF**2
-        return r
-
     def numerical_derivative_energy_per_nucleon_n(self, rho_n):
         """
         First derivative of energy per nucleon, calculated numerically using

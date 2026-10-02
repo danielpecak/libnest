@@ -89,7 +89,6 @@ CASES = dict([
     _case("bsk:proton_ref_pairing_field_eq6", NP),
     # --- thermodynamics
     _case("bsk:energy_per_nucleon", NP),
-    _case("bsk:testMe", ("rho",)),
     _case("bsk:energy_per_nucleon_n", ("rho",)),
     _case("bsk:derivative_energy_per_nucleon_n", ("rho",)),
     _case("bsk:second_derivative_energy_per_nucleon_n", ("rho",)),

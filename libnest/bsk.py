@@ -237,7 +237,6 @@ proton_ref_pairing_field_eq3 = BSK31.proton_ref_pairing_field_eq3
 neutron_ref_pairing_field_eq6 = BSK31.neutron_ref_pairing_field_eq6
 proton_ref_pairing_field_eq6 = BSK31.proton_ref_pairing_field_eq6
 energy_per_nucleon = BSK31.energy_per_nucleon
-testMe = BSK31.testMe
 numerical_derivative_energy_per_nucleon_n = BSK31.numerical_derivative_energy_per_nucleon_n
 numerical_second_derivative_energy_per_nucleon_n = BSK31.numerical_second_derivative_energy_per_nucleon_n
 numerical_derivative_epsilon_n = BSK31.numerical_derivative_epsilon_n
@@ -286,7 +285,6 @@ __all__ = (["BSK31", "T0", "T1", "T2", "T3", "T4", "T5", "X0", "X1", "T2X2", "X3
     "neutron_ref_pairing_field_eq6",
     "proton_ref_pairing_field_eq6",
     "energy_per_nucleon",
-    "testMe",
     "numerical_derivative_energy_per_nucleon_n",
     "numerical_second_derivative_energy_per_nucleon_n",
     "numerical_derivative_epsilon_n",
