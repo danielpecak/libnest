@@ -302,13 +302,29 @@ and the git diff of `bsk31.json` shows exactly which numbers moved.
 
 Suite after E3: 104 tests + 181 subtests, ruff clean, strict docs build green.
 
-### E4 — Pairing as a component
-- [ ] `edf/pairing.py`: gap model (Δ_NeuM, Δ_SM fits + k_F cutoffs) and a scheme registry
-      {`chamel2009` (= today's `_ref` and `_eq2`), `bskg3_eq3`, `bskg4_eq6`}; each functional
-      has a default scheme, overridable with `with_pairing(scheme=...)`.
-- [ ] ε_Λ from `PairingParameters.cutoff` instead of the hard-coded 6.5 MeV.
-- [ ] Old function names (`neutron_ref_pairing_field_eq3`, …) stay in `bsk` as wrappers.
-- [ ] Parity test against the C `g_Delta_n_ref` / `g_Delta_p_ref` for all three schemes.
+### E4 — Pairing as a component  ✅ DONE (2026-10-17)
+- [x] `edf/pairing.py`: gap model registry `GAP_MODELS` {`cao2006`} (Δ_NeuM, Δ_SM fits + k_F
+      cutoffs) and scheme registry `SCHEMES` {`chamel2009` (= old `_ref` and `_eq2`),
+      `bskg3_eq3`, `bskg4_eq6`}. All schemes are isospin symmetric, so each is written once
+      as `scheme(gaps, rho_q, rho_qbar)`. `PairingParameters.gap_model` / `.scheme` select
+      them (unknown names raise); `I`, `v_pi` follow the functional's scheme;
+      `f.with_pairing(scheme=...)` gives a new functional. (`cd752cc`)
+- [x] ε_Λ from `PairingParameters.cutoff` — already done in E2. Checked: 6.5 MeV for BSk31
+      (PRC 93, Table I); BSkG's E_cut is the same ε_Λ (upper limit μ_q + E_cut of the gap
+      integral, BSkG3 Eq. 17).
+- [x] Old function names (`neutron_ref_pairing_field_eq3`, …) stay as fixed-scheme methods,
+      hence in `bsk`.
+- [x] Parity test against the C `g_Delta_n_ref` / `g_Delta_p_ref` for all three schemes and
+      the gap model (`tests/test_pairing_c.py`, data from `tests/golden/make_c_pairing.py`,
+      W-BSK `af535fa`). Agreement 1e-8 MeV (Chamel, Eq. 3); Eq. 6 differs only by the
+      regularization of Δ_NeuM(ρ/2) (C: bare ρ; libnest: ρ + DENSEPSILON), ≤ 3.7e-5 MeV at
+      ρ = 1e-4, ∝ ε/ρ. (`e99eab8`)
+- [x] κ term of ε_π: total density gradient, BSk31 numbers changed — see §5. (`67fb47e`)
+- [x] Relative κ (decision 2): `PairingParameters.kappa_convention` = `"absolute"` (BSk,
+      κ in MeV fm⁸) | `"relative"` (BSkG, κ in fm⁸); new `g_q` = local pairing coupling;
+      `epsilon_pi_np`/`epsilon_np` default to the functional's κ. (`97a03c8`)
+- Not done (no need yet): a second gap model. BSk17–28 were fitted to gaps *without*
+  self-energy, so BSk22/24/25 (E5) need one; take its fit from the papers, not from memory.
 
 ### E5 — Port the parametrizations (§4)
 - [ ] One registry entry per force with reference, DOI and the notes from `bsk_constants.h`.
@@ -352,8 +368,16 @@ Work that does not depend on the refactor and can start now (it feeds E5/E6):
       W0, W0′.
 - [ ] Published infinite-matter properties of both forces (n₀, a_v, J, L, K_v, M*_s/M,
       M*_v/M) with table/page — they become the E6 reference values.
-- [ ] Pairing: confirm the Eq. 3 (BSkG3) / Eq. 6 (BSkG4) schemes already implemented in
-      `bsk.py` (`*_eq3`, `*_eq6`), the cutoff E_cut and the relative-κ convention (question 2).
+- [x] Pairing (done in E4): Eq. 3 / Eq. 6 checked against both papers and the C code; E_cut
+      = ε_Λ; relative κ implemented. For E5 the pairing parts read (Table 1 of both
+      papers): BSkG3 `PairingParameters(scheme="bskg3_eq3", cutoff=7.961,
+      kappa_n=123.20, kappa_p=129.07, kappa_convention="relative")`, BSkG4 the same with
+      `scheme="bskg4_eq6", cutoff=7.919`; f^± = 1 (BSkG3 Eq. 11 has none). Module-level API
+      of `bskg.py` = BSkG4 (decision 7).
+- [ ] **Check before porting (found 2026-10-17):** x1 in `bsk_constants.h` differs from the
+      papers by 1e-5: BSkG3 2.940890 vs 2.940880 (BSkG3 Table 1 and arXiv:2411.08007 Table 1),
+      BSkG4 2.973180 vs 2.97317. Smaller: BSkG3 x3 0.628700 vs 0.628699, x4 5.657991 vs
+      5.657990. Find out which values MOCCa uses (maybe the C ones come from MOCCa output).
 - [ ] Reference curves from the papers (E/A in SNM and NeuM, gaps) for later comparison
       figures.
 
