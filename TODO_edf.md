@@ -362,12 +362,13 @@ BSkG3/BSkG4 go to the contributor (`bskg.py`, §6a; decided 2026-10-17); the res
 - [ ] `plots.py`: `functional=` argument + comparison plots; `real_data_plots.py`: same
       argument, default BSk31.
 - [ ] `main.py`, README Quick Start, `examples/`: show `get_functional`.
-- [ ] Docs: parameter table **generated from the registry** (script in `docs/source/`, same
-      rule as figures — replaces the hand-written BSk31 table in the `bsk` docstring);
-      comparison figures; a "Choosing a functional" page (see `TODO_doc.md` D4).
+- [x] Docs: parameter table **generated from the registry**, comparison figure and a
+      "Choosing a functional" section — `docs/functionals.rst` (TODO_doc D4, 2026-10-17).
+- [ ] Replace the hand-written BSk31 table in the `bsk` docstring by a pointer to it.
 
 ### E8 — Release
-- [ ] `CHANGELOG.md`, version 0.2.0 (new API added, old API intact).
+- [ ] Version 0.2.0 (new API added, old API intact): turn "Unreleased" in `CHANGELOG.rst`
+      (started 2026-10-17) into 0.2.0.
 - [x] Point `TODO.md` P4 to this file (2026-10-17).
 - [~] `CLAUDE.md` architecture already describes the `edf` layer (incl. `pairing.py`), but
       `CLAUDE.md` itself is not in git yet.
@@ -423,6 +424,14 @@ formula fixes go to `bsk.py` (the one implementation). After E2, `bskg.py` is fi
    parity tests enough?
 7. ✅ **Default of `libnest.bskg`'s module-level functions:** BSkG4 (decided 2026-10-17);
    the library-wide default (`definitions` helpers, `plots`) stays BSk31.
+8. **BSkG4 Eq. 6 where the reference gaps close** (found 2026-10-17, visible in
+   `docs/_static/pairing_schemes.png`): Δ_SM closes at k_F = 1.31 fm⁻¹ (ρ = 0.152 fm⁻³) but
+   Δ_NeuM(ρ/2) only at 1.38 fm⁻¹ (ρ = 0.1775 fm⁻³). In between the ratio
+   Δ_SM(ρ)/Δ_NeuM(ρ/2) is (numerically) 0, so Δ_q ≈ 0; above, both are closed and the ratio is taken as 1
+   (as in C), so Δ_q = Δ_NeuM(ρ_q). The proton gap of neutron-rich matter therefore drops
+   to 0 and jumps back (e.g. ≈ 1.7 MeV for Y_p = 0.1). Keep the C convention, or treat the
+   window differently (e.g. ratio = 1 as soon as Δ_SM is closed)? Physics decision; the
+   golden master and the C parity test pin today's behaviour.
 
 ## 8. Effort estimate
 

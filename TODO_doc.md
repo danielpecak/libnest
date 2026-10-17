@@ -11,7 +11,8 @@ E2 is done (2026-10-02), so all of D2–D4 can start now, except the functional 
 (after E7).
 
 _Status 2026-10-17:_ D0 done except "Collisions Initial State" (needs your text); D1 done
-(strict `-W -n` build green, incl. the new `libnest.edf.pairing` docs); D2–D5 open.
+(strict `-W -n` build green, incl. the new `libnest.edf.pairing` docs); D4, D5 done
+(see there); D2, D3 open.
 
 Priorities: **D0** = wrong/broken on the live site · **D1** = build & deploy infrastructure
 (make breakage visible) · **D2** = information architecture · **D3** = API reference quality ·
@@ -233,39 +234,46 @@ class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thi
 
 ---
 
-## D4 — New content
+## D4 — New content  ✅ DONE except two items that need input (2026-10-17)
 
-- [ ] **Pairing models page** (unblocked: EDF E4 done): the three asymmetric-matter
-      interpolation schemes (Chamel 2009, BSkG3 Eq. 3, BSkG4 Eq. 6) with formulas, references,
-      and a generated figure comparing Δ_n, Δ_p at several asymmetries. The formulas and
-      references are already in the `libnest.edf.pairing` docstrings (rendered on the EDF
-      page); missing: the user-facing page, the figure, and the κ conventions (BSk absolute,
-      BSkG relative). Decide on "Pairing P" (fill or remove).
-- [ ] **Functional comparison** (after `TODO_edf.md` E7): parameter table **generated from the
-      parametrization registry** (a script in `docs/source/` writing an `.rst` include, same
-      rule as figures), plus E/A (SNM & NeuM), M*/M and Δ_n curves for all functionals.
-- [ ] **Inner-crust tables:** move the data to CSV files (`docs/data/*.csv`, loaded with
-      `csv-table :file:`), cite the source for each table, and state the functional used.
-- [ ] **Figure gallery** page: every generated figure with a link to its script.
-- [ ] **Changelog** (`CHANGELOG.md`, included in the docs) — there is none yet; start it at the
-      0.2.0 release (`TODO_edf.md` E8).
-- [ ] **How to cite:** BibTeX for libnest (from `CITATION.cff`) plus the papers to cite for
-      each functional. Also fix README "References": it cites PRC 88 024308 (BSk22–26) as
-      "the BSk functional", but the implemented one is BSk31 (PRC 93 034337).
-- [ ] Pasta page: keep hidden until `libnest.pasta` has real functions (today `volume()`
-      returns 0).
+- [x] **Pairing models page** (`docs/pairing.rst`): reference gaps, the three interpolation
+      schemes with formulas and references, the generated figure `pairing_schemes.png`
+      (Δ_n, Δ_p vs ρ at Y_p = 0, 0.1, 0.3, 0.5 for each scheme), the pairing strength and
+      cutoff, the κ conventions. "Pairing P"/"Pairing S" resolved: the bare heading with two
+      figures left `physics.rst`; the figures are on the pairing page.
+      ⚠️ The figure shows the BSkG4 Eq. 6 window discussed in `TODO_edf.md` §7, question 8.
+- [~] **Functional comparison** (`docs/functionals.rst`): parameter table **generated from the
+      registry** (`source/text/functionals.py`) and the figure `functionals.png` (E/A in SNM
+      and NeuM, M*_n/M) over `available_functionals()`. Both grow automatically with E5;
+      today they show BSk31 only. Δ_n curves left out: the reference gap is an input,
+      identical for all functionals sharing a gap model. Still open (E7): replace the
+      hand-written BSk31 table in the `bsk` docstring.
+- [~] **Inner-crust tables:** data moved to `docs/data/inner_crust_*.csv` (`csv-table :file:`).
+      Open, needs you: the source and the functional of each table.
+- [x] **Figure gallery** (`docs/gallery.rst`): generated from `FILES`; caption = docstring of the
+      script, with a download link to it.
+- [x] **Changelog:** `CHANGELOG.rst` (rst, not md: the docs include it without an extra
+      Sphinx extension), page `changelog.rst`. Started with "Unreleased" (the EDF refactor)
+      and 0.1.0–0.1.2 from the git history; E8 turns "Unreleased" into 0.2.0.
+- [x] **How to cite** (`help.rst`): BibTeX generated from `CITATION.cff`
+      (`source/text/citation.py`), the papers per functional and per pairing ingredient
+      (BSkG3/BSkG4 entries added to the bibliography, DOIs checked against Crossref). README
+      "References" now cites BSk31 (PRC 93 034337), PRC 80 065804, Cao 2006, Chamel 2010.
+- [x] Pasta page hidden (`:orphan:`, not in the navigation) until `libnest.pasta` has real
+      functions.
 
 ---
 
-## D5 — Polish (any time, optional)
+## D5 — Polish  ✅ DONE as far as decided (2026-10-17)
 
-- [ ] Theme: `sphinx_rtd_theme` is fine; `furo` or `pydata-sphinx-theme` would add dark mode
-      and better mobile layout.
-- [ ] "Edit on GitHub" links (`html_context` with github user/repo/branch), `html_title`,
-      favicon/logo.
+- [ ] Theme: kept `sphinx_rtd_theme` (decision 4); `furo` would be a new dependency.
+- [x] "Edit on GitHub" links (`html_context`, branch `main`); favicon generated from code
+      (`plot_favicon.py`: the NeuM gap). `html_title`: the default ("libNeST 0.1.1
+      documentation") is kept. No logo — needs a design from you.
 - [ ] Versioned docs (stable/latest) — only once there are several release lines users rely on.
-- [ ] Keep README and docs landing page in sync (same Quickstart snippet, ideally included from
-      one file).
+- [x] README and docs landing page in sync: `examples/quickstart.py` is included by
+      `index.rst`; `tests/test_quickstart.py` checks that the README shows the same code and
+      runs it.
 
 ---
 
@@ -278,8 +286,8 @@ class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thi
 | 3 | ✅ D1 infrastructure, then turn on `-W -n` in CI | 0.5–1 day | step 1 |
 | 4 | D2 restructure (landing page, conventions page, user guide skeleton) | 1–2 days | step 3 |
 | 5 | D3 API reference pass | 1–2 days | `TODO_edf.md` E2 ✅ |
-| 6 | D4 content (pairing page; functional comparison) | 1–2 days | E4 ✅; E7 |
-| 7 | D5 polish | as wanted | — |
+| 6 | ✅ D4 content (pairing page; functional comparison) — inner-crust sources open | 1–2 days | E4 ✅; E7 |
+| 7 | ✅ D5 polish (as decided) | as wanted | — |
 
 ## Decisions (2026-10-02)
 1. ✅ Physics fixes confirmed: `rho2tau` with (3π²)^(2/3); `rho2kf` = one isospin, both spins.
