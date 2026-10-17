@@ -361,22 +361,26 @@ formula fixes go to `bsk.py` (the one implementation). After E2, `bskg.py` is fi
 
 ## 7. Open questions (physics decisions — yours)
 
-1. **Reference gaps per functional?** The C code uses the same Δ_NeuM/Δ_SM fit for every
-   force. `physics.rst` says BSk16–17 were fitted to gaps *without* self-energy and BSk30–32
-   *with* it. Which curve is the current fit (NeST.pdf Eqs. 5.11–5.12), and should BSk22–25
-   use a different one? Proposal: start with the C behavior (parity) and keep `gap_model`
-   as the switch for later.
-2. **BSkG relative κ** (κ_n = 123.20, κ_p = 129.07 fm⁸ with g_q = V_q[1 + κ_q(∇ρ)²]):
-   implement that convention properly, or keep it disabled as in C?
-3. **f^± factors:** if, as I understand, they distinguish even/odd nucleon numbers in finite
-   nuclei, they're metadata in uniform matter (f⁺ = 1). Confirm, or tell me where they enter.
+1. ✅ **Reference gaps per functional?** Decided 2026-10-17: **one common gap model to
+   start** (today's Δ_NeuM/Δ_SM fits, as in the C code); `gap_model` stays the switch for
+   later. Checked: BSkG4 (arXiv:2411.08007, App. B, Table 5) lists exactly today's fits
+   (Cao, Lombardo, Schuck PRC 74 064301 (2006), with self-energy and polarization; fitted
+   for BSk30–32), so BSk31, BSkG3 and BSkG4 share this gap model. BSk17–28 were fitted to
+   gaps *without* self-energy (PRC 93 034337, Sec. II) — a second gap model before E5 ports
+   BSk22/24/25.
+2. ✅ **BSkG relative κ** (κ_n = 123.20, κ_p = 129.07 fm⁸ with g_q = V_q[1 + κ_q(∇ρ)²]):
+   decided 2026-10-17: **implement it properly** (not disabled as in C). Both papers use the
+   gradient of the total density, ρ = ρ_n + ρ_p (BSkG3 Eq. 15, BSkG4 Eq. 1).
+3. ✅ **f^± factors:** confirmed 2026-10-17: metadata in uniform matter (even/odd nucleon
+   numbers in finite nuclei).
 4. ✅ **Package name:** `libnest.edf` (default applied in E1–E2, 2026-10-02).
 5. ✅ **Future of `libnest.bsk`:** stays permanently as the BSk family module / BSk31 shortcut
    (default applied in E2, 2026-10-02).
 6. **Single source of truth with hpc-engine:** later, both `bsk_constants.h` and
    `parametrizations.py` could be generated from one data file (e.g. TOML). Worth it, or are
    parity tests enough?
-7. **Default of `libnest.bskg`'s module-level functions:** BSkG4 (newest, proposed) or BSkG3?
+7. ✅ **Default of `libnest.bskg`'s module-level functions:** BSkG4 (decided 2026-10-17);
+   the library-wide default (`definitions` helpers, `plots`) stays BSk31.
 
 ## 8. Effort estimate
 
