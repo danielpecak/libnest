@@ -96,7 +96,7 @@ class PairingParameters:
             of :data:`libnest.edf.pairing.SCHEMES`: ``"chamel2009"`` (BSk family),
             ``"bskg3_eq3"`` (BSkG3), ``"bskg4_eq6"`` (BSkG4)
         kappa_convention (str): how :math:`\\kappa_q` enters the pairing coupling
-            :math:`g_q` (see :meth:`.SkyrmeFunctional.g_q`): ``"absolute"``,
+            :math:`g_q` (see :func:`.g_q`): ``"absolute"``,
             :math:`g_q = v^{\\pi q} + \\kappa_q (\\nabla\\rho)^2` (BSk family, PRC 93,
             034337, Eq. 9), or ``"relative"``,
             :math:`g_q = v^{\\pi q}\\,[1 + \\kappa_q (\\nabla\\rho)^2]` (BSkG3, BSkG4)

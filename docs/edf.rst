@@ -63,5 +63,11 @@ Functional
 Pairing
 -------
 .. automodule:: libnest.edf.pairing
-   :members: GAP_MODELS, SCHEMES, GapModel, cao2006_neutron_matter,
-             cao2006_symmetric_matter, chamel2009, bskg3_eq3, bskg4_eq6
+   :members: GapModel, cao2006_neutron_matter, cao2006_symmetric_matter,
+             chamel2009, bskg3_eq3, bskg4_eq6
+
+.. autodata:: libnest.edf.pairing.GAP_MODELS
+   :no-value:
+
+.. autodata:: libnest.edf.pairing.SCHEMES
+   :no-value:

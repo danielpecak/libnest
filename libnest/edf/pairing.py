@@ -4,7 +4,7 @@
 Reference pairing gaps of uniform matter.
 
 The pairing strength :math:`v^{\\pi q}` of a functional (see
-:meth:`.SkyrmeFunctional.v_pi`) is fixed by requiring that it reproduces, in uniform
+:func:`.v_pi`) is fixed by requiring that it reproduces, in uniform
 matter, a set of reference :math:`{}^1S_0` gaps :math:`\\Delta_q(\\rho_n,\\rho_p)`.
 They are built from two ingredients, both selected by name in
 :class:`~libnest.edf.PairingParameters`:
@@ -122,8 +122,8 @@ class GapModel:
     Reference gaps in pure neutron matter and in symmetric matter.
 
     Attributes:
-        neutron_matter_kf (callable): :math:`\\Delta_{\\mathrm{NeuM}}(k_F)` [MeV]
-        symmetric_matter_kf (callable): :math:`\\Delta_{\\mathrm{SM}}(k_F)` [MeV], with
+        neutron_matter_kf (collections.abc.Callable): :math:`\\Delta_{\\mathrm{NeuM}}(k_F)` [MeV]
+        symmetric_matter_kf (collections.abc.Callable): :math:`\\Delta_{\\mathrm{SM}}(k_F)` [MeV], with
             :math:`k_F` of one species
         reference (str): where the gaps come from
     """
