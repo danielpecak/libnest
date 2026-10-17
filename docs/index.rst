@@ -13,6 +13,16 @@ functionals or data formats.
       * `WBSK Toolkit <https://wbsk.fizyka.pw.edu.pl/>`_
       * `py-WDATA <https://pypi.org/project/wdata/>`_
 
+Quick start
+===========
+Install with ``pip install libnest`` (see :doc:`installation`), then:
+
+.. literalinclude:: ../examples/quickstart.py
+   :language: python
+
+The same example is in the README; the test suite runs it and checks that both copies are
+identical.
+
 
 
 

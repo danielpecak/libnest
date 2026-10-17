@@ -130,6 +130,18 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+# Generated, like the figures, by docs/source/plots/plot_favicon.py (make -C source).
+html_favicon = '_static/favicon.png'
+
+# "Edit on GitHub" link at the top of every page.
+html_context = {
+    'display_github': True,
+    'github_user': 'danielpecak',
+    'github_repo': 'libnest',
+    'github_version': 'main',
+    'conf_py_path': '/docs/',
+}
+
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
