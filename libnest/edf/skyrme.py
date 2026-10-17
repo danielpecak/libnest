@@ -1178,8 +1178,9 @@ class SkyrmeFunctional:
 
     def epsilon_np(self, rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
         """
-        Calculates the total energy functional :math:`\\epsilon`, with a limit for
-        single-particle energies :math:`\\epsilon_{\\Lambda}` = 6.5 MeV.
+        Calculates the total energy functional :math:`\\epsilon`; its pairing part
+        (:func:`.epsilon_pi_np`) uses the single-particle energy cutoff
+        :math:`\\varepsilon_\\Lambda` of the functional (6.5 MeV for BSk31).
 
         .. math::
             \\varepsilon(\\rho_n,\\vec\\nabla\\rho_n, \\tilde{\\rho}_n,\\tau_n,{ j}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p,\\tau_p,{ j}_p) = \\nonumber \\\\
@@ -1203,9 +1204,9 @@ class SkyrmeFunctional:
             jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]
             nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]
             nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]
-            kappa_n (float):
-            kappa_p (float):
-                what is kappa? (no Eq.9 in Ref.41)
+            kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n` [MeV fm :sup:`8`],
+                see :func:`.epsilon_pi_np`
+            kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p` [MeV fm :sup:`8`]
 
         TO DO: write eq for jsum2 and jdiff2
 
@@ -1240,25 +1241,31 @@ class SkyrmeFunctional:
                         kappa_p):
         """
         Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
-        related to pairing energy density.
+        related to pairing energy density (PRC 93, 034337 (2016), Eq. 9; the factors
+        :math:`f^\\pm_q` for odd/even nucleon numbers in finite nuclei are 1 here).
 
         .. math::
 
         	\\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p)
 
-            =\\frac{1}{4} f^\\pm_n \\left( v^{\\pi n}(\\rho_n,\\rho_p) + \\kappa_n|\\nabla\\rho_n|^2 \\right) \\tilde{\\rho_n}^2
+            =\\frac{1}{4} \\left( v^{\\pi n}(\\rho_n,\\rho_p) + \\kappa_n|\\nabla\\rho|^2 \\right) \\tilde{\\rho_n}^2
 
-            +\\frac{1}{4} f^\\pm_p \\left( v^{\\pi p}(\\rho_n,\\rho_p) + \\kappa_p|\\nabla\\rho_p|^2 \\right) \\tilde{\\rho_p}^2,
+            +\\frac{1}{4} \\left( v^{\\pi p}(\\rho_n,\\rho_p) + \\kappa_p|\\nabla\\rho|^2 \\right) \\tilde{\\rho_p}^2,
+
+        with the gradient of the total density, :math:`\\rho = \\rho_n + \\rho_p`.
 
         Args:
             rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
             rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-            rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho_n` [fm :sup:`-4`]
-            rho_grad_p (float): proton  density gradient :math:`\\nabla \\rho_p` [fm :sup:`-4`]
+            rho_grad_n (float): neutron density gradient :math:`\\nabla \\rho_n` [fm :sup:`-4`],
+                the component along one direction; the total density gradient is
+                ``rho_grad_n + rho_grad_p``
+            rho_grad_p (float): proton density gradient :math:`\\nabla \\rho_p` [fm :sup:`-4`],
+                the component along the same direction
             nu_n (float): neutron anomalous density :math:`\\nu_n` [fm :sup:`-3`]
             nu_p (float): proton anomalous density :math:`\\nu_p` [fm :sup:`-3`]
-            kappa_n: :math:`\\kappa_n` (float)
-            kappa_p: :math:`\\kappa_p` (float)
+            kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n` [MeV fm :sup:`8`]
+            kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p` [MeV fm :sup:`8`]
 
         Returns:
             float: energy functional :math:`\\epsilon_{\\pi}` [MeV]
@@ -1266,8 +1273,10 @@ class SkyrmeFunctional:
         See also:
             :func:`.v_pi`
         """
-        return (1./4.*(self.v_pi(rho_n, rho_p, 'n') + kappa_n*(np.abs(rho_grad_n))**2)*nu_n**2
-                +1./4.*(self.v_pi(rho_n, rho_p, 'p') + kappa_p*(np.abs(rho_grad_p))**2 )* nu_p**2)
+        # (grad rho)^2 of the total density rho = rho_n + rho_p (PRC 93, 034337, Eq. 9)
+        rho_grad_square = (np.asarray(rho_grad_n) + np.asarray(rho_grad_p))**2
+        return (1./4.*(self.v_pi(rho_n, rho_p, 'n') + kappa_n*rho_grad_square)*nu_n**2
+                +1./4.*(self.v_pi(rho_n, rho_p, 'p') + kappa_p*rho_grad_square)*nu_p**2)
 
     def v_pi(self, rho_n, rho_p, q):
         """

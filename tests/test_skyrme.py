@@ -65,6 +65,30 @@ class TestPairingStrength(unittest.TestCase):
         self.assertTrue(np.all(np.abs(v) < 2000.), v)
 
 
+class TestPairingEnergy(unittest.TestCase):
+    """epsilon_pi = 1/4 sum_q [v_pi_q + kappa_q |grad rho|^2] nu_q^2, with the gradient of
+    the total density rho = rho_n + rho_p (PRC 93, 034337 (2016), Eq. 9)."""
+
+    rho_n, rho_p, nu_n, nu_p = 0.05, 0.02, 0.01, 0.004
+
+    def _eps_pi(self, g_n, g_p):
+        return bsk.epsilon_pi_np(self.rho_n, self.rho_p, g_n, g_p, self.nu_n, self.nu_p,
+                                 bsk.KAPPAN, bsk.KAPPAP)
+
+    def test_only_the_total_density_gradient_enters(self):
+        """Opposite gradients cancel; moving the gradient from neutrons to protons
+        changes nothing."""
+        self.assertAlmostEqual(self._eps_pi(0.01, -0.01) / self._eps_pi(0., 0.), 1., places=12)
+        self.assertAlmostEqual(self._eps_pi(0.01, 0.) / self._eps_pi(0., 0.01), 1., places=12)
+
+    def test_kappa_term(self):
+        """The gradient part is 1/4 (kappa_n nu_n^2 + kappa_p nu_p^2) (grad rho)^2."""
+        g_n, g_p = 0.01, 0.004
+        expected = 0.25*(bsk.KAPPAN*self.nu_n**2 + bsk.KAPPAP*self.nu_p**2)*(g_n + g_p)**2
+        self.assertAlmostEqual((self._eps_pi(g_n, g_p) - self._eps_pi(0., 0.)) / expected, 1.,
+                               places=9)
+
+
 
 POINTS = [(0.08, 0.08), (0.06, 0.02), (0.02, 0.06), (0.1, 0.), (0.03, 0.01)]
 

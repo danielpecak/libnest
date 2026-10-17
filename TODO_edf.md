@@ -212,6 +212,10 @@ sign-off. **Status: all done in E3 (2026-10-02)** — see the commits listed und
 - [x] **`testMe`** removed; its closed-form symmetric-matter E/A (PRC 80 065804 Eq. A13, with
       the n/p-averaged ħ²/2m) is now a test of the general formula. **`plots.py`:** three
       energy-density plots rewired to the renamed `bsk` functions, four dead ones removed.
+- [x] **κ term of `epsilon_pi_np`** (found in E4, fixed 2026-10-17): PRC 93 034337 Eq. (9) has
+      κ_q|∇n|² with the gradient of the *total* density (as BSkG3 Eq. 15, BSkG4 Eq. 1); the
+      code used |∇ρ_q|². Golden: ε_π (up to 27 % relative on the test grid), ε (≤ 4e-4).
+      The C code has the same species gradient, but its κ is disabled (`KAPPA_ZERO_MODE`).
 
 ---
 
