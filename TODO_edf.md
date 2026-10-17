@@ -9,7 +9,11 @@ This file replaces/expands `TODO.md` → P4. Companion plan: [`TODO_doc.md`](TOD
 
 ---
 
-## 1. Current state — what blocks it
+## 1. Starting state (2026-10-02, before E0) — what blocked it
+
+_Status 2026-10-17: resolved by E1–E4 except `bskg.py` (still the copy; contributor),
+the unused f^± (metadata by decision 3), the `ALPHA` name clash (kept for compatibility)
+and the consumers (E7)._
 
 - **Parameters are module globals** in `libnest/bsk.py` (`T0..T5`, `X0..X5`, `T2X2`,
   `ALPHA/BETA/GAMMA`, …) and all 44 functions read them directly.
@@ -97,7 +101,7 @@ BSKG3 = register(
     PairingParameters(scheme="bskg3_eq3", cutoff=7.961, ...))
 BSKG4 = register(..., PairingParameters(scheme="bskg4_eq6", cutoff=7.919, ...))
 
-_default = BSKG4                              # see open question 7
+_default = BSKG4                              # decision 7
 energy_per_nucleon = _default.energy_per_nucleon
 ...
 ```
@@ -182,7 +186,9 @@ against the paper table when porting). "bask24" in the request = **BSk24**.
 | t0t3 | toy | Saclay validation package | only t0, t3; α = 1 → closed-form E/A, ideal test case | — | common |
 
 Note: the C BSk16 block carries BSk31's κ and f^± values (looks copy-pasted) — check
-against Chamel 2008 before porting.
+against Chamel 2008 before porting. Its commented-out W0 = 62.174 is BSk31's too (PRC 93,
+Table I). The pairing cutoff ε_Λ is per force as well (PRC 93 Table I: 6.5 MeV for
+BSk30–32, 16.0 MeV for BSk29) — read it from each paper.
 
 ---
 
@@ -327,9 +333,14 @@ Suite after E3: 104 tests + 181 subtests, ruff clean, strict docs build green.
   self-energy, so BSk22/24/25 (E5) need one; take its fit from the papers, not from memory.
 
 ### E5 — Port the parametrizations (§4)
+BSkG3/BSkG4 go to the contributor (`bskg.py`, §6a; decided 2026-10-17); the rest here.
 - [ ] One registry entry per force with reference, DOI and the notes from `bsk_constants.h`.
-- [ ] Case-insensitive lookup + aliases (`"bsk24"`, `"SkMstar"`); `register()` for
-      user-defined sets (`dataclasses.replace(BSK31, t0=...)` for sensitivity studies).
+- [ ] Second gap model (gaps without self-energy) before BSk22/24/25 — see the E4 note and
+      decision 1; fit taken from the papers.
+- [x] Case-insensitive lookup (E2); `register()` for user-defined sets (E2) and
+      `with_pairing()` (E4). (`dataclasses.replace(BSK31.params, t0=...)` for sensitivity
+      studies.)
+- [ ] Aliases (`"SkMstar"` for SkM*).
 
 ### E6 — Validation for every functional
 - [ ] **Universal invariants**, parametrized over the registry: E/A → 0 for ρ → 0; SNM bound
@@ -341,7 +352,9 @@ Suite after E3: 104 tests + 181 subtests, ruff clean, strict docs build green.
       copy from the paper tables.)
 - [ ] **t0t3:** closed-form E/A check.
 - [ ] **Cross-code parity with hpc-engine:** generate reference tables (E/A, B_q, Δ_n, Δ_p on
-      a grid) with the C uniform-matter tools for every `BSK` id and compare. Note
+      a grid) with the C uniform-matter tools for every `BSK` id and compare. The reference
+      gaps are done (E4: `tests/test_pairing_c.py`); `tests/golden/make_c_pairing.py` shows
+      how to compile `bsk_functional.c` for that. Note
       `HBARC` differs (libnest 197.3269804 vs C 197.32697881, ~1e-8 relative) — align or set
       the tolerance accordingly.
 
@@ -355,8 +368,9 @@ Suite after E3: 104 tests + 181 subtests, ruff clean, strict docs build green.
 
 ### E8 — Release
 - [ ] `CHANGELOG.md`, version 0.2.0 (new API added, old API intact).
-- [ ] Point `TODO.md` P4 to this file; update `CLAUDE.md` architecture (`edf` layer between
-      `definitions` and `bsk`).
+- [x] Point `TODO.md` P4 to this file (2026-10-17).
+- [~] `CLAUDE.md` architecture already describes the `edf` layer (incl. `pairing.py`), but
+      `CLAUDE.md` itself is not in git yet.
 
 ---
 

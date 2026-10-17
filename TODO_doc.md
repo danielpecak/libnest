@@ -6,8 +6,12 @@ A student should land on it, install with `pip install libnest`, run a 5-line ex
 and find every public function documented with units and conventions.
 
 Companion plan: [`TODO_edf.md`](TODO_edf.md) (multi-functional refactor). The API-reference
-work below (D3) is scheduled **after** EDF phase E2, because the BSk docstrings move into a
-new class there. Everything else here can start now.
+work below (D3) waited for EDF phase E2 (the BSk docstrings moved into `SkyrmeFunctional`);
+E2 is done (2026-10-02), so all of D2–D4 can start now, except the functional comparison
+(after E7).
+
+_Status 2026-10-17:_ D0 done except "Collisions Initial State" (needs your text); D1 done
+(strict `-W -n` build green, incl. the new `libnest.edf.pairing` docs); D2–D5 open.
 
 Priorities: **D0** = wrong/broken on the live site · **D1** = build & deploy infrastructure
 (make breakage visible) · **D2** = information architecture · **D3** = API reference quality ·
@@ -198,14 +202,14 @@ Development
 
 ---
 
-## D3 — API reference quality (after EDF phase E2)
+## D3 — API reference quality (unblocked: EDF E2 done)
 
 Docstrings are the bulk of the site. Do this pass **once**, on the new `SkyrmeFunctional`
 class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thin wrappers.
 
 - [ ] **Topic-grouped API pages generated with `autosummary`** instead of the hand-maintained
       lists in `bsk.rst`, which go stale (they referenced three non-existent functions —
-      fixed in D1 — and still omit the `_eq2/_eq3/_eq6` pairing schemes).
+      fixed in D1 — and still omit the `_eq2/_eq3/_eq6` pairing schemes and `g_q`).
 - [x] **Fix ~20 broken cross-references in `plots.py`** _(done in D1)_ (`:func:\`energy_per_nucleon\`` needs a
       leading dot or the full path) and in `real_data_plots.py`; replace type names `string`
       → `str`, `numpy` → `numpy.ndarray`.
@@ -220,7 +224,8 @@ class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thi
 - [ ] **Docstring checklist** for every public function: one-line summary · formula · Args with
       units and "per species, both spin components" where relevant · "accepts scalars and
       arrays" · Returns with units · `:cite:` reference · "See also" with working links.
-      Leftovers to clean: `epsilon_np` ("what is kappa? (no Eq.9 in Ref.41)", "TO DO"),
+      Leftovers to clean: `epsilon_np` ("TO DO: write eq for jsum2 and jdiff2"; the κ question
+      was answered in E4),
       `vcritical` (formula labelled v_L), `vLandau` (k_F "[MeV]"), `Meff_hydro` (see TODO.md).
 - [ ] **Executable examples:** enable `sphinx.ext.doctest`, put `>>>` examples in key
       docstrings and in the Quickstart, run `make doctest` in CI.
@@ -230,9 +235,12 @@ class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thi
 
 ## D4 — New content
 
-- [ ] **Pairing models page:** the three asymmetric-matter interpolation schemes (Chamel 2009,
-      BSkG3 Eq. 3, BSkG4 Eq. 6) with formulas, references, and a generated figure comparing
-      Δ_n, Δ_p at several asymmetries. Decide on "Pairing P" (fill or remove).
+- [ ] **Pairing models page** (unblocked: EDF E4 done): the three asymmetric-matter
+      interpolation schemes (Chamel 2009, BSkG3 Eq. 3, BSkG4 Eq. 6) with formulas, references,
+      and a generated figure comparing Δ_n, Δ_p at several asymmetries. The formulas and
+      references are already in the `libnest.edf.pairing` docstrings (rendered on the EDF
+      page); missing: the user-facing page, the figure, and the κ conventions (BSk absolute,
+      BSkG relative). Decide on "Pairing P" (fill or remove).
 - [ ] **Functional comparison** (after `TODO_edf.md` E7): parameter table **generated from the
       parametrization registry** (a script in `docs/source/` writing an `.rst` include, same
       rule as figures), plus E/A (SNM & NeuM), M*/M and Δ_n curves for all functionals.
@@ -265,12 +273,12 @@ class from `TODO_edf.md`, not on `bsk.py` functions that are about to become thi
 
 | Step | What | Effort | Depends on |
 |------|------|--------|------------|
-| 1 | D0 page/figure fixes (inner-crust table, Landau figure, TODO boxes, topsecret, bib keys, installation page, typos) | ~1 day | — |
-| 2 | D0 physics-statement fixes (`rho2tau`, `rho2kf` convention, `units` tables, M*/M units) | ~0.5 day | your sign-off |
-| 3 | D1 infrastructure, then turn on `-W -n` in CI | 0.5–1 day | step 1 |
+| 1 | ✅ D0 page/figure fixes (inner-crust table, Landau figure, TODO boxes, topsecret, bib keys, installation page, typos) — "Collisions" open | ~1 day | — |
+| 2 | ✅ D0 physics-statement fixes (`rho2tau`, `rho2kf` convention, `units` tables, M*/M units) | ~0.5 day | your sign-off |
+| 3 | ✅ D1 infrastructure, then turn on `-W -n` in CI | 0.5–1 day | step 1 |
 | 4 | D2 restructure (landing page, conventions page, user guide skeleton) | 1–2 days | step 3 |
-| 5 | D3 API reference pass | 1–2 days | `TODO_edf.md` E2 |
-| 6 | D4 content (pairing page, functional comparison) | 1–2 days | `TODO_edf.md` E4–E7 |
+| 5 | D3 API reference pass | 1–2 days | `TODO_edf.md` E2 ✅ |
+| 6 | D4 content (pairing page; functional comparison) | 1–2 days | E4 ✅; E7 |
 | 7 | D5 polish | as wanted | — |
 
 ## Decisions (2026-10-02)

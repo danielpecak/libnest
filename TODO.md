@@ -61,7 +61,7 @@ works on modern pandas, and there is a runnable analyze-your-data example + phys
 - [x] **Removed hard-coded absolute paths from `libnest/real_data_plots.py`.** Now driven by
       `DATA_ROOT = os.environ.get("LIBNEST_DATA", ".")` — portable, overridable per user.
       (Follow-up, still open: pass the data dir as a function *argument* rather than a module
-      global — see P3.)
+      global — tracked in P3.)
 - [x] **Example dataset is generated at runtime, not stored.** `examples/analyze_data.py`
       writes a tiny 8×8 density map on the fly (`generate_sample_dataset`), so no data files
       live in git. `.gitignore` keeps generated `*/data/*.txt` and the output PNG out of the repo.
@@ -85,9 +85,15 @@ works on modern pandas, and there is a runnable analyze-your-data example + phys
       _Still open:_ wire a coverage badge (`pytest-cov` is already in the `[test]` extra / CI).
 - [x] **Add a CI test workflow** (`.github/workflows/tests.yml`) running pytest + coverage on
       3.9–3.12. _Done as part of P1._
-- [ ] **Resolve or file the ~21 in-code TODOs** catalogued in `docs/history/ANALIZA.md` (missing imports,
-      duplicated `E_minigap_*` functions, `nucleus` background-density handling). Each should
-      become a fixed bug or a tracked issue, not a silent comment.
+- [ ] **Resolve or file the in-code TODOs.** The ~21 of `docs/history/ANALIZA.md` are down to
+      (2026-10-17): `nucleus.py` ×5 (background density for both species, 3D directions,
+      formula/normalization of the documented quantity), `edf/skyrme.py` ×3 (two wish-list
+      comments — M* plots, non-uniform matter — and the `epsilon_np` docstring "TO DO: write eq
+      for jsum2 and jdiff2"), one hidden `.. todo::` in `docs/inner-crust.rst` (Landau
+      velocity). `bskg.py` carries copies; it is the contributor's (`TODO_edf.md` §6a). Each
+      should become a fixed bug or a tracked issue, not a silent comment.
+- [ ] **`real_data_plots`: data directory as a function argument** instead of the module
+      globals `TXT_PATH*` (follow-up of P2).
 - [x] **Audited cross-module dependencies** with `pyflakes`. `tools.py` imports and
       `definitions.mu_q` are clean (no undefined names). The audit turned up a *real* latent
       bug: `definitions.Meff_hydro` had a copy-pasted body `return HBAR2M_n * kF**2` using an
@@ -113,49 +119,20 @@ works on modern pandas, and there is a runnable analyze-your-data example + phys
       `PODSUMOWANIE_ZMIAN.md` to `docs/history/` with a "historical snapshot" header; `TODO.md`
       is the single living roadmap.
 
-## P4 — Support Skyrme functionals beyond BSk31
+## P4 — Support Skyrme functionals beyond BSk31  → see [`TODO_edf.md`](TODO_edf.md)
 
-Right now `libnest/bsk.py` hard-codes the BSk31 parameters as module-level globals
-(`T0..T5`, `X0..X5`, `T2X2`, `ALPHA/BETA/GAMMA`, `YW`, `FNP/FNM/FPP/FPM`,
-`KAPPAN/KAPPAP`, `HBAR2M_n/HBAR2M_p`) and every function reads those globals. The C
-reference `bsk_constants.h` (project `bsk/hpc-engine`) already organizes six
-parametrizations behind one interface — mirror that design in Python.
+Planned and tracked in `TODO_edf.md`. The design differs from the first idea here (a global
+`set_functional()`): one implementation of the formulas, parameter sets as data, and a
+functional object (`libnest.edf.get_functional("BSk31")`); `libnest.bsk` keeps its API as
+the BSk31 instance.
 
-- [ ] **Refactor to a selectable parameter set.** Replace the flat globals with one
-      parameter set per functional (a `dataclass` or dict keyed by name, e.g.
-      `FUNCTIONALS["BSk31"]`), and a way to pick the active one. Decide the API:
-      - a module-level `set_functional("BSk31")` that swaps the active set (simplest,
-        keeps existing call sites working), **or**
-      - an optional `functional=` argument threaded through the public functions (purer,
-        bigger diff). _Recommendation: `set_functional()` + a default of BSk31 for
-        backward compatibility, so existing code and tests keep passing._
-- [ ] **Port the six parametrizations** from `bsk_constants.h` with their references:
-      `BSk16` (Chamel+ NPA 812, 2008), `BSk31` (existing; PRC 93, 2016),
-      `BSkG3` (Grams+ EPJA 59, 2023), `BSkG4` (Grams+ arXiv:2411.08007, 2024),
-      `SLy4` (Chabanat+ NPA 635, 1998), `SkM*` (Bartel+ NPA 386, 1982).
-- [ ] **Honor the structural differences** (documented in `bsk_constants.h`):
-      - standard Skyrme forces (`SLy4`, `SkM*`) have `T4=T5=0`, `BETA=GAMMA=0` — the
-        extended-Skyrme gradient terms vanish; verify libnest's formulas reduce correctly;
-      - `BSkG3/BSkG4` use a single `hbar^2/2m` for both species and set `KAPPAN=KAPPAP=0`
-        (their gradient-pairing uses a different, *relative* convention — disabled here);
-      - pairing effective-mass factors `FNP/FNM/FPP/FPM` differ per force (BSk uses ≠1,
-        the others 1.0).
-- [ ] **Pairing interpolation options.** Add the two asymmetric-matter schemes from the C
-      code: `PAIRING_CHAMEL` (linear, PRL 102 152503 2009 — current default) and
-      `PAIRING_BSKG4_EQ6` (geometric, arXiv:2411.08007 Eq. 6, default for BSkG4).
-      `neutron_ref_pairing_field`/`proton_ref_pairing_field` already implement the Chamel
-      ansatz; add the BSkG4 variant and select per functional.
-- [ ] **Benchmark each functional.** Extend `tests/test_benchmark.py` with the published
-      saturation point (n0, E/A) per force, so adding a parametrization is self-validating.
-- [ ] **Docs.** Turn the hard-coded "BSk31 parameters" table in `bsk.py`'s docstring into a
-      table per functional, and note how to select one (`set_functional`).
+Status (2026-10-17, branch `edf-refactor`): E0–E4 done — golden master, parameters as data,
+`SkyrmeFunctional`, physics fixes, pairing schemes (Chamel 2009, BSkG3 Eq. 3, BSkG4 Eq. 6)
+with C parity tests, relative κ of BSkG. Open: E5 port the parametrizations (BSkG3/BSkG4 by
+the contributor in `bskg.py`), E6 validation, E7 consumers and docs, E8 release 0.2.0.
 
 ---
 
 ### Suggested order of attack
-1. **P0** (half a day) → library works again, tests green.
-2. **P1 packaging + LICENSE** (1 day) → `pip install libnest` works.
-3. **P2 myio + real_data_plots + example data** (1–2 days) → students can load and plot
-   their own data.
-4. **P2 benchmark suite + P3 CI** (1–2 days) → results are trustworthy and stay that way.
-5. **P3 polish** ongoing.
+P0–P2 are done (`libnest 0.1.0` on PyPI). Current work: P4 = `TODO_edf.md` (E5–E8, release
+0.2.0) and the documentation plan `TODO_doc.md` (D2–D4); P3 polish alongside.
