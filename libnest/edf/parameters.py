@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from typing import Optional
 
 from libnest.units import HBAR2M_n, HBAR2M_p
+from libnest.edf.pairing import GAP_MODELS, SCHEMES
 
 
 @dataclass(frozen=True)
@@ -85,6 +86,14 @@ class PairingParameters:
         f_nm (float): pairing renormalization factor :math:`f^-_n` [1]
         f_pp (float): pairing renormalization factor :math:`f^+_p` [1]
         f_pm (float): pairing renormalization factor :math:`f^-_p` [1]
+        gap_model (str): reference gaps of neutron and symmetric matter, a key of
+            :data:`libnest.edf.pairing.GAP_MODELS`
+        scheme (str): interpolation of the reference gaps to asymmetric matter, a key
+            of :data:`libnest.edf.pairing.SCHEMES`: ``"chamel2009"`` (BSk family),
+            ``"bskg3_eq3"`` (BSkG3), ``"bskg4_eq6"`` (BSkG4)
+
+    Raises:
+        ValueError: for an unknown ``gap_model`` or ``scheme``
     """
     cutoff: float = 6.5
     kappa_n: float = 0.0
@@ -93,3 +102,12 @@ class PairingParameters:
     f_nm: float = 1.0
     f_pp: float = 1.0
     f_pm: float = 1.0
+    gap_model: str = "cao2006"
+    scheme: str = "chamel2009"
+
+    def __post_init__(self):
+        for field, known in (("gap_model", GAP_MODELS), ("scheme", SCHEMES)):
+            value = getattr(self, field)
+            if value not in known:
+                raise ValueError("unknown {} {!r}; available: {}".format(
+                    field, value, ", ".join(sorted(known))))

@@ -12,30 +12,14 @@ Formulas and conventions as in :mod:`libnest.bsk`: densities in fm :sup:`-3` (on
 nucleon species, both spin components), energies in MeV; scalars and NumPy arrays
 are both accepted.
 """
+import dataclasses
 import sys
 import numpy as np
 from libnest.units import DENSEPSILON, NUMZERO
 from libnest.units import MN
-from libnest.definitions import rho2kf, rhoEta
+from libnest.definitions import rho2kf
+from libnest.edf import pairing
 from libnest.edf.parameters import PairingParameters
-
-
-def _clamp_nonnegative(pairing):
-    """Floors an interpolated pairing field at (numerical) zero.
-
-    The SM/NeuM interpolations carry a minus sign in one of the two terms, so
-    for sufficiently asymmetric matter the result can dip below zero.
-
-    Args:
-        pairing (float or np.ndarray): raw interpolated pairing field [MeV]
-
-    Returns:
-        float or np.ndarray: the same, with negative values replaced by NUMZERO
-    """
-    pairing = np.maximum(np.asarray(pairing, dtype=float), NUMZERO)
-    if pairing.shape == ():
-        return float(pairing)
-    return pairing
 
 
 def Lambda(x):
@@ -103,11 +87,36 @@ class SkyrmeFunctional:
     # ================================
     #       Pairing fields
     # ================================
+    # The formulas live in libnest.edf.pairing; the functional picks the gap model and
+    # the interpolation scheme named in its PairingParameters.
+    @property
+    def _gaps(self):
+        return pairing.GAP_MODELS[self.pairing.gap_model]
+
+    def with_pairing(self, **changes):
+        """
+        Returns a functional with the same Skyrme part and modified pairing parameters.
+
+        Args:
+            **changes: fields of :class:`~libnest.edf.PairingParameters` to replace
+
+        Returns:
+            SkyrmeFunctional: a new (unregistered) functional; ``self`` is unchanged
+
+        Example:
+            >>> from libnest.edf import get_functional
+            >>> g = get_functional("BSk31").with_pairing(scheme="bskg4_eq6")
+            >>> d = g.neutron_ref_pairing_field(0.05, 0.01)   # Eq. 6 of BSkG4
+        """
+        return SkyrmeFunctional(self.params, dataclasses.replace(self.pairing, **changes))
+
     def neutron_pairing_field(self, rho_n):
         #    Formula (5.12) from NeST.pdf
         r"""
-        Returns the pairing field for uniform pure neutron nuclear matter. For kF larger
-        than 1.38 fm :sup:`-1` it returns (numerical) zero.
+        Returns the reference pairing field for uniform pure neutron matter, from the
+        functional's gap model (``gap_model`` of
+        :class:`~libnest.edf.PairingParameters`). For the default ``"cao2006"`` it returns
+        (numerical) zero for kF larger than 1.38 fm :sup:`-1`:
 
         .. math::
 
@@ -124,22 +133,17 @@ class SkyrmeFunctional:
             :func:`.neutron_ref_pairing_field`
             :func:`.proton_ref_pairing_field`
         """
-        kF = np.asarray(rho2kf(rho_n), dtype=float)
-        delta = 3.37968*(kF**2)*((kF-1.38236)**2)/(((kF**2)+(0.556092**2))*
-                                                  ((kF-1.38236)**2+(0.327517**2)))
-        if delta.shape == ():
-            if kF > 1.38:
-                return float(NUMZERO)
-            else:
-                return float(delta)
-        delta[np.where(kF>1.38)] = np.float64(1.0*NUMZERO)
-        return delta
+        return self._gaps.neutron_matter(rho_n)
 
     def symmetric_pairing_field(self, rho_n, rho_p):
         #   Formula (5.11) from NeST.pdf
         r"""
-        Returns the pairing field for uniform symmetric matter. For kF larger than
-        1.31 fm :sup:`-1` it returns (numerical) zero.
+        Returns the reference pairing field for uniform symmetric matter, from the
+        functional's gap model (``gap_model`` of
+        :class:`~libnest.edf.PairingParameters`), as a function of the per-species Fermi
+        momentum :math:`k_F = (3\pi^2\rho/2)^{1/3}`, :math:`\rho = \rho_n + \rho_p`. For
+        the default ``"cao2006"`` it returns (numerical) zero for kF larger than
+        1.31 fm :sup:`-1`:
 
         .. math::
 
@@ -158,39 +162,26 @@ class SkyrmeFunctional:
             :func:`.neutron_ref_pairing_field`
             :func:`.proton_ref_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        #   The parametrization is a function of the PER-SPECIES Fermi momentum: in
-        #   symmetric matter rho_n = rho_p = rho/2, hence the 0.5 factor (same
-        #   convention as formula (A14) used in energy_per_nucleon). 
-        #    https://doi.org/10.1103/PhysRevC.80.065804
-        #    Chamel, N., Goriely, S., & Pearson, J. M. (2009). PRC 80, 065804 (2009).
-        kF = np.asarray(rho2kf(0.5*(rho_n+rho_p)), dtype=float)
-        delta = 11.5586*(kF**2)*((kF-1.3142)**2)/(((kF**2)+(0.489932**2))*
-                                                 (((kF-1.3142)**2)+(0.906146**2)))
-        if delta.shape == ():
-            if kF > 1.31:
-                return float(NUMZERO)
-            else:
-                return float(delta)
-        delta[np.where(kF>1.31)] = NUMZERO
-        return delta
+        return self._gaps.symmetric_matter(rho_n, rho_p)
 
 
     def neutron_ref_pairing_field(self, rho_n, rho_p):
         #   Formula (5.10) from NeST.pdf
         r"""
-        Returns the reference pairing field for neutrons in uniform matter.
-        This is an extrapolation between :math:`\Delta_{\mathrm{SM}}` and
-        :math:`\Delta_{\mathrm{NeuM}}`. In limits :math:`\eta \rightarrow 0` reproduces
-        symmetric matter and :math:`\eta \rightarrow 1`, the neutron matter.
+        Returns the reference pairing field for neutrons in uniform matter: an
+        interpolation between :math:`\Delta_{\mathrm{SM}}` (symmetric matter) and
+        :math:`\Delta_{\mathrm{NeuM}}` (pure neutron matter) with the functional's
+        scheme (``scheme`` of :class:`~libnest.edf.PairingParameters`, see
+        :mod:`libnest.edf.pairing`). It enters the pairing strength :func:`.v_pi`.
+        For the BSk family (scheme ``"chamel2009"``):
 
         .. math::
 
             \Delta_n(\rho_n,\rho_p) =
             \Delta_{\mathrm{SM}}(\rho_n+\rho_p)
             \left( 1 - |\eta| \right)
-            + \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_n}{\rho_n+\rho_p}
+            + \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_n}{\rho_n+\rho_p},
+            \qquad \eta = \frac{\rho_n-\rho_p}{\rho_n+\rho_p}
 
 
         Args:
@@ -205,27 +196,25 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.proton_ref_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p)
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        return _clamp_nonnegative(self.symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
-            +self.neutron_pairing_field(rho_n)*rho_n/rho*eta/rho)
+        return pairing.SCHEMES[self.pairing.scheme](self._gaps, rho_n, rho_p)
 
     def proton_ref_pairing_field(self, rho_n, rho_p):
         #   Formula (5.10) from NeST.pdf
         r"""
-        Returns the reference pairing field for protons in uniform matter.
-        This is an extrapolation between :math:`\Delta_{\mathrm{SM}}` and
-        :math:`\Delta_{\mathrm{NeuM}}`. In limits :math:`\eta \rightarrow 0` reproduces
-        symmetric matter and :math:`\eta \rightarrow 1`, the neutron matter.
+        Returns the reference pairing field for protons in uniform matter: an
+        interpolation between :math:`\Delta_{\mathrm{SM}}` (symmetric matter) and
+        :math:`\Delta_{\mathrm{NeuM}}` (pure neutron matter) with the functional's
+        scheme (``scheme`` of :class:`~libnest.edf.PairingParameters`, see
+        :mod:`libnest.edf.pairing`). It enters the pairing strength :func:`.v_pi`.
+        For the BSk family (scheme ``"chamel2009"``):
 
         .. math::
 
             \Delta_p(\rho_n,\rho_p) =
             \Delta_{\mathrm{SM}}(\rho_n+\rho_p)
             \left( 1 - |\eta| \right)
-            - \Delta_{\mathrm{NeuM}}(\rho_n) \eta \frac{\rho_p}{\rho_n+\rho_p}
+            - \Delta_{\mathrm{NeuM}}(\rho_p) \eta \frac{\rho_p}{\rho_n+\rho_p},
+            \qquad \eta = \frac{\rho_n-\rho_p}{\rho_n+\rho_p}
 
 
         Args:
@@ -240,28 +229,19 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_ref_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        return _clamp_nonnegative(self.symmetric_pairing_field(rho_n, rho_p)*(1-np.abs(eta/rho))
-            -self.neutron_pairing_field(rho_p)*rho_p/rho*eta/rho)
+        return pairing.SCHEMES[self.pairing.scheme](self._gaps, rho_p, rho_n)
 
 
     # ================================
-    #   Alternative interpolation schemes (delta_n, delta_p from delta_sm, delta_neu)
+    #   Individual interpolation schemes, whatever the functional's own scheme
     # ================================
-    # TODO(Adarsh): neutron_ref_pairing_field() / proton_ref_pairing_field() above
-    # implement one interpolation scheme (Formula 5.10 from NeST.pdf) for getting
-    # delta_n and delta_p from delta_sm (symmetric_pairing_field) and delta_neu
-    # (neutron_pairing_field). Add two more schemes here, following:
-    # https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
-
+    # Kept for backward compatibility; see libnest.edf.pairing and with_pairing().
     def neutron_ref_pairing_field_eq2(self, rho_n, rho_p):
         r"""
         Returns the reference pairing field for neutrons in uniform matter
         using the interpolation scheme from Eq. (2) of
         https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
+        (scheme ``"chamel2009"``, :func:`libnest.edf.pairing.chamel2009`).
 
         This interpolates between symmetric matter and neutron matter,
         with asymmetry dependence governed by :math:`\delta`.
@@ -291,21 +271,14 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_pairing_field`
         """
-
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        delta = eta/rho
-        pairing = ((1-np.abs(delta))*self.symmetric_pairing_field(rho_n,rho_p)) + (delta* (rho_n/rho) * self.neutron_pairing_field(rho_n))
-        return _clamp_nonnegative(pairing)
+        return pairing.chamel2009(self._gaps, rho_n, rho_p)
 
     def proton_ref_pairing_field_eq2(self, rho_n, rho_p):
-
         r"""
         Returns the reference pairing field for protons in uniform matter
         using the interpolation scheme from Eq. (2) of
         https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
+        (scheme ``"chamel2009"``, :func:`libnest.edf.pairing.chamel2009`).
 
         This interpolates between symmetric matter and neutron matter,
         with asymmetry dependence governed by :math:`\delta`.
@@ -335,25 +308,19 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        delta = eta/rho
-        pairing = ((1-np.abs(delta))*self.symmetric_pairing_field(rho_n,rho_p)) - (delta* (rho_p/rho) * self.neutron_pairing_field(rho_p))
-        return _clamp_nonnegative(pairing)
+        return pairing.chamel2009(self._gaps, rho_p, rho_n)
 
     def neutron_ref_pairing_field_eq3(self, rho_n, rho_p):
-
         r"""
         Returns the reference pairing field for neutrons in uniform matter
         using the interpolation scheme from Eq. (3) of
         https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
+        (scheme ``"bskg3_eq3"``, :func:`libnest.edf.pairing.bskg3_eq3`).
 
         This interpolates between symmetric matter and neutron matter,
         with asymmetry dependence governed by :math:`\delta`.
 
-        Used in BskG3. 
+        Used in BskG3.
 
         .. math::
 
@@ -377,20 +344,14 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        delta = eta/rho
-        pairing = ((1-np.abs(delta))*self.symmetric_pairing_field(rho_n,rho_p)) + np.abs(delta) * self.neutron_pairing_field(rho_n)
-        return _clamp_nonnegative(pairing)
+        return pairing.bskg3_eq3(self._gaps, rho_n, rho_p)
 
     def proton_ref_pairing_field_eq3(self, rho_n, rho_p):
-
         r"""
         Returns the reference pairing field for protons in uniform matter
         using the interpolation scheme from Eq. (3) of
         https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
+        (scheme ``"bskg3_eq3"``, :func:`libnest.edf.pairing.bskg3_eq3`).
 
         This interpolates between symmetric matter and neutron matter,
         with asymmetry dependence governed by :math:`\delta`.
@@ -419,20 +380,14 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        delta = eta/rho
-        pairing = ((1-np.abs(delta))*self.symmetric_pairing_field(rho_n,rho_p)) + np.abs(delta) * self.neutron_pairing_field(rho_p)
-        return _clamp_nonnegative(pairing)
+        return pairing.bskg3_eq3(self._gaps, rho_p, rho_n)
 
     def neutron_ref_pairing_field_eq6(self, rho_n, rho_p):
-
         r"""
         Returns the reference pairing field for neutrons in uniform matter
         using the interpolation scheme from Eq. (6) of
         https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
+        (scheme ``"bskg4_eq6"``, :func:`libnest.edf.pairing.bskg4_eq6`).
 
         This interpolates between symmetric matter and neutron matter,
         with asymmetry dependence governed by :math:`\delta`.
@@ -462,20 +417,14 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        delta = eta/rho
-        pairing = self.neutron_pairing_field(rho_n)* ((self.symmetric_pairing_field(rho_n,rho_p)/self.neutron_pairing_field(rho/2))**(1-delta))
-        return _clamp_nonnegative(pairing)
+        return pairing.bskg4_eq6(self._gaps, rho_n, rho_p)
 
     def proton_ref_pairing_field_eq6(self, rho_n, rho_p):
-
         r"""
         Returns the reference pairing field for protons in uniform matter
         using the interpolation scheme from Eq. (6) of
         https://link.springer.com/article/10.1140/epja/s10050-025-01503-x
+        (scheme ``"bskg4_eq6"``, :func:`libnest.edf.pairing.bskg4_eq6`).
 
         This interpolates between symmetric matter and neutron matter,
         with asymmetry dependence governed by :math:`\delta`.
@@ -505,13 +454,7 @@ class SkyrmeFunctional:
             :func:`.symmetric_pairing_field`
             :func:`.neutron_pairing_field`
         """
-        rho_n = np.asarray(rho_n, dtype=float)
-        rho_p = np.asarray(rho_p, dtype=float)
-        rho, eta = rhoEta(rho_n, rho_p) #eta = rho_n - rho_p
-        rho = np.asarray(rho + DENSEPSILON, dtype=float)
-        delta = eta/rho
-        pairing = self.neutron_pairing_field(rho_p)* ((self.symmetric_pairing_field(rho_n,rho_p)/self.neutron_pairing_field(rho/2))**(1+delta))
-        return _clamp_nonnegative(pairing)
+        return pairing.bskg4_eq6(self._gaps, rho_p, rho_n)
 
 
     # ================================

@@ -32,6 +32,15 @@ To study a modified parametrization, derive a new parameter set:
                          bsk.BSK31.pairing)
     g.effMn(0.08, 0.0), bsk.effMn(0.08, 0.0)
 
+The pairing part works the same way; :meth:`~libnest.edf.SkyrmeFunctional.with_pairing`
+returns a functional with the same Skyrme part and other pairing parameters, e.g. another
+interpolation of the reference gaps to asymmetric matter:
+
+.. code:: python
+
+    h = bsk.BSK31.with_pairing(scheme="bskg4_eq6")
+    h.neutron_ref_pairing_field(0.05, 0.01), bsk.neutron_ref_pairing_field(0.05, 0.01)
+
 Registry
 --------
 .. autofunction:: libnest.edf.get_functional
@@ -49,3 +58,10 @@ Parameter sets
 Functional
 ----------
 .. autoclass:: libnest.edf.SkyrmeFunctional
+   :members: with_pairing
+
+Pairing
+-------
+.. automodule:: libnest.edf.pairing
+   :members: GAP_MODELS, SCHEMES, GapModel, cao2006_neutron_matter,
+             cao2006_symmetric_matter, chamel2009, bskg3_eq3, bskg4_eq6
