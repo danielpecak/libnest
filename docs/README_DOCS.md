@@ -27,21 +27,30 @@ Open `docs/_build/html/index.html` in your browser. Building needs network acces
 make clean
 ```
 
-## Figures
+## Figures and generated text
 
 Every figure in the docs is generated from code at build time — no image files are
-committed (only the logos in `_static/`).
+committed (only the logos in `_static/`). The same holds for tables and text that come
+from the code or from repository metadata.
 
 - `source/plots/plot_<name>.py` — one script per figure; it takes the output path as its
-  only argument. Shared helpers (`output_path`, `savefig`) live in `source/plots/_common.py`.
-- `source/Makefile` — builds `_static/<name>.png` for every name in `FILES`. A figure is
-  rebuilt when its script or any `libnest/*.py` file changes. Scripts always import the
-  libnest of this checkout (the Makefile sets `PYTHONPATH`).
+  only argument. Its module docstring is the figure's caption in the gallery. Shared
+  helpers (`output_path`, `savefig`) and the categorical colors (`SERIES`, `LINESTYLES`:
+  use them in this order, with a legend, for figures with several curves) live in
+  `source/plots/_common.py`.
+- `source/text/*.py` — generated rst fragments and files in `_generated/` (not committed):
+  `functionals.inc` (table of the registered functionals, from `libnest.edf`),
+  `gallery.inc` (every figure in `FILES` with its caption and script) and `citation.bib`
+  (from `CITATION.cff`).
+- `source/Makefile` — builds `_static/<name>.png` for every name in `FILES` (plus the
+  favicon, `EXTRA`) and the `_generated/` files. Everything is rebuilt when its script or
+  any file of the `libnest` package changes. Scripts always import the libnest of this
+  checkout (the Makefile sets `PYTHONPATH`).
 - `make html` runs `make -C source` first, so figures are always current.
 
-To add a figure: create `source/plots/plot_<name>.py` (copy `plot_pairing_vs_rho.py`), add
-`<name>.png` to `FILES` in `source/Makefile`, and reference `_static/<name>.png` from an
-`.rst` page.
+To add a figure: create `source/plots/plot_<name>.py` with a one-sentence docstring (copy
+`plot_pairing_vs_rho.py`), add `<name>.png` to `FILES` in `source/Makefile` (this also puts
+it in the gallery), and reference `_static/<name>.png` from an `.rst` page.
 
 ## GitHub Pages Deployment
 
@@ -76,6 +85,7 @@ Declared in the `docs` extra of `pyproject.toml` (mirrored in `docs/requirements
 - `sphinxcontrib-bibtex` - Bibliography support
 - `sphinxcontrib-katex` - Math equations
 - `pillow` - Image processing
+- `pyyaml` - Reads `CITATION.cff` for the generated BibTeX entry
 
 ## References
 

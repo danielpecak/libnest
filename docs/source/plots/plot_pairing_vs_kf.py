@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Reference pairing gaps of pure neutron matter and symmetric matter (gap model cao2006) as
+functions of the Fermi wavevector of one species."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

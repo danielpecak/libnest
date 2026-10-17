@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+"""Energy per nucleon of BSk31 in pure neutron matter (NeuM) and symmetric matter (SM)."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Landau critical velocity of pure neutron matter (BSk31 reference gap), in percent of the
+speed of light, as a function of the neutron Fermi wavevector."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

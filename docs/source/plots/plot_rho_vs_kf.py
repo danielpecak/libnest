@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+r"""Density of one species (both spin components), :math:`\rho = k_F^3/3\pi^2`, on a
+logarithmic scale."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

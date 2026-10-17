@@ -8,6 +8,12 @@ import matplotlib
 matplotlib.use("Agg")  # render to files, no display needed
 import matplotlib.pyplot as plt
 
+# Categorical colors, assigned in this fixed order (never cycled): checked for colour-vision
+# deficiency and normal-vision separation of neighbours; the 3rd and 4th have low contrast on
+# white, so every multi-series figure also needs a legend and distinct line styles.
+SERIES = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#6250d6", "#e34948"]
+LINESTYLES = ["-", "--", "-.", ":", (0, (5, 1)), (0, (3, 1, 1, 1, 1, 1)), (0, (1, 3)), (0, (8, 3))]
+
 
 def output_path():
     """Returns the output image path given as the only command-line argument."""

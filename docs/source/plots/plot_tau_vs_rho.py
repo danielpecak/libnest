@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Aug 30 14:20:50 2022
-
-@author: aleks
-"""
-
+r"""Kinetic density of a uniform Fermi gas, :math:`\tau = \frac{3}{5} k_F^2 \rho`, as a
+function of the density."""
+# Created on Tue Aug 30 14:20:50 2022 by aleks
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

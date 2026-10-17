@@ -78,7 +78,11 @@ and PLL/2023/04/016476.
 
    installation
    physics
+   pairing
+   functionals
+   gallery
    help
+   changelog
    bibliography
 
 .. toctree::
@@ -90,7 +94,6 @@ and PLL/2023/04/016476.
    edf
    bsk
    io
-   pasta
    plots
    tools
 

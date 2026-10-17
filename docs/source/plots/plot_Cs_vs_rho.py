@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+r"""Density-dependent coupling constants :math:`C^\rho_0, C^\rho_1, C^\tau_0, C^\tau_1` of
+BSk31 in symmetric matter."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

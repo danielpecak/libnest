@@ -186,10 +186,13 @@ This work has been supported by:
 
 ## 📚 References
 
-If you use this library in your research, please cite:
+If you use this library in your research, please cite it (see `CITATION.cff`, or
+"Cite this repository" on GitHub) and the papers behind the functional you use:
 
-- S. Goriely, N. Chamel, J.M. Pearson, *Phys. Rev. C* **88**, 024308 (2013) - BSk functional
-- N. Chamel, S. Goriely, J.M. Pearson, *Phys. Rev. C* **80**, 065804 (2009) - Pairing model
+- S. Goriely, N. Chamel, J.M. Pearson, *Phys. Rev. C* **93**, 034337 (2016) - the BSk31 functional
+- N. Chamel, S. Goriely, J.M. Pearson, *Phys. Rev. C* **80**, 065804 (2009) - the extended Skyrme functional and its uniform-matter formulas
+- L.G. Cao, U. Lombardo, P. Schuck, *Phys. Rev. C* **74**, 064301 (2006) - reference pairing gaps
+- N. Chamel, *Phys. Rev. C* **82**, 014313 (2010) - pairing strength from the gaps
 
 See `docs/bibliography.rst` for a complete list of references.
 

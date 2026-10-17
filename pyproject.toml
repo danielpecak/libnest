@@ -52,6 +52,7 @@ docs = [
     "sphinxcontrib-bibtex",
     "sphinxcontrib-katex",
     "pillow",
+    "pyyaml",
 ]
 lint = [
     "ruff>=0.6",

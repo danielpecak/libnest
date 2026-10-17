@@ -1,3 +1,5 @@
+:orphan:
+
 Module: Pasta
 =============
 Functions that allow working with deep layers of the inner crust,

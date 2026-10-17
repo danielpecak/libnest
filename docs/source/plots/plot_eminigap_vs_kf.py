@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Minigap energy in pure neutron matter (BSk31) as a function of the neutron Fermi
+wavevector."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig

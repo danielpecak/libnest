@@ -138,3 +138,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Generated documentation fragments (docs/source/Makefile)
+docs/_generated/

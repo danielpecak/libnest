@@ -15,13 +15,6 @@ Crust
 In the crust we can show certain densities that are relevant. The major division
 is to **outer crust** and **inner crust**.
 
-Pairing S
----------
-.. image:: _static/pairing_vs_kf.png
-  :width: 48 %
-.. image:: _static/pairing_vs_rho.png
-  :width: 48 %
-
 ******************
 Density Functional
 ******************
@@ -152,9 +145,6 @@ for theoretical considerations.
 
 Pairing models
 ==============
-References for pairing models:
-
- * :cite:`chamel2009pairing`
- * :cite:`chamel2010effective`
- * :cite:`chamel2013pairing`
- * :cite:`chamel2016further`
+How the pairing strength of the BSk and BSkG functionals follows from realistic
+:math:`{}^1S_0` gaps, and how the gaps are interpolated to asymmetric matter, is described
+on the page :doc:`pairing`. Reviews: :cite:`chamel2010effective,chamel2013pairing`.

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+r"""Kinetic density of a uniform Fermi gas, :math:`\tau = \frac{3}{5} k_F^2 \rho`, as a
+function of the Fermi wavevector."""
 import numpy as np
 import matplotlib.pyplot as plt
 from _common import output_path, savefig
