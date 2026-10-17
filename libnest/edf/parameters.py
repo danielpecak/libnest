@@ -13,6 +13,9 @@ from typing import Optional
 from libnest.units import HBAR2M_n, HBAR2M_p
 from libnest.edf.pairing import GAP_MODELS, SCHEMES
 
+#: How the gradient-pairing coefficients enter, see :class:`PairingParameters`.
+KAPPA_CONVENTIONS = ("absolute", "relative")
+
 
 @dataclass(frozen=True)
 class SkyrmeParameters:
@@ -80,8 +83,9 @@ class PairingParameters:
     Attributes:
         cutoff (float): single-particle energy cutoff :math:`\\varepsilon_\\Lambda`
             [MeV] used in the pairing strength :math:`v^{\\pi}_q`
-        kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n` [MeV fm :sup:`8`]
-        kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p` [MeV fm :sup:`8`]
+        kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n`, in
+            MeV fm :sup:`8` (``kappa_convention="absolute"``) or fm :sup:`8` (``"relative"``)
+        kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p`, units as ``kappa_n``
         f_np (float): pairing renormalization factor :math:`f^+_n` [1]
         f_nm (float): pairing renormalization factor :math:`f^-_n` [1]
         f_pp (float): pairing renormalization factor :math:`f^+_p` [1]
@@ -91,9 +95,14 @@ class PairingParameters:
         scheme (str): interpolation of the reference gaps to asymmetric matter, a key
             of :data:`libnest.edf.pairing.SCHEMES`: ``"chamel2009"`` (BSk family),
             ``"bskg3_eq3"`` (BSkG3), ``"bskg4_eq6"`` (BSkG4)
+        kappa_convention (str): how :math:`\\kappa_q` enters the pairing coupling
+            :math:`g_q` (see :meth:`.SkyrmeFunctional.g_q`): ``"absolute"``,
+            :math:`g_q = v^{\\pi q} + \\kappa_q (\\nabla\\rho)^2` (BSk family, PRC 93,
+            034337, Eq. 9), or ``"relative"``,
+            :math:`g_q = v^{\\pi q}\\,[1 + \\kappa_q (\\nabla\\rho)^2]` (BSkG3, BSkG4)
 
     Raises:
-        ValueError: for an unknown ``gap_model`` or ``scheme``
+        ValueError: for an unknown ``gap_model``, ``scheme`` or ``kappa_convention``
     """
     cutoff: float = 6.5
     kappa_n: float = 0.0
@@ -104,9 +113,11 @@ class PairingParameters:
     f_pm: float = 1.0
     gap_model: str = "cao2006"
     scheme: str = "chamel2009"
+    kappa_convention: str = "absolute"
 
     def __post_init__(self):
-        for field, known in (("gap_model", GAP_MODELS), ("scheme", SCHEMES)):
+        for field, known in (("gap_model", GAP_MODELS), ("scheme", SCHEMES),
+                             ("kappa_convention", KAPPA_CONVENTIONS)):
             value = getattr(self, field)
             if value not in known:
                 raise ValueError("unknown {} {!r}; available: {}".format(

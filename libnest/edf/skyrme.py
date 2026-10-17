@@ -1176,7 +1176,8 @@ class SkyrmeFunctional:
                 )
 
 
-    def epsilon_np(self, rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p, kappa_n, kappa_p):
+    def epsilon_np(self, rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2, nu_n, nu_p,
+                   kappa_n=None, kappa_p=None):
         """
         Calculates the total energy functional :math:`\\epsilon`; its pairing part
         (:func:`.epsilon_pi_np`) uses the single-particle energy cutoff
@@ -1204,9 +1205,10 @@ class SkyrmeFunctional:
             jdiff2 (float) : difference of momentum density/current vectors :math:`j` [fm :sup:`-3`]
             nu_n (float): neutron anomalous density :math:`\\nu` [fm :sup:`-3`]
             nu_p (float): proton anomalous density :math:`\\nu` [fm :sup:`-3`]
-            kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n` [MeV fm :sup:`8`],
-                see :func:`.epsilon_pi_np`
-            kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p` [MeV fm :sup:`8`]
+            kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n`, see
+                :func:`.epsilon_pi_np`; default: the functional's own
+            kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p`; default: the
+                functional's own
 
         TO DO: write eq for jsum2 and jdiff2
 
@@ -1223,8 +1225,6 @@ class SkyrmeFunctional:
         jdiff2 = np.asarray(jdiff2)
         nu_n = np.asarray(nu_n)
         nu_p = np.asarray(nu_p)
-        kappa_n = np.asarray(kappa_n)
-        kappa_p = np.asarray(kappa_p)
         rho_grad_n_square = (rho_grad_n)**2
         rho_grad_p_square = (rho_grad_p)**2
         rho_grad_square = (rho_grad_n + rho_grad_p)**2  # (grad rho)^2, rho = rho_n + rho_p
@@ -1237,8 +1237,8 @@ class SkyrmeFunctional:
                 )
 
 
-    def epsilon_pi_np(self, rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n,
-                        kappa_p):
+    def epsilon_pi_np(self, rho_n, rho_p, rho_grad_n, rho_grad_p, nu_n, nu_p, kappa_n=None,
+                        kappa_p=None):
         """
         Energy functional :math:`\\epsilon_{\\pi}` for particle matter,
         related to pairing energy density (PRC 93, 034337 (2016), Eq. 9; the factors
@@ -1248,11 +1248,12 @@ class SkyrmeFunctional:
 
         	\\varepsilon_\\pi(\\rho_n,\\vec\\nabla\\rho_n,\\tilde{\\rho}_n,\\rho_p,\\vec\\nabla\\rho_p,\\tilde{\\rho}_p)
 
-            =\\frac{1}{4} \\left( v^{\\pi n}(\\rho_n,\\rho_p) + \\kappa_n|\\nabla\\rho|^2 \\right) \\tilde{\\rho_n}^2
+            =\\frac{1}{4} g_n \\tilde{\\rho_n}^2 + \\frac{1}{4} g_p \\tilde{\\rho_p}^2,
 
-            +\\frac{1}{4} \\left( v^{\\pi p}(\\rho_n,\\rho_p) + \\kappa_p|\\nabla\\rho|^2 \\right) \\tilde{\\rho_p}^2,
-
-        with the gradient of the total density, :math:`\\rho = \\rho_n + \\rho_p`.
+        where the pairing coupling :math:`g_q` (:func:`.g_q`) is, in the BSk convention
+        (``kappa_convention="absolute"``),
+        :math:`g_q = v^{\\pi q}(\\rho_n,\\rho_p) + \\kappa_q|\\nabla\\rho|^2`, with the
+        gradient of the total density, :math:`\\rho = \\rho_n + \\rho_p`.
 
         Args:
             rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
@@ -1264,19 +1265,65 @@ class SkyrmeFunctional:
                 the component along the same direction
             nu_n (float): neutron anomalous density :math:`\\nu_n` [fm :sup:`-3`]
             nu_p (float): proton anomalous density :math:`\\nu_p` [fm :sup:`-3`]
-            kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n` [MeV fm :sup:`8`]
-            kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p` [MeV fm :sup:`8`]
+            kappa_n (float): gradient-pairing coefficient :math:`\\kappa_n` [MeV fm :sup:`8`
+                in the BSk convention]; default: the functional's own
+            kappa_p (float): gradient-pairing coefficient :math:`\\kappa_p`; default: the
+                functional's own
 
         Returns:
             float: energy functional :math:`\\epsilon_{\\pi}` [MeV]
 
         See also:
+            :func:`.g_q`
             :func:`.v_pi`
         """
         # (grad rho)^2 of the total density rho = rho_n + rho_p (PRC 93, 034337, Eq. 9)
         rho_grad_square = (np.asarray(rho_grad_n) + np.asarray(rho_grad_p))**2
-        return (1./4.*(self.v_pi(rho_n, rho_p, 'n') + kappa_n*rho_grad_square)*nu_n**2
-                +1./4.*(self.v_pi(rho_n, rho_p, 'p') + kappa_p*rho_grad_square)*nu_p**2)
+        return (1./4.*self.g_q(rho_n, rho_p, 'n', rho_grad_square, kappa_n)*nu_n**2
+                +1./4.*self.g_q(rho_n, rho_p, 'p', rho_grad_square, kappa_p)*nu_p**2)
+
+    def g_q(self, rho_n, rho_p, q, rho_grad_square=0., kappa=None):
+        r"""
+        Local pairing coupling :math:`g_q`: the pairing strength :func:`.v_pi` with
+        the gradient term, in the functional's ``kappa_convention`` (see
+        :class:`~libnest.edf.PairingParameters`). BSk family (``"absolute"``, PRC 93,
+        034337 (2016), Eq. 9):
+
+        .. math::
+
+            g_q = v^{\pi q}(\rho_n,\rho_p) + \kappa_q (\nabla\rho)^2 ,
+
+        BSkG3, BSkG4 (``"relative"``, EPJA 59, 270 (2023), Eq. 15; arXiv:2411.08007,
+        Eq. 1):
+
+        .. math::
+
+            g_q = v^{\pi q}(\rho_n,\rho_p) \left[ 1 + \kappa_q (\nabla\rho)^2 \right] ,
+
+        both with the gradient of the total density, :math:`\rho = \rho_n + \rho_p`.
+        In uniform matter, :math:`\nabla\rho = 0`, both reduce to :math:`v^{\pi q}`.
+
+        Args:
+            rho_n (float): neutron density :math:`\rho_n` [fm :sup:`-3`]; sum of both spin components
+            rho_p (float): proton density :math:`\rho_p` [fm :sup:`-3`]; sum of both spin components
+            q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
+            rho_grad_square (float): :math:`(\nabla\rho)^2` [fm :sup:`-8`]
+            kappa (float): :math:`\kappa_q` [MeV fm :sup:`8` or fm :sup:`8`, by the
+                convention]; default: the functional's ``kappa_n`` or ``kappa_p``
+
+        Returns:
+            float: pairing coupling :math:`g_q` [MeV fm :sup:`3`]
+
+        See also:
+            :func:`.v_pi`
+            :func:`.epsilon_pi_np`
+        """
+        v = self.v_pi(rho_n, rho_p, q)    # rejects any q other than 'n' or 'p'
+        if kappa is None:
+            kappa = self.pairing.kappa_n if q == 'n' else self.pairing.kappa_p
+        if self.pairing.kappa_convention == "relative":
+            return v*(1. + kappa*rho_grad_square)
+        return v + kappa*rho_grad_square
 
     def v_pi(self, rho_n, rho_p, q):
         """

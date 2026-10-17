@@ -123,5 +123,77 @@ class TestFunctionalPairing(unittest.TestCase):
             self.f.pairing.scheme = "bskg4_eq6"
 
 
+class TestKappaConvention(unittest.TestCase):
+    """g_q = v_pi + kappa (grad rho)^2 (BSk, "absolute") or v_pi [1 + kappa (grad rho)^2]
+    (BSkG, "relative")."""
+
+    rho = (0.05, 0.02)
+    grad2 = 1e-4        # (grad rho)^2 [fm^-8]
+
+    def setUp(self):
+        self.absolute = bsk.BSK31
+        # BSkG3/BSkG4 gradient pairing (kappa in fm^8) on the Skyrme part of BSk31
+        self.relative = bsk.BSK31.with_pairing(kappa_convention="relative",
+                                               kappa_n=123.20, kappa_p=129.07)
+
+    def test_bsk31_is_absolute(self):
+        self.assertEqual(self.absolute.pairing.kappa_convention, "absolute")
+
+    def test_uniform_matter_coupling_is_the_pairing_strength(self):
+        for f in (self.absolute, self.relative):
+            for q in "np":
+                with self.subTest(convention=f.pairing.kappa_convention, q=q):
+                    self.assertEqual(f.g_q(*self.rho, q), f.v_pi(*self.rho, q))
+
+    def test_absolute_kappa_adds_to_the_strength(self):
+        for q, kappa in (("n", bsk.KAPPAN), ("p", bsk.KAPPAP)):
+            with self.subTest(q=q):
+                shift = self.absolute.g_q(*self.rho, q, self.grad2) - bsk.v_pi(*self.rho, q)
+                self.assertAlmostEqual(shift / (kappa*self.grad2), 1., places=9)
+
+    def test_relative_kappa_scales_the_strength(self):
+        for q, kappa in (("n", 123.20), ("p", 129.07)):
+            with self.subTest(q=q):
+                ratio = (self.relative.g_q(*self.rho, q, self.grad2)
+                         / self.relative.v_pi(*self.rho, q))
+                self.assertAlmostEqual(ratio, 1. + kappa*self.grad2, places=12)
+
+    def test_gradient_term_strengthens_pairing_with_the_published_kappas(self):
+        """kappa < 0 (BSk31, absolute) and kappa > 0 (BSkG, relative) both make the
+        coupling more attractive at the nuclear surface."""
+        for f in (self.absolute, self.relative):
+            for q in "np":
+                with self.subTest(convention=f.pairing.kappa_convention, q=q):
+                    self.assertLess(f.g_q(*self.rho, q), 0.)
+                    self.assertLess(f.g_q(*self.rho, q, self.grad2), f.g_q(*self.rho, q))
+
+    def test_epsilon_pi_uses_the_coupling_of_the_functional(self):
+        rho_n, rho_p, g_n, g_p, nu_n, nu_p = 0.05, 0.02, 0.01, 0.004, 0.01, 0.004
+        grad2 = (g_n + g_p)**2
+        for f in (self.absolute, self.relative):
+            with self.subTest(convention=f.pairing.kappa_convention):
+                expected = 0.25*(f.g_q(rho_n, rho_p, "n", grad2)*nu_n**2
+                                 + f.g_q(rho_n, rho_p, "p", grad2)*nu_p**2)
+                self.assertAlmostEqual(
+                    f.epsilon_pi_np(rho_n, rho_p, g_n, g_p, nu_n, nu_p) / expected, 1.,
+                    places=12)
+        # without kappa arguments, the functional's own are used
+        self.assertEqual(bsk.epsilon_pi_np(rho_n, rho_p, g_n, g_p, nu_n, nu_p),
+                         bsk.epsilon_pi_np(rho_n, rho_p, g_n, g_p, nu_n, nu_p,
+                                           bsk.KAPPAN, bsk.KAPPAP))
+
+    def test_scalar_and_array_input(self):
+        rho_n, rho_p = np.array([0.03, 0.05]), np.array([0.01, 0.02])
+        values = self.relative.g_q(rho_n, rho_p, "n", self.grad2)
+        for i in range(len(rho_n)):
+            self.assertAlmostEqual(
+                values[i], self.relative.g_q(float(rho_n[i]), float(rho_p[i]), "n",
+                                             self.grad2), places=12)
+
+    def test_unknown_convention_is_rejected(self):
+        with self.assertRaises(ValueError):
+            PairingParameters(kappa_convention="multiplicative")
+
+
 if __name__ == "__main__":
     unittest.main()

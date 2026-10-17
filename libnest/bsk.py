@@ -265,6 +265,7 @@ epsilon_tau_np = BSK31.epsilon_tau_np
 epsilon_delta_rho_np = BSK31.epsilon_delta_rho_np
 epsilon_np = BSK31.epsilon_np
 epsilon_pi_np = BSK31.epsilon_pi_np
+g_q = BSK31.g_q
 v_pi = BSK31.v_pi
 I = BSK31.I
 
@@ -313,6 +314,7 @@ __all__ = (["BSK31", "T0", "T1", "T2", "T3", "T4", "T5", "X0", "X1", "T2X2", "X3
     "epsilon_delta_rho_np",
     "epsilon_np",
     "epsilon_pi_np",
+    "g_q",
     "v_pi",
     "I",
     "Lambda",
