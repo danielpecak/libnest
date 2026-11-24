@@ -330,5 +330,34 @@ class TestAlternativePairingSchemes(unittest.TestCase):
                 self.assertTrue(np.all(np.isfinite(out)))
 
 
+class TestMeanField(unittest.TestCase):
+    """U_q must be the derivative of the rho-part of the energy density."""
+
+    DENSITIES = [(0.08, 0.08), (0.04, 0.04), (0.16, 0.0), (0.10, 0.06), (0.02, 0.09)]
+
+    def check_U_q_is_derivative(self, mod):
+        h = 1e-6
+        for rho_n, rho_p in self.DENSITIES:
+            dn = (mod.epsilon_rho_np(rho_n + h, rho_p) - mod.epsilon_rho_np(rho_n - h, rho_p)) / (2 * h)
+            dp = (mod.epsilon_rho_np(rho_n, rho_p + h) - mod.epsilon_rho_np(rho_n, rho_p - h)) / (2 * h)
+            with self.subTest(module=mod.__name__, rho_n=rho_n, rho_p=rho_p):
+                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'n')), float(dn), delta=1e-4)
+                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'p')), float(dp), delta=1e-4)
+
+    def test_U_q_bsk(self):
+        self.check_U_q_is_derivative(bsk)
+
+    def test_U_q_bskg(self):
+        from libnest import bskg
+        self.check_U_q_is_derivative(bskg)
+
+    def test_U_q_symmetric_matter_bound(self):
+        """Symmetric matter at saturation: U_q ~ -65 MeV, n and p equal."""
+        U_n = float(bsk.U_q(0.08, 0.08, 'n'))
+        self.assertAlmostEqual(U_n, float(bsk.U_q(0.08, 0.08, 'p')), places=10)
+        self.assertLess(U_n, -50)
+        self.assertGreater(U_n, -80)
+
+
 if __name__ == '__main__':
     unittest.main()

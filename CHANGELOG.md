@@ -13,6 +13,19 @@ Work in progress on the `edf-refactor` branch (see `TODO_edf.md`): a single
 implementation of the Skyrme formulas behind `libnest.edf`, selectable
 parametrizations, and fixes for the unit errors listed under "Known issues" below.
 
+### Fixed — results differ from 0.1.2
+
+- **`bsk.U_q` and `bskg.U_q`: wrong t3 term.** The mean field is the derivative of
+  the t3 energy t3/12 rho^alpha [(1 + x3/2) rho^2 - (x3 + 1/2)(rho_n^2 + rho_p^2)],
+  i.e. t3/12 rho^(alpha-1) [(1 + x3/2)(alpha+2) rho^2 - (x3 + 1/2)(2 rho rho_q
+  + alpha (rho_q^2 + rho_q'^2))]. The code had `(0.5+0.5*X3)` instead of
+  `(1+0.5*X3)` and a product `2*rho*rho_q*ALPHA*rho_q'**2` instead of the sum, so the
+  t3 repulsion was too strong: at rho_n = rho_p = 0.08 fm^-3 U_n was -18.4 instead of
+  -65.8 MeV, and in pure neutron matter at 0.16 fm^-3 +198.5 instead of -37.1 MeV.
+  `U_q` now equals d(`epsilon_rho_np`)/d(rho_q) (new test `TestMeanField`). It still
+  contains only the t0, t3 terms: no d(epsilon_tau)/d(rho_q), gradient or Coulomb
+  terms. Affects `plots.plot_U_q` and `real_data_plots`.
+
 ## [0.1.2] — 2026-10-13
 
 ### Changed — results differ from 0.1.1

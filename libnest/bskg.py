@@ -1043,8 +1043,8 @@ def U_q(rho_n, rho_p,q):
         sys.exit('# ERROR: Nucleon q must be either n or p')
     rho = rho_n + rho_p + DENSEPSILON
     return T0*((1+0.5*X0)*rho-(0.5+X0)*rho_q)+T3/12.*np.power(rho,(ALPHA-1))*(
-        ((0.5+0.5*X3)*rho**2*(ALPHA+2))-(0.5+X3)*(2*rho*rho_q*ALPHA*
-                                                  (rho_q_prime)**2))
+        ((1+0.5*X3)*rho**2*(ALPHA+2))-(0.5+X3)*(2*rho*rho_q+ALPHA*
+                                                (rho_q**2+rho_q_prime**2)))
 
 def B_q(rho_n, rho_p, q):
     #    Formula (5.13) from NeST.pdf
