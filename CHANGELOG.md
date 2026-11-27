@@ -25,6 +25,38 @@ parametrizations, and fixes for the unit errors listed under "Known issues" belo
   `U_q` now equals d(`epsilon_rho_np`)/d(rho_q) (new test `TestMeanField`). It still
   contains only the t0, t3 terms: no d(epsilon_tau)/d(rho_q), gradient or Coulomb
   terms. Affects `plots.plot_U_q` and `real_data_plots`.
+- **`bsk.U_q` and `bskg.U_q`: no tau terms.** `U_q` is now `U_rho_q + U_tau_q`, as
+  `U_rho_q + U_tau_q` of W-BSK (`hpc-engine/bsk/bsk_functional.c`, nuclear matter):
+  d(`epsilon_rho_np` + `epsilon_tau_np`)/d(rho_q) at fixed tau, j. The tau part comes from
+  the density dependence of C^tau_0, C^tau_1 (t4, t5) and from C^tau_1 (rho_n - rho_p)(tau_n -
+  tau_p): U_tau_q = C0_tau (tau_n + tau_p) + C1_tau (tau_q - tau_q') + dC0_tau [rho (tau_n +
+  tau_p) - (j_n + j_p)^2] + dC1_tau [(rho_n - rho_p)(tau_n - tau_p) - (j_n - j_p)^2].
+  New signature `U_q(rho_n, rho_p, q, tau_n=None, tau_p=None, jsum2=0, jdiff2=0)`; without
+  tau the uniform Fermi gas `definitions.rho2tau(rho_q)` is used. Symmetric matter at
+  rho_n = rho_p = 0.08 fm^-3: U_q = -59.8 MeV (was -65.8), pure neutron matter at 0.16
+  fm^-3: U_n = -24.5 MeV (was -37.1). Checked against the C code of W-BSK: equal to 1e-15
+  with DENSEPSILON = 0 on both sides (W-BSK has 1e-8 inside the powers, libnest 1e-12:
+  ~1e-5 MeV apart at these densities). Still not included (in `V_q` of W-BSK): pairing
+  rearrangement, Coulomb. The gradient terms are optional, see below.
+- **`bsk.epsilon_delta_rho_np`: wrong cross term.** grad rho_n . grad rho_p was computed as
+  `0.5*(p² - n² - p²)` = -|grad rho_n|²/2 instead of `0.5*(|grad rho|² - n² - p²)`; this
+  changes the t4 (beta) part. Now equal to `e_LaplaceRho_np` of W-BSK (1e-16 with
+  DENSEPSILON = 0). `epsilon_np` passed |grad rho_n|² + |grad rho_p|² as |grad rho|²; it now
+  uses (grad rho_n + grad rho_p)². The same in `bskg`.
+
+### Added
+
+- `bsk.U_rho_q`, `bsk.U_tau_q` (the two parts of `U_q`) and `bsk.dC0_rho`, `dC1_rho`,
+  `dC0_tau`, `dC1_tau` (d/d rho of the coupling constants); the same in `bskg`.
+- `bsk.U_LaplaceRho_q(rho_n, rho_p, q, rho_grad_n_square, rho_grad_p_square,
+  rho_grad_square, rho_lap_n, rho_lap_p)`: the gradient part of the mean field, the functional
+  derivative of int `epsilon_delta_rho_np` over rho_q, ported from `U_LaplaceRho_n/p` of W-BSK
+  (equal to machine precision with DENSEPSILON = 0; checked against a numerical functional
+  derivative on a grid). `U_q` takes the same five gradient arguments as optional keywords and
+  then adds this term (all five or none). In the static Pb208 / Ca40 BSk31 solutions
+  (MOCCa, 2026_11_20_thomas_fermi) the weighted rms of V_q - U_q drops from 3.7 / 6.6 MeV
+  (rho, tau only) to 1.1 / 0.27 MeV with the gradient term; the rest is mostly the spin-orbit
+  term, which libnest does not have. The same in `bskg`.
 
 ## [0.1.2] — 2026-10-13
 

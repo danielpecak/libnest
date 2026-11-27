@@ -331,32 +331,158 @@ class TestAlternativePairingSchemes(unittest.TestCase):
 
 
 class TestMeanField(unittest.TestCase):
-    """U_q must be the derivative of the rho-part of the energy density."""
+    """U_q = U_rho_q + U_tau_q must be the derivative of epsilon_rho + epsilon_tau over rho_q
+    (at fixed tau, j), and equal U_rho_q + U_tau_q of W-BSK (hpc-engine/bsk/bsk_functional.c)."""
 
     DENSITIES = [(0.08, 0.08), (0.04, 0.04), (0.16, 0.0), (0.10, 0.06), (0.02, 0.09)]
+    # rho_n, rho_p, tau_n, tau_p, (j_n + j_p)^2, (j_n - j_p)^2
+    STATES = [(0.08, 0.08, 0.10, 0.09, 0.0, 0.0), (0.16, 0.0, 0.30, 0.0, 0.0, 0.0),
+              (0.10, 0.06, 0.15, 0.07, 1e-3, 4e-4), (0.02, 0.09, 0.01, 0.12, 2e-4, 1e-4),
+              (0.04, 0.04, 0.05, 0.06, 2e-4, 0.0)]
+    # U_rho_n + U_tau_n, U_rho_p + U_tau_p of W-BSK (BSk31, NUCLEAR_MATTER) for STATES[:4], computed
+    # with bsk_functional.c through ctypes (2026-11-27). W-BSK regularizes rho with DENSEPSILON =
+    # 1e-8 inside the powers, libnest with 1e-12: the two differ by ~1e-5 MeV here; with
+    # DENSEPSILON = 0 on both sides they agree to 1e-15.
+    WBSK = [(-59.3548745901, -58.9037822844), (-23.1525073516, -101.3032509001),
+            (-48.9571252410, -68.2692649752), (-75.5839195086, -32.3518938959)]
 
-    def check_U_q_is_derivative(self, mod):
+    def check_U_rho_q_is_derivative(self, mod):
         h = 1e-6
         for rho_n, rho_p in self.DENSITIES:
             dn = (mod.epsilon_rho_np(rho_n + h, rho_p) - mod.epsilon_rho_np(rho_n - h, rho_p)) / (2 * h)
             dp = (mod.epsilon_rho_np(rho_n, rho_p + h) - mod.epsilon_rho_np(rho_n, rho_p - h)) / (2 * h)
             with self.subTest(module=mod.__name__, rho_n=rho_n, rho_p=rho_p):
-                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'n')), float(dn), delta=1e-4)
-                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'p')), float(dp), delta=1e-4)
+                self.assertAlmostEqual(float(mod.U_rho_q(rho_n, rho_p, 'n')), float(dn), delta=1e-4)
+                self.assertAlmostEqual(float(mod.U_rho_q(rho_n, rho_p, 'p')), float(dp), delta=1e-4)
+
+    def check_U_q_is_derivative(self, mod):
+        h = 1e-6
+        for rho_n, rho_p, tau_n, tau_p, jsum2, jdiff2 in self.STATES:
+            def eps(rn, rp):
+                return (mod.epsilon_rho_np(rn, rp)
+                        + mod.epsilon_tau_np(rn, rp, tau_n, tau_p, jsum2, jdiff2))
+            dn = (eps(rho_n + h, rho_p) - eps(rho_n - h, rho_p)) / (2 * h)
+            dp = (eps(rho_n, rho_p + h) - eps(rho_n, rho_p - h)) / (2 * h)
+            args = (tau_n, tau_p, jsum2, jdiff2)
+            with self.subTest(module=mod.__name__, rho_n=rho_n, rho_p=rho_p):
+                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'n', *args)), float(dn), delta=1e-4)
+                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'p', *args)), float(dp), delta=1e-4)
+
+    def check_U_q_wbsk(self, mod):
+        for (rho_n, rho_p, *args), (u_n, u_p) in zip(self.STATES, self.WBSK):
+            with self.subTest(module=mod.__name__, rho_n=rho_n, rho_p=rho_p):
+                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'n', *args)), u_n, delta=1e-4)
+                self.assertAlmostEqual(float(mod.U_q(rho_n, rho_p, 'p', *args)), u_p, delta=1e-4)
+
+    def test_U_rho_q_bsk(self):
+        self.check_U_rho_q_is_derivative(bsk)
+
+    def test_U_rho_q_bskg(self):
+        from libnest import bskg
+        self.check_U_rho_q_is_derivative(bskg)
 
     def test_U_q_bsk(self):
         self.check_U_q_is_derivative(bsk)
+        self.check_U_q_wbsk(bsk)
 
     def test_U_q_bskg(self):
         from libnest import bskg
         self.check_U_q_is_derivative(bskg)
+        self.check_U_q_wbsk(bskg)
+
+    def test_U_q_without_tau_is_U_rho_q(self):
+        """Every term of U_tau_q is proportional to tau or j^2."""
+        for rho_n, rho_p in self.DENSITIES:
+            for q in 'np':
+                self.assertEqual(float(bsk.U_q(rho_n, rho_p, q, 0., 0.)), float(bsk.U_rho_q(rho_n, rho_p, q)))
+
+    def test_U_q_default_tau_is_fermi_gas(self):
+        from libnest.definitions import rho2tau
+        rho_n = np.array([0.0, 0.02, 0.08, 0.16])
+        rho_p = np.array([0.0, 0.01, 0.08, 0.0])
+        for q in 'np':
+            np.testing.assert_array_equal(bsk.U_q(rho_n, rho_p, q),
+                                          bsk.U_q(rho_n, rho_p, q, rho2tau(rho_n), rho2tau(rho_p)))
+        self.assertTrue(np.all(np.isfinite(bsk.U_q(rho_n, rho_p, 'n'))))
 
     def test_U_q_symmetric_matter_bound(self):
-        """Symmetric matter at saturation: U_q ~ -65 MeV, n and p equal."""
+        """Symmetric matter at saturation: U_q ~ -60 MeV (U_rho -65.8 + U_tau +6.0), n and p equal."""
         U_n = float(bsk.U_q(0.08, 0.08, 'n'))
         self.assertAlmostEqual(U_n, float(bsk.U_q(0.08, 0.08, 'p')), places=10)
         self.assertLess(U_n, -50)
         self.assertGreater(U_n, -80)
+
+
+class TestGradientMeanField(unittest.TestCase):
+    """U_LaplaceRho_q must be the functional derivative of int epsilon_delta_rho_np over rho_q,
+    and equal U_LaplaceRho_n / U_LaplaceRho_p of W-BSK (hpc-engine/bsk/bsk_functional.c)."""
+
+    # rho_n, rho_p, (grad rho_n)^2, (grad rho_p)^2, (grad rho)^2, lap rho_n, lap rho_p
+    STATES = [(0.08, 0.07, 4e-4, 3e-4, 1.3e-3, -2e-3, -1.5e-3),
+              (0.02, 0.005, 1e-4, 2e-5, 1.0e-4, 3e-3, 1e-3),
+              (0.05, 0.0, 6e-4, 0.0, 6e-4, -4e-3, 0.0),
+              (0.003, 0.001, 5e-5, 1e-5, 2e-5, 2e-3, -1e-3)]
+    # U_LaplaceRho_n, U_LaplaceRho_p, e_LaplaceRho_np of W-BSK (BSk31, NUCLEAR_MATTER), computed
+    # with bsk_functional.c through ctypes (2026-11-27); DENSEPSILON 1e-8 there, 1e-12 here.
+    WBSK = [(0.4464958894, 0.4738608131, 6.960472192043e-02),
+            (-0.4883970953, -0.5309509298, 3.310879766109e-03),
+            (0.3496947845, 1.0351161976, 3.340271511628e-02),
+            (0.0292249519, -0.1399124218, -3.576142271957e-03)]
+
+    def check_wbsk(self, mod):
+        for (rn, rp, gn, gp, g, ln, lp), (u_n, u_p, e) in zip(self.STATES, self.WBSK):
+            with self.subTest(module=mod.__name__, rho_n=rn, rho_p=rp):
+                self.assertAlmostEqual(float(mod.U_LaplaceRho_q(rn, rp, 'n', gn, gp, g, ln, lp)), u_n, delta=1e-5)
+                self.assertAlmostEqual(float(mod.U_LaplaceRho_q(rn, rp, 'p', gn, gp, g, ln, lp)), u_p, delta=1e-5)
+                self.assertAlmostEqual(float(mod.epsilon_delta_rho_np(rn, rp, gn, gp, g)), e, delta=1e-8)
+
+    def check_functional_derivative(self, mod):
+        """d/ds int e(rho + s h) dx = int U h dx on a periodic 1D grid (spectral derivatives)."""
+        N, L = 256, 40.
+        x = np.arange(N) * L / N
+        k = 2 * np.pi * np.fft.fftfreq(N, L / N)
+        D = lambda f: np.fft.ifft(1j * k * np.fft.fft(f)).real
+        D2 = lambda f: np.fft.ifft(-k**2 * np.fft.fft(f)).real
+        prof = lambda R, a, r0: r0 / (1 + np.exp((abs(x - L / 2) - R) / a))
+        rho = {'n': prof(6, .6, .09) + 1e-3, 'p': prof(5.5, .5, .07) + 1e-4}
+        h = np.exp(-((x - L / 2 - 4) / 1.5)**2)
+
+        def E(rn, rp):
+            gn, gp = D(rn), D(rp)
+            return mod.epsilon_delta_rho_np(rn, rp, gn**2, gp**2, (gn + gp)**2).sum() * L / N
+
+        gn, gp = D(rho['n']), D(rho['p'])
+        for q in 'np':
+            s = 1e-6
+            plus, minus = dict(rho), dict(rho)
+            plus[q], minus[q] = rho[q] + s * h, rho[q] - s * h
+            num = (E(plus['n'], plus['p']) - E(minus['n'], minus['p'])) / (2 * s)
+            U = mod.U_LaplaceRho_q(rho['n'], rho['p'], q, gn**2, gp**2, (gn + gp)**2,
+                                   D2(rho['n']), D2(rho['p']))
+            with self.subTest(module=mod.__name__, q=q):
+                self.assertAlmostEqual((U * h).sum() * L / N, num, delta=1e-6 * abs(num))
+
+    def test_bsk(self):
+        self.check_wbsk(bsk)
+        self.check_functional_derivative(bsk)
+
+    def test_bskg(self):
+        from libnest import bskg
+        self.check_wbsk(bskg)
+        self.check_functional_derivative(bskg)
+
+    def test_U_q_with_gradients(self):
+        rn, rp, gn, gp, g, ln, lp = self.STATES[0]
+        for q in 'np':
+            full = bsk.U_q(rn, rp, q, 0.1, 0.09, rho_grad_n_square=gn, rho_grad_p_square=gp,
+                           rho_grad_square=g, rho_lap_n=ln, rho_lap_p=lp)
+            self.assertAlmostEqual(float(full), float(bsk.U_q(rn, rp, q, 0.1, 0.09)
+                                   + bsk.U_LaplaceRho_q(rn, rp, q, gn, gp, g, ln, lp)), places=12)
+        with self.assertRaises(ValueError):
+            bsk.U_q(rn, rp, 'n', rho_lap_n=ln, rho_lap_p=lp)
+
+    def test_vacuum_is_zero(self):
+        self.assertEqual(float(bsk.U_LaplaceRho_q(0., 0., 'n', 1e-4, 1e-4, 4e-4, 1e-3, 1e-3)), 0.)
 
 
 if __name__ == '__main__':

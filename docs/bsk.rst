@@ -47,6 +47,9 @@ Effective mass
 Mean field
 ~~~~~~~~~~
   * :func:`.U_q`
+  * :func:`.U_rho_q`
+  * :func:`.U_tau_q`
+  * :func:`.U_LaplaceRho_q`
   * :func:`.B_q`
 
 Density energy functional
@@ -69,6 +72,10 @@ Auxiliary
   * :func:`.C1_rho`
   * :func:`.C0_tau`
   * :func:`.C1_tau`
+  * :func:`.dC0_rho`
+  * :func:`.dC1_rho`
+  * :func:`.dC0_tau`
+  * :func:`.dC1_tau`
   * :func:`.I`
   * :func:`.Lambda`
 

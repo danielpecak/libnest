@@ -163,14 +163,16 @@ sign-off.
 - [ ] **`v_pi` has the same unit error:** `(HBARC**2/2/M)**1.5` with dimensionless `M`
       → `v_pi(0.03, 0, 'n') = -1.27e5`. Should be `B_q**1.5` (ħ²/2M*), giving a few hundred
       MeV fm³.
-- [ ] **`U_q` t3 term is dimensionally inconsistent:** it adds a ρ² term to
+- [x] *(t3 fixed 17b52da; tau terms added 2026-11-27: `U_q = U_rho_q + U_tau_q` as in
+      W-BSK, see CHANGELOG)* **`U_q` t3 term is dimensionally inconsistent:** it adds a ρ² term to
       `2*rho*rho_q*ALPHA*rho_q_prime**2` (ρ⁴), and uses `(0.5 + 0.5*x3)` where the standard
       expression has `(1 + x3/2)`. Re-derive (or port from the C `U_q`). Also: `U_q` has no
       τ-dependent t1/t2/t4/t5 contributions — fine for a "ρ-part only" function, but say so.
-- [ ] **Gradient terms in `epsilon_np` / `epsilon_delta_rho_np`:**
+- [x] *(fixed 2026-11-27, with `U_LaplaceRho_q` ported from W-BSK, see CHANGELOG)*
+      **Gradient terms in `epsilon_np` / `epsilon_delta_rho_np`:**
       `rho_grad_square = |∇ρ_n|² + |∇ρ_p|²` drops the cross term (should be |∇ρ_n + ∇ρ_p|²);
       `grad_rho_n_rho_p = 0.5*(p² − n² − p²)` is a typo (= −n²/2).
-- [ ] **`rho2tau` factor π^(2/3)** (also in `TODO_doc.md` D0).
+- [x] **`rho2tau` factor π^(2/3)** (also in `TODO_doc.md` D0).
 - [ ] **Kinetic term** of `energy_per_nucleon` must use the parameter set's ħ²/2m (identical
       numbers for BSk31 today, different for BSkG/SLy4).
 - [ ] **BSkG4 Eq. 6 edge case:** C floors Δ_SM and Δ_NeuM(ρ/2) at 1e-8 before taking the

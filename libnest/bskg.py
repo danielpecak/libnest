@@ -174,7 +174,7 @@ import sys
 import numpy as np
 from libnest.units import HBARC, DENSEPSILON, NUMZERO
 from libnest.units import MN, MP, HBAR2M_n, HBAR2M_p
-from libnest.definitions import rho2kf, rhoEta, mu_q
+from libnest.definitions import rho2kf, rhoEta, mu_q, rho2tau
 
 T0   =-2302.01     # Skyrme parameter :math:`t_0` [MeV fm :sup:`3`]
 T1   =762.99       # Skyrme parameter :math:`t_1` [MeV*fm :sup:`5`]
@@ -1018,33 +1018,225 @@ def effMp(rho_n, rho_p):
     """
     return HBAR2M_p/B_q(rho_n, rho_p,'p')
 
-def U_q(rho_n, rho_p,q):
+def U_q(rho_n, rho_p, q, tau_n=None, tau_p=None, jsum2=0., jdiff2=0.,
+        rho_grad_n_square=None, rho_grad_p_square=None, rho_grad_square=None,
+        rho_lap_n=None, rho_lap_p=None):
     #     Formula (5.14) from NeST.pdf
     """
-    Returns the mean field potential from density :math:`\\rho` variation.
+    Returns the mean field potential :math:`U_q` (variation of the energy density over
+    :math:`\\rho_q`), as in W-BSK: ``U_rho_q + U_tau_q`` of ``hpc-engine/bsk/bsk_functional.c``
+    (nuclear matter).
+
+    .. math::
+
+        U_q = \\frac{\\partial\\varepsilon_\\rho}{\\partial\\rho_q}
+            + \\frac{\\partial\\varepsilon_\\tau}{\\partial\\rho_q}
+            + \\frac{\\delta}{\\delta\\rho_q}\\int\\varepsilon_{\\Delta\\rho}
+            = U^\\rho_q + U^\\tau_q + U^{\\Delta\\rho}_q
+
+    The :math:`\\tau` part is there because the effective mass depends on the density:
+    :math:`C^\\tau_0, C^\\tau_1` depend on :math:`\\rho` (t4, t5 terms) and
+    :math:`\\varepsilon_\\tau` contains :math:`C^\\tau_1 (\\rho_n-\\rho_p)(\\tau_n-\\tau_p)`. So
+    :math:`U_q` depends on :math:`\\tau_n, \\tau_p` (and on the currents), see :func:`.U_tau_q`.
+
+    The gradient term :math:`U^{\\Delta\\rho}_q` (:func:`.U_LaplaceRho_q`) is added only if the
+    gradients and Laplacians are given (all five of them); without them :math:`U_q` is the
+    mean field of uniform matter.
+
+    Not included (they are in the potential ``V_q`` of W-BSK, ``bsk2wslda_functional.c``): the
+    pairing rearrangement term (``U_pairing_q``) and, for protons, the Coulomb potential.
 
     rho_q is either rho_n or rho_p.
 
     Args:
         rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
-        q (string): nucleon type choice ('p' - proton, or 'n' - neutron)
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
+        tau_n (float, optional): neutron kinetic density :math:`\\tau_n` [fm :sup:`-5`]. If not
+            given, the value of a uniform Fermi gas :func:`libnest.definitions.rho2tau` (rho_n)
+            is used (uniform matter, T = 0, no pairing).
+        tau_p (float, optional): proton kinetic density :math:`\\tau_p` [fm :sup:`-5`]; if not
+            given, :func:`libnest.definitions.rho2tau` (rho_p).
+        jsum2 (float, optional): :math:`({\\bf j}_n + {\\bf j}_p)^2` [fm :sup:`-8`], default 0
+        jdiff2 (float, optional): :math:`({\\bf j}_n - {\\bf j}_p)^2` [fm :sup:`-8`], default 0
+        rho_grad_n_square (float, optional): :math:`(\\nabla\\rho_n)^2` [fm :sup:`-8`]
+        rho_grad_p_square (float, optional): :math:`(\\nabla\\rho_p)^2` [fm :sup:`-8`]
+        rho_grad_square (float, optional): :math:`(\\nabla\\rho_n + \\nabla\\rho_p)^2` [fm :sup:`-8`]
+        rho_lap_n (float, optional): :math:`\\nabla^2\\rho_n` [fm :sup:`-5`]
+        rho_lap_p (float, optional): :math:`\\nabla^2\\rho_p` [fm :sup:`-5`]
 
     Returns:
         float: Mean field potential :math:`U_q` [MeV]
+
+    See also:
+        :func:`.U_rho_q`
+        :func:`.U_tau_q`
+        :func:`.U_LaplaceRho_q`
     """
-    if(q=='n'):
-        rho_q = rho_n + DENSEPSILON
-        rho_q_prime = rho_p + DENSEPSILON
-    elif(q=='p'):
-        rho_q = rho_p + DENSEPSILON
-        rho_q_prime = rho_n + DENSEPSILON
-    else:
+    if not (isinstance(q, str) and q in ('n', 'p')):
+        sys.exit('# ERROR: Nucleon q must be either n or p (the third argument of U_q)')
+    grads = (rho_grad_n_square, rho_grad_p_square, rho_grad_square, rho_lap_n, rho_lap_p)
+    if any(g is not None for g in grads) and any(g is None for g in grads):
+        raise ValueError('U_q: give all of rho_grad_n_square, rho_grad_p_square, '
+                         'rho_grad_square, rho_lap_n, rho_lap_p, or none of them')
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    if tau_n is None:
+        tau_n = rho2tau(rho_n)
+    if tau_p is None:
+        tau_p = rho2tau(rho_p)
+    u = U_rho_q(rho_n, rho_p, q) + U_tau_q(rho_n, rho_p, q, tau_n, tau_p, jsum2, jdiff2)
+    if rho_lap_n is not None:
+        u = u + U_LaplaceRho_q(rho_n, rho_p, q, *grads)
+    return u
+
+def U_rho_q(rho_n, rho_p, q):
+    """
+    Returns the part of the mean field coming from :math:`\\varepsilon_\\rho` (t0, t3 terms),
+    ``U_rho_n`` / ``U_rho_p`` of W-BSK.
+
+    .. math::
+
+        U^\\rho_q = \\frac{\\partial\\varepsilon_\\rho}{\\partial\\rho_q}
+        = \\frac{d C^\\rho_0}{d\\rho} \\rho^2 + 2 C^\\rho_0 \\rho
+        + \\frac{d C^\\rho_1}{d\\rho} (\\rho_q - \\rho_{q'})^2 + 2 C^\\rho_1 (\\rho_q - \\rho_{q'})
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
+
+    Returns:
+        float: :math:`U^\\rho_q` [MeV]
+    """
+    if q not in ('n', 'p'):
         sys.exit('# ERROR: Nucleon q must be either n or p')
-    rho = rho_n + rho_p + DENSEPSILON
-    return T0*((1+0.5*X0)*rho-(0.5+X0)*rho_q)+T3/12.*np.power(rho,(ALPHA-1))*(
-        ((1+0.5*X3)*rho**2*(ALPHA+2))-(0.5+X3)*(2*rho*rho_q+ALPHA*
-                                                (rho_q**2+rho_q_prime**2)))
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    rho = rho_n + rho_p
+    eta_q = rho_n - rho_p if q == 'n' else rho_p - rho_n
+    return (dC0_rho(rho_n, rho_p)*rho**2 + 2.*C0_rho(rho_n, rho_p)*rho
+            + dC1_rho(rho_n, rho_p)*eta_q**2 + 2.*C1_rho(rho_n, rho_p)*eta_q)
+
+def U_tau_q(rho_n, rho_p, q, tau_n, tau_p, jsum2=0., jdiff2=0.):
+    """
+    Returns the part of the mean field coming from :math:`\\varepsilon_\\tau` (effective mass
+    terms), ``U_tau_n`` / ``U_tau_p`` of W-BSK.
+
+    .. math::
+
+        U^\\tau_q = \\frac{\\partial\\varepsilon_\\tau}{\\partial\\rho_q}
+        = C^\\tau_0 (\\tau_n + \\tau_p) + C^\\tau_1 (\\tau_q - \\tau_{q'})
+        + \\frac{d C^\\tau_0}{d\\rho} \\left[ \\rho (\\tau_n + \\tau_p) - ({\\bf j}_n + {\\bf j}_p)^2 \\right]
+        + \\frac{d C^\\tau_1}{d\\rho} \\left[ (\\rho_n - \\rho_p)(\\tau_n - \\tau_p) - ({\\bf j}_n - {\\bf j}_p)^2 \\right]
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
+        tau_n (float): neutron kinetic density :math:`\\tau_n` [fm :sup:`-5`]
+        tau_p (float): proton kinetic density :math:`\\tau_p` [fm :sup:`-5`]
+        jsum2 (float, optional): :math:`({\\bf j}_n + {\\bf j}_p)^2` [fm :sup:`-8`], default 0
+        jdiff2 (float, optional): :math:`({\\bf j}_n - {\\bf j}_p)^2` [fm :sup:`-8`], default 0
+
+    Returns:
+        float: :math:`U^\\tau_q` [MeV]
+    """
+    if q not in ('n', 'p'):
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    tau_n = np.asarray(tau_n, dtype=float)
+    tau_p = np.asarray(tau_p, dtype=float)
+    rho = rho_n + rho_p
+    dtau_q = tau_n - tau_p if q == 'n' else tau_p - tau_n
+    return (C0_tau(rho_n, rho_p)*(tau_n + tau_p) + C1_tau(rho_n, rho_p)*dtau_q
+            + dC0_tau(rho_n, rho_p)*((tau_n + tau_p)*rho - jsum2)
+            + dC1_tau(rho_n, rho_p)*((tau_n - tau_p)*(rho_n - rho_p) - jdiff2))
+
+def U_LaplaceRho_q(rho_n, rho_p, q, rho_grad_n_square, rho_grad_p_square, rho_grad_square,
+                   rho_lap_n, rho_lap_p):
+    """
+    Returns the gradient part of the mean field, the variation of
+    :math:`\\int \\varepsilon_{\\Delta\\rho}` (:func:`.epsilon_delta_rho_np`) over :math:`\\rho_q`;
+    ``U_LaplaceRho_n`` / ``U_LaplaceRho_p`` of W-BSK (``hpc-engine/bsk/bsk_functional.c``,
+    nuclear matter).
+
+    .. math::
+
+        U^{\\Delta\\rho}_q = \\frac{\\partial\\varepsilon_{\\Delta\\rho}}{\\partial\\rho_q}
+        - \\nabla\\cdot\\frac{\\partial\\varepsilon_{\\Delta\\rho}}{\\partial(\\nabla\\rho_q)}
+
+    .. math::
+
+        U^{\\Delta\\rho}_q =
+        -\\frac{3}{8} t_1 \\left[ \\left(1 + \\frac{x_1}{2}\\right) \\nabla^2\\rho
+                                - \\left(\\frac{1}{2} + x_1\\right) \\nabla^2\\rho_q \\right]
+        + \\frac{1}{8} t_2 \\left[ \\left(1 + \\frac{x_2}{2}\\right) \\nabla^2\\rho
+                                + \\left(\\frac{1}{2} + x_2\\right) \\nabla^2\\rho_q \\right]
+
+    .. math::
+
+        + \\frac{1}{4} t_5 \\rho^{\\gamma-1} \\left\\{ \\left(1 + \\frac{x_5}{2}\\right)
+          \\left[ \\frac{1}{2}\\rho\\nabla^2\\rho + \\frac{\\gamma}{4}(\\nabla\\rho)^2 \\right]
+        + \\left(\\frac{1}{2} + x_5\\right) \\left[ \\frac{1}{2}\\rho\\nabla^2\\rho_q
+          + \\frac{\\gamma}{2}\\nabla\\rho\\cdot\\nabla\\rho_q
+          - \\frac{\\gamma}{4}\\sum_{q'}(\\nabla\\rho_{q'})^2 \\right] \\right\\}
+        - \\frac{1}{8} t_4 \\rho^{\\beta-1} \\left(1 + \\frac{x_4}{2}\\right) (2\\beta+3)
+          \\left[ \\rho\\nabla^2\\rho + \\frac{\\beta}{2}(\\nabla\\rho)^2 \\right]
+
+    .. math::
+
+        + \\frac{1}{8} t_4 \\rho^{\\beta-2} \\left(\\frac{1}{2} + x_4\\right) \\left[
+          3\\beta\\rho\\nabla\\rho\\cdot\\nabla\\rho_q + 3\\rho^2\\nabla^2\\rho_q
+        + \\beta(\\beta-1)\\rho_q(\\nabla\\rho)^2 + \\beta\\rho\\rho_q\\nabla^2\\rho
+        - \\frac{\\beta}{2}\\rho\\sum_{q'}\\left((\\nabla\\rho_{q'})^2
+          - 2\\rho_{q'}\\nabla^2\\rho_{q'}\\right) \\right]
+
+    with :math:`\\rho = \\rho_n + \\rho_p`. Points where both densities are below
+    ``DENSEPSILON`` give 0 (as in W-BSK).
+
+    The gradients and Laplacians are inputs (e.g. from FFT on the grid of the data). W-BSK gets
+    :math:`(\\nabla\\rho_q)^2 = \\frac{1}{2}\\nabla^2(\\rho_q^2) - \\rho_q\\nabla^2\\rho_q`.
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+        q (str): nucleon type choice ('p' - proton, or 'n' - neutron)
+        rho_grad_n_square (float): :math:`(\\nabla\\rho_n)^2` [fm :sup:`-8`]
+        rho_grad_p_square (float): :math:`(\\nabla\\rho_p)^2` [fm :sup:`-8`]
+        rho_grad_square (float): :math:`(\\nabla\\rho_n + \\nabla\\rho_p)^2` [fm :sup:`-8`] (with
+            the cross term)
+        rho_lap_n (float): :math:`\\nabla^2\\rho_n` [fm :sup:`-5`]
+        rho_lap_p (float): :math:`\\nabla^2\\rho_p` [fm :sup:`-5`]
+
+    Returns:
+        float: :math:`U^{\\Delta\\rho}_q` [MeV]
+    """
+    if not (isinstance(q, str) and q in ('n', 'p')):
+        sys.exit('# ERROR: Nucleon q must be either n or p')
+    rho_n = np.asarray(rho_n, dtype=float)
+    rho_p = np.asarray(rho_p, dtype=float)
+    g2n = np.asarray(rho_grad_n_square, dtype=float)
+    g2p = np.asarray(rho_grad_p_square, dtype=float)
+    g2 = np.asarray(rho_grad_square, dtype=float)
+    lap_n = np.asarray(rho_lap_n, dtype=float)
+    lap_p = np.asarray(rho_lap_p, dtype=float)
+    rho_q, g2q, lap_q = (rho_n, g2n, lap_n) if q == 'n' else (rho_p, g2p, lap_p)
+    r = rho_n + rho_p + DENSEPSILON
+    lap = lap_n + lap_p
+    gnp = 0.5*(g2 - g2n - g2p)                    # grad rho_n . grad rho_p
+    rb = np.power(r, BETA)
+    u = (-3./8.*T1*((1. + 0.5*X1)*lap - (0.5 + X1)*lap_q)
+         + 1./8.*((T2 + 0.5*T2X2)*lap + (0.5*T2 + T2X2)*lap_q)
+         + 1./4.*T5*np.power(r, GAMMA)*((1. + 0.5*X5)*(0.5*lap + 0.25*GAMMA*g2/r)
+                                        + (0.5 + X5)*(0.5*lap_q + 0.5*GAMMA*(gnp + g2q)/r
+                                                      - 0.25*GAMMA*(g2n + g2p)/r))
+         - 1./8.*T4*rb*(1. + 0.5*X4)*(2.*BETA + 3.)*(lap + 0.5*BETA*g2/r)
+         + 3./8.*T4*rb*(0.5 + X4)*(BETA*(gnp + g2q)/r + lap_q)
+         + 1./8.*T4*rb*(0.5 + X4)*BETA*rho_q*((BETA - 1.)*g2/r + lap)/r
+         - 1./16.*T4*rb*(0.5 + X4)*BETA*(g2n + g2p - 2.*rho_n*lap_n - 2.*rho_p*lap_p)/r)
+    return np.where((rho_n < DENSEPSILON) & (rho_p < DENSEPSILON), 0., u)
 
 def B_q(rho_n, rho_p, q):
     #    Formula (5.13) from NeST.pdf
@@ -1174,6 +1366,81 @@ def C1_tau(rho_n, rho_p):
     rho = rho_n + rho_p
     return (-1. / 8.) * T1 * (1. / 2. + X1) + 1. / 16. * T2 + 1. / 8. * T2X2 - 1. / 8. * T4 * np.power(rho, BETA) * (1. / 2. + X4) + 1. / 8. * T5 * np.power(rho, GAMMA) * (1. / 2. + X5)
 
+def dC0_rho(rho_n, rho_p):
+    """
+    Derivative of :math:`C^\\rho_0` over the total density :math:`\\rho`.
+
+    .. math::
+
+        \\frac{d C^\\rho_0}{d\\rho} = \\frac{3}{48} \\alpha t_3 \\rho^{\\alpha-1}
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`dC^{\\rho}_0/d\\rho`
+    """
+    return 3. / 48. * ALPHA * T3 * np.power(rho_n + rho_p + DENSEPSILON, ALPHA - 1.)
+
+
+def dC1_rho(rho_n, rho_p):
+    """
+    Derivative of :math:`C^\\rho_1` over the total density :math:`\\rho`.
+
+    .. math::
+
+        \\frac{d C^\\rho_1}{d\\rho} = -\\frac{1}{24} \\alpha t_3 \\left(\\frac{1}{2} + x_3\\right) \\rho^{\\alpha-1}
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`dC^{\\rho}_1/d\\rho`
+    """
+    return -1. / 24. * ALPHA * T3 * (1. / 2. + X3) * np.power(rho_n + rho_p + DENSEPSILON, ALPHA - 1.)
+
+
+def dC0_tau(rho_n, rho_p):
+    """
+    Derivative of :math:`C^\\tau_0` over the total density :math:`\\rho`.
+
+    .. math::
+
+        \\frac{d C^\\tau_0}{d\\rho} = \\frac{3}{16} \\beta t_4 \\rho^{\\beta-1}
+        + \\frac{1}{4} \\gamma t_5 \\left(\\frac{5}{4} + x_5\\right) \\rho^{\\gamma-1}
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`dC^{\\tau}_0/d\\rho`
+    """
+    rho = rho_n + rho_p + DENSEPSILON
+    return 3. / 16. * BETA * T4 * np.power(rho, BETA - 1.) + 1. / 4. * GAMMA * T5 * (1.25 + X5) * np.power(rho, GAMMA - 1.)
+
+
+def dC1_tau(rho_n, rho_p):
+    """
+    Derivative of :math:`C^\\tau_1` over the total density :math:`\\rho`.
+
+    .. math::
+
+        \\frac{d C^\\tau_1}{d\\rho} = -\\frac{1}{8} \\beta t_4 \\left(\\frac{1}{2} + x_4\\right) \\rho^{\\beta-1}
+        + \\frac{1}{8} \\gamma t_5 \\left(\\frac{1}{2} + x_5\\right) \\rho^{\\gamma-1}
+
+    Args:
+        rho_n (float): neutron density :math:`\\rho_n` [fm :sup:`-3`]; sum of both spin components
+        rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
+
+    Returns:
+        float: :math:`dC^{\\tau}_1/d\\rho`
+    """
+    rho = rho_n + rho_p + DENSEPSILON
+    return -1. / 8. * BETA * T4 * (1. / 2. + X4) * np.power(rho, BETA - 1.) + 1. / 8. * GAMMA * T5 * (1. / 2. + X5) * np.power(rho, GAMMA - 1.)
+
 def epsilon_rho_np(rho_n, rho_p):
     """
     Energy functional :math:`\\epsilon_{\\rho}` for particle matter, related to
@@ -1270,7 +1537,8 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
         rho_p (float): proton density :math:`\\rho_p` [fm :sup:`-3`]; sum of both spin components
         rho_grad_n_square (float): neutron density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]
         rho_grad_p_square (float): proton density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]
-        rho_grad_square (float): total density gradient squared :math:`\\nabla \\rho` [fm :sup:`-8`]
+        rho_grad_square (float): total density gradient squared
+            :math:`(\\nabla\\rho_n + \\nabla\\rho_p)^2` [fm :sup:`-8`] (with the cross term)
 
     Returns:
         float: energy functional :math:`\\epsilon_{\\Delta \\rho}`
@@ -1281,7 +1549,7 @@ def epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho
     rho_grad_p_square = np.asarray(rho_grad_p_square)
     rho_grad_square = np.asarray(rho_grad_square)
     rho = rho_n+rho_p + DENSEPSILON
-    grad_rho_n_rho_p = 0.5*(rho_grad_p_square-rho_grad_n_square-rho_grad_p_square)
+    grad_rho_n_rho_p = 0.5*(rho_grad_square-rho_grad_n_square-rho_grad_p_square)
 
     return (3./16.*T1*((1.+0.5*X1)*rho_grad_square-(0.5+X1)*(rho_grad_n_square+rho_grad_p_square))
             -1./16.*T2X2*(0.5*rho_grad_square+rho_grad_n_square+rho_grad_p_square)
@@ -1340,7 +1608,7 @@ def epsilon_np(rho_n, rho_p, rho_grad_n, rho_grad_p, tau_n, tau_p, jsum2, jdiff2
     kappa_p = np.asarray(kappa_p)
     rho_grad_n_square = (rho_grad_n)**2
     rho_grad_p_square = (rho_grad_p)**2
-    rho_grad_square = rho_grad_n_square + rho_grad_p_square
+    rho_grad_square = (rho_grad_n + rho_grad_p)**2
     return (HBARC**2/2./MN*tau_n + HBARC**2/2./MP*tau_p
             + epsilon_rho_np(rho_n, rho_p)
             + epsilon_delta_rho_np(rho_n, rho_p, rho_grad_n_square, rho_grad_p_square, rho_grad_square)
