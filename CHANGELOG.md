@@ -13,6 +13,13 @@ Work in progress on the `edf-refactor` branch (see `TODO_edf.md`): a single
 implementation of the Skyrme formulas behind `libnest.edf`, selectable
 parametrizations, and fixes for the unit errors listed under "Known issues" below.
 
+## [0.2.0] — 2026-11-27
+
+The mean field `U_q` now follows W-BSK: it depends on tau and the currents, and
+optionally on the density gradients. Its values change (symmetric matter at
+rho_n = rho_p = 0.08 fm^-3: -59.8 MeV; 0.1.2 gave -18.4 MeV). Existing calls
+`U_q(rho_n, rho_p, q)` still work; the new arguments are optional.
+
 ### Fixed — results differ from 0.1.2
 
 - **`bsk.U_q` and `bskg.U_q`: wrong t3 term.** The mean field is the derivative of
@@ -53,10 +60,18 @@ parametrizations, and fixes for the unit errors listed under "Known issues" belo
   derivative of int `epsilon_delta_rho_np` over rho_q, ported from `U_LaplaceRho_n/p` of W-BSK
   (equal to machine precision with DENSEPSILON = 0; checked against a numerical functional
   derivative on a grid). `U_q` takes the same five gradient arguments as optional keywords and
-  then adds this term (all five or none). In the static Pb208 / Ca40 BSk31 solutions
-  (MOCCa, 2026_11_20_thomas_fermi) the weighted rms of V_q - U_q drops from 3.7 / 6.6 MeV
-  (rho, tau only) to 1.1 / 0.27 MeV with the gradient term; the rest is mostly the spin-orbit
-  term, which libnest does not have. The same in `bskg`.
+  then adds this term (all five or none). In static Pb208 / Ca40 BSk31 solutions from MOCCa
+  the weighted rms of V_q - U_q drops from 3.7 / 6.6 MeV (rho, tau only) to 1.1 / 0.27 MeV
+  with the gradient term; the rest is mostly the spin-orbit term, which libnest does not
+  have. The same in `bskg`. libnest does not compute derivatives: the gradients and
+  Laplacians are inputs, computed on the user's grid (e.g. by FFT).
+
+### Known issues
+
+- `U_q` does not contain the pairing rearrangement term, the spin-orbit term, or the
+  Coulomb potential for protons.
+- `definitions.mu_q` and `bsk.v_pi` still have the unit error listed under 0.1.2, and
+  so do `I` and `epsilon_pi_np`, which are built on them.
 
 ## [0.1.2] — 2026-10-13
 
