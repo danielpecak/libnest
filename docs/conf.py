@@ -65,6 +65,10 @@ intersphinx_mapping = {
 # Document functions in source order, so related functions stay together.
 autodoc_member_order = 'bysource'
 
+# Napoleon turns "x (float, optional)" into the types "float" and "optional"; the latter is
+# not a class, so the nitpicky build (-n) must not look it up.
+nitpick_ignore = [('py:class', 'optional')]
+
 # `make linkcheck`: these publishers answer automated requests with HTTP 403,
 # although the links work in a browser.
 linkcheck_ignore = [
